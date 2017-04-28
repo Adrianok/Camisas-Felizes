@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes;
+  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes, uConexaoSingleTon;
 
 type
   TfrmPrincipal = class(TForm)
@@ -286,6 +286,13 @@ begin
   ImageColoridaBarra.Visible := False;
   imageColoridaFechar.Visible := False;
   imageColoridaTema.Visible := False;
+
+  try
+    TConexaoSigleton.GetInstancia;
+  except
+    ShowMessage('Não foi possível conectar ao banco de dados!');
+    Application.Terminate;
+  end;
 
 end;
 

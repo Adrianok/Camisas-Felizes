@@ -26,7 +26,7 @@ begin
   inherited;
   Params.DriverID := 'MySql';
   LoginPrompt := False;
-  Params.Values['Database'] := 'ajudinha';
+  Params.Values['Database'] := 'db_cf';
   Params.Values['User_Name'] := 'root';
   Params.Values['Password'] := '';
   Params.Values['Port'] := '3306';

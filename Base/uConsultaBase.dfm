@@ -21,14 +21,13 @@ object frmPesquisaBase: TfrmPesquisaBase
     Height = 57
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 413
     object edtPesquisa: TEdit
       Left = 8
       Top = 19
       Width = 329
       Height = 21
       TabOrder = 0
-      Text = 'Digite aqui sua pesquisa'
+      TextHint = 'Digite aqui sua pesquisa'
     end
     object BitBtn1: TBitBtn
       Left = 343

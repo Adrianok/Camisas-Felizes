@@ -23,7 +23,6 @@ object frmBase: TfrmBase
     Height = 89
     Align = alTop
     TabOrder = 0
-    ExplicitTop = -6
     object btnSalvar: TBitBtn
       Left = 4
       Top = 7
@@ -849,10 +848,8 @@ object frmBase: TfrmBase
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
     OnChange = pgControllChange
-    ExplicitTop = 83
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
-      ExplicitTop = 26
     end
     object Consuta: TTabSheet
       Caption = 'Consulta'
@@ -879,7 +876,7 @@ object frmBase: TfrmBase
     Width = 177
     Height = 21
     TabOrder = 2
-    Text = 'Digite aqui sua pesquisa'
+    TextHint = 'Digite aqui sua pesquisa'
   end
   object btnPesquisa: TBitBtn
     Left = 562

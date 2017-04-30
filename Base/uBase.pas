@@ -19,6 +19,8 @@ type
     btnExcluir: TBitBtn;
     btnFechar: TBitBtn;
     DBGrid1: TDBGrid;
+    Edit1: TEdit;
+    BitBtn1: TBitBtn;
     procedure btnFecharClick(Sender: TObject);
   private
     { Private declarations }

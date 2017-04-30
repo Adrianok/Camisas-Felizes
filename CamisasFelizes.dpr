@@ -2,7 +2,10 @@ program CamisasFelizes;
 
 uses
   Vcl.Forms,
-  uPrincipal in 'uPrincipal.pas' {frmPrincipal};
+  uConexao in 'ConexãoBD\uConexao.pas',
+  uConexaoSingleTon in 'ConexãoBD\uConexaoSingleTon.pas',
+  uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
+  uBase in 'Base\uBase.pas' {frmBase};
 
 {$R *.res}
 

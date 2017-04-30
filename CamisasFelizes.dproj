@@ -99,8 +99,14 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uPrincipal.pas">
+        <DCCReference Include="ConexãoBD\uConexao.pas"/>
+        <DCCReference Include="ConexãoBD\uConexaoSingleTon.pas"/>
+        <DCCReference Include="Principal\uPrincipal.pas">
             <Form>frmPrincipal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Base\uBase.pas">
+            <Form>frmBase</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes, uConexaoSingleTon,
+  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes,
+  uConexaoSingleTon,
   uBase;
 
 type
@@ -419,14 +420,13 @@ end;
 
 procedure TfrmPrincipal.PanelClientesClick(Sender: TObject);
 begin
-//Quando For Abrir o form base é necessário dar PanelFundoPrincipal.Visible := False;
-//E quando voltar para o form principal PanelFundoPrincipal.Visible := True;
-if not(Assigned(frmBase)) then
+  // Quando For Abrir o form base é necessário dar PanelFundoPrincipal.Visible := False;
+  // E quando voltar para o form principal PanelFundoPrincipal.Visible := True;
+  if not(Assigned(frmBase)) then
   begin
-    frmBase:= TfrmBase.Create(self);
+    frmBase := TfrmBase.Create(self);
     frmBase.Show;
   end;
-
 
 end;
 

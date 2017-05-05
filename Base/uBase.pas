@@ -15,19 +15,23 @@ type
     pgControll: TPageControl;
     Cadastro: TTabSheet;
     Consuta: TTabSheet;
-    btnSalvar: TBitBtn;
-    btnPesquisar: TBitBtn;
-    btnAlterar: TBitBtn;
-    btnExcluir: TBitBtn;
-    btnFechar: TBitBtn;
     DBGridCadastro: TDBGrid;
     edtPesquisa: TEdit;
     btnPesquisa: TBitBtn;
+    Panel2: TPanel;
+    btnSalvar: TBitBtn;
+    btnPesquisar: TBitBtn;
+    btnAlterar: TBitBtn;
+    Panel3: TPanel;
+    btnExcluir: TBitBtn;
+    btnFechar: TBitBtn;
+    btnNovo: TBitBtn;
     procedure btnFecharClick(Sender: TObject);
     procedure pgControllChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnNovoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,6 +52,13 @@ begin
   Close;
 end;
 
+procedure TfrmBase.btnNovoClick(Sender: TObject);
+begin
+  btnSalvar.Enabled := true;
+  btnNovo.Enabled := false;
+  btnAlterar.Enabled := false;
+end;
+
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);
 begin
   if (not(Assigned(frmPesquisaBase))) then
@@ -65,6 +76,7 @@ begin
   pgControll.ActivePage := Cadastro;
   edtPesquisa.Visible := false;
   btnPesquisa.Visible := false;
+  btnSalvar.Enabled := false;
 end;
 
 procedure TfrmBase.pgControllChange(Sender: TObject);
@@ -80,6 +92,8 @@ begin
       btnPesquisa.Visible := false;
       btnSalvar.Enabled := true;
       btnPesquisar.Enabled := true;
+      btnNovo.Enabled := true;
+      btnSalvar.Enabled := false;
     end
     else if (pgControll.ActivePage = Consuta) then
     begin
@@ -87,6 +101,8 @@ begin
       btnPesquisa.Visible := true;
       btnSalvar.Enabled := false;
       btnPesquisar.Enabled := false;
+      btnNovo.Enabled := true;
+      btnSalvar.Enabled := false;
     end;
   end;
 end;

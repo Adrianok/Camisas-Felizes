@@ -1,21 +1,5 @@
-﻿[btnSalvar]
-Coordinates=75,78,69,58
-Visible=True
-
-[pgControll]
+﻿[pgControll]
 Coordinates=10,146,73,36
-
-[btnPesquisar]
-Coordinates=254,10,90,58
-
-[btnAlterar]
-Coordinates=92,10,71,58
-
-[btnFechar]
-Coordinates=10,10,72,58
-
-[btnExcluir]
-Coordinates=173,10,71,58
 
 [Panel1]
 Coordinates=10,78,55,58
@@ -27,5 +11,6 @@ Coordinates=231,78,62,36
 Coordinates=154,78,67,36
 
 []
-Coordinates=290,1,91,36
+Coordinates=10,10,72,58
+Visible=True
 

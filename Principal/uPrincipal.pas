@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes,uPrincipalBorda, uBase, uConexaoSingleTon;
+  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, uControllerCadastroModelo, System.UITypes,uPrincipalBorda, uBase, uConexaoSingleTon;
 
 type
   TfrmPrincipal = class(TForm)
@@ -87,15 +87,17 @@ type
     procedure CreateParams(var Params: TCreateParams); override;
     procedure CadastroModeloMouseEnter(Sender: TObject);
     procedure CadastroModeloMouseLeave(Sender: TObject);
+    procedure CadastroModeloClick(Sender: TObject);
 
   private
+    oControllerModelo : TControllerCadastroModelo;
+
     azul: integer;
     verde: integer;
     azulEscuro: integer;
     amarelo: integer;
     cinza: integer;
     branco: integer;
-
     auxiliar: boolean;
   public
     colorido: integer;
@@ -207,6 +209,13 @@ begin
 
 end;
 
+procedure TfrmPrincipal.CadastroModeloClick(Sender: TObject);
+begin
+  if(not(assigned(oControllerModelo)))then
+    oControllerModelo := TControllerCadastroModelo.Create;
+    oControllerModelo.intanciarView;
+end;
+
 procedure TfrmPrincipal.CadastroModeloMouseEnter(Sender: TObject);
 begin
   CorCheck(IconCadastroModeloImageList, ImageColoridaCadastroModelo);
@@ -293,10 +302,13 @@ end;
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 
-  if MessageDlg('Deseja fechar o programa?', mtConfirmation, mbYesNo, 0) <> MrYes
+  if MessageDlg('Deseja fechar o programa?', mtConfirmation, mbYesNo, 0) = MrYes
   then
-    Action := caNone;
+  begin
     frmPrincipalBorda.Close;
+    oControllerModelo.Destroy;
+  end;
+
 
 end;
 
@@ -453,11 +465,7 @@ procedure TfrmPrincipal.PanelClientesClick(Sender: TObject);
 begin
   // Quando For Abrir o form base é necessário dar PanelFundoPrincipal.Visible := False;
   // E quando voltar para o form principal PanelFundoPrincipal.Visible := True;
-  if not(Assigned(frmBase)) then
-  begin
-    frmBase := TfrmBase.Create(self);
-    frmBase.Show;
-  end;
+
 
 end;
 

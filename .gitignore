@@ -5,3 +5,6 @@ CamisasFelizes.identcache
 CamisasFelizes.dproj.local
 /*/__recovery*
 /*/__history*
+*.dpr
+*.dproj
+*.stat

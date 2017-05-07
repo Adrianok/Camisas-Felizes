@@ -10,7 +10,9 @@ object frmPesquisaBase: TfrmPesquisaBase
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Visible = True
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -76,26 +78,13 @@ object frmPesquisaBase: TfrmPesquisaBase
       TabOrder = 1
     end
   end
-  object DBGrid1: TDBGrid
-    Left = 0
-    Top = 57
-    Width = 379
-    Height = 199
-    Align = alClient
-    TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-  end
   object Panel2: TPanel
     Left = 0
     Top = 256
     Width = 379
     Height = 80
     Align = alBottom
-    TabOrder = 2
+    TabOrder = 1
     object btnFechar: TBitBtn
       Left = 280
       Top = 6

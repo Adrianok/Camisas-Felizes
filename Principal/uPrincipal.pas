@@ -3,12 +3,9 @@ unit uPrincipal;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes,
-  uConexaoSingleTon,
-  uBase;
+  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes,uPrincipalBorda, uBase, uConexaoSingleTon;
 
 type
   TfrmPrincipal = class(TForm)
@@ -18,21 +15,16 @@ type
     IconFundoColImageList: TImageList;
     IconBarraWinImageList: TImageList;
     IconAlterarTemaImageList: TImageList;
-    QuadradoBrancoClientes: TImage;
-    QuadradoColoridoClientes: TImage;
+    ImageFundos: TImageList;
     AlterarCor: TPanel;
     AzulCor: TPanel;
     AmareloCor: TPanel;
     AzulEscuroCor: TPanel;
     VerdeCor: TPanel;
     CinzaCor: TPanel;
-    PanelClientes: TPanel;
-    ImageBrancaClientes: TImage;
-    imageColoridaClientes: TImage;
+    Panel1: TPanel;
     QuadradoColoridoFundoCol: TImage;
-    QuadradoColoridoBarraWin: TImage;
     QuadradoBrancoFundoCol: TImage;
-    QuadradoBrancoBarraWin: TImage;
     QuadradoColoridoFechar: TImage;
     QuadradoBrancoFechar: TImage;
     QuadradoColoridoAlterarTema: TImage;
@@ -40,16 +32,17 @@ type
     FundoColorido: TPanel;
     ImageBrancaFundoCol: TImage;
     imageColoridaFundoCol: TImage;
-    WindowsBar: TPanel;
-    ImageBrancaWindows: TImage;
-    ImageColoridaBarra: TImage;
     PanelFechar: TPanel;
     ImageFecharBranca: TImage;
     imageColoridaFechar: TImage;
     AlterarTema: TPanel;
     imageBrancaTema: TImage;
     imageColoridaTema: TImage;
-    ImageFundos: TImageList;
+    PanelClientes: TPanel;
+    ImageBrancaClientes: TImage;
+    imageColoridaClientes: TImage;
+    QuadradoColoridoClientes: TImage;
+    QuadradoBrancoClientes: TImage;
     procedure FormCreate(Sender: TObject);
     procedure MouseEnter(panel: TPanel; imageAzul: TImage; ImageBranca: TImage;
       quadradoAzul: TImage; quadradoBranco: TImage);
@@ -59,9 +52,6 @@ type
     procedure PanelClientesMouseLeave(Sender: TObject);
     procedure FundoColoridoMouseEnter(Sender: TObject);
     procedure FundoColoridoMouseLeave(Sender: TObject);
-    procedure WindowsBarMouseEnter(Sender: TObject);
-    procedure WindowsBarMouseLeave(Sender: TObject);
-    procedure WindowsBarClick(Sender: TObject);
     procedure FundoColoridoClick(Sender: TObject);
     procedure PanelFecharMouseLeave(Sender: TObject);
     procedure PanelFecharMouseEnter(Sender: TObject);
@@ -88,6 +78,8 @@ type
     procedure VerdeCorMouseLeave(Sender: TObject);
     procedure VerdeCorMouseEnter(Sender: TObject);
     procedure PanelClientesClick(Sender: TObject);
+    procedure CreateParams(var Params: TCreateParams); override;
+
   private
     azul: integer;
     verde: integer;
@@ -204,6 +196,7 @@ procedure TfrmPrincipal.AzulEscuroCorMouseLeave(Sender: TObject);
 begin
   AzulEscuroCor.Color := azulEscuro;
   AzulEscuroCor.Font.Color := branco;
+
 end;
 
 procedure TfrmPrincipal.ChangeColor;
@@ -212,7 +205,6 @@ begin
   begin
     FundoColoridoMouseLeave(self);
     PanelClientesMouseLeave(self);
-    WindowsBarMouseLeave(self);
     PanelFecharMouseLeave(self);
     AlterarTemaMouseLeave(self);
   end
@@ -221,7 +213,6 @@ begin
     frmPrincipal.Color := colorido;
     FundoColoridoMouseLeave(self);
     PanelClientesMouseLeave(self);
-    WindowsBarMouseLeave(self);
     PanelFecharMouseLeave(self);
     AlterarTemaMouseLeave(self);
   end;
@@ -264,12 +255,19 @@ begin
     ImageList.GetIcon(1, Image.Picture.icon)
 end;
 
+procedure TfrmPrincipal.CreateParams(var Params: TCreateParams);
+begin
+  inherited;
+  Params.Style := WS_DLGFRAME;
+end;
+
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  ReportMemoryLeaksOnShutdown := True;
+
   if MessageDlg('Deseja fechar o programa?', mtConfirmation, mbYesNo, 0) <> MrYes
   then
     Action := caNone;
+    frmPrincipalBorda.Close;
 
 end;
 
@@ -285,10 +283,12 @@ begin
   frmPrincipal.Color := branco;
   imageColoridaClientes.Visible := False;
   imageColoridaFundoCol.Visible := False;
-  ImageColoridaBarra.Visible := False;
   imageColoridaFechar.Visible := False;
   imageColoridaTema.Visible := False;
-
+  Left := 0;
+  Top := 0;
+  Constraints.MinHeight := (Screen.Height) - 65;
+  Constraints.MinWidth :=(Screen.Width)-20 ;
   try
     TConexaoSigleton.GetInstancia;
   except
@@ -306,17 +306,16 @@ begin
     frmPrincipal.Color := colorido;
     FundoColoridoMouseLeave(self);
     PanelClientesMouseEnter(self);
-    WindowsBarMouseEnter(self);
     PanelFecharMouseEnter(self);
     AlterarTemaMouseEnter(self);
     auxiliar := True;
+
   end
   else
   begin
     frmPrincipal.Color := branco;
     FundoColoridoMouseEnter(self);
     PanelClientesMouseLeave(self);
-    WindowsBarMouseLeave(self);
     PanelFecharMouseLeave(self);
     AlterarTemaMouseLeave(self);
     auxiliar := False;
@@ -453,38 +452,4 @@ begin
     MouseLeave(PanelClientes, imageColoridaClientes, ImageBrancaClientes,
       QuadradoColoridoClientes, QuadradoBrancoClientes);
 end;
-
-procedure TfrmPrincipal.WindowsBarClick(Sender: TObject);
-begin
-
-  if (frmPrincipal.BorderStyle = bsNone) then
-    frmPrincipal.BorderStyle := bsSizeable
-  else
-    frmPrincipal.BorderStyle := bsNone;
-end;
-
-procedure TfrmPrincipal.WindowsBarMouseEnter(Sender: TObject);
-begin
-  CorCheck(IconBarraWinImageList, ImageColoridaBarra);
-  CorCheck(ImageFundos, QuadradoColoridoBarraWin);
-  if (auxiliar) then
-    MouseLeave(WindowsBar, ImageColoridaBarra, ImageBrancaWindows,
-      QuadradoColoridoBarraWin, QuadradoBrancoBarraWin)
-  else
-    MouseEnter(WindowsBar, ImageColoridaBarra, ImageBrancaWindows,
-      QuadradoColoridoBarraWin, QuadradoBrancoBarraWin);
-end;
-
-procedure TfrmPrincipal.WindowsBarMouseLeave(Sender: TObject);
-begin
-  CorCheck(IconBarraWinImageList, ImageColoridaBarra);
-  CorCheck(ImageFundos, QuadradoColoridoBarraWin);
-  if (auxiliar) then
-    MouseEnter(WindowsBar, ImageColoridaBarra, ImageBrancaWindows,
-      QuadradoColoridoBarraWin, QuadradoBrancoBarraWin)
-  else
-    MouseLeave(WindowsBar, ImageColoridaBarra, ImageBrancaWindows,
-      QuadradoColoridoBarraWin, QuadradoBrancoBarraWin);
-end;
-
 end.

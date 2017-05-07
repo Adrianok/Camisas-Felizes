@@ -10,6 +10,7 @@ object frmBase: TfrmBase
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
   Visible = True
   OnClose = FormClose
@@ -24,7 +25,6 @@ object frmBase: TfrmBase
     Align = alTop
     Locked = True
     TabOrder = 0
-    ExplicitWidth = 593
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -708,8 +708,6 @@ object frmBase: TfrmBase
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
-      ExplicitLeft = 412
-      ExplicitTop = -1
       object btnExcluir: TBitBtn
         Left = 16
         Top = 7
@@ -1047,32 +1045,16 @@ object frmBase: TfrmBase
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
     OnChange = pgControllChange
-    ExplicitWidth = 593
-    ExplicitHeight = 271
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
-      ExplicitWidth = 585
-      ExplicitHeight = 243
     end
     object Consuta: TTabSheet
       Caption = 'Consulta'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 585
       ExplicitHeight = 243
-      object DBGridCadastro: TDBGrid
-        Left = 0
-        Top = 0
-        Width = 612
-        Height = 305
-        Align = alClient
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-      end
     end
   end
   object edtPesquisa: TEdit

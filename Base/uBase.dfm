@@ -363,7 +363,7 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
-        TabOrder = 1
+        TabOrder = 2
         OnClick = btnPesquisarClick
       end
       object btnAlterar: TBitBtn
@@ -526,7 +526,7 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
-        TabOrder = 2
+        TabOrder = 3
       end
       object btnNovo: TBitBtn
         Left = 3
@@ -690,7 +690,7 @@ object frmBase: TfrmBase
         Layout = blGlyphTop
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 3
+        TabOrder = 1
         OnClick = btnNovoClick
       end
     end
@@ -1040,7 +1040,7 @@ object frmBase: TfrmBase
     Top = 89
     Width = 620
     Height = 333
-    ActivePage = Cadastro
+    ActivePage = Consuta
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
@@ -1051,10 +1051,6 @@ object frmBase: TfrmBase
     object Consuta: TTabSheet
       Caption = 'Consulta'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 585
-      ExplicitHeight = 243
     end
   end
   object edtPesquisa: TEdit

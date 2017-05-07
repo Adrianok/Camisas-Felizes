@@ -43,6 +43,12 @@ type
     imageColoridaClientes: TImage;
     QuadradoColoridoClientes: TImage;
     QuadradoBrancoClientes: TImage;
+    QuadradoColoridoCadastroModelo: TImage;
+    QuadradoBrancoCadastroModelo: TImage;
+    CadastroModelo: TPanel;
+    ImageBrancaCadastroModelo: TImage;
+    ImageColoridaCadastroModelo: TImage;
+    IconCadastroModeloImageList: TImageList;
     procedure FormCreate(Sender: TObject);
     procedure MouseEnter(panel: TPanel; imageAzul: TImage; ImageBranca: TImage;
       quadradoAzul: TImage; quadradoBranco: TImage);
@@ -79,6 +85,8 @@ type
     procedure VerdeCorMouseEnter(Sender: TObject);
     procedure PanelClientesClick(Sender: TObject);
     procedure CreateParams(var Params: TCreateParams); override;
+    procedure CadastroModeloMouseEnter(Sender: TObject);
+    procedure CadastroModeloMouseLeave(Sender: TObject);
 
   private
     azul: integer;
@@ -199,23 +207,44 @@ begin
 
 end;
 
+procedure TfrmPrincipal.CadastroModeloMouseEnter(Sender: TObject);
+begin
+  CorCheck(IconCadastroModeloImageList, ImageColoridaCadastroModelo);
+  CorCheck(ImageFundos, QuadradoColoridoCadastroModelo);
+  if (auxiliar) then
+    MouseLeave(CadastroModelo, ImageColoridaCadastroModelo, ImageBrancaCadastroModelo,
+      QuadradoColoridoCadastroModelo, QuadradoBrancoCadastroModelo)
+  else
+    MouseEnter(CadastroModelo, ImageColoridaCadastroModelo, ImageBrancaCadastroModelo,
+      QuadradoColoridoCadastroModelo, QuadradoBrancoCadastroModelo)
+end;
+
+procedure TfrmPrincipal.CadastroModeloMouseLeave(Sender: TObject);
+begin
+
+  CorCheck(IconCadastroModeloImageList, ImageColoridaCadastroModelo);
+  CorCheck(ImageFundos, QuadradoColoridoCadastroModelo);
+  if (auxiliar) then
+    MouseEnter(CadastroModelo, ImageColoridaCadastroModelo, ImageBrancaCadastroModelo,
+      QuadradoColoridoCadastroModelo, QuadradoBrancoCadastroModelo)
+  else
+      MouseLeave(CadastroModelo, ImageColoridaCadastroModelo, ImageBrancaCadastroModelo,
+      QuadradoColoridoCadastroModelo, QuadradoBrancoCadastroModelo)
+
+end;
+
 procedure TfrmPrincipal.ChangeColor;
 begin
-  if (frmPrincipal.Color = branco) then
-  begin
-    FundoColoridoMouseLeave(self);
-    PanelClientesMouseLeave(self);
-    PanelFecharMouseLeave(self);
-    AlterarTemaMouseLeave(self);
-  end
-  else
-  begin
+  if (frmPrincipal.Color <> branco) then
     frmPrincipal.Color := colorido;
+
+
     FundoColoridoMouseLeave(self);
     PanelClientesMouseLeave(self);
     PanelFecharMouseLeave(self);
+    CadastroModeloMouseLeave(self);
     AlterarTemaMouseLeave(self);
-  end;
+
 end;
 
 procedure TfrmPrincipal.CinzaCorClick(Sender: TObject);
@@ -285,6 +314,7 @@ begin
   imageColoridaFundoCol.Visible := False;
   imageColoridaFechar.Visible := False;
   imageColoridaTema.Visible := False;
+  ImageColoridaCadastroModelo.Visible := False;
   Left := 0;
   Top := 0;
   Constraints.MinHeight := (Screen.Height) - 65;
@@ -308,6 +338,7 @@ begin
     PanelClientesMouseEnter(self);
     PanelFecharMouseEnter(self);
     AlterarTemaMouseEnter(self);
+    CadastroModeloMouseEnter(self);
     auxiliar := True;
 
   end
@@ -318,6 +349,7 @@ begin
     PanelClientesMouseLeave(self);
     PanelFecharMouseLeave(self);
     AlterarTemaMouseLeave(self);
+    CadastroModeloMouseLeave(self);
     auxiliar := False;
   end;
 end;

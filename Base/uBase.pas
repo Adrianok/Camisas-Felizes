@@ -15,7 +15,6 @@ type
     pgControll: TPageControl;
     Cadastro: TTabSheet;
     Consuta: TTabSheet;
-    DBGridCadastro: TDBGrid;
     edtPesquisa: TEdit;
     btnPesquisa: TBitBtn;
     Panel2: TPanel;
@@ -26,6 +25,7 @@ type
     btnExcluir: TBitBtn;
     btnFechar: TBitBtn;
     btnNovo: TBitBtn;
+    DBGrid1: TDBGrid;
     procedure btnFecharClick(Sender: TObject);
     procedure pgControllChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);

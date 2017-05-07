@@ -1040,7 +1040,7 @@ object frmBase: TfrmBase
     Top = 89
     Width = 620
     Height = 333
-    ActivePage = Consuta
+    ActivePage = Cadastro
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
@@ -1051,6 +1051,19 @@ object frmBase: TfrmBase
     object Consuta: TTabSheet
       Caption = 'Consulta'
       ImageIndex = 1
+      object DBGrid1: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 612
+        Height = 305
+        Align = alClient
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
     end
   end
   object edtPesquisa: TEdit

@@ -1,7 +1,8 @@
 /Win32
-CamisasFelizes.res
-CamisasFelizes.stat
-CamisasFelizes.identcache
-CamisasFelizes.dproj.local
-/*/__recovery*
-/*/__history*
+*.res
+*.stat
+*.identcache
+*.dproj.local
+*.dproj
+__recovery
+__history

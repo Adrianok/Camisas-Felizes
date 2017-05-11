@@ -6,49 +6,50 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes;
+  VCLTee.TeeFilters, System.ImageList, Vcl.ImgList, Vcl.ExtDlgs, System.UITypes, uConexaoSingleTon;
 
 type
   TfrmPrincipal = class(TForm)
-    PanelClientes: TPanel;
-    ImageBrancaClientes: TImage;
-    imageColoridaClientes: TImage;
-    QuadradoBrancoClientes: TImage;
-    Panel1: TPanel;
-    QuadradoColoridoFundoCol: TImage;
-    QuadradoColoridoBarraWin: TImage;
-    QuadradoBrancoFundoCol: TImage;
-    QuadradoBrancoBarraWin: TImage;
-    FundoColorido: TPanel;
-    ImageBrancaFundoCol: TImage;
-    imageColoridaFundoCol: TImage;
-    WindowsBar: TPanel;
-    ImageBrancaWindows: TImage;
-    ImageColoridaBarra: TImage;
-    QuadradoColoridoFechar: TImage;
-    QuadradoBrancoFechar: TImage;
-    PanelFechar: TPanel;
-    ImageFecharBranca: TImage;
-    imageColoridaFechar: TImage;
-    QuadradoColoridoClientes: TImage;
-    AlterarTema: TPanel;
-    imageBrancaTema: TImage;
-    QuadradoColoridoAlterarTema: TImage;
-    imageColoridaTema: TImage;
     Image1: TImage;
-    QuadradoBrancoAlterarTema: TImage;
     IconClientesImageList: TImageList;
     IconFecharImageList: TImageList;
     IconFundoColImageList: TImageList;
-    ImageFundos: TImageList;
     IconBarraWinImageList: TImageList;
     IconAlterarTemaImageList: TImageList;
+    PanelFundoPrincipal: TPanel;
+    QuadradoBrancoClientes: TImage;
+    QuadradoColoridoClientes: TImage;
     AlterarCor: TPanel;
     AzulCor: TPanel;
     AmareloCor: TPanel;
     AzulEscuroCor: TPanel;
     VerdeCor: TPanel;
     CinzaCor: TPanel;
+    PanelClientes: TPanel;
+    ImageBrancaClientes: TImage;
+    imageColoridaClientes: TImage;
+    PanelRight: TPanel;
+    QuadradoColoridoFundoCol: TImage;
+    QuadradoColoridoBarraWin: TImage;
+    QuadradoBrancoFundoCol: TImage;
+    QuadradoBrancoBarraWin: TImage;
+    QuadradoColoridoFechar: TImage;
+    QuadradoBrancoFechar: TImage;
+    QuadradoColoridoAlterarTema: TImage;
+    QuadradoBrancoAlterarTema: TImage;
+    FundoColorido: TPanel;
+    ImageBrancaFundoCol: TImage;
+    imageColoridaFundoCol: TImage;
+    WindowsBar: TPanel;
+    ImageBrancaWindows: TImage;
+    ImageColoridaBarra: TImage;
+    PanelFechar: TPanel;
+    ImageFecharBranca: TImage;
+    imageColoridaFechar: TImage;
+    AlterarTema: TPanel;
+    imageBrancaTema: TImage;
+    imageColoridaTema: TImage;
+    ImageFundos: TImageList;
     procedure FormCreate(Sender: TObject);
     procedure MouseEnter(panel: TPanel; imageAzul: TImage; ImageBranca: TImage;
       quadradoAzul: TImage; quadradoBranco: TImage);
@@ -86,6 +87,7 @@ type
     procedure CinzaCorMouseEnter(Sender: TObject);
     procedure VerdeCorMouseLeave(Sender: TObject);
     procedure VerdeCorMouseEnter(Sender: TObject);
+    procedure PanelClientesClick(Sender: TObject);
   private
     azul: integer;
     verde: integer;
@@ -287,6 +289,13 @@ begin
   imageColoridaFechar.Visible := False;
   imageColoridaTema.Visible := False;
 
+  try
+    TConexaoSigleton.GetInstancia;
+  except
+    ShowMessage('Não foi possível conectar ao banco de dados!');
+    Application.Terminate;
+  end;
+
 end;
 
 procedure TfrmPrincipal.FundoColoridoClick(Sender: TObject);
@@ -407,6 +416,12 @@ procedure TfrmPrincipal.VerdeCorMouseLeave(Sender: TObject);
 begin
   VerdeCor.Color := verde;
   VerdeCor.Font.Color := branco;
+end;
+
+procedure TfrmPrincipal.PanelClientesClick(Sender: TObject);
+begin
+//Quando For Abrir o form base é necessário dar PanelFundoPrincipal.Visible := False;
+//E quando voltar para o form principal PanelFundoPrincipal.Visible := True;
 end;
 
 procedure TfrmPrincipal.PanelClientesMouseEnter(Sender: TObject);

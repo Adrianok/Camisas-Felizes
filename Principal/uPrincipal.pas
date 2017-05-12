@@ -176,14 +176,11 @@ procedure TfrmPrincipal.AzulEscuroCorMouseLeave(Sender: TObject);
 begin
   AzulEscuroCor.Color := azulEscuro;
   AzulEscuroCor.Font.Color := branco;
-
 end;
 
 procedure TfrmPrincipal.CadastroModeloClick(Sender: TObject);
 begin
-  if (not(assigned(oControllerPrincipal))) then
-    oControllerPrincipal := TControllerPrincipal.Create;
-    oControllerPrincipal.intanciarViewCadastroModelo;
+  oControllerPrincipal.intanciarViewCadastroModelo(Self);
 end;
 
 procedure TfrmPrincipal.ChangeColor;
@@ -250,6 +247,7 @@ begin
     Application.Terminate;
   end;
 
+  oControllerPrincipal := TControllerPrincipal.Create;
 end;
 
 procedure TfrmPrincipal.FormDestroy(Sender: TObject);

@@ -1,14 +1,17 @@
 unit uControllerPrincipal;
 
 interface
+
 uses
+  System.Classes,
   uModelo, System.SysUtils;
+
 type
   TControllerPrincipal = class
    private
   public
-    procedure intanciarViewCadastroModelo;
-    destructor Destroy;
+    procedure intanciarViewCadastroModelo(AOwner: TComponent);
+    destructor Destroy; override;
   end;
 
 implementation
@@ -19,12 +22,15 @@ implementation
   begin
     if(assigned(frmCadastroModelo))then
       FreeAndNil(frmCadastroModelo);
+
+    inherited;
   end;
 
-  procedure TControllerPrincipal.intanciarViewCadastroModelo;
+  procedure TControllerPrincipal.intanciarViewCadastroModelo(AOwner: TComponent);
   begin
     if(not(assigned(frmCadastroModelo))) then
-      frmCadastroModelo := TfrmCadastroModelo.Create(nil);
+      frmCadastroModelo := TfrmCadastroModelo.Create(AOwner);
+
     frmCadastroModelo.Show;
   end;
 

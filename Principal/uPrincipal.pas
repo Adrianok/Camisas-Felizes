@@ -31,12 +31,16 @@ implementation
 
 procedure TfrmPrincipal.CadastrodemodelosClick(Sender: TObject);
 begin
-  oControllerModelo.InstanciarForm(Self);
+  if(not(assigned(oControllerModelo)))then
+    oControllerModelo := TControllerCadastroModelo.Create(Self);
+
+
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   ReportMemoryLeaksOnShutdown := True;
+  FreeAndNil(oControllerModelo);
 end;
 
 end.

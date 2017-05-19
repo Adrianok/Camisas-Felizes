@@ -2,7 +2,7 @@ unit uControllerCadastroModelo;
 
 interface
 uses
-  System.classes, System.SysUtils, uModelo, uClasseGenerica;
+  System.classes, System.SysUtils, uModelo;
 type
   TControllerCadastroModelo = class
   private
@@ -23,7 +23,7 @@ implementation
 constructor TControllerCadastroModelo.Create(Aowner : TComponent);
 begin
 
-
+  InstanciarForm(Aowner);
 
 end;
 
@@ -39,9 +39,9 @@ end;
 procedure TControllerCadastroModelo.InstanciarForm(Aowner: TComponent);
 begin
   if not(assigned(frmCadastroModelo)) then
-    frmCadastroModelo := TfrmCadastroModelo(TClasseGenerica.ConstructorFrm('TfrmCadastroModelo', Aowner));
-  frmCadastroModelo.btnFechar.OnClick := FecharForm;
+    frmCadastroModelo := TfrmCadastroModelo.Create(Aowner);
 
+  frmCadastroModelo.btnFechar.OnClick := FecharForm;
   frmCadastroModelo.Show;
 end;
 

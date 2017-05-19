@@ -28,6 +28,5 @@ implementation
 
 
 
-initialization
-  RegisterClass(TfrmCadastroModelo);
+
 end.

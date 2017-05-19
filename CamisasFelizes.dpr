@@ -8,17 +8,14 @@ uses
   uConsultaBase in 'Base\uConsultaBase.pas' {frmPesquisaBase},
   uControllerCadastroModelo in 'Modelo\uControllerCadastroModelo.pas',
   uModelo in 'Modelo\uModelo.pas' {frmCadastroModelo},
-  uControllerPrincipal in 'Principal\uControllerPrincipal.pas',
-  uFuncoesPrincipal in 'Principal\uFuncoesPrincipal.pas',
   uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
-  uPrincipalBorda in 'Principal\uPrincipalBorda.pas' {frmPrincipalBorda};
+  uClasseGenerica in 'Funcoes\uClasseGenerica.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmPrincipalBorda, frmPrincipalBorda);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Run;
 end.

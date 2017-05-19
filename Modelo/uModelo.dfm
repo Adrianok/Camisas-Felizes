@@ -8,8 +8,10 @@ inherited frmCadastroModelo: TfrmCadastroModelo
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 597
+    ExplicitWidth = 597
     inherited Panel3: TPanel
       Left = 388
+      ExplicitLeft = 388
       inherited btnFechar: TBitBtn
         Cancel = True
       end
@@ -18,31 +20,11 @@ inherited frmCadastroModelo: TfrmCadastroModelo
   inherited pgControll: TPageControl
     Width = 597
     Height = 153
+    ExplicitWidth = 597
+    ExplicitHeight = 153
     inherited Cadastro: TTabSheet
-      ExplicitTop = 24
-      object edtModelo: TLabeledEdit
-        Left = 70
-        Top = 72
-        Width = 487
-        Height = 26
-        EditLabel.Width = 60
-        EditLabel.Height = 23
-        EditLabel.Caption = 'Modelo:'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -17
-        EditLabel.Font.Name = 'Segoe UI Light'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 0
-      end
+      ExplicitWidth = 589
+      ExplicitHeight = 125
       object edtCodigo: TLabeledEdit
         Left = 70
         Top = 16
@@ -65,7 +47,7 @@ inherited frmCadastroModelo: TfrmCadastroModelo
         Font.Style = []
         LabelPosition = lpLeft
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
       end
       object edtPreCo: TLabeledEdit
         Left = 320
@@ -88,14 +70,35 @@ inherited frmCadastroModelo: TfrmCadastroModelo
         Font.Style = []
         LabelPosition = lpLeft
         ParentFont = False
+        TabOrder = 1
+      end
+      object edtModelo: TLabeledEdit
+        Left = 70
+        Top = 72
+        Width = 487
+        Height = 26
+        EditLabel.Width = 60
+        EditLabel.Height = 23
+        EditLabel.Caption = 'Modelo:'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -17
+        EditLabel.Font.Name = 'Segoe UI Light'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        LabelPosition = lpLeft
+        ParentFont = False
         TabOrder = 2
       end
     end
     inherited Consuta: TTabSheet
-      inherited DBGrid1: TDBGrid
-        Width = 589
-        Height = 125
-      end
+      ExplicitWidth = 589
+      ExplicitHeight = 125
     end
   end
 end

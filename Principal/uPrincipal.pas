@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList ,
-  Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus, uModelo;
+  Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus, uModelo, uControllerCadastroModelo;
 
 type
   TfrmPrincipal = class(TForm)
@@ -31,7 +31,7 @@ implementation
 
 procedure TfrmPrincipal.CadastrodemodelosClick(Sender: TObject);
 begin
-  //oControllerModelo.InstanciarForm(Self);
+  oControllerModelo.InstanciarForm(Self);
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);

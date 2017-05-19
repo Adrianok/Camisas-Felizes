@@ -16,14 +16,12 @@
     <Transaction>2017/04/27 20:53:38.000.755,=C:\Users\Matheus\Desktop\Github Cf\Camisas-Felizes\ConexãoBD\uConexaoSingleTon.pas</Transaction>
     <Transaction>2017/04/27 20:53:38.000.295,=C:\Users\Matheus\Desktop\Github Cf\Camisas-Felizes\ConexãoBD\uConexao.pas</Transaction>
     <Transaction>2017/04/27 20:55:43.000.656,=C:\Users\Matheus\Desktop\Github Cf\Camisas-Felizes\Principal\uPrincipal.pas</Transaction>
-    <Transaction>2017/05/11 19:52:08.000.191,=C:\git\CamisasFelizes\Base\uConsultaBase.pas</Transaction>
     <Transaction>2017/05/11 19:52:08.000.139,=C:\git\CamisasFelizes\Base\uBase.pas</Transaction>
-    <Transaction>2017/05/11 20:24:15.000.385,=C:\git\CamisasFelizes\Modelo\uModelo.pas</Transaction>
+    <Transaction>2017/05/11 19:52:08.000.191,=C:\git\CamisasFelizes\Base\uConsultaBase.pas</Transaction>
     <Transaction>2017/05/11 20:24:15.000.288,=C:\git\CamisasFelizes\Modelo\uControllerCadastroModelo.pas</Transaction>
-    <Transaction>2017/05/11 20:24:23.000.118,=C:\git\CamisasFelizes\Principal\uFuncoesPrincipal.pas</Transaction>
+    <Transaction>2017/05/11 20:24:15.000.385,=C:\git\CamisasFelizes\Modelo\uModelo.pas</Transaction>
     <Transaction>2017/05/11 20:24:23.000.105,=C:\git\CamisasFelizes\Principal\uControllerPrincipal.pas</Transaction>
     <Transaction>2017/05/11 20:24:23.000.166,=C:\git\CamisasFelizes\Principal\uPrincipalBorda.pas</Transaction>
-    <Transaction>2017/05/18 20:58:44.207,C:\Users\Matheus\Desktop\GitFlow\Principal\uPrincipalBorda.pas=</Transaction>
-    <Transaction>2017/05/18 21:00:10.951,=C:\Users\Matheus\Desktop\GitFlow\Funcoes\uClasseGenerica.pas</Transaction>
+    <Transaction>2017/05/11 20:24:23.000.118,=C:\git\CamisasFelizes\Principal\uFuncoesPrincipal.pas</Transaction>
   </Transactions>
 </BorlandProject>

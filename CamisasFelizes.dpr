@@ -8,8 +8,7 @@ uses
   uConsultaBase in 'Base\uConsultaBase.pas' {frmPesquisaBase},
   uControllerCadastroModelo in 'Modelo\uControllerCadastroModelo.pas',
   uModelo in 'Modelo\uModelo.pas' {frmCadastroModelo},
-  uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
-  uClasseGenerica in 'Funcoes\uClasseGenerica.pas';
+  uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal};
 
 {$R *.res}
 

@@ -1,10 +1,10 @@
-unit uCadastroUfDTO;
+unit uCadastroUfDto;
 
 interface
 
 type
 
-  TUf = class
+  TCadastroUfDto = class
   private
     Fuf: string;
     Fid: Integer;
@@ -24,17 +24,17 @@ implementation
 
 { TUf }
 
-procedure TUf.Setid(const Value: Integer);
+procedure TCadastroUfDto.Setid(const Value: Integer);
 begin
   Fid := Value;
 end;
 
-procedure TUf.Setnome(const Value: string);
+procedure TCadastroUfDto.Setnome(const Value: string);
 begin
   Fnome := Value;
 end;
 
-procedure TUf.Setuf(const Value: string);
+procedure TCadastroUfDto.Setuf(const Value: string);
 begin
   Fuf := Value;
 end;

@@ -11,7 +11,12 @@ uses
   uCadastroModeloModel in 'Modelo\uCadastroModeloModel.pas',
   uCadastroCorDto in 'Cor\uCadastroCorDto.pas',
   uCadastroModeloForm in 'Modelo\uCadastroModeloForm.pas' {frmCadastroModelo},
-  uPrincipalForm in 'Principal\uPrincipalForm.pas' {frmPrincipal};
+  uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
+  uCadastroUfController in 'CadastroUF\uCadastroUfController.pas',
+  uCadastroUfDto in 'CadastroUF\uCadastroUfDto.pas',
+  uCadastroUfForm in 'CadastroUF\uCadastroUfForm.pas' {Cadastro de UF},
+  uCadastroUfModel in 'CadastroUF\uCadastroUfModel.pas',
+  uCadastroUfRegra in 'CadastroUF\uCadastroUfRegra.pas';
 
 {$R *.res}
 

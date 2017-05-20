@@ -121,6 +121,13 @@
             <Form>frmPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="CadastroUF\uCadastroUfController.pas"/>
+        <DCCReference Include="CadastroUF\uCadastroUfDto.pas"/>
+        <DCCReference Include="CadastroUF\uCadastroUfForm.pas">
+            <Form>Cadastro de UF</Form>
+        </DCCReference>
+        <DCCReference Include="CadastroUF\uCadastroUfModel.pas"/>
+        <DCCReference Include="CadastroUF\uCadastroUfRegra.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

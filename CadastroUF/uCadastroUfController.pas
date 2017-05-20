@@ -3,45 +3,75 @@ unit uCadastroUfController;
 interface
 
 uses
-  System.SysUtils, FireDAC.Comp.Client, Data.DB, FireDAC.DApt, FireDAC.Comp.UI,
-  FireDAC.Comp.DataSet, uCadastroUfModel, uConexaoSingleTon, uCadastroUfDTO;
+  System.SysUtils, System.classes, FireDAC.Comp.Client, Data.DB, FireDAC.DApt,
+  FireDAC.Comp.UI,
+  FireDAC.Comp.DataSet, uCadastroUfModel, uConexaoSingleTon, uCadastroUfDTO,
+  uCadastroUfRegra,
+  uCadastroUfForm;
 
 type
-  TUfController = class
-
+  TCadastroUfController = class
   private
-    oUfModel = TUfModel;
+    oCadastroUfDTO: TCadastroUfDTO;
+    oCadastroUfModel: TCadastroUfModel;
+    oCadastroUfRegra: TCadastroUfRegra;
+    oCadastroUfForm: TCadastroUfForm;
 
   public
-
-    function Salvar(var aEstado = TUfDto): boolean;
+    procedure CriarForm(aOwner: TComponent);
+    procedure FecharForm(Sender: TObject);
 
     constructor Create;
     destructor Destroy; override;
 
   end;
 
+var
+  oCadastroUfController: TCadastroUfController;
+
 implementation
 
 { TUfController }
 
-constructor TUfController.Create;
+constructor TCadastroUfController.Create;
 begin
-  oUfModel := TUfModel.Create;
+  oCadastroUfDTO := TCadastroUfDTO.Create;
+  oCadastroUfModel := TCadastroUfModel.Create;
+  oCadastroUfRegra := TCadastroUfRegra.Create;
+
 end;
 
-destructor TUfController.Destroy;
+procedure TCadastroUfController.CriarForm(aOwner: TComponent);
 begin
-  if (Assigned(oUfModel)) then
-    FreeAndNil(oUfModel);
+  if (not(Assigned(oCadastroUfForm))) then
+    oCadastroUfForm := TCadastroUfForm.Create(aOwner);
+
+  oCadastroUfForm.btnFechar.OnClick := FecharForm;
+
+end;
+
+destructor TCadastroUfController.Destroy;
+begin
+  if (Assigned(oCadastroUfDTO)) then
+    FreeAndNil(oCadastroUfDTO);
+
+  if (Assigned(oCadastroUfModel)) then
+    FreeAndNil(oCadastroUfModel);
+
+  if (Assigned(oCadastroUfRegra)) then
+    FreeAndNil(oCadastroUfRegra);
 
   inherited;
+
 end;
 
-function TUfController.Salvar(var aEstado): boolean;
+procedure TCadastroUfController.FecharForm(Sender: TObject);
 begin
-result := false;
-
+  if (Assigned(oCadastroUfForm)) then
+  begin
+    oCadastroUfForm.Close;
+    FreeAndNil(oCadastroUfForm);
+  end;
 end;
 
 end.

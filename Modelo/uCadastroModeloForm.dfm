@@ -49,7 +49,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
         ParentFont = False
         TabOrder = 0
       end
-      object edtPreCo: TLabeledEdit
+      object edtPreco: TLabeledEdit
         Left = 320
         Top = 16
         Width = 237

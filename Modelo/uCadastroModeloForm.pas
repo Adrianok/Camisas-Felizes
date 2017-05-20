@@ -14,7 +14,7 @@ uses
 type
   TCadastroModeloForm = class(TfrmBase)
     edtCodigo: TLabeledEdit;
-    edtPreCo: TLabeledEdit;
+    edtPreco: TLabeledEdit;
     edtModelo: TLabeledEdit;
     edtCor: TLabeledEdit;
   public
@@ -22,7 +22,7 @@ type
   end;
 
 var
-  CadastroModeloForm : TCadastroModeloForm;
+  oCadastroModeloForm : TCadastroModeloForm;
 
 
 implementation

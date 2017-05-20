@@ -27,10 +27,10 @@ implementation
 procedure TCadastroModeloController.AtribuirDto;
 begin
 
-  oCadastroModeloDto.IdModelo;
-  oCadastroModeloDto.Modelo;
-  oCadastroModeloDto.Preco;
-  oCadastroModeloDto.Cor.Descricao;
+ oCadastroModeloForm.edtCodigo.Text := IntToStr(oCadastroModeloDto.IdModelo);
+ oCadastroModeloForm.edtModelo.Text := oCadastroModeloDto.Modelo;
+ oCadastroModeloForm.edtPreco.Text := CurrToStr(oCadastroModeloDto.Preco);
+ oCadastroModeloForm.edtCor.Text := oCadastroModeloDto.Cor.Descricao;
 
 end;
 
@@ -60,20 +60,20 @@ end;
 
 procedure TCadastroModeloController.FecharForm(Sender: TObject);
 begin
-  if(assigned(CadastroModeloForm))then
+  if(assigned(oCadastroModeloForm))then
   begin
-    CadastroModeloForm.Close;
-    FreeAndNil(CadastroModeloForm);
+    oCadastroModeloForm.Close;
+    FreeAndNil(oCadastroModeloForm);
   end;
 end;
 
 procedure TCadastroModeloController.InstanciarForm(Aowner: TComponent);
 begin
-  if not(assigned(CadastroModeloForm)) then
-    CadastroModeloForm := TCadastroModeloForm.Create(Aowner);
+  if not(assigned(oCadastroModeloForm)) then
+    oCadastroModeloForm := TCadastroModeloForm.Create(Aowner);
 
-  CadastroModeloForm.btnFechar.OnClick := FecharForm;
-  CadastroModeloForm.Show;
+  oCadastroModeloForm.btnFechar.OnClick := FecharForm;
+  oCadastroModeloForm.Show;
 end;
 
 initialization

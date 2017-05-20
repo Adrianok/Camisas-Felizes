@@ -9,11 +9,11 @@ uses
   uControllerCadastroModelo in 'Modelo\uControllerCadastroModelo.pas',
   uModelo in 'Modelo\uModelo.pas' {frmCadastroModelo},
   uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
-  uUf_Controller in 'CadastroUF\uUf_Controller.pas',
-  uUf_DTO in 'CadastroUF\uUf_DTO.pas',
-  uUf_Form in 'CadastroUF\uUf_Form.pas',
-  uUf_Model in 'CadastroUF\uUf_Model.pas',
-  uUf_Regra in 'CadastroUF\uUf_Regra.pas';
+  uCadastroUfController in 'CadastroUF\uCadastroUfController.pas',
+  uCadastroUfDto in 'CadastroUF\uCadastroUfDto.pas',
+  uCadastroUfForm in 'CadastroUF\uCadastroUfForm.pas' {Cadastro de UF},
+  uCadastroUfModel in 'CadastroUF\uCadastroUfModel.pas',
+  uCadastroUfRegra in 'CadastroUF\uCadastroUfRegra.pas';
 
 {$R *.res}
 

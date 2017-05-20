@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList,
   Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus, uModelo,
-  uControllerCadastroModelo, uUf_Controller;
+  uControllerCadastroModelo, uCadastroUfController;
 
 type
   TfrmPrincipal = class(TForm)
@@ -34,10 +34,10 @@ implementation
 
 procedure TfrmPrincipal.C1Click(Sender: TObject);
 begin
-  if (not(Assigned(oUf_Controller))) then
-    oUf_Controller := TUf_Controller.Create;
+  if (not(Assigned(oCadastroUfController))) then
+    oCadastroUfController := TCadastroUfController.Create;
 
-  oUf_Controller.CriarForm(Self);
+  oCadastroUfController.CriarForm(Self);
 
 end;
 
@@ -51,7 +51,8 @@ end;
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   ReportMemoryLeaksOnShutdown := True;
-  FreeAndNil(oControllerModelo);
+  if (Assigned(oCadastroUfController)) then
+    oCadastroUfController.Destroy;
 end;
 
 end.

@@ -1,4 +1,4 @@
-﻿inherited frmBase1: TfrmBase1
+﻿inherited CadastroUfForm: TCadastroUfForm
   Caption = 'Cadastro de UF'
   ClientHeight = 314
   ClientWidth = 600
@@ -21,6 +21,7 @@
     ExplicitHeight = 225
     inherited Cadastro: TTabSheet
       Font.Height = -15
+      ParentFont = False
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 592
@@ -29,9 +30,9 @@
         Left = 70
         Top = 19
         Width = 121
-        Height = 28
-        EditLabel.Width = 52
-        EditLabel.Height = 20
+        Height = 26
+        EditLabel.Width = 48
+        EditLabel.Height = 18
         EditLabel.BiDiMode = bdLeftToRight
         EditLabel.Caption = 'C'#243'digo:'
         EditLabel.ParentBiDiMode = False
@@ -45,10 +46,10 @@
         Left = 70
         Top = 75
         Width = 489
-        Height = 28
+        Height = 26
         CharCase = ecUpperCase
-        EditLabel.Width = 20
-        EditLabel.Height = 20
+        EditLabel.Width = 23
+        EditLabel.Height = 18
         EditLabel.Caption = 'UF:'
         LabelPosition = lpLeft
         MaxLength = 2
@@ -58,10 +59,10 @@
         Left = 70
         Top = 139
         Width = 489
-        Height = 28
+        Height = 26
         CharCase = ecUpperCase
         EditLabel.Width = 44
-        EditLabel.Height = 20
+        EditLabel.Height = 18
         EditLabel.Caption = 'Nome:'
         LabelPosition = lpLeft
         TabOrder = 2

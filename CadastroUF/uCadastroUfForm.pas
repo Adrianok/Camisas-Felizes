@@ -1,4 +1,4 @@
-unit uUf_Form;
+unit uCadastroUfForm;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   Vcl.Buttons, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
-  TUf_Form = class(TfrmBase)
+  TCadastroUfForm = class(TfrmBase)
     LedtCódigo: TLabeledEdit;
     LedtUf: TLabeledEdit;
     LedtNome: TLabeledEdit;
@@ -21,7 +21,7 @@ type
   end;
 
 var
-  Uf_Form: TUf_Form;
+  CadastroUfForm: TCadastroUfForm;
 
 implementation
 

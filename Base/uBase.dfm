@@ -1,6 +1,7 @@
 object frmBase: TfrmBase
   Left = 0
   Top = 0
+  BorderIcons = []
   Caption = 'Formul'#225'rio Base'
   ClientHeight = 422
   ClientWidth = 620
@@ -1051,6 +1052,10 @@ object frmBase: TfrmBase
     object Consuta: TTabSheet
       Caption = 'Consulta'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBGrid1: TDBGrid
         Left = 0
         Top = 0

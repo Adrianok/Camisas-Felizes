@@ -1,8 +1,10 @@
-unit uDtoCor;
+unit uCadastroCorDto ;
 
 interface
+uses
+  System.SysUtils;
 type
-  TDtoCor = class
+  TCadastroCorDto = class
   private
     FDescricao: string;
     FIdCor: Integer;
@@ -16,23 +18,23 @@ type
   end;
 
 var
-  oDtoCor : TDtoCor;
+  oCadastroCorDto : TCadastroCorDto;
 implementation
 
 { TDtoCor }
 
-constructor TDtoCor.Create;
+constructor TCadastroCorDto.Create;
 begin
   FIdCor := 0;
-  FDescricao := '';
+  FDescricao := EmptyStr;
 end;
 
-procedure TDtoCor.SetDescricao(const Value: string);
+procedure TCadastroCorDto.SetDescricao(const Value: string);
 begin
   FDescricao := Value;
 end;
 
-procedure TDtoCor.SetIdCor(const Value: Integer);
+procedure TCadastroCorDto.SetIdCor(const Value: Integer);
 begin
   FIdCor := Value;
 end;

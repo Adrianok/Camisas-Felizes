@@ -109,12 +109,15 @@
             <Form>frmPesquisaBase</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Modelo\uControllerCadastroModelo.pas"/>
-        <DCCReference Include="Modelo\uModelo.pas">
+        <DCCReference Include="Modelo\uModelo_M.pas"/>
+        <DCCReference Include="Modelo\uModelo_D.pas"/>
+        <DCCReference Include="Cor\uCor_D.pas"/>
+        <DCCReference Include="Modelo\uModelo_C.pas"/>
+        <DCCReference Include="Modelo\uModelo_F.pas">
             <Form>frmCadastroModelo</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Principal\uPrincipal.pas">
+        <DCCReference Include="Principal\uPrincipal_F.pas">
             <Form>frmPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>

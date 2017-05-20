@@ -26,6 +26,10 @@ object frmPrincipal: TfrmPrincipal
         Caption = 'Cadastro de modelos'
         OnClick = CadastrodemodelosClick
       end
+      object C1: TMenuItem
+        Caption = 'Cadastro de UF'
+        OnClick = C1Click
+      end
     end
   end
 end

@@ -1,9 +1,9 @@
-unit uUfRegra;
+unit uUf_Regra;
 
 interface
 
 type
-  TUfRegra = class
+  TUf_Regra = class
 
   end;
 

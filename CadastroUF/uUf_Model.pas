@@ -1,18 +1,18 @@
-unit uUfModel;
+unit uUf_Model;
 
 interface
 
 uses
   System.SysUtils, FireDAC.Comp.Client, Data.DB, FireDAC.DApt, FireDAC.Comp.UI,
-  FireDAC.Comp.DataSet, uConexaoSingleTon, uUfDTO;
+  FireDAC.Comp.DataSet, uConexaoSingleTon, uUf_DTO;
 
 type
-  TUfModel = class
+  TUf_Model = class
   public
-    function Salvar(var aEstado: TUfDto): boolean;
-    function Ler(var aEstado: TUfDto): boolean;
+    function Salvar(var aEstado: TUf_DTO): boolean;
+    function Ler(var aEstado: TUf_DTO): boolean;
     function BuscaId: integer;
-    function Alterar(var aEstado: TUfDto): boolean;
+    function Alterar(var aEstado: TUf_DTO): boolean;
     function Deletar(const aEstado: Integer): Boolean;
   end;
 
@@ -20,7 +20,7 @@ implementation
 
 { TUfModel }
 
-function TUfModel.Alterar(var aEstado: TUfDto): boolean;
+function TUf_Model.Alterar(var aEstado: TUf_DTO): boolean;
 var
   sSql: string;
 
@@ -33,7 +33,7 @@ begin
   result := TConexaoSigleton.GetInstancia.ExecSQL(sSql) > 0;
 end;
 
-function TUfModel.BuscaId: integer;
+function TUf_Model.BuscaId: integer;
 var
   sSql: TFDQuery;
 
@@ -53,13 +53,13 @@ begin
   end;
 end;
 
-function TUfModel.Deletar(const aEstado: Integer): Boolean;
+function TUf_Model.Deletar(const aEstado: Integer): Boolean;
 begin
   result := TConexaoSigleton.GetInstancia.ExecSQL
     ('delete from uf where iduf = ' + inttostr(aEstado)) > 0;
 end;
 
-function TUfModel.Ler(var aEstado: TUfDto): boolean;
+function TUf_Model.Ler(var aEstado: TUf_DTO): boolean;
 var
   sSqlLer: TFDQuery;
 
@@ -86,7 +86,7 @@ begin
   end;
 end;
 
-function TUfModel.Salvar(var aEstado: TUfDto): boolean;
+function TUf_Model.Salvar(var aEstado: TUf_DTO): boolean;
 var
   sSqlSalvar: string;
 

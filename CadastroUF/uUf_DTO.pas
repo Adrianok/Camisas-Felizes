@@ -1,10 +1,10 @@
-unit uUfDTO;
+unit uUf_DTO;
 
 interface
 
 type
 
-  TUfDTO = class
+  TUf_DTO = class
   private
     Fuf: string;
     Fid: Integer;
@@ -24,17 +24,17 @@ implementation
 
 { TUf }
 
-procedure TUfDTO.Setid(const Value: Integer);
+procedure TUf_DTO.Setid(const Value: Integer);
 begin
   Fid := Value;
 end;
 
-procedure TUfDTO.Setnome(const Value: string);
+procedure TUf_DTO.Setnome(const Value: string);
 begin
   Fnome := Value;
 end;
 
-procedure TUfDTO.Setuf(const Value: string);
+procedure TUf_DTO.Setuf(const Value: string);
 begin
   Fuf := Value;
 end;

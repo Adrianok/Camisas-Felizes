@@ -1,9 +1,9 @@
-inherited frmCadastroModelo: TfrmCadastroModelo
-  Caption = 'frmCadastroModelo'
-  ClientHeight = 242
+inherited CadastroModeloForm: TCadastroModeloForm
+  Caption = 'CadastroModeloForm'
+  ClientHeight = 291
   ClientWidth = 597
   ExplicitWidth = 613
-  ExplicitHeight = 281
+  ExplicitHeight = 330
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -19,7 +19,7 @@ inherited frmCadastroModelo: TfrmCadastroModelo
   end
   inherited pgControll: TPageControl
     Width = 597
-    Height = 153
+    Height = 202
     ExplicitWidth = 597
     ExplicitHeight = 153
     inherited Cadastro: TTabSheet
@@ -95,10 +95,39 @@ inherited frmCadastroModelo: TfrmCadastroModelo
         ParentFont = False
         TabOrder = 2
       end
+      object edtCor: TLabeledEdit
+        Left = 70
+        Top = 128
+        Width = 487
+        Height = 26
+        EditLabel.Width = 32
+        EditLabel.Height = 23
+        EditLabel.Caption = 'Cor:'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -17
+        EditLabel.Font.Name = 'Segoe UI Light'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        LabelPosition = lpLeft
+        ParentFont = False
+        TabOrder = 3
+      end
     end
     inherited Consuta: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 589
-      ExplicitHeight = 125
+      ExplicitHeight = 174
+      inherited DBGrid1: TDBGrid
+        Width = 589
+        Height = 174
+      end
     end
   end
 end

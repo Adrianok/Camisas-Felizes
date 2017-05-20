@@ -2,12 +2,15 @@ unit uCadastroModeloController;
 
 interface
 uses
-  System.classes, System.SysUtils, uCadastroModeloForm, uCadastroModeloDto;
+  System.classes, System.SysUtils,
+  uCadastroModeloForm, uCadastroModeloDto,
+  uCadastroModeloRegra, uCadastroModeloModel;
 type
   TCadastroModeloController = class
   private
     procedure FecharForm(Sender : TObject);
   public
+    procedure AtribuirDto;
     procedure InstanciarForm(Aowner : TComponent);
     constructor Create(Aowner : TComponent);
     destructor Destroy;
@@ -21,34 +24,56 @@ implementation
 { TControllerCadastroModelo }
 
 
+procedure TCadastroModeloController.AtribuirDto;
+begin
+
+  oCadastroModeloDto.IdModelo;
+  oCadastroModeloDto.Modelo;
+  oCadastroModeloDto.Preco;
+  oCadastroModeloDto.Cor.Descricao;
+
+end;
+
 constructor TCadastroModeloController.Create(Aowner : TComponent);
 begin
+  if(not(assigned(oCadastroModeloModel)))then
+    oCadastroModeloModel := TCadastroModeloModel.Create;
+
   if(not(assigned(oCadastroModeloDto)))then
     oCadastroModeloDto := TCadastroModeloDto.Create;
+
+  if(not(assigned(oCadastroModeloRegra)))then
+    oCadastroModeloRegra := TCadastroModeloRegra.Create;
 end;
 
 destructor TCadastroModeloController.Destroy;
 begin
+  if(assigned(oCadastroModeloModel))then
+    FreeAndNil(oCadastroModeloModel);
+
   if(assigned(oCadastroModeloDto))then
     FreeAndNil(oCadastroModeloDto);
+
+  if(assigned(oCadastroModeloRegra))then
+    FreeAndNil(oCadastroModeloRegra);
 end;
 
 procedure TCadastroModeloController.FecharForm(Sender: TObject);
 begin
-  if(assigned(frmCadastroModelo))then
+  if(assigned(CadastroModeloForm))then
   begin
-    frmCadastroModelo.Close;
-    FreeAndNil(frmCadastroModelo);
+    CadastroModeloForm.Close;
+    FreeAndNil(CadastroModeloForm);
   end;
 end;
 
 procedure TCadastroModeloController.InstanciarForm(Aowner: TComponent);
 begin
-  if not(assigned(frmCadastroModelo)) then
-    frmCadastroModelo := TfrmCadastroModelo.Create(Aowner);
+  if not(assigned(CadastroModeloForm)) then
+    CadastroModeloForm := TCadastroModeloForm.Create(Aowner);
 
-  frmCadastroModelo.btnFechar.OnClick := FecharForm;
-  frmCadastroModelo.Show;
+  CadastroModeloForm.btnFechar.OnClick := FecharForm;
+  CadastroModeloForm.Show;
 end;
 
 initialization

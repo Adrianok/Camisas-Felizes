@@ -7,6 +7,9 @@ type
   public
   end;
 
+var
+  oCadastroModeloModel : TCadastroModeloModel;
+
 implementation
 
 end.

@@ -3,8 +3,11 @@ unit uPrincipalForm;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroModeloController, Vcl.Menus;
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.Menus, uCadastroModeloController;
 
 type
   TfrmPrincipal = class(TForm)
@@ -33,7 +36,6 @@ begin
   if (not(assigned(oCadastroModeloController))) then
     oCadastroModeloController := TCadastroModeloController.Create(Self);
   oCadastroModeloController.InstanciarForm(Self);
-
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);

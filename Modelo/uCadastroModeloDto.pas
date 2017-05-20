@@ -9,13 +9,16 @@ type
     FPreco: currency;
     FModelo: string;
     FIdModelo: Integer;
+    FCor: TCadastroCorDto;
     procedure SetIdModelo(const Value: Integer);
     procedure SetModelo(const Value: string);
     procedure SetPreco(const Value: currency);
+    procedure SetCor(const Value: TCadastroCorDto);
   public
     property IdModelo: Integer read FIdModelo write SetIdModelo;
     property Modelo: string read FModelo write SetModelo;
     property Preco: currency read FPreco write SetPreco;
+    property Cor : TCadastroCorDto read FCor write SetCor;
     constructor Create;
     destructor Destroy;override;
   end;
@@ -42,6 +45,11 @@ begin
   inherited;
   if(assigned(oCadastroCorDto))then
     FreeAndNil(oCadastroCorDto);
+end;
+
+procedure TCadastroModeloDto.SetCor(const Value: TCadastroCorDto);
+begin
+  FCor := Value;
 end;
 
 procedure TCadastroModeloDto.SetIdModelo(const Value: Integer);

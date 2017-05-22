@@ -13,8 +13,11 @@ type
     function Ler(var aEstado: TCadastroUfDTO): boolean;
     function BuscaId: integer;
     function Alterar(var aEstado: TCadastroUfDTO): boolean;
-    function Deletar(const aEstado: Integer): Boolean;
+    function Deletar(const aEstado: integer): boolean;
   end;
+
+var
+  oCadastroUfModel: TCadastroUfModel;
 
 implementation
 
@@ -25,10 +28,9 @@ var
   sSql: string;
 
 begin
-  sSql := 'update uf set iduf = ' + inttostr(aEstado.id) +
-          ' , sigla = ' + quotedStr(aEstado.uf) +
-          ' , nome = ' + quotedStr(aEstado.nome) +
-          ' Where idEstado = ' + inttostr(aEstado.id);
+  sSql := 'update uf set iduf = ' + inttostr(aEstado.id) + ' , sigla = ' +
+    quotedStr(aEstado.uf) + ' , nome = ' + quotedStr(aEstado.nome) +
+    ' Where idEstado = ' + inttostr(aEstado.id);
 
   result := TConexaoSigleton.GetInstancia.ExecSQL(sSql) > 0;
 end;
@@ -53,10 +55,10 @@ begin
   end;
 end;
 
-function TCadastroUfModel.Deletar(const aEstado: Integer): Boolean;
+function TCadastroUfModel.Deletar(const aEstado: integer): boolean;
 begin
-  result := TConexaoSigleton.GetInstancia.ExecSQL
-    ('delete from uf where iduf = ' + inttostr(aEstado)) > 0;
+  result := TConexaoSigleton.GetInstancia.ExecSQL('delete from uf where iduf = '
+    + inttostr(aEstado)) > 0;
 end;
 
 function TCadastroUfModel.Ler(var aEstado: TCadastroUfDTO): boolean;

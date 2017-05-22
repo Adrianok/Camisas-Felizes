@@ -22,6 +22,7 @@ type
     btnExcluir: TBitBtn;
     btnFechar: TBitBtn;
     btnNovo: TBitBtn;
+    Consuta: TTabSheet;
     procedure btnFecharClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -68,8 +69,9 @@ end;
 
 procedure TfrmBase.FormCreate(Sender: TObject);
 begin
-  pgControll.ActivePage := Cadastro;
   btnSalvar.Enabled := false;
+  btnPesquisar.Enabled := false;
+  btnExcluir.Enabled := false;
 end;
 
 end.

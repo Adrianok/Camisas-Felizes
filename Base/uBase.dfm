@@ -1041,12 +1041,16 @@ object frmBase: TfrmBase
     Top = 89
     Width = 620
     Height = 333
-    ActivePage = Cadastro
+    ActivePage = Consuta
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
+    end
+    object Consuta: TTabSheet
+      Caption = 'Consulta'
+      ImageIndex = 1
     end
   end
 end

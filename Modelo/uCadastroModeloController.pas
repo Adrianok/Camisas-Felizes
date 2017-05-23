@@ -1,79 +1,78 @@
 unit uCadastroModeloController;
 
 interface
+
 uses
+  Dialogs,
   System.classes, System.SysUtils,
-  uCadastroModeloForm, uCadastroModeloDto,
-  uCadastroModeloRegra, uCadastroModeloModel;
+  uCadastroModeloDto, uClassInterface,
+  uCadastroModeloRegra, uCadastroModeloModel,
+  uCadastroModeloForm;
+
 type
-  TCadastroModeloController = class
+  TCadastroModeloController = class(TClassInterface)
   private
-    procedure FecharForm(Sender : TObject);
   public
-    procedure AtribuirDto;
-    procedure InstanciarForm(Aowner : TComponent);
-    constructor Create(Aowner : TComponent);
-    destructor Destroy;
+    procedure CriarForm(Aowner: TComponent);
+    procedure Fechar;
+    procedure Novo; override;
+
+    constructor Create;
+    destructor Destroy; override;
   end;
 
 var
-  oCadastroModeloController : TCadastroModeloController;
+  oCadastroModeloController: TCadastroModeloController;
 
 implementation
 
 { TControllerCadastroModelo }
 
-
-procedure TCadastroModeloController.AtribuirDto;
+constructor TCadastroModeloController.Create;
 begin
+  if (not(assigned(oCadastroModeloModel))) then
+    oCadastroModeloModel := TCadastroModeloModel.Create(nil);
 
- oCadastroModeloForm.edtCodigo.Text := IntToStr(oCadastroModeloDto.IdModelo);
- oCadastroModeloForm.edtModelo.Text := oCadastroModeloDto.Modelo;
- oCadastroModeloForm.edtPreco.Text := CurrToStr(oCadastroModeloDto.Preco);
- oCadastroModeloForm.edtCor.Text := oCadastroModeloDto.Cor.Descricao;
-
-end;
-
-constructor TCadastroModeloController.Create(Aowner : TComponent);
-begin
-  if(not(assigned(oCadastroModeloModel)))then
-    oCadastroModeloModel := TCadastroModeloModel.Create;
-
-  if(not(assigned(oCadastroModeloDto)))then
+  if (not(assigned(oCadastroModeloDto))) then
     oCadastroModeloDto := TCadastroModeloDto.Create;
 
-  if(not(assigned(oCadastroModeloRegra)))then
+  if (not(assigned(oCadastroModeloRegra))) then
     oCadastroModeloRegra := TCadastroModeloRegra.Create;
+end;
+
+procedure TCadastroModeloController.CriarForm(Aowner: TComponent);
+begin
+  if not(assigned(oFormulario)) then
+    oFormulario := TCadastroModeloForm.Create(Aowner);
+  oFormulario.oController := oCadastroModeloController;
+  oFormulario.Show;
 end;
 
 destructor TCadastroModeloController.Destroy;
 begin
-  if(assigned(oCadastroModeloModel))then
+  if (assigned(oCadastroModeloModel)) then
     FreeAndNil(oCadastroModeloModel);
 
-  if(assigned(oCadastroModeloDto))then
+  if (assigned(oCadastroModeloDto)) then
     FreeAndNil(oCadastroModeloDto);
 
-  if(assigned(oCadastroModeloRegra))then
+  if (assigned(oCadastroModeloRegra)) then
     FreeAndNil(oCadastroModeloRegra);
+  inherited;
 end;
 
-procedure TCadastroModeloController.FecharForm(Sender: TObject);
+procedure TCadastroModeloController.Fechar;
 begin
-  if(assigned(oCadastroModeloForm))then
-  begin
-    oCadastroModeloForm.Close;
-    FreeAndNil(oCadastroModeloForm);
-  end;
+  if not(assigned(oFormulario)) then
+    exit;
+  oFormulario.Close;
+  FreeAndNil(oFormulario);
 end;
 
-procedure TCadastroModeloController.InstanciarForm(Aowner: TComponent);
+procedure TCadastroModeloController.Novo;
 begin
-  if not(assigned(oCadastroModeloForm)) then
-    oCadastroModeloForm := TCadastroModeloForm.Create(Aowner);
-
-  oCadastroModeloForm.btnFechar.OnClick := FecharForm;
-  oCadastroModeloForm.Show;
+  inherited;
+  Showmessage('selectbanco');
 end;
 
 initialization
@@ -81,4 +80,5 @@ initialization
 finalization
   if (not(assigned(oCadastroModeloController))) then
     FreeAndNil(oCadastroModeloController);
+
 end.

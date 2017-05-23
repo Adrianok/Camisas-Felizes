@@ -36,15 +36,15 @@ begin
   IdModelo := 0;
   Preco := 0;
   Modelo := EmptyStr;
-  if(not(assigned(oCadastroCorDto)))then
-    oCadastroCorDto := TCadastroCorDto.Create;
+
+  FCor := TCadastroCorDto.Create;
 end;
 
 destructor TCadastroModeloDto.Destroy;
 begin
   inherited;
-  if(assigned(oCadastroCorDto))then
-    FreeAndNil(oCadastroCorDto);
+  if(assigned(FCor))then
+    FreeAndNil(FCor);
 end;
 
 procedure TCadastroModeloDto.SetCor(const Value: TCadastroCorDto);

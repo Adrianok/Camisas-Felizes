@@ -7,18 +7,17 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList,
-  Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus, uModelo,
-  uControllerCadastroModelo, uCadastroUfController;
+  Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus,
+  uCadastroModeloController,
+  uCadastroUfController;
 
 type
   TfrmPrincipal = class(TForm)
     MainMenu1: TMainMenu;
-    CadastroModelo: TMenuItem;
-    Cadastrodemodelos: TMenuItem;
     C1: TMenuItem;
-    procedure CadastrodemodelosClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure C1Click(Sender: TObject);
+    procedure CadastrodeModelos1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,23 +35,20 @@ procedure TfrmPrincipal.C1Click(Sender: TObject);
 begin
   if (not(Assigned(oCadastroUfController))) then
     oCadastroUfController := TCadastroUfController.Create;
-
   oCadastroUfController.CriarForm(Self);
 
 end;
 
-procedure TfrmPrincipal.CadastrodemodelosClick(Sender: TObject);
+procedure TfrmPrincipal.CadastrodeModelos1Click(Sender: TObject);
 begin
-  if (not(Assigned(oControllerModelo))) then
-    oControllerModelo := TControllerCadastroModelo.Create(Self);
-
+  if (not(Assigned(oCadastroModeloController))) then
+    oCadastroModeloController := TCadastroModeloController.Create;
+  oCadastroModeloController.CriarForm(self);
 end;
 
-procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   ReportMemoryLeaksOnShutdown := True;
-  if (Assigned(oCadastroUfController)) then
-    oCadastroUfController.Destroy;
 end;
 
 end.

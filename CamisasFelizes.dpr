@@ -16,7 +16,10 @@ uses
   uCadastroUfDto in 'CadastroUF\uCadastroUfDto.pas',
   uCadastroUfForm in 'CadastroUF\uCadastroUfForm.pas' {Cadastro de UF},
   uCadastroUfModel in 'CadastroUF\uCadastroUfModel.pas',
-  uCadastroUfRegra in 'CadastroUF\uCadastroUfRegra.pas';
+  uCadastroUfRegra in 'CadastroUF\uCadastroUfRegra.pas',
+  uCadastroModeloRegra in 'Modelo\uCadastroModeloRegra.pas',
+  uInterfaceBase in 'Base\uInterfaceBase.pas',
+  uClassInterface in 'Base\uClassInterface.pas';
 
 {$R *.res}
 

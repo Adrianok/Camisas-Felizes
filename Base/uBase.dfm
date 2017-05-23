@@ -14,8 +14,6 @@ object frmBase: TfrmBase
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Visible = True
-  OnClose = FormClose
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -46,6 +44,7 @@ object frmBase: TfrmBase
         Width = 90
         Height = 70
         Caption = 'Salvar'
+        Enabled = False
         Glyph.Data = {
           F6120000424DF612000000000000360000002800000028000000280000000100
           180000000000C0120000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -203,6 +202,7 @@ object frmBase: TfrmBase
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
+        OnClick = btnSalvarClick
       end
       object btnPesquisar: TBitBtn
         Left = 195
@@ -373,6 +373,7 @@ object frmBase: TfrmBase
         Width = 90
         Height = 70
         Caption = 'Alterar'
+        Enabled = False
         Glyph.Data = {
           F6120000424DF612000000000000360000002800000028000000280000000100
           180000000000C0120000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -528,6 +529,7 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
         TabOrder = 3
+        OnClick = btnAlterarClick
       end
       object btnNovo: TBitBtn
         Left = 3
@@ -715,6 +717,7 @@ object frmBase: TfrmBase
         Width = 90
         Height = 70
         Caption = 'Excluir'
+        Enabled = False
         Glyph.Data = {
           F6120000424DF612000000000000360000002800000028000000280000000100
           180000000000C0120000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -870,6 +873,7 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
         TabOrder = 0
+        OnClick = btnExcluirClick
       end
       object btnFechar: TBitBtn
         Left = 112

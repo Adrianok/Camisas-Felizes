@@ -22,8 +22,6 @@
     inherited Cadastro: TTabSheet
       Font.Height = -15
       ParentFont = False
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 592
       ExplicitHeight = 197
       object LedtCódigo: TLabeledEdit
@@ -66,16 +64,6 @@
         EditLabel.Caption = 'Nome:'
         LabelPosition = lpLeft
         TabOrder = 2
-      end
-    end
-    inherited Consuta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
-      ExplicitWidth = 592
-      ExplicitHeight = 197
-      inherited DBGrid1: TDBGrid
-        Width = 592
-        Height = 197
       end
     end
   end

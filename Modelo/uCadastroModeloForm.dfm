@@ -21,10 +21,10 @@ inherited CadastroModeloForm: TCadastroModeloForm
     Width = 597
     Height = 202
     ExplicitWidth = 597
-    ExplicitHeight = 153
+    ExplicitHeight = 202
     inherited Cadastro: TTabSheet
       ExplicitWidth = 589
-      ExplicitHeight = 125
+      ExplicitHeight = 174
       object edtCodigo: TLabeledEdit
         Left = 70
         Top = 16
@@ -117,16 +117,6 @@ inherited CadastroModeloForm: TCadastroModeloForm
         LabelPosition = lpLeft
         ParentFont = False
         TabOrder = 3
-      end
-    end
-    inherited Consuta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
-      ExplicitWidth = 589
-      ExplicitHeight = 174
-      inherited DBGrid1: TDBGrid
-        Width = 589
-        Height = 174
       end
     end
   end

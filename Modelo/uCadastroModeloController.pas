@@ -3,7 +3,8 @@ unit uCadastroModeloController;
 interface
 
 uses
-  Dialogs,
+  Dialogs, Vcl.ExtCtrls,
+  Vcl.StdCtrls,
   System.classes, System.SysUtils,
   uCadastroModeloDto, uClassInterface,
   uCadastroModeloRegra, uCadastroModeloModel,
@@ -14,8 +15,9 @@ type
   private
   public
     procedure CriarForm(Aowner: TComponent);
-    procedure Fechar;
     procedure Novo; override;
+    procedure Fechar; override;
+    procedure Salvar; override;
 
     constructor Create;
     destructor Destroy; override;
@@ -58,27 +60,45 @@ begin
 
   if (assigned(oCadastroModeloRegra)) then
     FreeAndNil(oCadastroModeloRegra);
+
   inherited;
+
+  if (assigned(oCadastroModeloController)) then
+    oCadastroModeloController := nil;
 end;
 
 procedure TCadastroModeloController.Fechar;
 begin
-  if not(assigned(oFormulario)) then
-    exit;
-  oFormulario.Close;
-  FreeAndNil(oFormulario);
+  inherited;
+  if assigned(oFormulario) then
+  begin
+    oFormulario.Close;
+    FreeAndNil(oFormulario);
+  end;
 end;
 
 procedure TCadastroModeloController.Novo;
 begin
-  inherited;
-  Showmessage('selectbanco');
+  (oFormulario as TCadastroModeloForm).edtCodigo.Text := inttostr(oCadastroModeloRegra.Novo);
+   inherited;
 end;
 
-initialization
+procedure TCadastroModeloController.Salvar;
+begin
+  if(not(ValidarVazio(oFormulario)))then
+    begin
+      exit;
+    end;
+    oCadastroModeloRegra.Salvar(oCadastroModeloDto);
 
-finalization
-  if (not(assigned(oCadastroModeloController))) then
-    FreeAndNil(oCadastroModeloController);
+    with (oFormulario as TCadastroModeloForm) do
+    begin
+      oCadastroModeloDto.IdModelo        :=  StrToInt(edtCodigo.Text);
+      oCadastroModeloDto.Preco           :=  StrToCurr(edtPreco.Text);
+      oCadastroModeloDto.Modelo          :=  edtModelo.Text;
+      oCadastroModeloDto.Cor.Descricao   :=  edtModelo.Text;
+    end;
+
+end;
 
 end.

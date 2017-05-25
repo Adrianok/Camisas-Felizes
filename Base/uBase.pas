@@ -56,7 +56,10 @@ end;
 
 procedure TfrmBase.btnNovoClick(Sender: TObject);
 begin
-  oController.Novo;
+  if(assigned(oController))then
+  oController.Novo
+  else
+  Showmessage('nfoinstanciadoocontroller');
 end;
 
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);
@@ -68,5 +71,8 @@ procedure TfrmBase.btnSalvarClick(Sender: TObject);
 begin
   oController.Salvar;
 end;
+
+
+
 
 end.

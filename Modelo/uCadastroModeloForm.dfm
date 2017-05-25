@@ -14,6 +14,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
       ExplicitLeft = 388
       inherited btnFechar: TBitBtn
         Cancel = True
+        OnClick = btnFecharClick
       end
     end
   end
@@ -74,7 +75,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
       end
       object edtModelo: TLabeledEdit
         Left = 70
-        Top = 72
+        Top = 75
         Width = 487
         Height = 26
         EditLabel.Width = 60

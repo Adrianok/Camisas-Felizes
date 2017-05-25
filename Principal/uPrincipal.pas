@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList,
   Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus,
-  uCadastroModeloController,
+  uCadastroModeloController, uConexaoSingleTon,
   uCadastroUfController;
 
 type
@@ -33,6 +33,7 @@ implementation
 
 procedure TfrmPrincipal.C1Click(Sender: TObject);
 begin
+
   if (not(Assigned(oCadastroUfController))) then
     oCadastroUfController := TCadastroUfController.Create;
   oCadastroUfController.CriarForm(Self);
@@ -43,12 +44,20 @@ procedure TfrmPrincipal.CadastrodeModelos1Click(Sender: TObject);
 begin
   if (not(Assigned(oCadastroModeloController))) then
     oCadastroModeloController := TCadastroModeloController.Create;
-  oCadastroModeloController.CriarForm(self);
+
+  oCadastroModeloController.CriarForm(Self);
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   ReportMemoryLeaksOnShutdown := True;
+  try
+    TConexaoSigleton.GetInstancia;
+  except
+    ShowMessage('Não foi possível conectar ao banco de dados');
+    Application.Terminate;
+  end;
+
 end;
 
 end.

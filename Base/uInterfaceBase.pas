@@ -12,6 +12,8 @@ type
     procedure Excluir;
     procedure Fechar;
 
+//    function GetInstance: TObject;
+//    property Instance: TObject read GetInstance;
 
   end;
 

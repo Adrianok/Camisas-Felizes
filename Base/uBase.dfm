@@ -44,7 +44,6 @@ object frmBase: TfrmBase
         Width = 90
         Height = 70
         Caption = 'Salvar'
-        Enabled = False
         Glyph.Data = {
           F6120000424DF612000000000000360000002800000028000000280000000100
           180000000000C0120000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -373,7 +372,6 @@ object frmBase: TfrmBase
         Width = 90
         Height = 70
         Caption = 'Alterar'
-        Enabled = False
         Glyph.Data = {
           F6120000424DF612000000000000360000002800000028000000280000000100
           180000000000C0120000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -717,7 +715,6 @@ object frmBase: TfrmBase
         Width = 90
         Height = 70
         Caption = 'Excluir'
-        Enabled = False
         Glyph.Data = {
           F6120000424DF612000000000000360000002800000028000000280000000100
           180000000000C0120000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -1036,7 +1033,6 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
         TabOrder = 1
-        OnClick = btnFecharClick
       end
     end
   end
@@ -1051,6 +1047,10 @@ object frmBase: TfrmBase
     TabOrder = 1
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
 end

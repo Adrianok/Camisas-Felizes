@@ -11,7 +11,7 @@ type
   private
   public
     function Novo:Integer;
-    function Salvar(var oDtoModelo: TCadastroModeloDto): boolean;
+    function Salvar(var oCadastroModeloDto: TCadastroModeloDto): boolean;
   end;
 
 var
@@ -26,26 +26,9 @@ begin
   Result := oCadastroModeloModel.Novo;
 end;
 
-function TCadastroModeloRegra.Salvar(var oDtoModelo: TCadastroModeloDto): boolean;
+function TCadastroModeloRegra.Salvar(var oCadastroModeloDto: TCadastroModeloDto): boolean;
 begin
-
-//  if (oDtoModelo.Modelo = EmptyStr) then
-//  begin
-//    oCadastroModeloForm.edtModelo.SetFocus;
-//    raise Exception.Create('O campo: ' + oCadastroModeloForm.edtModelo.EditLabel.Caption+ '   é obrigatório');
-//    exit
-//  end;
-//  if (oDtoModelo.Preco = 0) then
-//  begin
-//    oCadastroModeloForm.edtPreco.SetFocus;
-//    raise Exception.Create('O campo: ' + oCadastroModeloForm.edtModelo.EditLabel.Caption+ '   é obrigatório');
-//  end;
-//  if (oDtoModelo.Preco = 0) then
-//  begin
-//    oCadastroModeloForm.edtPreco.SetFocus;
-//    raise Exception.Create('O campo: ' + oCadastroModeloForm.edtModelo.EditLabel.Caption+ '   é obrigatório');
-//  end;
-
+ // oCadastroModeloModel.Inserir;
 end;
 
 end.

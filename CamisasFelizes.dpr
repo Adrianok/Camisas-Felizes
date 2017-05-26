@@ -18,8 +18,9 @@ uses
   uCadastroUfModel in 'CadastroUF\uCadastroUfModel.pas',
   uCadastroUfRegra in 'CadastroUF\uCadastroUfRegra.pas',
   uCadastroModeloRegra in 'Modelo\uCadastroModeloRegra.pas',
-  uInterfaceBase in 'Base\uInterfaceBase.pas',
-  uClassInterface in 'Base\uClassInterface.pas';
+  uClasseInterfaceViewBase in 'Base\uClasseInterfaceViewBase.pas',
+  uInterfaceViewBase in 'Base\uInterfaceViewBase.pas',
+  uInterfaceCadastroModeloModel in 'Modelo\uInterfaceCadastroModeloModel.pas';
 
 {$R *.res}
 

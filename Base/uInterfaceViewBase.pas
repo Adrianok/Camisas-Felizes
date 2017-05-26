@@ -1,10 +1,10 @@
-unit uInterfaceBase;
+unit uInterfaceViewBase;
 
 interface
 uses
   System.Classes;
 type
-  TInterfaceBase = interface
+  IInterfaceViewBase = interface
     procedure Novo;
     procedure Salvar;
     procedure Alterar;

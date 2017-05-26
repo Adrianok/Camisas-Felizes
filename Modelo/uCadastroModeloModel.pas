@@ -3,16 +3,23 @@ unit uCadastroModeloModel;
 interface
 
 uses
-  FireDAC.Comp.Client, System.SysUtils,
-  Data.DB, FireDAC.DApt, FireDAC.Comp.UI,
-  System.Classes, uConexaoSingleTon;
+  System.Generics.Collections,FireDAC.Comp.Client,
+  System.SysUtils, Data.DB, FireDAC.DApt,
+  FireDAC.Comp.UI,System.Classes,
+  uConexaoSingleTon, uCadastroModeloDto;
 
 type
   TCadastroModeloModel = class(TFDQuery)
   private
 
   public
-    function Novo: Integer;
+
+    function SelecionarTudo(var oCadastroModeloDto: TObjectDictionary<string,TCadastroModeloDto>): Boolean;
+    function Inserir(var oCadastroModeloDto: TCadastroModeloDto):boolean;
+    function Atualizar(var oCadastroModeloDto: TCadastroModeloDto):boolean;
+    function Deletar(var oCadastroModeloDto: TCadastroModeloDto):boolean;
+    function NovoId: Integer;
+
     constructor Create(AOwner: TComponent); override;
   end;
 
@@ -23,13 +30,31 @@ implementation
 
 { TCadastroModeloModel }
 
+function TCadastroModeloModel.Atualizar(
+  var oCadastroModeloDto: TCadastroModeloDto): boolean;
+begin
+
+end;
+
 constructor TCadastroModeloModel.Create(AOwner: TComponent);
 begin
   inherited;
   Connection := TConexaoSigleton.GetInstancia;
 end;
 
-function TCadastroModeloModel.Novo: Integer;
+function TCadastroModeloModel.Deletar(
+  var oCadastroModeloDto: TCadastroModeloDto): boolean;
+begin
+
+end;
+
+function TCadastroModeloModel.Inserir(
+  var oCadastroModeloDto: TCadastroModeloDto): boolean;
+begin
+
+end;
+
+function TCadastroModeloModel.NovoId: Integer;
 var
   Retorno: Integer;
 begin
@@ -43,6 +68,12 @@ begin
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;
+
+end;
+
+function TCadastroModeloModel.SelecionarTudo(
+  var oCadastroModeloDto: TObjectDictionary<string, TCadastroModeloDto>): Boolean;
+begin
 
 end;
 

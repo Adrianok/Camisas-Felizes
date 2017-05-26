@@ -23,7 +23,7 @@ implementation
 
 function TCadastroModeloRegra.Novo: Integer;
 begin
-  Result := oCadastroModeloModel.Novo;
+  Result := oCadastroModeloModel.NovoId;
 end;
 
 function TCadastroModeloRegra.Salvar(var oCadastroModeloDto: TCadastroModeloDto): boolean;

@@ -1,22 +1,22 @@
-unit uClassInterface;
+unit uClasseInterfaceViewBase;
 
 interface
 
 uses
-  uInterfaceBase, dialogs,
+  uInterfaceViewBase, dialogs,
   uBase, System.SysUtils,
   Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.Forms;
 
 type
-  TClassInterface = class(TInterfacedObject, TInterfaceBase)
+  TClassInterfaceViewBase = class(TInterfacedObject, IInterfaceViewBase)
   private
   protected
     oFormulario: TfrmBase;
   public
     procedure Novo; virtual;
     procedure Salvar; virtual;
-    function ValidarVazio(oFormulario : TForm):boolean; // devera ser transferida pra uma interface de regra
+    function ValidarVazio(oFormulario : TForm):boolean;
     procedure Alterar; virtual;
     procedure Pesquisar; virtual;
     procedure Excluir; virtual;
@@ -29,39 +29,39 @@ implementation
 
 // Aqui vão ficar todos as alterações que são padroes para todo formulario
 //  tais como botões que ativam e desativam
-procedure TClassInterface.Alterar;
+procedure TClassInterfaceViewBase.Alterar;
 begin
   ValidarVazio(oFormulario);
 end;
 
-procedure TClassInterface.Excluir;
+procedure TClassInterfaceViewBase.Excluir;
 begin
 
 end;
 
-procedure TClassInterface.Fechar;
+procedure TClassInterfaceViewBase.Fechar;
 begin
 
 end;
 
-procedure TClassInterface.Novo;
+procedure TClassInterfaceViewBase.Novo;
 begin
 
 end;
 
-procedure TClassInterface.Pesquisar;
+procedure TClassInterfaceViewBase.Pesquisar;
 begin
 
 end;
 
-procedure TClassInterface.Salvar;
+procedure TClassInterfaceViewBase.Salvar;
 begin
 
 end;
 
 
 
-function TClassInterface.ValidarVazio(oFormulario: TForm):boolean;
+function TClassInterfaceViewBase.ValidarVazio(oFormulario: TForm):boolean;
 var
   iIndice: Integer;
 begin
@@ -70,7 +70,7 @@ begin
     if (oFormulario.Components[iIndice] is TLabeledEdit) then
       if (oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr then
       begin
-       // (oFormulario.Components[iIndice] as TLabeledEdit).SetFocus;
+       //(oFormulario.Components[iIndice] as TLabeledEdit).SetFocus;
         raise Exception.Create('O Campo ' +
           (oFormulario.Components[iIndice] as TLabeledEdit).EditLabel.Caption +
           ' Não pode ser vazio');

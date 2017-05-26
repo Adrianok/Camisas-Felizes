@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
   Vcl.StdCtrls, System.ImageList,
-  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, uInterfaceBase;
+  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, uInterfaceViewBase;
 
 type
   TfrmBase = class(TForm)
@@ -32,7 +32,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    oController: TInterfaceBase;
+    oController: IInterfaceViewBase;
   end;
 
 implementation
@@ -56,10 +56,7 @@ end;
 
 procedure TfrmBase.btnNovoClick(Sender: TObject);
 begin
-  if(assigned(oController))then
   oController.Novo
-  else
-  Showmessage('nfoinstanciadoocontroller');
 end;
 
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);

@@ -6,12 +6,12 @@ uses
   Dialogs, Vcl.ExtCtrls,
   Vcl.StdCtrls,
   System.classes, System.SysUtils,
-  uCadastroModeloDto, uClassInterface,
+  uCadastroModeloDto, uClasseInterfaceViewBase,
   uCadastroModeloRegra, uCadastroModeloModel,
   uCadastroModeloForm;
 
 type
-  TCadastroModeloController = class(TClassInterface)
+  TCadastroModeloController = class(TClassInterfaceViewBase)
   private
   public
     procedure CriarForm(Aowner: TComponent);

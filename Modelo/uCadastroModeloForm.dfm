@@ -24,9 +24,12 @@ inherited CadastroModeloForm: TCadastroModeloForm
     ExplicitWidth = 597
     ExplicitHeight = 202
     inherited Cadastro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 589
       ExplicitHeight = 174
       object edtCodigo: TLabeledEdit
+        Tag = 999
         Left = 70
         Top = 16
         Width = 153

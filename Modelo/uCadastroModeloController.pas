@@ -18,6 +18,8 @@ type
     procedure Novo; override;
     procedure Fechar; override;
     procedure Salvar; override;
+    procedure VerificarModelo(Sender : TObject);
+    procedure VerificarCor(Sender : TObject);
 
     constructor Create;
     destructor Destroy; override;
@@ -40,6 +42,8 @@ begin
 
   if (not(assigned(oCadastroModeloRegra))) then
     oCadastroModeloRegra := TCadastroModeloRegra.Create;
+
+
 end;
 
 procedure TCadastroModeloController.CriarForm(Aowner: TComponent);
@@ -48,6 +52,9 @@ begin
     oFormulario := TCadastroModeloForm.Create(Aowner);
   oFormulario.oController := oCadastroModeloController;
   oFormulario.Show;
+  (oFormulario as TCadastroModeloForm).edtModelo.OnExit := VerificarModelo;
+   //temporario
+    (oFormulario as TCadastroModeloForm).edtCor.OnExit := VerificarCor;
 end;
 
 destructor TCadastroModeloController.Destroy;
@@ -79,26 +86,59 @@ end;
 
 procedure TCadastroModeloController.Novo;
 begin
-  (oFormulario as TCadastroModeloForm).edtCodigo.Text := inttostr(oCadastroModeloRegra.Novo);
+  if(oCadastroModeloRegra.Novo(oCadastroModeloDto))then
+  (oFormulario as TCadastroModeloForm).edtCodigo.Text := IntToStr(oCadastroModeloDto.IdModelo);
    inherited;
 end;
 
 procedure TCadastroModeloController.Salvar;
 begin
-  if(not(ValidarVazio(oFormulario)))then
+  if(ValidarVazio(oFormulario)=false)then
     begin
       exit;
     end;
-    oCadastroModeloRegra.Salvar(oCadastroModeloDto);
 
     with (oFormulario as TCadastroModeloForm) do
     begin
       oCadastroModeloDto.IdModelo        :=  StrToInt(edtCodigo.Text);
       oCadastroModeloDto.Preco           :=  StrToCurr(edtPreco.Text);
       oCadastroModeloDto.Modelo          :=  edtModelo.Text;
-      oCadastroModeloDto.Cor.Descricao   :=  edtModelo.Text;
+      oCadastroModeloDto.Cor.Descricao   :=  edtCor.Text;
+    end;
+    if(oCadastroModeloRegra.Salvar(oCadastroModeloDto))then
+      ShowMessage('Registro: '+ oCadastroModeloDto.Modelo +' Atualizado com sucesso')
+    else
+      ShowMessage('Registro: '+ oCadastroModeloDto.Modelo +' Inserido com sucesso');
+
+
+end;
+
+procedure TCadastroModeloController.VerificarCor(Sender: TObject);
+begin
+  if((oFormulario as TCadastroModeloForm).edtCor.Text = EmptyStr)then
+    exit;
+  oCadastroModeloDto.cor.Descricao :=  (oFormulario as TCadastroModeloForm).edtCor.text;
+    if((oCadastroModeloRegra.SelectCor(oCadastroModeloDto))=false)then
+      raise exception.Create('Esta cor não possui cadastro');
+end;
+
+procedure TCadastroModeloController.VerificarModelo(Sender: TObject);
+begin
+  if((oFormulario as TCadastroModeloForm).edtModelo.Text = EmptyStr)then
+    exit;
+  oCadastroModeloDto.Modelo :=  (oFormulario as TCadastroModeloForm).edtModelo.text;
+
+  if(oCadastroModeloRegra.SelectDescricao(oCadastroModeloDto))then
+    with (oFormulario as TCadastroModeloForm) do
+    begin
+      if(oCadastroModeloDto.Preco <> 0)then
+        edtPreco.Text :=  CurrToStr(oCadastroModeloDto.Preco);
+
+      edtCodigo.Text  :=  IntToStr(oCadastroModeloDto.IdModelo);
+      edtCor.Text     :=  oCadastroModeloDto.Cor.Descricao;
     end;
 
 end;
+
 
 end.

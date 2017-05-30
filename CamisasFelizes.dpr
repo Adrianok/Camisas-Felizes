@@ -24,6 +24,7 @@ uses
 
 {$R *.res}
 
+
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;

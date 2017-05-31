@@ -14,6 +14,7 @@ type
     function SelectCor(var oCadastroModeloDto : TCadastroModeloDto) : boolean;
     function Novo(var oCadastroModeloDto : TCadastroModeloDto) : boolean;
     function Salvar(var oCadastroModeloDto: TCadastroModeloDto): boolean;
+
   end;
 
 var
@@ -23,6 +24,8 @@ implementation
 
 { TCadastroModeloRegra }
 
+
+
 function TCadastroModeloRegra.Novo(var oCadastroModeloDto : TCadastroModeloDto) : boolean;
 begin
   Result := oCadastroModeloModel.NovoId(oCadastroModeloDto);
@@ -31,7 +34,7 @@ end;
 function TCadastroModeloRegra.Salvar(var oCadastroModeloDto: TCadastroModeloDto): boolean;
 begin
     //funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
-    if(oCadastroModeloModel.SelectID(oCadastroModeloDto))then
+    if(oCadastroModeloModel.SelectModelo(oCadastroModeloDto))then
     begin
       //oCadastroModeloModel.Atualizar;
       Result:=True
@@ -48,14 +51,15 @@ end;
 function TCadastroModeloRegra.SelectCor(
   var oCadastroModeloDto: TCadastroModeloDto): boolean;
 begin
-    Result := oCadastroModeloModel.SelectPorCor(oCadastroModeloDto);
+   // Result := oCadastroModeloModel.SelectPorCor(oCadastroModeloDto);
+   Result:= True;
 end;
 
 function TCadastroModeloRegra.SelectDescricao(
   var oCadastroModeloDto: TCadastroModeloDto): boolean;
 begin
-  if(oCadastroModeloModel.SelectPorModelo(oCadastroModeloDto))then
-    Result := oCadastroModeloModel.SelectModelo(oCadastroModeloDto)
+  if(oCadastroModeloModel.SelectModelo(oCadastroModeloDto))then
+    Result := True
   else
     Result := oCadastroModeloModel.NovoId(oCadastroModeloDto);
 end;

@@ -17,9 +17,11 @@ type
     procedure CriarForm(Aowner: TComponent);
     procedure Novo; override;
     procedure Fechar; override;
+    procedure Alterar; override;
     procedure Salvar; override;
     procedure VerificarModelo(Sender : TObject);
     procedure VerificarCor(Sender : TObject);
+    procedure NovoID;
 
     constructor Create;
     destructor Destroy; override;
@@ -32,10 +34,16 @@ implementation
 
 { TControllerCadastroModelo }
 
+procedure TCadastroModeloController.Alterar;
+begin
+
+  inherited;
+end;
+
 constructor TCadastroModeloController.Create;
 begin
   if (not(assigned(oCadastroModeloModel))) then
-    oCadastroModeloModel := TCadastroModeloModel.Create(nil);
+    oCadastroModeloModel := TCadastroModeloModel.Create;
 
   if (not(assigned(oCadastroModeloDto))) then
     oCadastroModeloDto := TCadastroModeloDto.Create;
@@ -54,7 +62,8 @@ begin
   oFormulario.Show;
   (oFormulario as TCadastroModeloForm).edtModelo.OnExit := VerificarModelo;
    //temporario
-    (oFormulario as TCadastroModeloForm).edtCor.OnExit := VerificarCor;
+  (oFormulario as TCadastroModeloForm).edtCor.OnExit := VerificarCor;
+  (oFormulario as TCadastroModeloForm).edtCor.OnExit := VerificarCor;
 end;
 
 destructor TCadastroModeloController.Destroy;
@@ -86,14 +95,20 @@ end;
 
 procedure TCadastroModeloController.Novo;
 begin
-  if(oCadastroModeloRegra.Novo(oCadastroModeloDto))then
+  inherited;
+  NovoID;
+
+end;
+
+procedure TCadastroModeloController.NovoID;
+begin
+ if(oCadastroModeloRegra.Novo(oCadastroModeloDto))then
   (oFormulario as TCadastroModeloForm).edtCodigo.Text := IntToStr(oCadastroModeloDto.IdModelo);
-   inherited;
 end;
 
 procedure TCadastroModeloController.Salvar;
 begin
-  if(ValidarVazio(oFormulario)=false)then
+  if(not(ValidarVazio))then
     begin
       exit;
     end;
@@ -108,9 +123,11 @@ begin
     if(oCadastroModeloRegra.Salvar(oCadastroModeloDto))then
       ShowMessage('Registro: '+ oCadastroModeloDto.Modelo +' Atualizado com sucesso')
     else
+    begin
       ShowMessage('Registro: '+ oCadastroModeloDto.Modelo +' Inserido com sucesso');
+    end;
 
-
+    inherited;
 end;
 
 procedure TCadastroModeloController.VerificarCor(Sender: TObject);

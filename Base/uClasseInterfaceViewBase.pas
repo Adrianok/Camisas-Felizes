@@ -16,11 +16,14 @@ type
   public
     procedure Novo; virtual;
     procedure Salvar; virtual;
-    function ValidarVazio(oFormulario: TForm): boolean;
+    function ValidarVazio: boolean;
     procedure Alterar; virtual;
     procedure Pesquisar; virtual;
     procedure Excluir; virtual;
     procedure Fechar; virtual;
+    procedure AtivarCampos;
+    procedure DesativarCampos;
+    procedure LimparCampos;
   end;
 
 implementation
@@ -31,7 +34,35 @@ implementation
 // tais como botões que ativam e desativam
 procedure TClassInterfaceViewBase.Alterar;
 begin
-  ValidarVazio(oFormulario);
+  ValidarVazio;
+  AtivarCampos;
+end;
+
+procedure TClassInterfaceViewBase.AtivarCampos;
+var
+  iIndice: integer;
+
+begin
+  for iIndice := 0 to (oFormulario.ComponentCount - 1) do
+    if (oFormulario.Components[iIndice] is TLabeledEdit) and
+      ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+    begin
+      (oFormulario.Components[iIndice] as TLabeledEdit).Enabled := True;
+    end;
+
+end;
+
+procedure TClassInterfaceViewBase.DesativarCampos;
+var
+  iIndice: integer;
+
+begin
+  for iIndice := 0 to (oFormulario.ComponentCount - 1) do
+    if (oFormulario.Components[iIndice] is TLabeledEdit) then
+    begin
+      (oFormulario.Components[iIndice] as TLabeledEdit).Enabled := False;
+    end;
+
 end;
 
 procedure TClassInterfaceViewBase.Excluir;
@@ -44,9 +75,22 @@ begin
 
 end;
 
+procedure TClassInterfaceViewBase.LimparCampos;
+var
+  iIndice: integer;
+begin
+  for iIndice := 0 to (oFormulario.ComponentCount - 1) do
+    if (oFormulario.Components[iIndice] is TLabeledEdit) then
+    begin
+      (oFormulario.Components[iIndice] as TLabeledEdit).Text := EmptyStr;
+    end;
+
+end;
+
 procedure TClassInterfaceViewBase.Novo;
 begin
-
+  LimparCampos;
+  AtivarCampos;
 end;
 
 procedure TClassInterfaceViewBase.Pesquisar;
@@ -56,26 +100,26 @@ end;
 
 procedure TClassInterfaceViewBase.Salvar;
 begin
-
+  DesativarCampos;
 end;
 
-function TClassInterfaceViewBase.ValidarVazio(oFormulario: TForm): boolean;
+function TClassInterfaceViewBase.ValidarVazio: boolean;
 var
   sSeparador: string;
-  iIndice: Integer;
+  iIndice: integer;
   sStringMessage: string;
   auxiliar: boolean;
-  itamanho: Integer;
+  itamanho: integer;
   sCampo: string;
-  iQuantidadeCampos: Integer;
-  iNumeroCampo: Integer;
+  iQuantidadeCampos: integer;
+  iNumeroCampo: integer;
 
 begin
   inherited;
   sSeparador := #13; // Separa os nomes dos campos
   sStringMessage := '';
   // zera os nomes dos campos que aparecerão no raise exception
-  auxiliar := true;
+  auxiliar := True;
   // auxiliar para não iniciar com caractere especial na mensagem
   iQuantidadeCampos := 0;
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
@@ -88,11 +132,11 @@ begin
       if ((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
         ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
       begin
-        if (auxiliar = false) then
+        if (auxiliar = False) then
           sStringMessage := sStringMessage + sSeparador;
         sStringMessage := sStringMessage + copy(sCampo, 1, itamanho - 1);
 
-        auxiliar := false;
+        auxiliar := False;
         iQuantidadeCampos := iQuantidadeCampos + 1;
 
         if (iQuantidadeCampos = 1) then
@@ -105,17 +149,17 @@ begin
     (oFormulario.Components[iNumeroCampo] as TWinControl).SetFocus;
     raise Exception.Create('O Campo: ' + #13 + sStringMessage + #13 +
       'Não pode ser vazio');
-    Result := false
+    Result := False
   end;
 
   if (iQuantidadeCampos > 1) then
   begin
     raise Exception.Create('Os Campos: ' + #13 + sStringMessage + #13 +
       'Não podem ser vazios');
-    Result := false
+    Result := False
   end
   else
-    Result := true;
+    Result := True;
 end;
 
 end.

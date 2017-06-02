@@ -1,30 +1,30 @@
 object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'Camisas Felizes'
-  ClientHeight = 464
-  ClientWidth = 662
-  Color = clWhite
+  Caption = 'frmPrincipal'
+  ClientHeight = 242
+  ClientWidth = 472
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -17
-  Font.Name = 'Segoe UI'
+  Font.Height = -11
+  Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIForm
   Menu = MainMenu1
   OldCreateOrder = False
   WindowState = wsMaximized
-  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 23
+  TextHeight = 13
   object MainMenu1: TMainMenu
-    Left = 176
-    Top = 40
-    object CadastroModelo: TMenuItem
+    Left = 208
+    Top = 104
+    object Cadastros1: TMenuItem
       Caption = 'Cadastros'
-      object Cadastrodemodelos: TMenuItem
-        Caption = 'Cadastro de modelos'
-        OnClick = CadastrodemodelosClick
+      object CadastrodeModelos1: TMenuItem
+        Caption = 'Cadastro de Modelos'
+        OnClick = CadastrodeModelos1Click
       end
       object C1: TMenuItem
         Caption = 'Cadastro de UF'

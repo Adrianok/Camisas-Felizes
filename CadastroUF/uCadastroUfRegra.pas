@@ -10,19 +10,28 @@ type
   TCadastroUfRegra = class
   public
     procedure LimparForm(var aDto: TCadastroUfDto);
-    function Salvar(var aModel: TCadastroUfModel;
-      var aUf: TCadastroUfDto): boolean;
-    function BuscarId: integer;
-
+    function Salvar(const aModel: TCadastroUfModel; var aUf: TCadastroUfDto): boolean;
+    function Novo(var oCadastroModeloDto: TCadastroUfDto): boolean;
+    function Deletar(const aModel: TCadastroUfModel; const aIdUf: integer): boolean;
   end;
+
+var
+  oCadastroUfRegra: TCadastroUfRegra;
 
 implementation
 
 { TCadastroUfRegra }
 
-function TCadastroUfRegra.BuscarId: integer;
+function TCadastroUfRegra.Novo(var oCadastroModeloDto : TCadastroUFDto) : boolean;
 begin
-  result := oCadastroUfModel.NovoId;
+  Result := oCadastroUfModel.NovoId(oCadastroUfDto);
+end;
+
+function TCadastroUfRegra.Deletar(const aModel: TCadastroUfModel;
+  const aIdUf: integer): boolean;
+begin
+  if (aIdUf > 0) then
+    result := aModel.Deletar(aIdUf);
 end;
 
 procedure TCadastroUfRegra.LimparForm(var aDto: TCadastroUfDto);
@@ -32,13 +41,10 @@ begin
   aDto.nome := EmptyStr;
 end;
 
-function TCadastroUfRegra.Salvar(var aModel: TCadastroUfModel;
+function TCadastroUfRegra.Salvar(const aModel: TCadastroUfModel;
   var aUf: TCadastroUfDto): boolean;
 begin
-  result := False;
-  if ((trim(aUf.uf) <> EmptyStr)) then
-    if ((aUf.nome) <> EmptyStr) then
-      result := aModel.Salvar(aUf);
+  result := aModel.Salvar(aUf);
 end;
 
 end.

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
   Vcl.StdCtrls, System.ImageList,
-  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, uInterfaceViewBase;
 
 type
   TfrmBase = class(TForm)
@@ -22,56 +22,54 @@ type
     btnExcluir: TBitBtn;
     btnFechar: TBitBtn;
     btnNovo: TBitBtn;
-    Consuta: TTabSheet;
-    procedure btnFecharClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure btnPesquisarClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnNovoClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    oController: IInterfaceViewBase;
   end;
-
-var
-  frmBase: TfrmBase;
 
 implementation
 
 {$R *.dfm}
 
-uses uConsultaBase;
+procedure TfrmBase.btnAlterarClick(Sender: TObject);
+begin
+  oController.Alterar;
+end;
+
+procedure TfrmBase.btnExcluirClick(Sender: TObject);
+begin
+  oController.Excluir;
+end;
 
 procedure TfrmBase.btnFecharClick(Sender: TObject);
 begin
-  Close;
+  oController.Fechar;
 end;
 
 procedure TfrmBase.btnNovoClick(Sender: TObject);
 begin
-  btnSalvar.Enabled := true;
-  btnNovo.Enabled := false;
-  btnAlterar.Enabled := false;
+  oController.Novo
 end;
 
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);
 begin
-  if (not(Assigned(frmPesquisaBase))) then
-    frmPesquisaBase := TfrmPesquisaBase.Create(self);
-  frmPesquisaBase.Show;
+  oController.Pesquisar;
 end;
 
-procedure TfrmBase.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmBase.btnSalvarClick(Sender: TObject);
 begin
-  frmBase := nil;
+  oController.Salvar;
 end;
 
-procedure TfrmBase.FormCreate(Sender: TObject);
-begin
-  btnSalvar.Enabled := false;
-  btnPesquisar.Enabled := false;
-  btnExcluir.Enabled := false;
-end;
+
+
 
 end.

@@ -14,8 +14,6 @@ object frmBase: TfrmBase
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Visible = True
-  OnClose = FormClose
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -203,6 +201,7 @@ object frmBase: TfrmBase
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
+        OnClick = btnSalvarClick
       end
       object btnPesquisar: TBitBtn
         Left = 195
@@ -528,6 +527,7 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
         TabOrder = 3
+        OnClick = btnAlterarClick
       end
       object btnNovo: TBitBtn
         Left = 3
@@ -870,6 +870,7 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
         TabOrder = 0
+        OnClick = btnExcluirClick
       end
       object btnFechar: TBitBtn
         Left = 112
@@ -1041,16 +1042,12 @@ object frmBase: TfrmBase
     Top = 89
     Width = 620
     Height = 333
-    ActivePage = Consuta
+    ActivePage = Cadastro
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
-    end
-    object Consuta: TTabSheet
-      Caption = 'Consulta'
-      ImageIndex = 1
     end
   end
 end

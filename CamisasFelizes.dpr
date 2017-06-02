@@ -6,16 +6,25 @@ uses
   uConexaoSingleTon in 'ConexãoBD\uConexaoSingleTon.pas',
   uBase in 'Base\uBase.pas' {frmBase},
   uConsultaBase in 'Base\uConsultaBase.pas' {frmPesquisaBase},
-  uControllerCadastroModelo in 'Modelo\uControllerCadastroModelo.pas',
-  uModelo in 'Modelo\uModelo.pas' {frmCadastroModelo},
+  uCadastroModeloController in 'Modelo\uCadastroModeloController.pas',
+  uCadastroModeloDto in 'Modelo\uCadastroModeloDto.pas',
+  uCadastroModeloModel in 'Modelo\uCadastroModeloModel.pas',
+  uCadastroCorDto in 'Cor\uCadastroCorDto.pas',
+  uCadastroModeloForm in 'Modelo\uCadastroModeloForm.pas' {frmCadastroModelo},
   uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
   uCadastroUfController in 'CadastroUF\uCadastroUfController.pas',
   uCadastroUfDto in 'CadastroUF\uCadastroUfDto.pas',
   uCadastroUfForm in 'CadastroUF\uCadastroUfForm.pas' {Cadastro de UF},
   uCadastroUfModel in 'CadastroUF\uCadastroUfModel.pas',
-  uCadastroUfRegra in 'CadastroUF\uCadastroUfRegra.pas';
+  uCadastroUfRegra in 'CadastroUF\uCadastroUfRegra.pas',
+  uCadastroModeloRegra in 'Modelo\uCadastroModeloRegra.pas',
+  uClasseInterfaceViewBase in 'Base\uClasseInterfaceViewBase.pas',
+  uInterfaceViewBase in 'Base\uInterfaceViewBase.pas',
+  uInterfaceCadastroModeloModel in 'Modelo\uInterfaceCadastroModeloModel.pas',
+  uIterfaceCadastroUfModel in 'CadastroUF\uIterfaceCadastroUfModel.pas';
 
 {$R *.res}
+
 
 begin
   Application.Initialize;

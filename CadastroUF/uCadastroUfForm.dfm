@@ -1,4 +1,4 @@
-﻿inherited CadastroUfForm: TCadastroUfForm
+inherited CadastroUfForm: TCadastroUfForm
   Caption = 'Cadastro de UF'
   ClientHeight = 314
   ClientWidth = 600
@@ -22,11 +22,9 @@
     inherited Cadastro: TTabSheet
       Font.Height = -15
       ParentFont = False
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 592
       ExplicitHeight = 197
-      object LedtCódigo: TLabeledEdit
+      object LedtCodigo: TLabeledEdit
         Left = 70
         Top = 19
         Width = 121
@@ -40,7 +38,7 @@
         Enabled = False
         LabelPosition = lpLeft
         TabOrder = 0
-        TextHint = 'C'#243'd'
+        TextHint = 'C'#211'DIGO'
       end
       object LedtUf: TLabeledEdit
         Left = 70
@@ -54,6 +52,7 @@
         LabelPosition = lpLeft
         MaxLength = 2
         TabOrder = 1
+        TextHint = 'Sigla'
       end
       object LedtNome: TLabeledEdit
         Left = 70
@@ -66,16 +65,7 @@
         EditLabel.Caption = 'Nome:'
         LabelPosition = lpLeft
         TabOrder = 2
-      end
-    end
-    inherited Consuta: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
-      ExplicitWidth = 592
-      ExplicitHeight = 197
-      inherited DBGrid1: TDBGrid
-        Width = 592
-        Height = 197
+        TextHint = 'nome UF'
       end
     end
   end

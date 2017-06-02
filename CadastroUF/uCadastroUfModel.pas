@@ -3,17 +3,27 @@ unit uCadastroUfModel;
 interface
 
 uses
-  System.SysUtils, FireDAC.Comp.Client, Data.DB, FireDAC.DApt, FireDAC.Comp.UI,
-  FireDAC.Comp.DataSet, uConexaoSingleTon, uCadastroUfDto;
+  System.Generics.Collections, FireDAC.Comp.Client,
+  System.SysUtils, Data.DB, FireDAC.DApt,
+  FireDAC.Comp.UI, System.Classes, Dialogs,
+  uConexaoSingleTon,
+  uCadastroUfDto,
+  uIterfaceCadastroUfModel;
 
 type
-  TCadastroUfModel = class
+  TCadastroUfModel = class(TInterfacedObject, IInterfaceCadastroUfModel)
+  private
+    Query: TFDQuery;
+    QuerySql: string;
   public
     function Salvar(var aEstado: TCadastroUfDTO): boolean;
     function Ler(var aEstado: TCadastroUfDTO): boolean;
-    function BuscaId: integer;
+    function NovoId(var oCadastroUfDto: TCadastroUfDTO): boolean;
     function Alterar(var aEstado: TCadastroUfDTO): boolean;
-    function Deletar(const aEstado: integer): boolean;
+    function Deletar(const aIdUf: Integer): boolean;
+
+    constructor Create;
+    destructor Destroy; override;
   end;
 
 var
@@ -24,80 +34,85 @@ implementation
 { TUfModel }
 
 function TCadastroUfModel.Alterar(var aEstado: TCadastroUfDTO): boolean;
-var
-  sSql: string;
-
 begin
-  sSql := 'update uf set iduf = ' + inttostr(aEstado.id) + ' , sigla = ' +
+  QuerySql := ('update uf set iduf = ' + inttostr(aEstado.id) + ' , sigla = ' +
     quotedStr(aEstado.uf) + ' , nome = ' + quotedStr(aEstado.nome) +
-    ' Where idEstado = ' + inttostr(aEstado.id);
+    ' Where iduf = ' + inttostr(aEstado.id));
 
-  result := TConexaoSigleton.GetInstancia.ExecSQL(sSql) > 0;
+  result := Query.Connection.ExecSQL(QuerySql) > 0;
 end;
 
-function TCadastroUfModel.BuscaId: integer;
+function TCadastroUfModel.NovoId(var oCadastroUfDto: TCadastroUfDTO): boolean;
 var
-  sSql: TFDQuery;
-
+  Retorno: Integer;
 begin
-  sSql := TFDQuery.Create(nil);
   try
-    sSql.Connection := TConexaoSigleton.GetInstancia;
-    sSql.Open('Select max(iduf) as ID from uf');
+    Query.SQL.Clear;
+    Query.Open('select max(idUf) as id from Uf');
+    if (not(Query.IsEmpty)) then
     begin
-      if (not(sSql.IsEmpty)) then
-        result := sSql.FieldByName('ID').AsInteger + 1;
-    end;
-
-  finally
-    if (Assigned(sSql)) then
-      FreeAndNil(sSql);
+      oCadastroUfDto.id := (Query.FieldByName('id').AsInteger) + 1;
+      result := True;
+    end
+    else
+      result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;
+
 end;
 
-function TCadastroUfModel.Deletar(const aEstado: integer): boolean;
+constructor TCadastroUfModel.Create;
 begin
-  result := TConexaoSigleton.GetInstancia.ExecSQL('delete from uf where iduf = '
-    + inttostr(aEstado)) > 0;
+  inherited;
+  Query := TFDQuery.Create(nil);
+  Query.Connection := TConexaoSigleton.GetInstancia;
+
+end;
+
+function TCadastroUfModel.Deletar(const aIdUf: Integer): boolean;
+begin
+  result := Query.Connection.ExecSQL
+    ('delete from Municipio where idMunicipio = ' + inttostr(aIdUf)) > 0;
+end;
+
+destructor TCadastroUfModel.Destroy;
+begin
+  inherited;
+  if (Assigned(Query)) then
+    FreeAndNil(Query);
 end;
 
 function TCadastroUfModel.Ler(var aEstado: TCadastroUfDTO): boolean;
-var
-  sSqlLer: TFDQuery;
-
 begin
-  result := false;
-  sSqlLer := TFDQuery.Create(nil);
+  result := False;
   try
-    sSqlLer.Connection := TConexaoSigleton.GetInstancia;
-    sSqlLer.Open('Select iduf, sigla, descricao from uf where iduf = ' +
-      inttostr(aEstado.id));
+    QuerySql := 'Select iduf, sigla, descricao from uf where sigla = ' +
+      (aEstado.uf);
 
-    if (not(sSqlLer.IsEmpty)) then
+    if (not(Query.IsEmpty)) then
     begin
-      aEstado.id := sSqlLer.FieldByName('iduf').AsInteger;
-      aEstado.uf := sSqlLer.FieldByName('uf').AsString;
-      aEstado.nome := sSqlLer.FieldByName('descricao').AsString;
+      aEstado.id := Query.FieldByName('iduf').AsInteger;
+      aEstado.uf := Query.FieldByName('sigla').AsString;
+      aEstado.nome := Query.FieldByName('descricao').AsString;
 
-      result := true;
+      result := True;
     end;
 
   finally
-    if (Assigned(sSqlLer)) then
-      FreeAndNil(sSqlLer);
+    if (Assigned(Query)) then
+      FreeAndNil(Query);
   end;
 end;
 
 function TCadastroUfModel.Salvar(var aEstado: TCadastroUfDTO): boolean;
-var
-  sSqlSalvar: string;
 
 begin
-  sSqlSalvar := 'insert into uf (iduf, sigla, descricao) values (' +
+  QuerySql := ('insert into uf (iduf, sigla, descricao) values (' +
     inttostr(aEstado.id) + ', ' + quotedStr(aEstado.uf) + ', ' +
-    quotedStr(aEstado.nome) + ')';
+    quotedStr(aEstado.nome) + ')');
 
-  result := TConexaoSigleton.GetInstancia.ExecSQL(sSqlSalvar) > 0;
+  result := Query.Connection.ExecSQL(QuerySql) > 0;
 
 end;
 

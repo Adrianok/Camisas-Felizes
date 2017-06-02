@@ -10,7 +10,7 @@ uses
 
 type
   TCadastroUfForm = class(TfrmBase)
-    LedtCódigo: TLabeledEdit;
+    LedtCodigo: TLabeledEdit;
     LedtUf: TLabeledEdit;
     LedtNome: TLabeledEdit;
 

@@ -105,33 +105,26 @@ begin
   end;
 
 end;
-//
-//function TCadastroCorModel.SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
-//begin
-////  try
-////    Query.SQL.Clear;
-////    Query.Open
-////      ('SELECT * FROM Cor JOIN cor_Cor ON Cor_idCor = idCor ' +
-////      'join cor on idcor = cor_idcor WHERE Cor = ''' +
-////      oCadastroCorDto.D + ''' ');
-////    if (not(Query.IsEmpty)) then
-////    begin
-////      oCadastroCorDto.IdCor := Query.FieldByName('idCor').AsInteger;
-////      oCadastroCorDto.Cor := Query.FieldByName('Cor').AsString;
-////      oCadastroCorDto.Preco := Query.FieldByName('preco').AsCurrency;
-////      oCadastroCorDto.Cor.Descricao :=
-////        Query.FieldByName('descricao').AsString;
-////      oCadastroCorDto.Cor.IdCor := Query.FieldByName('idcor').AsInteger;
-////
-////      Result := True;
-////    end
-////    else if (Query.IsEmpty) then
-////      Result := False;
-////  except
-////    raise Exception.Create('Não Foi possível acessar o banco de dados');
-////
-////  end;
-//end;
+
+function TCadastroCorModel.SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
+begin
+  try
+    Query.SQL.Clear;
+    Query.Open
+      ('SELECT * FROM Cor WHERE Descricao = ''' +oCadastroCorDto.Descricao + ''' ');
+    if (not(Query.IsEmpty)) then
+    begin
+      oCadastroCorDto.IdCor     := Query.FieldByName('idCor').AsInteger;
+      oCadastroCorDto.Descricao := Query.FieldByName('descricao').AsString;
+      Result := True;
+    end
+    else if (Query.IsEmpty) then
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+
+  end;
+end;
 
 // function TCadastroCorModel.SelectPorCor(
 // var oCadastroCorDto: TCadastroCorDto): Boolean;

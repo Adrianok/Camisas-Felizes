@@ -133,7 +133,6 @@
         <DCCReference Include="Cor\uCadastroCorDto.pas"/>
         <DCCReference Include="Cor\uCadastroCorForm.pas">
             <Form>CadastroCorForm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Cor\uCadastroCorModel.pas"/>
         <DCCReference Include="Cor\uCadastroCorRegra.pas"/>

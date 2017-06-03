@@ -4,22 +4,30 @@ interface
 
 uses
   System.SysUtils, System.classes, FireDAC.Comp.Client, Data.DB, FireDAC.DApt,
-  FireDAC.Comp.UI,
-  FireDAC.Comp.DataSet, uCadastroUfModel, uConexaoSingleTon, uCadastroUfDTO,
+  FireDAC.Comp.UI, Dialogs,
+  FireDAC.Comp.DataSet,
+  uCadastroUfModel,
+  uConexaoSingleTon,
+  uCadastroUfDTO,
   uCadastroUfRegra,
-  uCadastroUfForm;
+  uCadastroUfForm,
+  uClasseInterfaceViewBase,
+  uInterfaceViewBase,
+  uBase;
 
 type
-  TCadastroUfController = class
+  TCadastroUfController = class(TClassInterfaceViewBase)
   private
     oCadastroUfDTO: TCadastroUfDTO;
     oCadastroUfModel: TCadastroUfModel;
     oCadastroUfRegra: TCadastroUfRegra;
-    oCadastroUfForm: TCadastroUfForm;
-
   public
-    procedure CriarForm(aOwner: TComponent);
-    procedure FecharForm(Sender: TObject);
+    procedure CriarForm(Aowner: TComponent); override;
+    procedure Novo; override;
+    procedure Fechar; override;
+    procedure Salvar; override;
+    procedure Deletar(Sender: TObject);
+    procedure PreencherForm;
 
     constructor Create;
     destructor Destroy; override;
@@ -27,31 +35,40 @@ type
   end;
 
 var
-  oCadastroUfController: TCadastroUfController;
+  oCadastroUfController: IInterfaceViewBase;
 
 implementation
 
 { TUfController }
+
 
 constructor TCadastroUfController.Create;
 begin
   oCadastroUfDTO := TCadastroUfDTO.Create;
   oCadastroUfModel := TCadastroUfModel.Create;
   oCadastroUfRegra := TCadastroUfRegra.Create;
-
 end;
 
-procedure TCadastroUfController.CriarForm(aOwner: TComponent);
+procedure TCadastroUfController.CriarForm(Aowner: TComponent);
 begin
-  if (not(Assigned(oCadastroUfForm))) then
-    oCadastroUfForm := TCadastroUfForm.Create(aOwner);
+  if (not(Assigned(oFormulario))) then
+    oFormulario := TCadastroUfForm.Create(Aowner);
+  oFormulario.oController := oCadastroUfController;
+  oFormulario.Show;
+end;
 
-  oCadastroUfForm.btnFechar.OnClick := FecharForm;
-
+procedure TCadastroUfController.Deletar;
+var
+  IdUf: Integer;
+begin
+  IdUf := StrToInt((oFormulario as TCadastroUfForm).LedtCodigo.Text);
+  oCadastroUfRegra.Deletar(oCadastroUfModel, IdUf);
 end;
 
 destructor TCadastroUfController.Destroy;
 begin
+  inherited;
+
   if (Assigned(oCadastroUfDTO)) then
     FreeAndNil(oCadastroUfDTO);
 
@@ -60,23 +77,51 @@ begin
 
   if (Assigned(oCadastroUfRegra)) then
     FreeAndNil(oCadastroUfRegra);
+end;
 
+procedure TCadastroUfController.Fechar;
+begin
+  inherited;
+  if (Assigned(oFormulario)) then
+  begin
+    oFormulario.Close;
+    FreeAndNil(oFormulario);
+  end;
+end;
+
+procedure TCadastroUfController.Novo;
+begin
+  if (oCadastroUfRegra.Novo(oCadastroUfDTO)) then
+    (oFormulario as TCadastroUfForm).LedtCodigo.Text := IntToStr(oCadastroUfDTO.id);
   inherited;
 
 end;
 
-procedure TCadastroUfController.FecharForm(Sender: TObject);
+procedure TCadastroUfController.PreencherForm;
 begin
-  if (Assigned(oCadastroUfForm)) then
-  begin
-    oCadastroUfForm.Close;
-    FreeAndNil(oCadastroUfForm);
-  end;
+  { oCadastroUfForm. }
 end;
 
-initialization
+procedure TCadastroUfController.Salvar;
+begin
+  if (ValidarVazio(oFormulario) = false) then
+  begin
+    exit;
+  end;
 
+  with (oFormulario as TCadastroUfForm) do
+  begin
+    oCadastroUfDTO.id := StrToInt(LedtCodigo.Text);
+    oCadastroUfDTO.uf := LedtUf.Text;
+    oCadastroUfDTO.nome := LedtNome.Text;
+  end;
 
-finalization
+  if (oCadastroUfRegra.Salvar(oCadastroUfModel, oCadastroUfDTO)) then
+    ShowMessage('Registro: ' + oCadastroUfDTO.uf + ' Atualizado com sucesso')
+  else
+    ShowMessage('Registro: ' + oCadastroUfDTO.uf + ' Inserido com sucesso');
+
+  inherited;
+end;
 
 end.

@@ -1,4 +1,4 @@
-﻿inherited CadastroUfForm: TCadastroUfForm
+inherited CadastroUfForm: TCadastroUfForm
   Caption = 'Cadastro de UF'
   ClientHeight = 314
   ClientWidth = 600
@@ -24,7 +24,7 @@
       ParentFont = False
       ExplicitWidth = 592
       ExplicitHeight = 197
-      object LedtCódigo: TLabeledEdit
+      object LedtCodigo: TLabeledEdit
         Left = 70
         Top = 19
         Width = 121
@@ -38,7 +38,7 @@
         Enabled = False
         LabelPosition = lpLeft
         TabOrder = 0
-        TextHint = 'C'#243'd'
+        TextHint = 'C'#211'DIGO'
       end
       object LedtUf: TLabeledEdit
         Left = 70
@@ -52,6 +52,7 @@
         LabelPosition = lpLeft
         MaxLength = 2
         TabOrder = 1
+        TextHint = 'Sigla'
       end
       object LedtNome: TLabeledEdit
         Left = 70
@@ -64,6 +65,7 @@
         EditLabel.Caption = 'Nome:'
         LabelPosition = lpLeft
         TabOrder = 2
+        TextHint = 'nome UF'
       end
     end
   end

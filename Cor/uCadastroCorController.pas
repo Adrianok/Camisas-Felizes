@@ -8,31 +8,29 @@ uses
   System.classes, System.SysUtils,
   uCadastroCorDto, uClasseInterfaceViewBase,
   uCadastroCorRegra, uCadastroCorModel,
-  uCadastroCorForm;
+  uCadastroCorForm, uInterfaceViewBase;
 
 type
   TCadastroCorController = class(TClassInterfaceViewBase)
   private
-    oCadastroCorModel : TCadastroCorModel;
-    oCadastroCorDto   : TCadastroCorDto;
-    oCadastroCorRegra : TCadastroCorRegra;
   public
-    procedure CriarForm(Aowner: TComponent);
+    procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Fechar; override;
-    procedure Alterar; override;
     procedure Salvar; override;
-    procedure VerificarCor(Sender : TObject);
+    procedure Alterar; override;
     procedure NovoID;
+    procedure VerificarCor(Sender: TObject);
 
     constructor Create;
     destructor Destroy; override;
   end;
 
 var
-  oCadastroCorController: TCadastroCorController;
+  oCadastroCorController: IInterfaceViewBase;
 
 implementation
+
 
 { TControllerCadastroCor }
 
@@ -57,6 +55,7 @@ end;
 
 procedure TCadastroCorController.CriarForm(Aowner: TComponent);
 begin
+
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroCorForm.Create(Aowner);
   oFormulario.oController := oCadastroCorController;
@@ -94,9 +93,8 @@ end;
 
 procedure TCadastroCorController.Novo;
 begin
-  inherited;
   NovoID;
-
+  inherited;
 end;
 
 procedure TCadastroCorController.NovoID;

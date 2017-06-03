@@ -6,7 +6,8 @@ uses
   uInterfaceViewBase, dialogs,
   uBase, System.SysUtils,
   Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Forms, Vcl.Controls;
+  Vcl.Forms, Vcl.Controls,
+  System.Classes;
 
 type
   TClassInterfaceViewBase = class(TInterfacedObject, IInterfaceViewBase)
@@ -14,6 +15,7 @@ type
   protected
     oFormulario: TfrmBase;
   public
+    procedure CriarForm(Aowner: TComponent);virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
     function ValidarVazio: boolean;
@@ -52,6 +54,11 @@ begin
 
 end;
 
+procedure TClassInterfaceViewBase.CriarForm(Aowner: TComponent);
+begin
+
+end;
+
 procedure TClassInterfaceViewBase.DesativarCampos;
 var
   iIndice: integer;
@@ -67,6 +74,8 @@ end;
 
 procedure TClassInterfaceViewBase.Excluir;
 begin
+  LimparCampos;
+  DesativarCampos;
 
 end;
 
@@ -95,7 +104,7 @@ end;
 
 procedure TClassInterfaceViewBase.Pesquisar;
 begin
-
+    AtivarCampos;
 end;
 
 procedure TClassInterfaceViewBase.Salvar;

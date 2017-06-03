@@ -1,10 +1,13 @@
 unit uInterfaceViewBase;
 
 interface
+
 uses
   System.Classes;
+
 type
   IInterfaceViewBase = interface
+    procedure CriarForm(Aowner: TComponent);
     procedure Novo;
     procedure Salvar;
     procedure Alterar;

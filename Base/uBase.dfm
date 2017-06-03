@@ -1033,6 +1033,7 @@ object frmBase: TfrmBase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Layout = blGlyphTop
         TabOrder = 1
+        OnClick = btnFecharClick
       end
     end
   end

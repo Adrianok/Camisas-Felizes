@@ -9,7 +9,6 @@ uses
   uCadastroModeloController in 'Modelo\uCadastroModeloController.pas',
   uCadastroModeloDto in 'Modelo\uCadastroModeloDto.pas',
   uCadastroModeloModel in 'Modelo\uCadastroModeloModel.pas',
-  uCadastroCorDto in 'Cor\uCadastroCorDto.pas',
   uCadastroModeloForm in 'Modelo\uCadastroModeloForm.pas' {frmCadastroModelo},
   uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
   uCadastroUfController in 'CadastroUF\uCadastroUfController.pas',
@@ -20,7 +19,13 @@ uses
   uCadastroModeloRegra in 'Modelo\uCadastroModeloRegra.pas',
   uClasseInterfaceViewBase in 'Base\uClasseInterfaceViewBase.pas',
   uInterfaceViewBase in 'Base\uInterfaceViewBase.pas',
-  uInterfaceCadastroModeloModel in 'Modelo\uInterfaceCadastroModeloModel.pas';
+  uInterfaceCadastroModeloModel in 'Modelo\uInterfaceCadastroModeloModel.pas',
+  uCadastroCorController in 'Cor\uCadastroCorController.pas',
+  uCadastroCorDto in 'Cor\uCadastroCorDto.pas',
+  uCadastroCorForm in 'Cor\uCadastroCorForm.pas' {CadastroCorForm},
+  uCadastroCorModel in 'Cor\uCadastroCorModel.pas',
+  uCadastroCorRegra in 'Cor\uCadastroCorRegra.pas',
+  uInterfaceCadastroCorModel in 'Cor\uInterfaceCadastroCorModel.pas';
 
 {$R *.res}
 

@@ -112,7 +112,6 @@
         <DCCReference Include="Modelo\uCadastroModeloController.pas"/>
         <DCCReference Include="Modelo\uCadastroModeloDto.pas"/>
         <DCCReference Include="Modelo\uCadastroModeloModel.pas"/>
-        <DCCReference Include="Cor\uCadastroCorDto.pas"/>
         <DCCReference Include="Modelo\uCadastroModeloForm.pas">
             <Form>frmCadastroModelo</Form>
         </DCCReference>
@@ -130,6 +129,15 @@
         <DCCReference Include="Base\uClasseInterfaceViewBase.pas"/>
         <DCCReference Include="Base\uInterfaceViewBase.pas"/>
         <DCCReference Include="Modelo\uInterfaceCadastroModeloModel.pas"/>
+        <DCCReference Include="Cor\uCadastroCorController.pas"/>
+        <DCCReference Include="Cor\uCadastroCorDto.pas"/>
+        <DCCReference Include="Cor\uCadastroCorForm.pas">
+            <Form>CadastroCorForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cor\uCadastroCorModel.pas"/>
+        <DCCReference Include="Cor\uCadastroCorRegra.pas"/>
+        <DCCReference Include="Cor\uInterfaceCadastroCorModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

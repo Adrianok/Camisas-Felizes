@@ -92,11 +92,7 @@ end;
 
 procedure TCadastroModeloController.Salvar;
 begin
-  if (ValidarVazio(oFormulario) = false) then
-  begin
-    exit;
-  end;
-
+  inherited;
   with (oFormulario as TCadastroModeloForm) do
   begin
     oCadastroModeloDto.IdModelo := StrToInt(edtCodigo.Text);
@@ -105,11 +101,9 @@ begin
     oCadastroModeloDto.Cor.Descricao := edtCor.Text;
   end;
   if (oCadastroModeloRegra.Salvar(oCadastroModeloDto)) then
-    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +
-      ' Atualizado com sucesso')
+    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +' Atualizado com sucesso')
   else
-    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +
-      ' Inserido com sucesso');
+    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +' Inserido com sucesso');
 
 end;
 

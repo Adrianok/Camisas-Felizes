@@ -20,7 +20,6 @@ type
     procedure Salvar; override;
     procedure Alterar; override;
     procedure NovoID;
-    procedure VerificarCor(Sender: TObject);
 
     constructor Create;
     destructor Destroy; override;
@@ -61,7 +60,6 @@ begin
   oFormulario.oController := oCadastroCorController;
   oFormulario.Show;
 
-  (oFormulario as TCadastroCorForm).edtCor.OnExit := VerificarCor;
 end;
 
 destructor TCadastroCorController.Destroy;
@@ -93,8 +91,8 @@ end;
 
 procedure TCadastroCorController.Novo;
 begin
-  NovoID;
   inherited;
+  NovoID;
 end;
 
 procedure TCadastroCorController.NovoID;
@@ -105,6 +103,7 @@ end;
 
 procedure TCadastroCorController.Salvar;
 begin
+    inherited;
     with (oFormulario as TCadastroCorForm) do
     begin
       oCadastroCorDto.IdCor        :=  StrToInt(edtCodigo.Text);
@@ -116,24 +115,9 @@ begin
     begin
       ShowMessage('Registro: '+ oCadastroCorDto.Descricao +' Inserido com sucesso');
     end;
-
-    inherited;
 end;
 
-procedure TCadastroCorController.VerificarCor(Sender: TObject);
-begin
-  if((oFormulario as TCadastroCorForm).edtCor.Text = EmptyStr)then
-    exit;
-  oCadastroCorDto.Descricao :=  (oFormulario as TCadastroCorForm).edtCor.text;
 
-  if(oCadastroCorRegra.SelectDescricao(oCadastroCorDto))then
-    with (oFormulario as TCadastroCorForm) do
-    begin
-      edtCodigo.Text  :=  IntToStr(oCadastroCorDto.IdCor);
-      edtCor.Text     :=  oCadastroCorDto.Descricao;
-    end;
-
-end;
 
 
 end.

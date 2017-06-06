@@ -55,13 +55,12 @@ begin
    Result:= True;
 end;
 
-function TCadastroCorRegra.SelectDescricao(
-  var oCadastroCorDto: TCadastroCorDto): boolean;
+function TCadastroCorRegra.SelectDescricao(var oCadastroCorDto: TCadastroCorDto): boolean;
 begin
-//  if(oCadastroCorModel.SelectCor(oCadastroCorDto))then
-//    Result := True
-//  else
-//    Result := oCadastroCorModel.NovoId(oCadastroCorDto);
+  if(oCadastroCorModel.SelectDescricao(oCadastroCorDto))then
+    Result := True
+  else
+    Result := oCadastroCorModel.NovoId(oCadastroCorDto);
 end;
 
 end.

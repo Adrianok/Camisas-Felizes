@@ -17,6 +17,7 @@ type
   public
     // function SelectPorCor(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
     function SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
+    function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Inserir(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Atualizar(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Deletar(var oCadastroCorDto: TCadastroCorDto): Boolean;
@@ -41,9 +42,9 @@ begin
     Query := TFDQuery.Create(nil);
     Query.Connection := TConexaoSigleton.GetInstancia;
     Query.SQL.Clear;
-    Query.SQL.Add(' UPDATE cor SET idcor='
-    + IntToStr(oCadastroCorDto.IdCor) + ', descricao = '''
-    + oCadastroCorDto.Descricao + ''');');
+    Query.SQL.Add(' UPDATE cor SET descricao ='''
+    + oCadastroCorDto.Descricao + ''' WHERE idcor= '
+    + IntToStr(oCadastroCorDto.IdCor) + ';');
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
     begin
@@ -53,9 +54,8 @@ begin
       Result := False;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
-    FreeAndNil(Query);
   end;
-
+  FreeAndNil(Query);
 end;
 
 constructor TCadastroCorModel.Create;
@@ -101,9 +101,8 @@ begin
       Result := False;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
-    FreeAndNil(Query);
   end;
-
+  FreeAndNil(Query);
 end;
 
 function TCadastroCorModel.NovoId(var oCadastroCorDto: TCadastroCorDto): Boolean;
@@ -124,9 +123,8 @@ begin
       Result := False;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
-    FreeAndNil(Query);
   end;
-
+  FreeAndNil(Query);
 end;
 
 function TCadastroCorModel.SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
@@ -146,9 +144,29 @@ begin
       Result := False;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
-    FreeAndNil(Query);
   end;
-
+  FreeAndNil(Query);
 end;
 
+function TCadastroCorModel.SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
+var
+   Query : TFDQuery;
+begin
+  try
+    Query := TFDQuery.Create(nil);
+    Query.Connection := TConexaoSigleton.GetInstancia;
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM cor WHERE descricao =''' + oCadastroCorDto.Descricao + ''' ');
+    if (not(Query.IsEmpty)) then
+    begin
+      oCadastroCorDto.IdCor := Query.FieldByName('idcor').AsInteger;
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+  FreeAndNil(Query);
+end;
 end.

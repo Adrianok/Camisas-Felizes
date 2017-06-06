@@ -104,10 +104,7 @@ end;
 
 procedure TCadastroUfController.Salvar;
 begin
-  if (ValidarVazio(oFormulario) = false) then
-  begin
-    exit;
-  end;
+
 
   with (oFormulario as TCadastroUfForm) do
   begin

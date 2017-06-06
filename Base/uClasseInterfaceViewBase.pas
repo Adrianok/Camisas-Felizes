@@ -23,6 +23,7 @@ type
     procedure Pesquisar; virtual;
     procedure Excluir; virtual;
     procedure Fechar; virtual;
+    procedure AjustarFoco;
     procedure AtivarCampos;
     procedure DesativarCampos;
     procedure LimparCampos;
@@ -34,10 +35,25 @@ implementation
 
 // Aqui vão ficar todos as alterações que são padroes para todo formulario
 // tais como botões que ativam e desativam
+procedure TClassInterfaceViewBase.AjustarFoco;
+var
+  iIndice: integer;
+begin
+  for iIndice := 0 to (oFormulario.ComponentCount - 1) do
+    if(oFormulario.Components[iIndice] is TLabeledEdit) and
+      ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
+      ((oFormulario.Components[iIndice] as TWinControl).Enabled = True) then
+    begin
+      (oFormulario.Components[iIndice] as TWinControl).SetFocus;
+      exit;
+    end;
+
+end;
 procedure TClassInterfaceViewBase.Alterar;
 begin
   ValidarVazio;
   AtivarCampos;
+  AjustarFoco;
 end;
 
 procedure TClassInterfaceViewBase.AtivarCampos;
@@ -100,16 +116,19 @@ procedure TClassInterfaceViewBase.Novo;
 begin
   LimparCampos;
   AtivarCampos;
+  AjustarFoco;
 end;
 
 procedure TClassInterfaceViewBase.Pesquisar;
 begin
-    AtivarCampos;
+  AtivarCampos;
+  AjustarFoco;
 end;
 
 procedure TClassInterfaceViewBase.Salvar;
 begin
-  DesativarCampos;
+  if(ValidarVazio)then
+    DesativarCampos;
 end;
 
 function TClassInterfaceViewBase.ValidarVazio: boolean;

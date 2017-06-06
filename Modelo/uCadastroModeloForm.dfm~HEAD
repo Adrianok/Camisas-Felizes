@@ -67,7 +67,6 @@ inherited CadastroModeloForm: TCadastroModeloForm
         EditLabel.Font.Name = 'Segoe UI Light'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -91,7 +90,6 @@ inherited CadastroModeloForm: TCadastroModeloForm
         EditLabel.Font.Name = 'Segoe UI Light'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -115,7 +113,6 @@ inherited CadastroModeloForm: TCadastroModeloForm
         EditLabel.Font.Name = 'Segoe UI Light'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15

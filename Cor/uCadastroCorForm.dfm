@@ -1,32 +1,27 @@
-inherited frmCadastroModelo: TfrmCadastroModelo
-  Caption = 'frmCadastroModelo'
-  ClientHeight = 242
-  ClientWidth = 597
-  ExplicitWidth = 613
-  ExplicitHeight = 281
+inherited CadastroCorForm: TCadastroCorForm
+  Caption = 'CadastroCorForm'
+  ClientHeight = 237
+  ClientWidth = 590
+  ExplicitWidth = 606
+  ExplicitHeight = 276
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 597
-    ExplicitWidth = 597
+    Width = 590
     inherited Panel3: TPanel
-      Left = 388
-      ExplicitLeft = 388
-      inherited btnFechar: TBitBtn
-        Cancel = True
-      end
+      Left = 381
     end
   end
   inherited pgControll: TPageControl
-    Width = 597
-    Height = 153
-    ExplicitWidth = 597
-    ExplicitHeight = 153
+    Width = 590
+    Height = 148
+    ExplicitHeight = 148
     inherited Cadastro: TTabSheet
-      ExplicitWidth = 589
-      ExplicitHeight = 125
+      ExplicitTop = -5
+      ExplicitHeight = 262
       object edtCodigo: TLabeledEdit
-        Left = 70
+        Tag = 999
+        Left = 78
         Top = 16
         Width = 153
         Height = 26
@@ -49,20 +44,21 @@ inherited frmCadastroModelo: TfrmCadastroModelo
         ParentFont = False
         TabOrder = 0
       end
-      object edtPreCo: TLabeledEdit
-        Left = 320
-        Top = 16
-        Width = 237
+      object edtCor: TLabeledEdit
+        Left = 78
+        Top = 72
+        Width = 487
         Height = 26
-        EditLabel.Width = 46
+        EditLabel.Width = 32
         EditLabel.Height = 23
-        EditLabel.Caption = 'Pre'#231'o:'
+        EditLabel.Caption = 'Cor:'
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = clWindowText
         EditLabel.Font.Height = -17
         EditLabel.Font.Name = 'Segoe UI Light'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -72,33 +68,6 @@ inherited frmCadastroModelo: TfrmCadastroModelo
         ParentFont = False
         TabOrder = 1
       end
-      object edtModelo: TLabeledEdit
-        Left = 70
-        Top = 72
-        Width = 487
-        Height = 26
-        EditLabel.Width = 60
-        EditLabel.Height = 23
-        EditLabel.Caption = 'Modelo:'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -17
-        EditLabel.Font.Name = 'Segoe UI Light'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 2
-      end
-    end
-    inherited Consuta: TTabSheet
-      ExplicitWidth = 589
-      ExplicitHeight = 125
     end
   end
 end

@@ -26,7 +26,8 @@ uses
   uCadastroCorModel in 'Cor\uCadastroCorModel.pas',
   uCadastroCorRegra in 'Cor\uCadastroCorRegra.pas',
   uInterfaceCadastroCorModel in 'Cor\uInterfaceCadastroCorModel.pas',
-  uIterfaceCadastroUfModel in 'CadastroUF\uIterfaceCadastroUfModel.pas';
+  uIterfaceCadastroUfModel in 'CadastroUF\uIterfaceCadastroUfModel.pas',
+  uCadastroCorConsultaForm in 'Cor\uCadastroCorConsultaForm.pas' {CadastroCorConsultaForm};
 
 {$R *.res}
 

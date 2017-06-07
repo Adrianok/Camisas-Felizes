@@ -7,7 +7,7 @@ uses
   uBase, System.SysUtils,
   Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.Forms, Vcl.Controls,
-  System.Classes;
+  System.Classes, uConsultaBase;
 
 type
   TClassInterfaceViewBase = class(TInterfacedObject, IInterfaceViewBase)
@@ -15,10 +15,11 @@ type
   protected
     oFormulario: TfrmBase;
   public
+    procedure CriarFormConsulta(Aowner: TComponent);virtual;
     procedure CriarForm(Aowner: TComponent);virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
-    function ValidarVazio: boolean;
+    function  ValidarVazio: boolean;
     procedure Alterar; virtual;
     procedure Pesquisar; virtual;
     procedure Excluir; virtual;
@@ -97,8 +98,8 @@ end;
 
 procedure TClassInterfaceViewBase.Fechar;
 begin
-
 end;
+
 
 procedure TClassInterfaceViewBase.LimparCampos;
 var

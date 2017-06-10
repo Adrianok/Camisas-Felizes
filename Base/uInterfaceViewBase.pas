@@ -7,19 +7,13 @@ uses
 
 type
   IInterfaceViewBase = interface
-
-    procedure CriarFormConsulta(Aowner: TComponent);
+    procedure Consulta;
     procedure CriarForm(Aowner: TComponent);
     procedure Novo;
     procedure Salvar;
-    procedure Alterar;
-    procedure Pesquisar;
+    procedure Pesquisar(Aowner: TComponent);
     procedure Excluir;
     procedure Fechar;
-    procedure FecharConsulta;
-
-//    function GetInstance: TObject;
-//    property Instance: TObject read GetInstance;
 
   end;
 

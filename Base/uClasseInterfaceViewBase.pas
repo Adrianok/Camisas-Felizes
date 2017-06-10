@@ -15,15 +15,15 @@ type
   protected
     oFormulario: TfrmBase;
   public
-    procedure CriarFormConsulta(Aowner: TComponent);virtual;
+    procedure Inicial; virtual;
+    procedure Consulta; virtual;
     procedure CriarForm(Aowner: TComponent);virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
     function  ValidarVazio: boolean;
-    procedure Alterar; virtual;
-    procedure Pesquisar; virtual;
+    procedure Pesquisar(Aowner: TComponent);  virtual;
     procedure Excluir; virtual;
-    procedure Fechar; virtual;
+    procedure Fechar;
     procedure AjustarFoco;
     procedure AtivarCampos;
     procedure DesativarCampos;
@@ -50,12 +50,6 @@ begin
     end;
 
 end;
-procedure TClassInterfaceViewBase.Alterar;
-begin
-  ValidarVazio;
-  AtivarCampos;
-  AjustarFoco;
-end;
 
 procedure TClassInterfaceViewBase.AtivarCampos;
 var
@@ -71,10 +65,16 @@ begin
 
 end;
 
+procedure TClassInterfaceViewBase.Consulta;
+begin
+
+end;
+
 procedure TClassInterfaceViewBase.CriarForm(Aowner: TComponent);
 begin
 
 end;
+
 
 procedure TClassInterfaceViewBase.DesativarCampos;
 var
@@ -91,6 +91,10 @@ end;
 
 procedure TClassInterfaceViewBase.Excluir;
 begin
+  oFormulario.btnNovo.Enabled := True;
+  oFormulario.btnSalvar.Enabled := False;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := False;
   LimparCampos;
   DesativarCampos;
 
@@ -98,8 +102,21 @@ end;
 
 procedure TClassInterfaceViewBase.Fechar;
 begin
+  inherited;
+  if assigned(oFormulario) then
+    FreeAndNil(oFormulario);
 end;
 
+
+procedure TClassInterfaceViewBase.Inicial;
+begin
+  oFormulario.btnNovo.Enabled := True;
+  oFormulario.btnSalvar.Enabled := False;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := False;
+  LimparCampos;
+  DesativarCampos;
+end;
 
 procedure TClassInterfaceViewBase.LimparCampos;
 var
@@ -115,6 +132,10 @@ end;
 
 procedure TClassInterfaceViewBase.Novo;
 begin
+  oFormulario.btnNovo.Enabled := False;
+  oFormulario.btnSalvar.Enabled := True;
+  oFormulario.btnExcluir.Caption := 'Cancelar';
+  oFormulario.btnExcluir.Enabled := True;
   LimparCampos;
   AtivarCampos;
   AjustarFoco;
@@ -122,12 +143,20 @@ end;
 
 procedure TClassInterfaceViewBase.Pesquisar;
 begin
+  oFormulario.btnNovo.Enabled := False;
+  oFormulario.btnSalvar.Enabled := True;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := True;
   AtivarCampos;
   AjustarFoco;
 end;
 
 procedure TClassInterfaceViewBase.Salvar;
 begin
+  oFormulario.btnNovo.Enabled := True;
+  oFormulario.btnSalvar.Enabled := False;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := False;
   if(ValidarVazio)then
     DesativarCampos;
 end;

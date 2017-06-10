@@ -1,24 +1,30 @@
 inherited CadastroCorForm: TCadastroCorForm
+  Left = 360
+  Top = 208
   Caption = 'CadastroCorForm'
   ClientHeight = 237
-  ClientWidth = 590
-  ExplicitWidth = 606
+  ClientWidth = 491
+  Position = poDesigned
+  ExplicitWidth = 507
   ExplicitHeight = 276
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 590
+    Width = 491
+    ExplicitWidth = 590
     inherited Panel3: TPanel
-      Left = 381
+      Left = 290
+      ExplicitLeft = 412
     end
   end
   inherited pgControll: TPageControl
-    Width = 590
+    Width = 491
     Height = 148
+    ExplicitWidth = 590
     ExplicitHeight = 148
     inherited Cadastro: TTabSheet
-      ExplicitTop = -5
-      ExplicitHeight = 262
+      ExplicitWidth = 582
+      ExplicitHeight = 120
       object edtCodigo: TLabeledEdit
         Tag = 999
         Left = 78
@@ -47,7 +53,7 @@ inherited CadastroCorForm: TCadastroCorForm
       object edtCor: TLabeledEdit
         Left = 78
         Top = 72
-        Width = 487
+        Width = 355
         Height = 26
         EditLabel.Width = 32
         EditLabel.Height = 23

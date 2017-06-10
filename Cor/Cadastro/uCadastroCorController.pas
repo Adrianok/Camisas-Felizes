@@ -9,19 +9,18 @@ uses
   uCadastroCorDto, uClasseInterfaceViewBase,
   uCadastroCorRegra, uCadastroCorModel,
   uCadastroCorForm, uInterfaceViewBase,
-  uCadastroCorConsultaForm, uCadastroCorConsultaController;
+  uConsultaCorForm, uConsultaCorController;
 
 type
   TCadastroCorController = class(TClassInterfaceViewBase)
   private
   public
-    procedure CriarFormConsulta(Aowner: TComponent); override;
+    procedure Inicial; override;
+    procedure Consulta; override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
-    procedure Fechar; override;
     procedure Salvar; override;
-    procedure Alterar; override;
-    procedure Pesquisar; override;
+    procedure Pesquisar(Aowner : TComponent); override;
     procedure NovoID;
 
     constructor Create;
@@ -36,11 +35,23 @@ implementation
 
 { TControllerCadastroCor }
 
-procedure TCadastroCorController.Alterar;
+procedure TCadastroCorController.Consulta;
 begin
-
-
-  inherited;
+inherited;
+  if(oCadastroCorDto.IdCor <> 0)then
+  begin
+    if(oCadastroCorRegra.SelectCor(oCadastroCorModel, oCadastroCorDto))then
+    with (oFormulario as TCadastroCorForm) do
+    begin
+      edtCodigo.Text :=   IntToStr(oCadastroCorDto.IdCor);
+      edtCor.Text    :=  oCadastroCorDto.Descricao;
+    end;
+  end
+  else
+  begin
+    ShowMessage('Nenhum Registro Selecionado');
+    Inicial;
+  end;
 end;
 
 constructor TCadastroCorController.Create;
@@ -61,17 +72,7 @@ begin
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroCorForm.Create(Aowner);
   oFormulario.oController := oCadastroCorController;
-  oFormulario.oControllerConsulta := oCadastroCorConsultaController;
   oFormulario.Show;
-end;
-
-
-
-procedure TCadastroCorController.CriarFormConsulta(Aowner: TComponent);
-begin
-  if (not(assigned(oCadastroCorConsultaController))) then
-    oCadastroCorConsultaController := TCadastroCorConsultaController.Create;
-  oCadastroCorConsultaController.CriarForm(Aowner);
 end;
 
 destructor TCadastroCorController.Destroy;
@@ -82,31 +83,19 @@ begin
   if (assigned(oCadastroCorDto)) then
     FreeAndNil(oCadastroCorDto);
 
-  if (assigned(oCadastroCorConsultaController)) then
-  begin
-    oCadastroCorConsultaController.Fechar;
-    FreeAndNil(oCadastroCorConsultaController);
-  end;
   if (assigned(oCadastroCorRegra)) then
     FreeAndNil(oCadastroCorRegra);
 
-  if (assigned(oCadastroCorController)) then
-    oCadastroCorController := nil;
-
-  inherited;
+    inherited;
 end;
 
-procedure TCadastroCorController.Fechar;
+
+
+procedure TCadastroCorController.Inicial;
 begin
   inherited;
-  if assigned(oFormulario) then
-  begin
-    oFormulario.Close;
-    FreeAndNil(oFormulario);
-  end;
+
 end;
-
-
 
 procedure TCadastroCorController.Novo;
 begin
@@ -116,15 +105,27 @@ end;
 
 procedure TCadastroCorController.NovoID;
 begin
- if(oCadastroCorRegra.Novo(oCadastroCorDto))then
+ if(oCadastroCorRegra.Novo(oCadastroCorModel, oCadastroCorDto))then
   (oFormulario as TCadastroCorForm).edtCodigo.Text := IntToStr(oCadastroCorDto.IdCor);
 end;
 
-procedure TCadastroCorController.Pesquisar;
+procedure TCadastroCorController.Pesquisar(Aowner : TComponent);
+var
+ sIdCor : string;
+ sDescricao : string;
 begin
   inherited;
-    if (not(assigned(oCadastroCorConsultaController))) then
-    FreeAndNil(oCadastroCorConsultaController);
+
+      if(sIdCor <> '')then
+       oCadastroCorDto.IdCor        :=  StrToInt(sIdCor);
+
+
+       oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;;
+
+
+  if (not(assigned(oConsultaCorController))) then
+    oConsultaCorController := TConsultaCorController.Create;
+  oConsultaCorController.CriarForm(Aowner, oCadastroCorDto);
 end;
 
 procedure TCadastroCorController.Salvar;
@@ -135,7 +136,7 @@ begin
       oCadastroCorDto.IdCor        :=  StrToInt(edtCodigo.Text);
       oCadastroCorDto.Descricao          :=  edtCor.Text;
     end;
-    if(oCadastroCorRegra.Salvar(oCadastroCorDto))then
+    if(oCadastroCorRegra.Salvar(oCadastroCorModel, oCadastroCorDto))then
       ShowMessage('Registro: '+ oCadastroCorDto.Descricao +' Atualizado com sucesso')
     else
     begin

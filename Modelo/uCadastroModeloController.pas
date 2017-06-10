@@ -16,7 +16,6 @@ type
   public
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
-    procedure Fechar; override;
     procedure Salvar; override;
     procedure VerificarModelo(Sender: TObject);
     procedure VerificarCor(Sender: TObject);
@@ -70,16 +69,6 @@ begin
 
   if (assigned(oCadastroModeloController)) then
     oCadastroModeloController := nil;
-end;
-
-procedure TCadastroModeloController.Fechar;
-begin
-  inherited;
-  if assigned(oFormulario) then
-  begin
-    oFormulario.Close;
-    FreeAndNil(oFormulario);
-  end;
 end;
 
 procedure TCadastroModeloController.Novo;

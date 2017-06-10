@@ -7,25 +7,34 @@ uses
   uBase, System.SysUtils,
   Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.Forms, Vcl.Controls,
-  System.Classes, uConsultaBase;
-
+  System.Classes, uConsultaBase,
+  FireDAC.Comp.Client, Vcl.DbGrids,
+  uCadastroCorDto;
 type
   TClassInterfaceConsultaBase = class(TInterfacedObject, IInterfaceConsultaBase)
   private
   protected
     oFormulario : TfrmPesquisaBase;
   public
-    procedure CriarForm(Aowner: TComponent); virtual;
+    procedure PesquisarGrid; virtual;
+    procedure AlimentarDto(Column : TColumn); virtual;
+    function PreencherGrid(MemTable : TFDMemTable):boolean; virtual;
+    procedure CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto); virtual;
     procedure Pesquisar; virtual;
     procedure Cancelar;  virtual;
     procedure Confirmar; virtual;
-    procedure Fechar;    virtual;
-
+    procedure Fechar; virtual;
   end;
 
 implementation
 
 { TClassInterfaceConsultaBase }
+
+procedure TClassInterfaceConsultaBase.AlimentarDto(Column: TColumn);
+begin
+
+
+end;
 
 procedure TClassInterfaceConsultaBase.Cancelar;
 begin
@@ -37,18 +46,32 @@ begin
 
 end;
 
-procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent);
+procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto);
+
 begin
 
 end;
+
+
 
 procedure TClassInterfaceConsultaBase.Fechar;
 begin
-  inherited;
-    Showmessage('a');
+  oFormulario.FDMemTableGrid.Close;
+  if assigned(oFormulario) then
+    FreeAndNil(oFormulario);
 end;
 
 procedure TClassInterfaceConsultaBase.Pesquisar;
+begin
+
+end;
+
+procedure TClassInterfaceConsultaBase.PesquisarGrid;
+begin
+
+end;
+function TClassInterfaceConsultaBase.PreencherGrid(
+  MemTable: TFDMemTable): boolean;
 begin
 
 end;

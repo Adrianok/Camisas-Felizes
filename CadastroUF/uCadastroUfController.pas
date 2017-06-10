@@ -24,7 +24,6 @@ type
   public
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
-    procedure Fechar; override;
     procedure Salvar; override;
     procedure Deletar(Sender: TObject);
     procedure PreencherForm;
@@ -79,15 +78,6 @@ begin
     FreeAndNil(oCadastroUfRegra);
 end;
 
-procedure TCadastroUfController.Fechar;
-begin
-  inherited;
-  if (Assigned(oFormulario)) then
-  begin
-    oFormulario.Close;
-    FreeAndNil(oFormulario);
-  end;
-end;
 
 procedure TCadastroUfController.Novo;
 begin

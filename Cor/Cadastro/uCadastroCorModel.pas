@@ -15,7 +15,7 @@ type
     // function SelecionarTudo(var oCadastroModeloDto: TObjectDictionary<string, TCadastroModeloDto>): Boolean;
     Query: TFDQuery;
   public
-    // function SelectPorCor(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+    function SelectPorId(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Inserir(var oCadastroCorDto: TCadastroCorDto): Boolean;
@@ -59,7 +59,11 @@ begin
     Query.Connection := TConexaoSigleton.GetInstancia;
 end;
 
-
+destructor TCadastroCorModel.Destroy;
+begin
+  FreeAndNil(Query);
+  inherited;
+end;
 
 function TCadastroCorModel.Deletar(
   var oCadastroCorDto: TCadastroCorDto): Boolean;
@@ -67,11 +71,7 @@ begin
 
 end;
 
-destructor TCadastroCorModel.Destroy;
-begin
-  FreeAndNil(Query);
-  inherited;
-end;
+
 
 
 
@@ -144,4 +144,22 @@ begin
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;
 end;
+function TCadastroCorModel.SelectPorId(
+  var oCadastroCorDto: TCadastroCorDto): Boolean;
+begin
+  try
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM cor WHERE idcor =' + IntToStr(oCadastroCorDto.IdCor));
+    if (not(Query.IsEmpty)) then
+    begin
+      Result := True;
+      oCadastroCorDto.Descricao := Query.FieldByName('descricao').AsString;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
+
 end.

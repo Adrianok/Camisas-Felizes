@@ -3,12 +3,15 @@ unit uInterfaceConsultaBase;
 interface
 
 uses
-  System.Classes;
+  System.Classes, FireDAC.Comp.Client,
+  Vcl.DbGrids, uCadastroCorDto;
 
 type
   IInterfaceConsultaBase = interface
-
-    procedure CriarForm(Aowner: TComponent);virtual;
+    procedure PesquisarGrid;
+    procedure AlimentarDto(Column : TColumn);
+    function PreencherGrid(MemTable : TFDMemTable):boolean;
+    procedure CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto);
     procedure Pesquisar;
     procedure Cancelar;
     procedure Fechar;

@@ -26,6 +26,7 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
+    procedure edtPesquisaChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,9 +59,12 @@ end;
 
 procedure TfrmPesquisaBase.btnPesquisaClick(Sender: TObject);
 begin
-
   oController.PesquisarGrid;
+end;
 
+procedure TfrmPesquisaBase.edtPesquisaChange(Sender: TObject);
+begin
+  oController.PesquisarGrid;
 end;
 
 procedure TfrmPesquisaBase.FormKeyDown(Sender: TObject; var Key: Word;
@@ -69,8 +73,16 @@ begin
   if key = VK_ESCAPE then
   begin
     oController.Fechar;
-    char(Key) := #0;
+    char(Key) := #0
+  end
+  else
+  if key = VK_RETURN then
+  begin
+    oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
+    oController.Fechar;
+    char(Key) := #0
   end;
 end;
 
 end.
+

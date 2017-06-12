@@ -31,8 +31,10 @@ object frmPesquisaBase: TfrmPesquisaBase
       Top = 19
       Width = 329
       Height = 21
+      CharCase = ecUpperCase
       TabOrder = 0
       TextHint = 'Digite aqui sua pesquisa'
+      OnChange = edtPesquisaChange
     end
     object btnPesquisa: TBitBtn
       Left = 343

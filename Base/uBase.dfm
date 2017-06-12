@@ -893,6 +893,10 @@ object frmBase: TfrmBase
     TabOrder = 1
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
 end

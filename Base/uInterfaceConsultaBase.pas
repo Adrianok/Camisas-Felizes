@@ -10,8 +10,8 @@ type
   IInterfaceConsultaBase = interface
     procedure PesquisarGrid;
     procedure AlimentarDto(Column : TColumn);
-    function PreencherGrid(MemTable : TFDMemTable):boolean;
-    procedure CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto);
+    function PreencherGrid:boolean;
+    procedure CriarForm(Aowner: TComponent);
     procedure Pesquisar;
     procedure Cancelar;
     procedure Fechar;

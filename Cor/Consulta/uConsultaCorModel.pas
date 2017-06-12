@@ -41,7 +41,7 @@ function TConsultaCorModel.SelectAll(MemTable: TFDMemTable): boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM cor');
+    Query.Open('SELECT idcor, UPPER(descricao) as descricao FROM cor');
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;

@@ -15,13 +15,13 @@ type
   protected
     oFormulario: TfrmBase;
   public
+    procedure CriarForm(Aowner: TComponent);virtual;
+    procedure Pesquisar(Aowner: TComponent);  virtual;
     procedure Inicial; virtual;
     procedure Consulta; virtual;
-    procedure CriarForm(Aowner: TComponent);virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
     function  ValidarVazio: boolean;
-    procedure Pesquisar(Aowner: TComponent);  virtual;
     procedure Excluir; virtual;
     procedure Fechar;
     procedure AjustarFoco;
@@ -54,7 +54,6 @@ end;
 procedure TClassInterfaceViewBase.AtivarCampos;
 var
   iIndice: integer;
-
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
     if (oFormulario.Components[iIndice] is TLabeledEdit) and
@@ -149,6 +148,7 @@ begin
   oFormulario.btnExcluir.Enabled := True;
   AtivarCampos;
   AjustarFoco;
+
 end;
 
 procedure TClassInterfaceViewBase.Salvar;
@@ -184,11 +184,10 @@ begin
     if (oFormulario.Components[iIndice] is TLabeledEdit) then
     begin
       if (oFormulario.Components[iIndice] is TLabeledEdit) then
-        sCampo := (oFormulario.Components[iIndice] as TLabeledEdit)
-          .EditLabel.Caption;
+        sCampo := (oFormulario.Components[iIndice] as TLabeledEdit).EditLabel.Caption;
       itamanho := length(sCampo);
-      if ((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
-        ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+      if ((oFormulario.Components[iIndice] as TLabeledEdit).Text  =  EmptyStr) and
+         ((oFormulario.Components[iIndice] as TWinControl ).Tag   <> 999)      then
       begin
         if (auxiliar = False) then
           sStringMessage := sStringMessage + sSeparador;

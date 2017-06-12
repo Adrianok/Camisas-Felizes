@@ -18,8 +18,8 @@ type
   public
     procedure PesquisarGrid; virtual;
     procedure AlimentarDto(Column : TColumn); virtual;
-    function PreencherGrid(MemTable : TFDMemTable):boolean; virtual;
-    procedure CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto); virtual;
+    function PreencherGrid:boolean; virtual;
+    procedure CriarForm(Aowner: TComponent); virtual;
     procedure Pesquisar; virtual;
     procedure Cancelar;  virtual;
     procedure Confirmar; virtual;
@@ -46,13 +46,10 @@ begin
 
 end;
 
-procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto);
-
+procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent);
 begin
 
 end;
-
-
 
 procedure TClassInterfaceConsultaBase.Fechar;
 begin
@@ -70,8 +67,7 @@ procedure TClassInterfaceConsultaBase.PesquisarGrid;
 begin
 
 end;
-function TClassInterfaceConsultaBase.PreencherGrid(
-  MemTable: TFDMemTable): boolean;
+function TClassInterfaceConsultaBase.PreencherGrid: boolean;
 begin
 
 end;

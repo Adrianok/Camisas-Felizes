@@ -17,10 +17,10 @@ type
   public
     procedure Inicial; override;
     procedure Consulta; override;
+    procedure Pesquisar(Aowner : TComponent); override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
-    procedure Pesquisar(Aowner : TComponent); override;
     procedure NovoID;
 
     constructor Create;
@@ -112,20 +112,15 @@ end;
 procedure TCadastroCorController.Pesquisar(Aowner : TComponent);
 var
  sIdCor : string;
- sDescricao : string;
 begin
   inherited;
-
-      if(sIdCor <> '')then
-       oCadastroCorDto.IdCor        :=  StrToInt(sIdCor);
-
-
-       oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;;
-
+  if(sIdCor <> '')then
+    oCadastroCorDto.IdCor        :=  StrToInt(sIdCor);
+  oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;;
 
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorController := TConsultaCorController.Create;
-  oConsultaCorController.CriarForm(Aowner, oCadastroCorDto);
+  oConsultaCorController.CriarForm(Aowner);
 end;
 
 procedure TCadastroCorController.Salvar;

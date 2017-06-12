@@ -70,8 +70,7 @@ begin
     oController.Consulta;
 end;
 
-procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key = vk_F2 then
     oController.Pesquisar(Self);

@@ -16,8 +16,8 @@ type
   public
     procedure PesquisarGrid;  override;
     procedure AlimentarDto(Column : TColumn); override;
-    function PreencherGrid(MemTable : TFDMemTable):boolean; override;
-    procedure CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto); override;
+    function PreencherGrid:boolean; virtual;
+    procedure CriarForm(Aowner: TComponent); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -57,8 +57,6 @@ begin
   if (not(assigned(oCadastroCorDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
-
-
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorModel := TConsultaCorModel.Create;
 
@@ -66,17 +64,19 @@ begin
     oConsultaCorRegra := TConsultaCorRegra.Create;
 end;
 
-procedure TConsultaCorController.CriarForm(Aowner: TComponent;var oCadastroCorDto : TCadastroCorDto);
+procedure TConsultaCorController.CriarForm(Aowner: TComponent);
 begin
   inherited;
   if not(assigned(oFormulario)) then
+  begin
     oFormulario :=  TConsultaCorForm.Create(Aowner);
-  oFormulario.oController := oConsultaCorController;
+    oFormulario.oController := oConsultaCorController;
+    PreencherGrid;
+  end;
   oFormulario.Show;
 
   oFormulario.edtPesquisa.Text := oCadastroCorDto.Descricao;
 
-  PreencherGrid(oFormulario.FDMemTableGrid);
 end;
 
 destructor TConsultaCorController.Destroy;
@@ -95,32 +95,19 @@ end;
 
 
 procedure TConsultaCorController.PesquisarGrid;
-var
-  iPos : Integer;
 begin
   inherited;
-  //Falta pesquisar no dbgrid
-
-
-// if(oConsultaCorRegra.SelectId(oConsultaCorModel, oFormulario.edtPesquisa.Text) = 0) then
-//  ShowMessage('Registro Não Encontrado')
-// else
-  //ShowMessage(IntTostr(oFormulario.DBGrid1.ComponentCount));
-//  iPos := oConsultaCorRegra.SelectId(oConsultaCorModel, oFormulario.edtPesquisa.Text);
-     // oFormulario.DBGrid1.Options.dgEditing := True;
-    oFormulario.DBGrid1.SelectedIndex := 13;
-  //ShowMessage(oFormulario.DBGrid1.Columns[iPos].Field.Text);
-  //oFormulario.DBGrid1.SelectedIndex := oConsultaCorRegra.SelectId(oConsultaCorModel, oFormulario.edtPesquisa.Text);
+  oFormulario.FDMemTableGrid.Filter := 'descricao like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+                                      +'or idcor  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';
+  oFormulario.FDMemTableGrid.Filtered := True;
  end;
 
-function TConsultaCorController.PreencherGrid(MemTable: TFDMemTable): boolean;
+function TConsultaCorController.PreencherGrid: boolean;
 begin
-
-  if(oConsultaCorRegra.SelectAll(oConsultaCorModel, MemTable))then
-    MemTable.Open
+  if(oConsultaCorRegra.SelectAll(oConsultaCorModel, oFormulario.FDMemTableGrid))then
+  oFormulario.FDMemTableGrid.Open
   else
     ShowMessage('Não foram encontrados registros');
-
 end;
 
 end.

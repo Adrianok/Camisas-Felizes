@@ -1,8 +1,9 @@
 object frmPesquisaBase: TfrmPesquisaBase
   Left = 0
   Top = 0
+  BiDiMode = bdLeftToRight
   Caption = 'Formul'#225'rio Base Pesquisa'
-  ClientHeight = 336
+  ClientHeight = 329
   ClientWidth = 379
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,9 +12,11 @@ object frmPesquisaBase: TfrmPesquisaBase
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIChild
+  KeyPreview = True
   OldCreateOrder = False
+  ParentBiDiMode = False
   Visible = True
-  OnClose = FormClose
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -28,10 +31,12 @@ object frmPesquisaBase: TfrmPesquisaBase
       Top = 19
       Width = 329
       Height = 21
+      CharCase = ecUpperCase
       TabOrder = 0
       TextHint = 'Digite aqui sua pesquisa'
+      OnChange = edtPesquisaChange
     end
-    object BitBtn1: TBitBtn
+    object btnPesquisa: TBitBtn
       Left = 343
       Top = 18
       Width = 27
@@ -76,11 +81,12 @@ object frmPesquisaBase: TfrmPesquisaBase
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFF000000}
       TabOrder = 1
+      OnClick = btnPesquisaClick
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 256
+    Top = 249
     Width = 379
     Height = 80
     Align = alBottom
@@ -409,6 +415,7 @@ object frmPesquisaBase: TfrmPesquisaBase
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphTop
       TabOrder = 1
+      OnClick = btnCancelarClick
     end
     object btnConfirmar: TBitBtn
       Left = 88
@@ -568,15 +575,17 @@ object frmPesquisaBase: TfrmPesquisaBase
         0000}
       Layout = blGlyphTop
       TabOrder = 2
+      OnClick = btnConfirmarClick
     end
   end
-  object DBGrid: TDBGrid
+  object DBGrid1: TDBGrid
     Left = 0
     Top = 57
     Width = 379
-    Height = 199
+    Height = 192
     Align = alClient
-    DataSource = DataSource
+    DataSource = DataSourceGrid
+    Options = [dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -584,8 +593,20 @@ object frmPesquisaBase: TfrmPesquisaBase
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
-  object DataSource: TDataSource
-    Left = 24
-    Top = 288
+  object DataSourceGrid: TDataSource
+    DataSet = FDMemTableGrid
+    Left = 16
+    Top = 264
+  end
+  object FDMemTableGrid: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 56
+    Top = 264
   end
 end

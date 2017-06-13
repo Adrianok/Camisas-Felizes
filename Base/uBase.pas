@@ -7,8 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
   Vcl.StdCtrls, System.ImageList,
-  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, uInterfaceViewBase,
-  uInterfaceConsultaBase;
+  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, uInterfaceViewBase;
 
 type
   TfrmBase = class(TForm)
@@ -18,7 +17,6 @@ type
     Panel2: TPanel;
     btnSalvar: TBitBtn;
     btnPesquisar: TBitBtn;
-    btnAlterar: TBitBtn;
     Panel3: TPanel;
     btnExcluir: TBitBtn;
     btnFechar: TBitBtn;
@@ -26,26 +24,20 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     oController: IInterfaceViewBase;
-    oControllerConsulta: IInterfaceConsultaBase;
   end;
 
 implementation
 
 {$R *.dfm}
-
-procedure TfrmBase.btnAlterarClick(Sender: TObject);
-begin
-  oController.Alterar;
-end;
 
 procedure TfrmBase.btnExcluirClick(Sender: TObject);
 begin
@@ -64,7 +56,7 @@ end;
 
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);
 begin
-  oController.Pesquisar;
+  oController.Pesquisar(Self);
 end;
 
 procedure TfrmBase.btnSalvarClick(Sender: TObject);
@@ -72,13 +64,16 @@ begin
   oController.Salvar;
 end;
 
-procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmBase.FormActivate(Sender: TObject);
 begin
-  if key = vk_F2 then
-    oController.CriarForm(Aowner);
+  if(assigned(oController))then
+    oController.Consulta;
 end;
 
-
+procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = vk_F2 then
+    oController.Pesquisar(Self);
+end;
 
 end.

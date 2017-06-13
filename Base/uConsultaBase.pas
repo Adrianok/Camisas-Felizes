@@ -14,21 +14,19 @@ type
     BitBtn1: TBitBtn;
     Panel2: TPanel;
     btnFechar: TBitBtn;
-    btnCancelar: TBitBtn;
-    btnConfirmar: TBitBtn;
-    DataSource: TDataSource;
-    DBGrid: TDBGrid;
+    btnExcluir: TBitBtn;
+    btnAlterar: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnFecharClick(Sender: TObject);
   private
     { Private declarations }
   public
-      { Public declarations }
-      oController: IInterfaceConsultaBase;
+    { Public declarations }
+    oController: IInterfaceConsultaBase;
   end;
 
 var
-  frmPesquisaBase: TfrmPesquisaBase;
+frmPesquisaBase: TfrmPesquisaBase;
 
 implementation
 
@@ -36,12 +34,12 @@ implementation
 
 procedure TfrmPesquisaBase.btnFecharClick(Sender: TObject);
 begin
-  oController.Fechar;
+Close;
 end;
 
 procedure TfrmPesquisaBase.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  frmPesquisaBase := nil;
+frmPesquisaBase := nil;
 end;
 
 end.

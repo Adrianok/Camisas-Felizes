@@ -8,21 +8,20 @@ uses
   System.classes, System.SysUtils,
   uCadastroCorDto, uClasseInterfaceViewBase,
   uCadastroCorRegra, uCadastroCorModel,
-  uCadastroCorForm;
+  uCadastroCorForm, uInterfaceViewBase,
+  uCadastroCorConsultaForm, uCadastroCorConsultaController;
 
 type
   TCadastroCorController = class(TClassInterfaceViewBase)
   private
-    oCadastroCorModel : TCadastroCorModel;
-    oCadastroCorDto   : TCadastroCorDto;
-    oCadastroCorRegra : TCadastroCorRegra;
   public
-    procedure CriarForm(Aowner: TComponent);
+    procedure CriarFormConsulta(Aowner: TComponent); override;
+    procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Fechar; override;
-    procedure Alterar; override;
     procedure Salvar; override;
-    procedure VerificarCor(Sender : TObject);
+    procedure Alterar; override;
+    procedure Pesquisar; override;
     procedure NovoID;
 
     constructor Create;
@@ -30,9 +29,10 @@ type
   end;
 
 var
-  oCadastroCorController: TCadastroCorController;
+  oCadastroCorController: IInterfaceViewBase;
 
 implementation
+
 
 { TControllerCadastroCor }
 
@@ -57,12 +57,21 @@ end;
 
 procedure TCadastroCorController.CriarForm(Aowner: TComponent);
 begin
+  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroCorForm.Create(Aowner);
   oFormulario.oController := oCadastroCorController;
+  oFormulario.oControllerConsulta := oCadastroCorConsultaController;
   oFormulario.Show;
+end;
 
-  (oFormulario as TCadastroCorForm).edtCor.OnExit := VerificarCor;
+
+
+procedure TCadastroCorController.CriarFormConsulta(Aowner: TComponent);
+begin
+  if (not(assigned(oCadastroCorConsultaController))) then
+    oCadastroCorConsultaController := TCadastroCorConsultaController.Create;
+  oCadastroCorConsultaController.CriarForm(Aowner);
 end;
 
 destructor TCadastroCorController.Destroy;
@@ -73,13 +82,18 @@ begin
   if (assigned(oCadastroCorDto)) then
     FreeAndNil(oCadastroCorDto);
 
+  if (assigned(oCadastroCorConsultaController)) then
+  begin
+    oCadastroCorConsultaController.Fechar;
+    FreeAndNil(oCadastroCorConsultaController);
+  end;
   if (assigned(oCadastroCorRegra)) then
     FreeAndNil(oCadastroCorRegra);
 
-  inherited;
-
   if (assigned(oCadastroCorController)) then
     oCadastroCorController := nil;
+
+  inherited;
 end;
 
 procedure TCadastroCorController.Fechar;
@@ -92,11 +106,12 @@ begin
   end;
 end;
 
+
+
 procedure TCadastroCorController.Novo;
 begin
   inherited;
   NovoID;
-
 end;
 
 procedure TCadastroCorController.NovoID;
@@ -105,8 +120,16 @@ begin
   (oFormulario as TCadastroCorForm).edtCodigo.Text := IntToStr(oCadastroCorDto.IdCor);
 end;
 
+procedure TCadastroCorController.Pesquisar;
+begin
+  inherited;
+    if (not(assigned(oCadastroCorConsultaController))) then
+    FreeAndNil(oCadastroCorConsultaController);
+end;
+
 procedure TCadastroCorController.Salvar;
 begin
+    inherited;
     with (oFormulario as TCadastroCorForm) do
     begin
       oCadastroCorDto.IdCor        :=  StrToInt(edtCodigo.Text);
@@ -118,24 +141,9 @@ begin
     begin
       ShowMessage('Registro: '+ oCadastroCorDto.Descricao +' Inserido com sucesso');
     end;
-
-    inherited;
 end;
 
-procedure TCadastroCorController.VerificarCor(Sender: TObject);
-begin
-  if((oFormulario as TCadastroCorForm).edtCor.Text = EmptyStr)then
-    exit;
-  oCadastroCorDto.Descricao :=  (oFormulario as TCadastroCorForm).edtCor.text;
 
-  if(oCadastroCorRegra.SelectDescricao(oCadastroCorDto))then
-    with (oFormulario as TCadastroCorForm) do
-    begin
-      edtCodigo.Text  :=  IntToStr(oCadastroCorDto.IdCor);
-      edtCor.Text     :=  oCadastroCorDto.Descricao;
-    end;
-
-end;
 
 
 end.

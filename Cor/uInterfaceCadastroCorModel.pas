@@ -8,9 +8,7 @@ uses
 type
   IInterfaceCadastroCorModel = interface
 
-    function SelectPorCor(var oCadastroModeloDto: TCadastroCorDto): Boolean;
-    function SelectModelo(var oCadastroModeloDto: TCadastroCorDto): Boolean;
-    function SelectID(var oCadastroModeloDto: TCadastroCorDto): Boolean;
+    function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroCorDto):boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroCorDto):boolean;
     function Deletar(var oCadastroModeloDto: TCadastroCorDto):boolean;

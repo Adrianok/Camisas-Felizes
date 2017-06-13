@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
   Vcl.StdCtrls, System.ImageList,
-  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, uInterfaceViewBase;
+  Vcl.ImgList, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, uInterfaceViewBase,
+  uInterfaceConsultaBase;
 
 type
   TfrmBase = class(TForm)
@@ -28,11 +29,13 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
     { Public declarations }
     oController: IInterfaceViewBase;
+    oControllerConsulta: IInterfaceConsultaBase;
   end;
 
 implementation
@@ -69,6 +72,12 @@ begin
   oController.Salvar;
 end;
 
+procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = vk_F2 then
+    oController.CriarForm(Aowner);
+end;
 
 
 

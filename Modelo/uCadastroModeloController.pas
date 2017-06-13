@@ -8,13 +8,13 @@ uses
   System.classes, System.SysUtils,
   uCadastroModeloDto, uClasseInterfaceViewBase,
   uCadastroModeloRegra, uCadastroModeloModel,
-  uCadastroModeloForm;
+  uCadastroModeloForm, uInterfaceViewBase;
 
 type
   TCadastroModeloController = class(TClassInterfaceViewBase)
   private
   public
-    procedure CriarForm(Aowner: TComponent);
+    procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Fechar; override;
     procedure Salvar; override;
@@ -26,7 +26,7 @@ type
   end;
 
 var
-  oCadastroModeloController: TCadastroModeloController;
+  oCadastroModeloController: IInterfaceViewBase;
 
 implementation
 
@@ -35,7 +35,7 @@ implementation
 constructor TCadastroModeloController.Create;
 begin
   if (not(assigned(oCadastroModeloModel))) then
-    oCadastroModeloModel := TCadastroModeloModel.Create(nil);
+    oCadastroModeloModel := TCadastroModeloModel.Create;
 
   if (not(assigned(oCadastroModeloDto))) then
     oCadastroModeloDto := TCadastroModeloDto.Create;
@@ -92,11 +92,7 @@ end;
 
 procedure TCadastroModeloController.Salvar;
 begin
-  if (ValidarVazio(oFormulario) = false) then
-  begin
-    exit;
-  end;
-
+  inherited;
   with (oFormulario as TCadastroModeloForm) do
   begin
     oCadastroModeloDto.IdModelo := StrToInt(edtCodigo.Text);
@@ -105,11 +101,9 @@ begin
     oCadastroModeloDto.Cor.Descricao := edtCor.Text;
   end;
   if (oCadastroModeloRegra.Salvar(oCadastroModeloDto)) then
-    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +
-      ' Atualizado com sucesso')
+    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +' Atualizado com sucesso')
   else
-    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +
-      ' Inserido com sucesso');
+    ShowMessage('Registro: ' + oCadastroModeloDto.Modelo +' Inserido com sucesso');
 
 end;
 

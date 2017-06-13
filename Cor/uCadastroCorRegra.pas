@@ -17,6 +17,9 @@ type
 
   end;
 
+var
+  oCadastroCorRegra: TCadastroCorRegra;
+
 implementation
 
 { TCadastroCorRegra }
@@ -33,7 +36,7 @@ begin
     //funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
     if(oCadastroCorModel.SelectCor(oCadastroCorDto))then
     begin
-      //oCadastroCorModel.Atualizar;
+      oCadastroCorModel.Atualizar(oCadastroCorDto);
       Result:=True
     end
     else
@@ -52,10 +55,9 @@ begin
    Result:= True;
 end;
 
-function TCadastroCorRegra.SelectDescricao(
-  var oCadastroCorDto: TCadastroCorDto): boolean;
+function TCadastroCorRegra.SelectDescricao(var oCadastroCorDto: TCadastroCorDto): boolean;
 begin
-  if(oCadastroCorModel.SelectCor(oCadastroCorDto))then
+  if(oCadastroCorModel.SelectDescricao(oCadastroCorDto))then
     Result := True
   else
     Result := oCadastroCorModel.NovoId(oCadastroCorDto);

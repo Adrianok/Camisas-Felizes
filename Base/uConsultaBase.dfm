@@ -248,7 +248,7 @@ object frmPesquisaBase: TfrmPesquisaBase
       TabOrder = 0
       OnClick = btnFecharClick
     end
-    object btnExcluir: TBitBtn
+    object btnCancelar: TBitBtn
       Left = 184
       Top = 6
       Width = 90
@@ -410,7 +410,7 @@ object frmPesquisaBase: TfrmPesquisaBase
       Layout = blGlyphTop
       TabOrder = 1
     end
-    object btnAlterar: TBitBtn
+    object btnConfirmar: TBitBtn
       Left = 88
       Top = 6
       Width = 90
@@ -569,5 +569,23 @@ object frmPesquisaBase: TfrmPesquisaBase
       Layout = blGlyphTop
       TabOrder = 2
     end
+  end
+  object DBGrid: TDBGrid
+    Left = 0
+    Top = 57
+    Width = 379
+    Height = 199
+    Align = alClient
+    DataSource = DataSource
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object DataSource: TDataSource
+    Left = 24
+    Top = 288
   end
 end

@@ -1,11 +1,12 @@
 inherited CadastroTamanhoForm: TCadastroTamanhoForm
   Caption = 'CadastroTamanhoForm'
   ClientHeight = 239
-  ExplicitHeight = 278
+  ExplicitHeight = 268
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgControll: TPageControl
     Height = 150
+    ExplicitHeight = 150
     inherited Cadastro: TTabSheet
       object edtCodigo: TLabeledEdit
         Tag = 999

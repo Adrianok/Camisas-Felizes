@@ -1,4 +1,4 @@
-                                      unit uCadastroTamanhoForm;
+unit uCadastroTamanhoForm;
 
 interface
 

@@ -1,64 +1,64 @@
-unit uCadastroCorRegra;
+unit uCadastroTamanhoRegra;
 
 interface
 
 uses
-  System.SysUtils, uCadastroCorDto,
-  uCadastroCorForm, uCadastroCorModel;
+  System.SysUtils, uCadastroTamanhoDto,
+  uCadastroTamanhoForm, uCadastroTamanhoModel;
 
 type
-  TCadastroCorRegra = class
+  TCadastroTamanhoRegra = class
   private
   public
-    function SelectDescricao(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
-    function SelectCor(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
-    function Novo(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
-    function Salvar(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
+    function SelectDescricao(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
+    function SelectTamanho(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
+    function Novo(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
+    function Salvar(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
 
   end;
 
 var
-  oCadastroCorRegra: TCadastroCorRegra;
+  oCadastroTamanhoRegra: TCadastroTamanhoRegra;
 
 implementation
 
-{ TCadastroCorRegra }
+{ TCadastroTamanhoRegra }
 
 
 
-function TCadastroCorRegra.Novo(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
+function TCadastroTamanhoRegra.Novo(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
 begin
-  Result := oCadastroCorModel.NovoId(oCadastroCorDto);
+  Result := oCadastroTamanhoModel.NovoId(oCadastroTamanhoDto);
 end;
 
-function TCadastroCorRegra.Salvar(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
+function TCadastroTamanhoRegra.Salvar(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
 begin
     //funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
-    if(oCadastroCorModel.SelectCor(oCadastroCorDto))then
+    if(oCadastroTamanhoModel.SelectTamanho(oCadastroTamanhoDto))then
     begin
-      oCadastroCorModel.Atualizar(oCadastroCorDto);
+      oCadastroTamanhoModel.Atualizar(oCadastroTamanhoDto);
       Result:=True
     end
     else
     begin
-      oCadastroCorModel.Inserir(oCadastroCorDto);
+      oCadastroTamanhoModel.Inserir(oCadastroTamanhoDto);
       Result := False;
     end;
 
 
 end;
 
-function TCadastroCorRegra.SelectCor(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
+function TCadastroTamanhoRegra.SelectTamanho(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
 begin
-    Result := oCadastroCorModel.SelectPorId(oCadastroCorDto);
+    Result := oCadastroTamanhoModel.SelectPorId(oCadastroTamanhoDto);
 end;
 
-function TCadastroCorRegra.SelectDescricao(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
+function TCadastroTamanhoRegra.SelectDescricao(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
 begin
-  if(oCadastroCorModel.SelectDescricao(oCadastroCorDto))then
+  if(oCadastroTamanhoModel.SelectDescricao(oCadastroTamanhoDto))then
     Result := True
   else
-    Result := oCadastroCorModel.NovoId(oCadastroCorDto);
+    Result := oCadastroTamanhoModel.NovoId(oCadastroTamanhoDto);
 end;
 
 end.

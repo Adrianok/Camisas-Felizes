@@ -1,4 +1,4 @@
-unit uConsultaCorForm;
+unit uConsultaTamanhoForm;
 
 interface
 
@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.Client;
 
 type
-  TConsultaCorForm = class(TfrmPesquisaBase)
+  TConsultaTamanhoForm = class(TfrmPesquisaBase)
   private
   public
   end;

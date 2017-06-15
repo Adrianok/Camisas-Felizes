@@ -41,7 +41,7 @@ function TConsultaCorModel.SelectAll(MemTable: TFDMemTable): boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT idcor, UPPER(descricao) as descricao FROM cor');
+    Query.Open('SELECT idCor, UPPER(descricao) as descricao FROM Cor');
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;
@@ -58,10 +58,10 @@ function TConsultaCorModel.SelectId(sDescricao: String): Integer;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM cor where descricao = '+QuotedStr(sDescricao));
+    Query.Open('SELECT * FROM Cor where descricao = '+QuotedStr(sDescricao));
     if (not(Query.IsEmpty)) then
     begin
-      Result := Query.FieldByName('idcor').AsInteger;
+      Result := Query.FieldByName('idCor').AsInteger;
     end
     else
       Result := 0;

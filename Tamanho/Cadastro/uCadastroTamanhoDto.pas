@@ -1,42 +1,42 @@
-unit uCadastroCorDto ;
+unit uCadastroTamanhoDto ;
 
 interface
 uses
   System.SysUtils;
 type
-  TCadastroCorDto = class
+  TCadastroTamanhoDto = class
   private
     FDescricao: string;
-    FIdCor: Integer;
+    FIdTamanho: Integer;
 
     procedure SetDescricao(const Value: string);
-    procedure SetIdCor(const Value: Integer);
+    procedure SetIdTamanho(const Value: Integer);
   public
     constructor Create;
-    property IdCor : Integer read FIdCor write SetIdCor;
+    property IdTamanho : Integer read FIdTamanho write SetIdTamanho;
     property Descricao : string read FDescricao write SetDescricao;
   end;
 
 var
-  oCadastroCorDto : TCadastroCorDto;
+  oCadastroTamanhoDto : TCadastroTamanhoDto;
 implementation
 
-{ TDtoCor }
+{ TDtoTamanho }
 
-constructor TCadastroCorDto.Create;
+constructor TCadastroTamanhoDto.Create;
 begin
-  FIdCor := 0;
+  FIdTamanho := 0;
   FDescricao := EmptyStr;
 end;
 
-procedure TCadastroCorDto.SetDescricao(const Value: string);
+procedure TCadastroTamanhoDto.SetDescricao(const Value: string);
 begin
   FDescricao := Value;
 end;
 
-procedure TCadastroCorDto.SetIdCor(const Value: Integer);
+procedure TCadastroTamanhoDto.SetIdTamanho(const Value: Integer);
 begin
-  FIdCor := Value;
+  FIdTamanho := Value;
 end;
 
 end.

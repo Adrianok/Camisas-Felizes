@@ -1,10 +1,10 @@
-unit uInterfaceCorModel;
+unit uInterfaceTamanhoModel;
 
 interface
 uses
   System.Generics.Collections;
 type
-  IInterfaceConsultaCorModel = interface
+  IInterfaceConsultaTamanhoModel = interface
 
     function SelectDescricao: Boolean;
     function Inserir:boolean;

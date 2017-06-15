@@ -1,36 +1,36 @@
-unit uConsultaCorRegra;
+unit uConsultaTamanhoRegra;
 
 
 interface
 
 uses
   System.SysUtils, FireDac.Comp.Client,
-  uConsultaCorForm, uConsultaCorModel;
+  uConsultaTamanhoForm, uConsultaTamanhoModel;
 
 type
-  TConsultaCorRegra = class
+  TConsultaTamanhoRegra = class
   public
-    function SelectId(const oConsultaCorModel: TConsultaCorModel; sDescricao : String) : Integer;
-    function SelectAll(const oConsultaCorModel: TConsultaCorModel; MemTable: TFDMemTable) : boolean;
+    function SelectId(const oConsultaTamanhoModel: TConsultaTamanhoModel; sDescricao : String) : Integer;
+    function SelectAll(const oConsultaTamanhoModel: TConsultaTamanhoModel; MemTable: TFDMemTable) : boolean;
   end;
 
 var
-  oConsultaCorRegra: TConsultaCorRegra;
+  oConsultaTamanhoRegra: TConsultaTamanhoRegra;
 implementation
 
-{ TConsultaCorRegra }
+{ TConsultaTamanhoRegra }
 
-function TConsultaCorRegra.SelectAll(const oConsultaCorModel: TConsultaCorModel; MemTable: TFDMemTable) : boolean;
+function TConsultaTamanhoRegra.SelectAll(const oConsultaTamanhoModel: TConsultaTamanhoModel; MemTable: TFDMemTable) : boolean;
 begin
 
-  Result:= oConsultaCorModel.SelectAll(MemTable);
+  Result:= oConsultaTamanhoModel.SelectAll(MemTable);
 
 end;
 
-function TConsultaCorRegra.SelectId(const oConsultaCorModel: TConsultaCorModel;
+function TConsultaTamanhoRegra.SelectId(const oConsultaTamanhoModel: TConsultaTamanhoModel;
   sDescricao: String): Integer;
 begin
-  Result := oConsultaCorModel.SelectId(sDescricao);
+  Result := oConsultaTamanhoModel.SelectId(sDescricao);
 end;
 
 end.

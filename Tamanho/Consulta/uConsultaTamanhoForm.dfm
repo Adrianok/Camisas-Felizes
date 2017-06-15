@@ -1,11 +1,11 @@
-inherited ConsultaCorForm: TConsultaCorForm
+inherited ConsultaTamanhoForm: TConsultaTamanhoForm
   Left = 893
-  Caption = 'Consulta cadastro de cor'
+  Caption = 'Consulta cadastro de Tamanho'
   ClientHeight = 522
   ClientWidth = 374
   Position = poDesigned
-  ExplicitWidth = 390
-  ExplicitHeight = 561
+  ExplicitWidth = 380
+  ExplicitHeight = 551
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -35,7 +35,7 @@ inherited ConsultaCorForm: TConsultaCorForm
     Columns = <
       item
         Expanded = False
-        FieldName = 'idcor'
+        FieldName = 'idTamanho'
         Title.Caption = 'C'#243'digo'
         Width = 54
         Visible = True
@@ -56,7 +56,7 @@ inherited ConsultaCorForm: TConsultaCorForm
     Columns = <
       item
         Expanded = False
-        FieldName = 'idcor'
+        FieldName = 'idTamanho'
         Title.Caption = 'C'#243'digo'
         Width = 59
         Visible = True

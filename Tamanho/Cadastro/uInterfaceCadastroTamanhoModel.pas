@@ -1,18 +1,18 @@
-unit uInterfaceCadastroCorModel;
+unit uInterfaceCadastroTamanhoModel;
 
 
 interface
 uses
   System.Generics.Collections,
-  uCadastroCorDto;
+  uCadastroTamanhoDto;
 type
-  IInterfaceCadastroCorModel = interface
+  IInterfaceCadastroTamanhoModel = interface
 
-    function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function Inserir(var oCadastroModeloDto: TCadastroCorDto):boolean;
-    function Atualizar(var oCadastroModeloDto: TCadastroCorDto):boolean;
-    function Deletar(var oCadastroModeloDto: TCadastroCorDto):boolean;
-    function NovoId(var oCadastroModeloDto: TCadastroCorDto):boolean;
+    function SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function Inserir(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
+    function Atualizar(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
+    function Deletar(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
+    function NovoId(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
 
   end;
 

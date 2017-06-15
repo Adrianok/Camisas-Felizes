@@ -1,4 +1,4 @@
-unit uCadastroCorModel;
+unit uCadastroTamanhoModel;
 
 interface
 
@@ -6,41 +6,41 @@ uses
   System.Generics.Collections, FireDAC.Comp.Client,
   System.SysUtils, Data.DB, FireDAC.DApt,
   FireDAC.Comp.UI, System.Classes, Dialogs,
-  uConexaoSingleTon, uCadastroCorDto,
-  uInterfaceCadastroCorModel;
+  uConexaoSingleTon, uCadastroTamanhoDto,
+  uInterfaceCadastroTamanhoModel;
 
 type
-  TCadastroCorModel = class(TinterfacedObject, IInterfaceCadastroCorModel)
+  TCadastroTamanhoModel = class(TinterfacedObject, IInterfaceCadastroTamanhoModel)
   private
     // function SelecionarTudo(var oCadastroModeloDto: TObjectDictionary<string, TCadastroModeloDto>): Boolean;
     Query: TFDQuery;
   public
-    function SelectPorId(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function Inserir(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function Atualizar(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function Deletar(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function NovoId(var oCadastroCorDto: TCadastroCorDto): Boolean;
+    function SelectPorId(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function SelectTamanho(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function Inserir(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function Atualizar(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function Deletar(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function NovoId(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 
     constructor Create;
     destructor Destroy; override;
   end;
 
   var
-    oCadastroCorModel: TCadastroCorModel;
+    oCadastroTamanhoModel: TCadastroTamanhoModel;
 
 implementation
 
 { TCadastroModeloModel }
 
-function TCadastroCorModel.Atualizar(var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroTamanhoModel.Atualizar(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' UPDATE cor SET descricao ='''
-    + oCadastroCorDto.Descricao + ''' WHERE idcor= '
-    + IntToStr(oCadastroCorDto.IdCor) + ';');
+    Query.SQL.Add(' UPDATE Tamanho SET descricao ='''
+    + oCadastroTamanhoDto.Descricao + ''' WHERE idTamanho= '
+    + IntToStr(oCadastroTamanhoDto.IdTamanho) + ';');
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
     begin
@@ -53,20 +53,20 @@ begin
   end;
 end;
 
-constructor TCadastroCorModel.Create;
+constructor TCadastroTamanhoModel.Create;
 begin
     Query := TFDQuery.Create(nil);
     Query.Connection := TConexaoSigleton.GetInstancia;
 end;
 
-destructor TCadastroCorModel.Destroy;
+destructor TCadastroTamanhoModel.Destroy;
 begin
   FreeAndNil(Query);
   inherited;
 end;
 
-function TCadastroCorModel.Deletar(
-  var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroTamanhoModel.Deletar(
+  var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
 
 end;
@@ -76,13 +76,13 @@ end;
 
 
 
-function TCadastroCorModel.Inserir(var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroTamanhoModel.Inserir(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' INSERT INTO cor (idcor, descricao) VALUES ('
-    + IntToStr(oCadastroCorDto.IdCor) + ', '''
-    + oCadastroCorDto.Descricao + ''');');
+    Query.SQL.Add(' INSERT INTO Tamanho (idTamanho, descricao) VALUES ('
+    + IntToStr(oCadastroTamanhoDto.IdTamanho) + ', '''
+    + oCadastroTamanhoDto.Descricao + ''');');
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
     begin
@@ -95,14 +95,14 @@ begin
   end;
 end;
 
-function TCadastroCorModel.NovoId(var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroTamanhoModel.NovoId(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT MAX(idcor) AS id FROM cor');
+    Query.Open('SELECT MAX(idTamanho) AS id FROM Tamanho');
     if (not(Query.IsEmpty)) then
     begin
-      oCadastroCorDto.IdCor := (Query.FieldByName('id').AsInteger) + 1;
+      oCadastroTamanhoDto.IdTamanho := (Query.FieldByName('id').AsInteger) + 1;
       Result := True;
     end
     else
@@ -112,11 +112,11 @@ begin
   end;
 end;
 
-function TCadastroCorModel.SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroTamanhoModel.SelectTamanho(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM cor WHERE idcor =' + IntToStr(oCadastroCorDto.IdCor));
+    Query.Open('SELECT * FROM Tamanho WHERE idTamanho =' + IntToStr(oCadastroTamanhoDto.IdTamanho));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
@@ -128,14 +128,14 @@ begin
   end;
 end;
 
-function TCadastroCorModel.SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroTamanhoModel.SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM cor WHERE descricao =''' + oCadastroCorDto.Descricao + ''' ');
+    Query.Open('SELECT * FROM Tamanho WHERE descricao =''' + oCadastroTamanhoDto.Descricao + ''' ');
     if (not(Query.IsEmpty)) then
     begin
-      oCadastroCorDto.IdCor := Query.FieldByName('idcor').AsInteger;
+      oCadastroTamanhoDto.IdTamanho := Query.FieldByName('idTamanho').AsInteger;
       Result := True;
     end
     else
@@ -144,16 +144,16 @@ begin
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;
 end;
-function TCadastroCorModel.SelectPorId(
-  var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroTamanhoModel.SelectPorId(
+  var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM cor WHERE idcor =' + IntToStr(oCadastroCorDto.IdCor));
+    Query.Open('SELECT * FROM Tamanho WHERE idTamanho =' + IntToStr(oCadastroTamanhoDto.IdTamanho));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
-      oCadastroCorDto.Descricao := Query.FieldByName('descricao').AsString;
+      oCadastroTamanhoDto.Descricao := Query.FieldByName('descricao').AsString;
     end
     else
       Result := False;

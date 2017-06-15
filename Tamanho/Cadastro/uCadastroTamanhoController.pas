@@ -1,4 +1,4 @@
-unit uCadastroCorController;
+unit uCadastroTamanhoController;
 
 interface
 
@@ -6,13 +6,13 @@ uses
   Dialogs, Vcl.ExtCtrls,
   Vcl.StdCtrls,
   System.classes, System.SysUtils,
-  uCadastroCorDto, uClasseInterfaceViewBase,
-  uCadastroCorRegra, uCadastroCorModel,
-  uCadastroCorForm, uInterfaceViewBase,
-  uConsultaCorForm, uConsultaCorController;
+  uCadastroTamanhoDto, uClasseInterfaceViewBase,
+  uCadastroTamanhoRegra, uCadastroTamanhoModel,
+  uCadastroTamanhoForm, uInterfaceViewBase,
+  uConsultaTamanhoForm, uConsultaTamanhoController;
 
 type
-  TCadastroCorController = class(TClassInterfaceViewBase)
+  TCadastroTamanhoController = class(TClassInterfaceViewBase)
   private
   public
     procedure Inicial; override;
@@ -28,23 +28,23 @@ type
   end;
 
 var
-  oCadastroCorController: IInterfaceViewBase;
+  oCadastroTamanhoController: IInterfaceViewBase;
 
 implementation
 
 
-{ TControllerCadastroCor }
+{ TControllerCadastroTamanho }
 
-procedure TCadastroCorController.Consulta;
+procedure TCadastroTamanhoController.Consulta;
 begin
 inherited;
-  if(oCadastroCorDto.IdCor <> 0)then
+  if(oCadastroTamanhoDto.IdTamanho <> 0)then
   begin
-    if(oCadastroCorRegra.SelectCor(oCadastroCorModel, oCadastroCorDto))then
-    with (oFormulario as TCadastroCorForm) do
+    if(oCadastroTamanhoRegra.SelectTamanho(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+    with (oFormulario as TCadastroTamanhoForm) do
     begin
-      edtCodigo.Text :=   IntToStr(oCadastroCorDto.IdCor);
-      edtCor.Text    :=  oCadastroCorDto.Descricao;
+      edtCodigo.Text :=   IntToStr(oCadastroTamanhoDto.IdTamanho);
+      edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
     end;
   end
   else
@@ -54,88 +54,88 @@ inherited;
   end;
 end;
 
-constructor TCadastroCorController.Create;
+constructor TCadastroTamanhoController.Create;
 begin
-  if (not(assigned(oCadastroCorModel))) then
-    oCadastroCorModel := TCadastroCorModel.Create;
+  if (not(assigned(oCadastroTamanhoModel))) then
+    oCadastroTamanhoModel := TCadastroTamanhoModel.Create;
 
-  if (not(assigned(oCadastroCorDto))) then
-    oCadastroCorDto := TCadastroCorDto.Create;
+  if (not(assigned(oCadastroTamanhoDto))) then
+    oCadastroTamanhoDto := TCadastroTamanhoDto.Create;
 
-  if (not(assigned(oCadastroCorRegra))) then
-    oCadastroCorRegra := TCadastroCorRegra.Create;
+  if (not(assigned(oCadastroTamanhoRegra))) then
+    oCadastroTamanhoRegra := TCadastroTamanhoRegra.Create;
 end;
 
-procedure TCadastroCorController.CriarForm(Aowner: TComponent);
+procedure TCadastroTamanhoController.CriarForm(Aowner: TComponent);
 begin
   inherited;
   if not(assigned(oFormulario)) then
-    oFormulario := TCadastroCorForm.Create(Aowner);
-  oFormulario.oController := oCadastroCorController;
+    oFormulario := TCadastroTamanhoForm.Create(Aowner);
+  oFormulario.oController := oCadastroTamanhoController;
   oFormulario.Show;
 end;
 
-destructor TCadastroCorController.Destroy;
+destructor TCadastroTamanhoController.Destroy;
 begin
-  if (assigned(oCadastroCorModel)) then
-    FreeAndNil(oCadastroCorModel);
+  if (assigned(oCadastroTamanhoModel)) then
+    FreeAndNil(oCadastroTamanhoModel);
 
-  if (assigned(oCadastroCorDto)) then
-    FreeAndNil(oCadastroCorDto);
+  if (assigned(oCadastroTamanhoDto)) then
+    FreeAndNil(oCadastroTamanhoDto);
 
-  if (assigned(oCadastroCorRegra)) then
-    FreeAndNil(oCadastroCorRegra);
+  if (assigned(oCadastroTamanhoRegra)) then
+    FreeAndNil(oCadastroTamanhoRegra);
 
     inherited;
 end;
 
 
 
-procedure TCadastroCorController.Inicial;
+procedure TCadastroTamanhoController.Inicial;
 begin
   inherited;
 
 end;
 
-procedure TCadastroCorController.Novo;
+procedure TCadastroTamanhoController.Novo;
 begin
   inherited;
   NovoID;
 end;
 
-procedure TCadastroCorController.NovoID;
+procedure TCadastroTamanhoController.NovoID;
 begin
- if(oCadastroCorRegra.Novo(oCadastroCorModel, oCadastroCorDto))then
-  (oFormulario as TCadastroCorForm).edtCodigo.Text := IntToStr(oCadastroCorDto.IdCor);
+ if(oCadastroTamanhoRegra.Novo(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+  (oFormulario as TCadastroTamanhoForm).edtCodigo.Text := IntToStr(oCadastroTamanhoDto.IdTamanho);
 end;
 
-procedure TCadastroCorController.Pesquisar(Aowner : TComponent);
+procedure TCadastroTamanhoController.Pesquisar(Aowner : TComponent);
 var
- sIdCor : string;
+ sIdTamanho : string;
 begin
   inherited;
-  if(sIdCor <> '')then
-    oCadastroCorDto.IdCor        :=  StrToInt(sIdCor);
-  oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;;
+  if(sIdTamanho <> '')then
+    oCadastroTamanhoDto.IdTamanho        :=  StrToInt(sIdTamanho);
+  oCadastroTamanhoDto.Descricao    :=(oFormulario as TCadastroTamanhoForm).edtTamanho.Text;;
 
-  if (not(assigned(oConsultaCorController))) then
-    oConsultaCorController := TConsultaCorController.Create;
-  oConsultaCorController.CriarForm(Aowner);
+  if (not(assigned(oConsultaTamanhoController))) then
+    oConsultaTamanhoController := TConsultaTamanhoController.Create;
+  oConsultaTamanhoController.CriarForm(Aowner);
 end;
 
-procedure TCadastroCorController.Salvar;
+procedure TCadastroTamanhoController.Salvar;
 begin
     inherited;
-    with (oFormulario as TCadastroCorForm) do
+    with (oFormulario as TCadastroTamanhoForm) do
     begin
-      oCadastroCorDto.IdCor        :=  StrToInt(edtCodigo.Text);
-      oCadastroCorDto.Descricao          :=  edtCor.Text;
+      oCadastroTamanhoDto.IdTamanho        :=  StrToInt(edtCodigo.Text);
+      oCadastroTamanhoDto.Descricao          :=  edtTamanho.Text;
     end;
-    if(oCadastroCorRegra.Salvar(oCadastroCorModel, oCadastroCorDto))then
-      ShowMessage('Registro: '+ oCadastroCorDto.Descricao +' Atualizado com sucesso')
+    if(oCadastroTamanhoRegra.Salvar(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+      ShowMessage('Registro: '+ oCadastroTamanhoDto.Descricao +' Atualizado com sucesso')
     else
     begin
-      ShowMessage('Registro: '+ oCadastroCorDto.Descricao +' Inserido com sucesso');
+      ShowMessage('Registro: '+ oCadastroTamanhoDto.Descricao +' Inserido com sucesso');
     end;
 end;
 

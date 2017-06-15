@@ -1,19 +1,19 @@
 unit uInterfaceViewBase;
 
 interface
+
 uses
   System.Classes;
+
 type
   IInterfaceViewBase = interface
+    procedure Consulta;
+    procedure CriarForm(Aowner: TComponent);
     procedure Novo;
     procedure Salvar;
-    procedure Alterar;
-    procedure Pesquisar;
+    procedure Pesquisar(Aowner: TComponent);
     procedure Excluir;
     procedure Fechar;
-
-//    function GetInstance: TObject;
-//    property Instance: TObject read GetInstance;
 
   end;
 

@@ -46,6 +46,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <Custom_Styles>Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf</Custom_Styles>
         <SanitizedProjectName>CamisasFelizes</SanitizedProjectName>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
@@ -112,7 +113,6 @@
         <DCCReference Include="Modelo\uCadastroModeloController.pas"/>
         <DCCReference Include="Modelo\uCadastroModeloDto.pas"/>
         <DCCReference Include="Modelo\uCadastroModeloModel.pas"/>
-        <DCCReference Include="Cor\uCadastroCorDto.pas"/>
         <DCCReference Include="Modelo\uCadastroModeloForm.pas">
             <Form>frmCadastroModelo</Form>
         </DCCReference>
@@ -130,6 +130,25 @@
         <DCCReference Include="Base\uClasseInterfaceViewBase.pas"/>
         <DCCReference Include="Base\uInterfaceViewBase.pas"/>
         <DCCReference Include="Modelo\uInterfaceCadastroModeloModel.pas"/>
+        <DCCReference Include="Cor\Cadastro\uCadastroCorController.pas"/>
+        <DCCReference Include="Cor\Cadastro\uCadastroCorDto.pas"/>
+        <DCCReference Include="Cor\Cadastro\uCadastroCorForm.pas">
+            <Form>CadastroCorForm</Form>
+        </DCCReference>
+        <DCCReference Include="Cor\Cadastro\uCadastroCorModel.pas"/>
+        <DCCReference Include="Cor\Cadastro\uCadastroCorRegra.pas"/>
+        <DCCReference Include="Cor\Cadastro\uInterfaceCadastroCorModel.pas"/>
+        <DCCReference Include="CadastroUF\uIterfaceCadastroUfModel.pas"/>
+        <DCCReference Include="Base\uInterfaceConsultaBase.pas"/>
+        <DCCReference Include="Base\uClasseInterfaceConsultaBase.pas"/>
+        <DCCReference Include="Cor\Consulta\uConsultaCorController.pas"/>
+        <DCCReference Include="Cor\Consulta\uConsultaCorForm.pas">
+            <Form>ConsultaCorForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cor\Consulta\uConsultaCorModel.pas"/>
+        <DCCReference Include="Cor\Consulta\uConsultaCorRegra.pas"/>
+        <DCCReference Include="Cor\Consulta\uInterfaceConsultaCorModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

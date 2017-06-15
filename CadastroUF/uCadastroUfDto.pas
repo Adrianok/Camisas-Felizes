@@ -20,6 +20,9 @@ type
 
   end;
 
+var
+  oCadastroUfDto: TCadastroUfDto;
+
 implementation
 
 { TUf }

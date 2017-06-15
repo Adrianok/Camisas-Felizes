@@ -6,7 +6,8 @@ uses
   uInterfaceViewBase, dialogs,
   uBase, System.SysUtils,
   Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Forms, Vcl.Controls;
+  Vcl.Forms, Vcl.Controls,
+  System.Classes, uConsultaBase;
 
 type
   TClassInterfaceViewBase = class(TInterfacedObject, IInterfaceViewBase)
@@ -14,13 +15,16 @@ type
   protected
     oFormulario: TfrmBase;
   public
+    procedure CriarForm(Aowner: TComponent);virtual;
+    procedure Pesquisar(Aowner: TComponent);  virtual;
+    procedure Inicial; virtual;
+    procedure Consulta; virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
-    function ValidarVazio: boolean;
-    procedure Alterar; virtual;
-    procedure Pesquisar; virtual;
+    function  ValidarVazio: boolean;
     procedure Excluir; virtual;
-    procedure Fechar; virtual;
+    procedure Fechar;
+    procedure AjustarFoco;
     procedure AtivarCampos;
     procedure DesativarCampos;
     procedure LimparCampos;
@@ -32,16 +36,24 @@ implementation
 
 // Aqui vão ficar todos as alterações que são padroes para todo formulario
 // tais como botões que ativam e desativam
-procedure TClassInterfaceViewBase.Alterar;
+procedure TClassInterfaceViewBase.AjustarFoco;
+var
+  iIndice: integer;
 begin
-  ValidarVazio;
-  AtivarCampos;
+  for iIndice := 0 to (oFormulario.ComponentCount - 1) do
+    if(oFormulario.Components[iIndice] is TLabeledEdit) and
+      ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
+      ((oFormulario.Components[iIndice] as TWinControl).Enabled = True) then
+    begin
+      (oFormulario.Components[iIndice] as TWinControl).SetFocus;
+      exit;
+    end;
+
 end;
 
 procedure TClassInterfaceViewBase.AtivarCampos;
 var
   iIndice: integer;
-
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
     if (oFormulario.Components[iIndice] is TLabeledEdit) and
@@ -51,6 +63,17 @@ begin
     end;
 
 end;
+
+procedure TClassInterfaceViewBase.Consulta;
+begin
+
+end;
+
+procedure TClassInterfaceViewBase.CriarForm(Aowner: TComponent);
+begin
+
+end;
+
 
 procedure TClassInterfaceViewBase.DesativarCampos;
 var
@@ -67,12 +90,31 @@ end;
 
 procedure TClassInterfaceViewBase.Excluir;
 begin
+  oFormulario.btnNovo.Enabled := True;
+  oFormulario.btnSalvar.Enabled := False;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := False;
+  LimparCampos;
+  DesativarCampos;
 
 end;
 
 procedure TClassInterfaceViewBase.Fechar;
 begin
+  inherited;
+  if assigned(oFormulario) then
+    FreeAndNil(oFormulario);
+end;
 
+
+procedure TClassInterfaceViewBase.Inicial;
+begin
+  oFormulario.btnNovo.Enabled := True;
+  oFormulario.btnSalvar.Enabled := False;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := False;
+  LimparCampos;
+  DesativarCampos;
 end;
 
 procedure TClassInterfaceViewBase.LimparCampos;
@@ -89,18 +131,34 @@ end;
 
 procedure TClassInterfaceViewBase.Novo;
 begin
+  oFormulario.btnNovo.Enabled := False;
+  oFormulario.btnSalvar.Enabled := True;
+  oFormulario.btnExcluir.Caption := 'Cancelar';
+  oFormulario.btnExcluir.Enabled := True;
   LimparCampos;
   AtivarCampos;
+  AjustarFoco;
 end;
 
 procedure TClassInterfaceViewBase.Pesquisar;
 begin
+  oFormulario.btnNovo.Enabled := False;
+  oFormulario.btnSalvar.Enabled := True;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := True;
+  AtivarCampos;
+  AjustarFoco;
 
 end;
 
 procedure TClassInterfaceViewBase.Salvar;
 begin
-  DesativarCampos;
+  oFormulario.btnNovo.Enabled := True;
+  oFormulario.btnSalvar.Enabled := False;
+  oFormulario.btnExcluir.Caption := 'Excluir';
+  oFormulario.btnExcluir.Enabled := False;
+  if(ValidarVazio)then
+    DesativarCampos;
 end;
 
 function TClassInterfaceViewBase.ValidarVazio: boolean;
@@ -126,11 +184,10 @@ begin
     if (oFormulario.Components[iIndice] is TLabeledEdit) then
     begin
       if (oFormulario.Components[iIndice] is TLabeledEdit) then
-        sCampo := (oFormulario.Components[iIndice] as TLabeledEdit)
-          .EditLabel.Caption;
+        sCampo := (oFormulario.Components[iIndice] as TLabeledEdit).EditLabel.Caption;
       itamanho := length(sCampo);
-      if ((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
-        ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+      if ((oFormulario.Components[iIndice] as TLabeledEdit).Text  =  EmptyStr) and
+         ((oFormulario.Components[iIndice] as TWinControl ).Tag   <> 999)      then
       begin
         if (auxiliar = False) then
           sStringMessage := sStringMessage + sSeparador;

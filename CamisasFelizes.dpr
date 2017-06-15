@@ -9,7 +9,6 @@ uses
   uCadastroModeloController in 'Modelo\uCadastroModeloController.pas',
   uCadastroModeloDto in 'Modelo\uCadastroModeloDto.pas',
   uCadastroModeloModel in 'Modelo\uCadastroModeloModel.pas',
-  uCadastroCorDto in 'Cor\uCadastroCorDto.pas',
   uCadastroModeloForm in 'Modelo\uCadastroModeloForm.pas' {frmCadastroModelo},
   uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
   uCadastroUfController in 'CadastroUF\uCadastroUfController.pas',
@@ -20,7 +19,23 @@ uses
   uCadastroModeloRegra in 'Modelo\uCadastroModeloRegra.pas',
   uClasseInterfaceViewBase in 'Base\uClasseInterfaceViewBase.pas',
   uInterfaceViewBase in 'Base\uInterfaceViewBase.pas',
-  uInterfaceCadastroModeloModel in 'Modelo\uInterfaceCadastroModeloModel.pas';
+  uInterfaceCadastroModeloModel in 'Modelo\uInterfaceCadastroModeloModel.pas',
+  uCadastroCorController in 'Cor\Cadastro\uCadastroCorController.pas',
+  uCadastroCorDto in 'Cor\Cadastro\uCadastroCorDto.pas',
+  uCadastroCorForm in 'Cor\Cadastro\uCadastroCorForm.pas' {CadastroCorForm},
+  uCadastroCorModel in 'Cor\Cadastro\uCadastroCorModel.pas',
+  uCadastroCorRegra in 'Cor\Cadastro\uCadastroCorRegra.pas',
+  uInterfaceCadastroCorModel in 'Cor\Cadastro\uInterfaceCadastroCorModel.pas',
+  uIterfaceCadastroUfModel in 'CadastroUF\uIterfaceCadastroUfModel.pas',
+  uInterfaceConsultaBase in 'Base\uInterfaceConsultaBase.pas',
+  uClasseInterfaceConsultaBase in 'Base\uClasseInterfaceConsultaBase.pas',
+  uConsultaCorController in 'Cor\Consulta\uConsultaCorController.pas',
+  uConsultaCorForm in 'Cor\Consulta\uConsultaCorForm.pas' {ConsultaCorForm},
+  uConsultaCorModel in 'Cor\Consulta\uConsultaCorModel.pas',
+  uConsultaCorRegra in 'Cor\Consulta\uConsultaCorRegra.pas',
+  uInterfaceConsultaCorModel in 'Cor\Consulta\uInterfaceConsultaCorModel.pas',
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 

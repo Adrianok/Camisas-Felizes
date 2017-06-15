@@ -32,6 +32,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object CadastrodeCor: TMenuItem
         Caption = 'Cadastro de Cor'
+        OnClick = CadastrodeCorClick
       end
       object CadastrodeTamanho: TMenuItem
         Caption = 'Cadastro de Tamanho'

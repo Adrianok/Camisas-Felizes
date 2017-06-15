@@ -21,6 +21,7 @@ type
     procedure C1Click(Sender: TObject);
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure CadastrodeCorClick(Sender: TObject);
     procedure CadastrodeTamanhoClick(Sender: TObject);
   private
     { Private declarations }
@@ -43,6 +44,13 @@ begin
 
 end;
 
+procedure TfrmPrincipal.CadastrodeCorClick(Sender: TObject);
+begin
+  if (not(Assigned(oCadastroCorController))) then
+    oCadastroCorController := TCadastroCorController.Create;
+  oCadastroCorController.CriarForm(Self);
+end;
+
 procedure TfrmPrincipal.CadastrodeModelos1Click(Sender: TObject);
 begin
   if (not(Assigned(oCadastroModeloController))) then
@@ -63,7 +71,7 @@ begin
   try
     TConexaoSigleton.GetInstancia;
   except
-    ShowMessage('Não foi possível conectar ao banco de dados');
+    ShowMessage('Não foi possível ConsultaCorCadastro ao banco de dados');
     Application.Terminate;
   end;
 

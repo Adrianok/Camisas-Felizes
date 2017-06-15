@@ -2,9 +2,11 @@ object frmPesquisaBase: TfrmPesquisaBase
   Left = 0
   Top = 0
   BiDiMode = bdLeftToRight
+  BorderIcons = []
+  BorderStyle = bsToolWindow
   Caption = 'Formul'#225'rio Base Pesquisa'
-  ClientHeight = 329
-  ClientWidth = 379
+  ClientHeight = 339
+  ClientWidth = 389
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,10 +24,11 @@ object frmPesquisaBase: TfrmPesquisaBase
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 379
+    Width = 389
     Height = 57
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 379
     object edtPesquisa: TEdit
       Left = 8
       Top = 19
@@ -86,11 +89,13 @@ object frmPesquisaBase: TfrmPesquisaBase
   end
   object Panel2: TPanel
     Left = 0
-    Top = 249
-    Width = 379
+    Top = 259
+    Width = 389
     Height = 80
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 249
+    ExplicitWidth = 379
     object btnFechar: TBitBtn
       Left = 280
       Top = 6
@@ -581,8 +586,8 @@ object frmPesquisaBase: TfrmPesquisaBase
   object DBGrid1: TDBGrid
     Left = 0
     Top = 57
-    Width = 379
-    Height = 192
+    Width = 389
+    Height = 202
     Align = alClient
     DataSource = DataSourceGrid
     Options = [dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]

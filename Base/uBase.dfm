@@ -3,9 +3,10 @@ object frmBase: TfrmBase
   Top = 0
   BiDiMode = bdLeftToRight
   BorderIcons = []
+  BorderStyle = bsToolWindow
   Caption = 'Formul'#225'rio Base'
-  ClientHeight = 422
-  ClientWidth = 620
+  ClientHeight = 432
+  ClientWidth = 630
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,11 +26,12 @@ object frmBase: TfrmBase
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 620
+    Width = 630
     Height = 89
     Align = alTop
     Locked = True
     TabOrder = 0
+    ExplicitWidth = 620
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -540,7 +542,7 @@ object frmBase: TfrmBase
       end
     end
     object Panel3: TPanel
-      Left = 419
+      Left = 429
       Top = 1
       Width = 200
       Height = 87
@@ -553,6 +555,7 @@ object frmBase: TfrmBase
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
+      ExplicitLeft = 419
       object btnExcluir: TBitBtn
         Left = 8
         Top = 7
@@ -885,18 +888,18 @@ object frmBase: TfrmBase
   object pgControll: TPageControl
     Left = 0
     Top = 89
-    Width = 620
-    Height = 333
+    Width = 630
+    Height = 343
     ActivePage = Cadastro
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
+    ExplicitWidth = 620
+    ExplicitHeight = 333
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 612
+      ExplicitHeight = 305
     end
   end
 end

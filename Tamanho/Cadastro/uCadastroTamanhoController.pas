@@ -129,7 +129,7 @@ begin
     with (oFormulario as TCadastroTamanhoForm) do
     begin
       oCadastroTamanhoDto.IdTamanho        :=  StrToInt(edtCodigo.Text);
-      oCadastroTamanhoDto.Descricao          :=  edtTamanho.Text;
+      oCadastroTamanhoDto.Descricao        :=  edtTamanho.Text;
     end;
     if(oCadastroTamanhoRegra.Salvar(oCadastroTamanhoModel, oCadastroTamanhoDto))then
       ShowMessage('Registro: '+ oCadastroTamanhoDto.Descricao +' Atualizado com sucesso')

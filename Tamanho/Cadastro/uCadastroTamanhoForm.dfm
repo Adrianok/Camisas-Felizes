@@ -14,6 +14,7 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
         Top = 16
         Width = 153
         Height = 26
+        CharCase = ecUpperCase
         EditLabel.Width = 58
         EditLabel.Height = 23
         EditLabel.Caption = 'C'#243'digo:'
@@ -37,7 +38,8 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
         Left = 78
         Top = 72
         Width = 487
-        Height = 26
+        Height = 27
+        CharCase = ecUpperCase
         EditLabel.Width = 68
         EditLabel.Height = 23
         EditLabel.Caption = 'Tamanho:'
@@ -54,8 +56,10 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
         Font.Name = 'Tahoma'
         Font.Style = []
         LabelPosition = lpLeft
+        MaxLength = 2
         ParentFont = False
         TabOrder = 1
+        TextHint = 'Informe os tamanhos dispon'#237'veis'
       end
     end
   end

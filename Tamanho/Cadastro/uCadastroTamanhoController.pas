@@ -114,9 +114,11 @@ var
  sIdTamanho : string;
 begin
   inherited;
+  sIdTamanho   :=  (oFormulario as TCadastroTamanhoForm).edtCodigo.Text;
+
   if(sIdTamanho <> '')then
     oCadastroTamanhoDto.IdTamanho        :=  StrToInt(sIdTamanho);
-  oCadastroTamanhoDto.Descricao    :=(oFormulario as TCadastroTamanhoForm).edtTamanho.Text;;
+  oCadastroTamanhoDto.Descricao    :=(oFormulario as TCadastroTamanhoForm).edtTamanho.Text;
 
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoController := TConsultaTamanhoController.Create;

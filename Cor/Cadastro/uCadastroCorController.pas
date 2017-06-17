@@ -114,9 +114,11 @@ var
  sIdCor : string;
 begin
   inherited;
+  sIdCor :=    (oFormulario as TCadastroCorForm).edtCodigo.Text;
+
   if(sIdCor <> '')then
     oCadastroCorDto.IdCor        :=  StrToInt(sIdCor);
-  oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;;
+  oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;
 
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorController := TConsultaCorController.Create;

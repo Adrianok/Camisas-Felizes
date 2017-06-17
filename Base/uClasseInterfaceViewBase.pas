@@ -15,13 +15,13 @@ type
   protected
     oFormulario: TfrmBase;
   public
-    procedure CriarForm(Aowner: TComponent);virtual;
-    procedure Pesquisar(Aowner: TComponent);  virtual;
+    procedure CriarForm(Aowner: TComponent); virtual;
+    procedure Pesquisar(Aowner: TComponent); virtual;
     procedure Inicial; virtual;
     procedure Consulta; virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
-    function  ValidarVazio: boolean;
+    function ValidarVazio: boolean;
     procedure Excluir; virtual;
     procedure Fechar;
     procedure AjustarFoco;
@@ -41,7 +41,7 @@ var
   iIndice: integer;
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if(oFormulario.Components[iIndice] is TLabeledEdit) and
+    if (oFormulario.Components[iIndice] is TLabeledEdit) and
       ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
       ((oFormulario.Components[iIndice] as TWinControl).Enabled = True) then
     begin
@@ -56,10 +56,10 @@ var
   iIndice: integer;
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if (oFormulario.Components[iIndice] is TLabeledEdit) and
+    if (oFormulario.Components[iIndice] is TWinControl) and
       ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
     begin
-      (oFormulario.Components[iIndice] as TLabeledEdit).Enabled := True;
+      (oFormulario.Components[iIndice] as TWinControl).Enabled := True;
     end;
 
 end;
@@ -74,16 +74,15 @@ begin
 
 end;
 
-
 procedure TClassInterfaceViewBase.DesativarCampos;
 var
   iIndice: integer;
 
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if (oFormulario.Components[iIndice] is TLabeledEdit) then
+    if (oFormulario.Components[iIndice] is TWinControl) then
     begin
-      (oFormulario.Components[iIndice] as TLabeledEdit).Enabled := False;
+      (oFormulario.Components[iIndice] as TWinControl).Enabled := False;
     end;
 
 end;
@@ -105,7 +104,6 @@ begin
   if assigned(oFormulario) then
     FreeAndNil(oFormulario);
 end;
-
 
 procedure TClassInterfaceViewBase.Inicial;
 begin
@@ -157,7 +155,7 @@ begin
   oFormulario.btnSalvar.Enabled := False;
   oFormulario.btnExcluir.Caption := 'Excluir';
   oFormulario.btnExcluir.Enabled := False;
-  if(ValidarVazio)then
+  if (ValidarVazio) then
     DesativarCampos;
 end;
 
@@ -184,10 +182,11 @@ begin
     if (oFormulario.Components[iIndice] is TLabeledEdit) then
     begin
       if (oFormulario.Components[iIndice] is TLabeledEdit) then
-        sCampo := (oFormulario.Components[iIndice] as TLabeledEdit).EditLabel.Caption;
+        sCampo := (oFormulario.Components[iIndice] as TLabeledEdit)
+          .EditLabel.Caption;
       itamanho := length(sCampo);
-      if ((oFormulario.Components[iIndice] as TLabeledEdit).Text  =  EmptyStr) and
-         ((oFormulario.Components[iIndice] as TWinControl ).Tag   <> 999)      then
+      if ((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
+        ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
       begin
         if (auxiliar = False) then
           sStringMessage := sStringMessage + sSeparador;

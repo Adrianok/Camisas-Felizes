@@ -1,0 +1,36 @@
+unit uCadastroModeloForm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uBase, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
+
+type
+  TCadastroModeloForm = class(TfrmBase)
+    edtCodigo: TLabeledEdit;
+    edtModelo: TLabeledEdit;
+    edtPreco: TLabeledEdit;
+    GroupBox1: TGroupBox;
+    LabeledEdit1: TLabeledEdit;
+    DBGrid1: TDBGrid;
+    MemTableCor: TFDMemTable;
+    DataSource: TDataSource;
+    btnAdicionar: TBitBtn;
+    btnRemover: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+
+implementation
+
+{$R *.dfm}
+
+end.

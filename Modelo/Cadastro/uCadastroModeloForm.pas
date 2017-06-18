@@ -17,8 +17,6 @@ type
     edtPreco: TLabeledEdit;
     GroupBox1: TGroupBox;
     edtCor: TLabeledEdit;
-    btnAdicionar: TBitBtn;
-    btnRemover: TBitBtn;
     ListView1: TListView;
 
   private

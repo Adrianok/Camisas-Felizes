@@ -118,7 +118,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
       Tag = 888
       Left = 48
       Top = 28
-      Width = 335
+      Width = 401
       Height = 26
       EditLabel.Width = 32
       EditLabel.Height = 23
@@ -142,32 +142,16 @@ inherited CadastroModeloForm: TCadastroModeloForm
       ParentFont = False
       TabOrder = 0
     end
-    object btnAdicionar: TBitBtn
-      Left = 389
-      Top = 11
-      Width = 58
-      Height = 28
-      Caption = '+'
-      TabOrder = 1
-    end
-    object btnRemover: TBitBtn
-      Left = 389
-      Top = 42
-      Width = 58
-      Height = 28
-      Caption = '-'
-      TabOrder = 2
-    end
     object ListView1: TListView
       Left = 24
       Top = 80
-      Width = 393
+      Width = 425
       Height = 177
       Checkboxes = True
       Columns = <>
       GridLines = True
       MultiSelect = True
-      TabOrder = 3
+      TabOrder = 1
       ViewStyle = vsList
     end
   end

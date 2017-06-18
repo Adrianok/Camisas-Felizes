@@ -6,7 +6,7 @@ uses
   Dialogs, Vcl.ExtCtrls,
   Vcl.StdCtrls, System.classes, System.SysUtils,
   uClasseInterfaceConsultaBase, uConsultaUfModel,
-  uInterfaceConsultaBase,uCadastroUfDto, uConsultaUfForm,
+  uInterfaceConsultaBase, uCadastroUfDto, uConsultaUfForm,
   FireDac.Comp.Client, uConsultaUfRegra,
   Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows;
 
@@ -16,7 +16,7 @@ type
   public
     procedure PesquisarGrid;  override;
     procedure AlimentarDto(Column : TColumn); override;
-    function PreencherGrid:boolean;
+    function PreencherGrid:boolean; override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
@@ -30,18 +30,17 @@ var
 
 implementation
 
-{ TConsultaUfConsultaController }
+{ TConsultaCorConsultaController }
 
 procedure TConsultaUfController.AlimentarDto(Column: TColumn);
 begin
   inherited;
-   oCadastroUfDto.Id := StrToInt(Column.Field.Text);
+  oCadastroUfDto.id := StrToInt(Column.Field.Text);
 end;
 
 procedure TConsultaUfController.Cancelar;
 begin
   inherited;
-
 end;
 
 procedure TConsultaUfController.Confirmar;
@@ -55,9 +54,7 @@ constructor TConsultaUfController.Create;
 begin
   //falta reiniciarSistema
   if (not(assigned(oCadastroUfDto))) then
-       raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
-
+    raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
   if (not(assigned(oConsultaUfController))) then
     oConsultaUfModel := TConsultaUfModel.Create;
@@ -70,15 +67,14 @@ procedure TConsultaUfController.CriarForm(Aowner: TComponent);
 begin
   inherited;
   if not(assigned(oFormulario)) then
-    begin
-      oFormulario :=  TConsultaUfForm.Create(Aowner);
-      oFormulario.oController := oConsultaUfController;
-      PreencherGrid;
-    end;
-    oFormulario.Show;
+  begin
+    oFormulario :=  TConsultaUfForm.Create(Aowner);
+    oFormulario.oController := oConsultaUfController;
+    PreencherGrid;
+  end;
+  oFormulario.Show;
 
   oFormulario.edtPesquisa.Text := oCadastroUfDto.uf;
-
 
 end;
 
@@ -100,19 +96,18 @@ end;
 procedure TConsultaUfController.PesquisarGrid;
 begin
   inherited;
-  oFormulario.FDMemTableGrid.Filter := 'descricao like ''%' + oFormulario.edtPesquisa.Text + '%'' '
-                                      +'or idcor  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';
+  oFormulario.FDMemTableGrid.Filter := 'sigla like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+                                      +'or iduf  like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+                                      +'or descricao  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';;
   oFormulario.FDMemTableGrid.Filtered := True;
  end;
 
 function TConsultaUfController.PreencherGrid: boolean;
 begin
-
-  if(oConsultaUfRegra.SelectAll(oConsultaUfModel, TFDMemTable))then
-    oFormulario.
+  if(oConsultaUfRegra.SelectAll(oConsultaUfModel, oFormulario.FDMemTableGrid))then
+  oFormulario.FDMemTableGrid.Open
   else
     ShowMessage('Não foram encontrados registros');
-
 end;
 
 end.

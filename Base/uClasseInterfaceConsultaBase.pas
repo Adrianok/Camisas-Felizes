@@ -24,6 +24,7 @@ type
     procedure Cancelar;  virtual;
     procedure Confirmar; virtual;
     procedure Fechar; virtual;
+    procedure Deletar;  virtual;
   end;
 
 implementation
@@ -47,6 +48,11 @@ begin
 end;
 
 procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent);
+begin
+
+end;
+
+procedure TClassInterfaceConsultaBase.Deletar;
 begin
 
 end;

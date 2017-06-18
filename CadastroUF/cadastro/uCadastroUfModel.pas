@@ -38,10 +38,10 @@ function TCadastroUfModel.Atualizar(var oCadastroUfDto: TCadastroUfDto): Boolean
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' UPDATE Uf SET sigla ='''
-    + oCadastroUfDto.uf + ''' WHERE idUf= '
-    + IntToStr(oCadastroUfDto.id) + ';');
+    Query.SQL.Add('UPDATE Uf SET descricao =' + QuotedStr(oCadastroUfDto.nome) +
+                          ' WHERE sigla = ' + QuotedStr(oCadastroUfDto.uf));
     Query.ExecSQL;
+
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
@@ -65,24 +65,33 @@ begin
   inherited;
 end;
 
-function TCadastroUfModel.Deletar(
-  var oCadastroUfDto: TCadastroUfDto): Boolean;
+function TCadastroUfModel.Deletar(var oCadastroUfDto: TCadastroUfDto): Boolean;
 begin
-
+   try
+    Query.SQL.Clear;
+    Query.SQL.Add(' DELETE FROM Uf WHERE iduf = '+ IntToStr(oCadastroUfDto.Id));
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+    begin
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
-
-
-
-
 
 
 function TCadastroUfModel.Inserir(var oCadastroUfDto: TCadastroUfDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' INSERT INTO Uf (idUf, sigla, descricao) VALUES ('
-    + IntToStr(oCadastroUfDto.Id) + ', '''
-    + oCadastroUfDto.uf + ',' + oCadastroUfDto.nome + ')');
+    Query.SQL.Add('INSERT INTO Uf (iduf, sigla, descricao) VALUES ('
+                  + IntToStr(oCadastroUfDto.Id) + ','
+                  + QuotedStr(oCadastroUfDto.uf) + ','
+                  + QuotedStr(oCadastroUfDto.nome) + ')');
+
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
     begin
@@ -116,7 +125,7 @@ function TCadastroUfModel.SelectUf(var oCadastroUfDto: TCadastroUfDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM Uf WHERE idUf =' + IntToStr(oCadastroUfDto.Id));
+    Query.Open('SELECT iduf, sigla, descricao FROM Uf WHERE sigla =' + QuotedStr(oCadastroUfDto.uf));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
@@ -132,7 +141,7 @@ function TCadastroUfModel.SelectDescricao(var oCadastroUfDto: TCadastroUfDto): B
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT iduf, sigla, descricao  FROM Uf WHERE sigla =''' + oCadastroUfDto.uf + ''' ');
+    Query.Open('SELECT iduf, sigla, descricao  FROM Uf WHERE sigla =''' + QuotedStr(oCadastroUfDto.uf) + ''' ');
     if (not(Query.IsEmpty)) then
     begin
       oCadastroUfDto.Id := Query.FieldByName('idUf').AsInteger;

@@ -3,8 +3,10 @@ unit uConsultaBase;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.Buttons,
   Vcl.ExtCtrls, uInterfaceConsultaBase, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
@@ -30,8 +32,8 @@ type
   private
     { Private declarations }
   public
-      { Public declarations }
-      oController: IInterfaceConsultaBase;
+    { Public declarations }
+    oController: IInterfaceConsultaBase;
   end;
 
 var
@@ -43,18 +45,19 @@ implementation
 
 procedure TfrmPesquisaBase.btnCancelarClick(Sender: TObject);
 begin
-    oController.Fechar;
+  oController.Fechar;
 end;
 
 procedure TfrmPesquisaBase.btnConfirmarClick(Sender: TObject);
 begin
-    oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-    oController.Fechar;
+//  oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
+  oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
+  oController.Fechar;
 end;
 
 procedure TfrmPesquisaBase.btnFecharClick(Sender: TObject);
 begin
-    oController.Fechar;
+  oController.Fechar;
 end;
 
 procedure TfrmPesquisaBase.btnPesquisaClick(Sender: TObject);
@@ -70,13 +73,12 @@ end;
 procedure TfrmPesquisaBase.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if key = VK_ESCAPE then
+  if Key = VK_ESCAPE then
   begin
     oController.Fechar;
     char(Key) := #0
   end
-  else
-  if key = VK_RETURN then
+  else if Key = VK_RETURN then
   begin
     oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
     oController.Fechar;
@@ -85,4 +87,3 @@ begin
 end;
 
 end.
-

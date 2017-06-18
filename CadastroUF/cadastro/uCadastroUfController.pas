@@ -22,6 +22,7 @@ type
     procedure Salvar; override;
     procedure Pesquisar(Aowner: TComponent); override;
     procedure NovoID;
+    procedure Excluir; override;
 
     constructor Create;
     destructor Destroy; override;
@@ -37,7 +38,7 @@ implementation
 procedure TCadastroUfController.Consulta;
 begin
   inherited;
-  if (oCadastroUfDto.Id <> 0) then
+  if (oCadastroUfDto.Id > -1) then
   begin
     if (oCadastroUfRegra.SelectUf(oCadastroUfModel, oCadastroUfDto)) then
       with (oFormulario as TCadastroUfForm) do
@@ -71,8 +72,15 @@ begin
   inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroUfForm.Create(Aowner);
-    oFormulario.oController := oCadastroUfController;
-    oFormulario.Show;
+  oFormulario.oController := oCadastroUfController;
+  oFormulario.Show;
+end;
+
+procedure TCadastroUfController.Excluir;
+begin
+  inherited;
+  if (oCadastroUfRegra.Deletar(oCadastroUfModel, oCadastroUfDto)) then
+    ShowMessage('Registro deletado com sucesso')
 end;
 
 destructor TCadastroUfController.Destroy;
@@ -104,25 +112,22 @@ end;
 procedure TCadastroUfController.NovoID;
 begin
   if (oCadastroUfRegra.Novo(oCadastroUfModel, oCadastroUfDto)) then
-    (oFormulario as TCadastroUfForm).ledtCodigo.Text :=
-      IntToStr(oCadastroUfDto.Id);
+    (oFormulario as TCadastroUfForm).ledtCodigo.Text := IntToStr(oCadastroUfDto.Id);
 end;
 
 procedure TCadastroUfController.Pesquisar(Aowner: TComponent);
 var
-  sIdUf: string;
-  sDescricao: string;
+ sIdUf : string;
 begin
   inherited;
-
-  if (sIdUf <> '') then
-    oCadastroUfDto.Id := StrToInt(sIdUf);
-
-  oCadastroUfDto.uf := (oFormulario as TCadastroUfForm).ledtUf.Text;;
+  if(sIdUf <> '')then
+    oCadastroUfDto.id   :=  StrToInt(sIdUf);
+    oCadastroUfDto.uf   :=(oFormulario as TCadastroUfForm).ledtUf.Text;
+    oCadastroUfDto.nome := (oFormulario as TCadastroUfForm).LedtNome.Text;
 
   if (not(assigned(oConsultaUfController))) then
     oConsultaUfController := TConsultaUfController.Create;
-  oConsultaUfController.CriarForm(Aowner, oCadastroUfDto);
+  oConsultaUfController.CriarForm(Aowner);
 end;
 
 procedure TCadastroUfController.Salvar;

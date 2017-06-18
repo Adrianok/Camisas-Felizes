@@ -24,7 +24,7 @@ type
     oConsultaUfModel: TConsultaUfModel;
 implementation
 
-{ TConsultaUfModel }
+{ TConsultaCorModel }
 constructor TConsultaUfModel.Create;
 begin
     Query := TFDQuery.Create(nil);
@@ -41,7 +41,7 @@ function TConsultaUfModel.SelectAll(MemTable: TFDMemTable): boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM Uf');
+    Query.Open('SELECT iduf, UPPER(sigla) as sigla, descricao FROM uf');
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;
@@ -58,10 +58,10 @@ function TConsultaUfModel.SelectId(sDescricao: String): Integer;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM Uf where descricao = '+QuotedStr(sDescricao));
+    Query.Open('SELECT * FROM uf where descricao = '+QuotedStr(sDescricao));
     if (not(Query.IsEmpty)) then
     begin
-      Result := Query.FieldByName('idUf').AsInteger;
+      Result := Query.FieldByName('iduf').AsInteger;
     end
     else
       Result := 0;

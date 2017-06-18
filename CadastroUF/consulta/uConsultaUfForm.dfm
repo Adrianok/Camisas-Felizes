@@ -18,49 +18,38 @@ inherited ConsultaUfForm: TConsultaUfForm
     ExplicitTop = 442
     ExplicitWidth = 374
   end
-  object DBGrid: TDBGrid
-    Left = 0
-    Top = 57
+  inherited DBGrid1: TDBGrid
     Width = 374
     Height = 385
-    Align = alClient
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
     Columns = <
       item
         Expanded = False
         FieldName = 'iduf'
-        Title.Caption = 'C'#243'digo'
-        Width = 54
+        Width = 60
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'sigla'
+        ImeName = 'sigla'
+        Title.Caption = 'Sigla'
+        Width = 60
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'descricao'
         Title.Caption = 'Descri'#231#227'o'
-        Width = 308
+        Width = 210
         Visible = True
       end>
   end
-  object DataSource: TDataSource
-    Left = 16
-    Top = 474
+  inherited DataSourceGrid: TDataSource
+    Left = 128
+    Top = 328
   end
-  object FDMemTableGrid: TFDMemTable
-    MasterSource = DataSource
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
+  inherited FDMemTableGrid: TFDMemTable
     Left = 48
-    Top = 442
+    Top = 329
   end
 end

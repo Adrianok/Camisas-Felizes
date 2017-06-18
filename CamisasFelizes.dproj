@@ -110,37 +110,49 @@
             <Form>frmPesquisaBase</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Modelo\uCadastroModeloController.pas"/>
-        <DCCReference Include="Modelo\uCadastroModeloDto.pas"/>
-        <DCCReference Include="Modelo\uCadastroModeloModel.pas"/>
-        <DCCReference Include="Modelo\uCadastroModeloForm.pas">
-            <Form>frmCadastroModelo</Form>
-        </DCCReference>
         <DCCReference Include="Principal\uPrincipal.pas">
             <Form>frmPrincipal</Form>
         </DCCReference>
-        <DCCReference Include="CadastroUF\uCadastroUfController.pas"/>
-        <DCCReference Include="CadastroUF\uCadastroUfDto.pas"/>
-        <DCCReference Include="CadastroUF\uCadastroUfForm.pas">
-            <Form>Cadastro de UF</Form>
-        </DCCReference>
-        <DCCReference Include="CadastroUF\uCadastroUfModel.pas"/>
-        <DCCReference Include="CadastroUF\uCadastroUfRegra.pas"/>
-        <DCCReference Include="Modelo\uCadastroModeloRegra.pas"/>
         <DCCReference Include="Base\uClasseInterfaceViewBase.pas"/>
         <DCCReference Include="Base\uInterfaceViewBase.pas"/>
+        <DCCReference Include="Base\uInterfaceConsultaBase.pas"/>
+        <DCCReference Include="Base\uClasseInterfaceConsultaBase.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfController.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfForm.pas">
+            <Form>ConsultaUfForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfModel.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfRegra.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uInterfaceConsultaUfModel.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uInterfaceUfModel.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfController.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfDto.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfForm.pas">
+            <Form>CadastroUfForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfModel.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfRegra.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uInterfaceCadastroUfModel.pas"/>
+        <DCCReference Include="Modelo\uCadastroModeloController.pas"/>
+        <DCCReference Include="Modelo\uCadastroModeloDto.pas"/>
+        <DCCReference Include="Modelo\uCadastroModeloForm.pas">
+            <Form>CadastroModeloForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Modelo\uCadastroModeloModel.pas"/>
+        <DCCReference Include="Modelo\uCadastroModeloRegra.pas"/>
         <DCCReference Include="Modelo\uInterfaceCadastroModeloModel.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorController.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorDto.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorForm.pas">
             <Form>CadastroCorForm</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Cor\Cadastro\uCadastroCorModel.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorRegra.pas"/>
         <DCCReference Include="Cor\Cadastro\uInterfaceCadastroCorModel.pas"/>
-        <DCCReference Include="CadastroUF\uIterfaceCadastroUfModel.pas"/>
-        <DCCReference Include="Base\uInterfaceConsultaBase.pas"/>
-        <DCCReference Include="Base\uClasseInterfaceConsultaBase.pas"/>
         <DCCReference Include="Cor\Consulta\uConsultaCorController.pas"/>
         <DCCReference Include="Cor\Consulta\uConsultaCorForm.pas">
             <Form>ConsultaCorForm</Form>
@@ -149,6 +161,7 @@
         <DCCReference Include="Cor\Consulta\uConsultaCorModel.pas"/>
         <DCCReference Include="Cor\Consulta\uConsultaCorRegra.pas"/>
         <DCCReference Include="Cor\Consulta\uInterfaceConsultaCorModel.pas"/>
+        <DCCReference Include="Cor\Consulta\uInterfaceCorModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

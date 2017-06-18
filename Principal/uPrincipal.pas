@@ -8,8 +8,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList,
   Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus,
-  uConexaoSingleTon,
-  uCadastroUfController;
+  uConexaoSingleTon, uCadastroUfController, uCadastroModeloController,
+  uCadastroCorDto,
+  uCadastroCorController;
 
 type
   TfrmPrincipal = class(TForm)
@@ -18,6 +19,7 @@ type
     procedure C1Click(Sender: TObject);
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure CadastrodeCorClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,11 +35,16 @@ implementation
 
 procedure TfrmPrincipal.C1Click(Sender: TObject);
 begin
-
   if (not(Assigned(oCadastroUfController))) then
     oCadastroUfController := TCadastroUfController.Create;
   oCadastroUfController.CriarForm(Self);
+end;
 
+procedure TfrmPrincipal.CadastrodeCorClick(Sender: TObject);
+begin
+  if (not(Assigned(oCadastroCorController))) then
+    oCadastroCorController := TCadastroCorController.Create;
+  oCadastroCorController.CriarForm(Self);
 end;
 
 procedure TfrmPrincipal.CadastrodeModelos1Click(Sender: TObject);

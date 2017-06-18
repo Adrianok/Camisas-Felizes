@@ -12,8 +12,6 @@ uses
 
 type
   TConsultaUfForm = class(TfrmPesquisaBase)
-    DataSource: TDataSource;
-    FDMemTableGrid: TFDMemTable;
   private
   public
   end;

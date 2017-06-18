@@ -10,8 +10,8 @@ inherited CadastroUfForm: TCadastroUfForm
     Width = 600
     ExplicitWidth = 600
     inherited Panel3: TPanel
-      Left = 391
-      ExplicitLeft = 391
+      Left = 399
+      ExplicitLeft = 399
     end
   end
   inherited pgControll: TPageControl
@@ -22,9 +22,12 @@ inherited CadastroUfForm: TCadastroUfForm
     inherited Cadastro: TTabSheet
       Font.Height = -15
       ParentFont = False
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 592
       ExplicitHeight = 197
       object LedtCodigo: TLabeledEdit
+        Tag = 999
         Left = 70
         Top = 19
         Width = 121

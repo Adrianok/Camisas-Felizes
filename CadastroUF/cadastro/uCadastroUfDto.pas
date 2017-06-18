@@ -2,6 +2,9 @@ unit uCadastroUfDto;
 
 interface
 
+uses
+  System.SysUtils;
+
 type
 
   TCadastroUfDto = class
@@ -17,7 +20,7 @@ type
     property id: Integer read Fid write Setid;
     property uf: string read Fuf write Setuf;
     property nome: string read Fnome write Setnome;
-
+    constructor Create;
   end;
 
 var
@@ -26,6 +29,13 @@ var
 implementation
 
 { TUf }
+
+constructor TCadastroUfDto.Create;
+begin
+  Fid := 0;
+  Fnome := EmptyStr;
+  Fuf := EmptyStr;
+end;
 
 procedure TCadastroUfDto.Setid(const Value: Integer);
 begin

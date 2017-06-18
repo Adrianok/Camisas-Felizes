@@ -7,16 +7,16 @@ uses
   System.SysUtils, Data.DB, FireDAC.DApt,
   FireDAC.Comp.UI, System.Classes, Dialogs,
   uConexaoSingleTon, uCadastroCorDto,
-  uInterfaceCadastroCorModel;
+  uInterfaceCadastroCorModel, uListaCores;
 
 type
   TCadastroCorModel = class(TinterfacedObject, IInterfaceCadastroCorModel)
   private
-    // function SelecionarTudo(var oCadastroModeloDto: TObjectDictionary<string, TCadastroModeloDto>): Boolean;
     Query: TFDQuery;
   public
     function SelectPorId(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
+    function SelectAllLista(var oListaCores: TListaCores): Boolean;
     function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Inserir(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Atualizar(var oCadastroCorDto: TCadastroCorDto): Boolean;
@@ -103,6 +103,35 @@ begin
     if (not(Query.IsEmpty)) then
     begin
       oCadastroCorDto.IdCor := (Query.FieldByName('id').AsInteger) + 1;
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
+
+function TCadastroCorModel.SelectAllLista(var oListaCores: TListaCores): Boolean;
+var
+  oCadastroCorDto: TCadastroCorDto;
+  sDescricao : String;
+begin
+  try
+    Query.Open('select * from cor');
+    if (not(Query.IsEmpty)) then
+    begin
+      Query.First;
+      while (not(Query.Eof)) do
+      begin
+        oCadastroCorDto := TCadastroCorDto.Create;
+        oCadastroCorDto.IdCor := Query.FieldByName('idcor').AsInteger;
+        oCadastroCorDto.Descricao := Query.FieldByName('descricao').AsString;
+
+        oListaCores.Add(oCadastroCorDto.Descricao, oCadastroCorDto);
+
+        Query.Next;
+      end;
       Result := True;
     end
     else

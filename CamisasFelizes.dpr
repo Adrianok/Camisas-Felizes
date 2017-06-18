@@ -55,7 +55,8 @@ uses
   uInterfaceConsultaModeloModel in 'Modelo\Consulta\uInterfaceConsultaModeloModel.pas',
   uInterfaceModeloModel in 'Modelo\Consulta\uInterfaceModeloModel.pas',
   uInterfaceCor_ModeloModel in 'Cor_Modelo\uInterfaceCor_ModeloModel.pas',
-  uCor_ModeloModel in 'Cor_Modelo\uCor_ModeloModel.pas';
+  uCor_ModeloModel in 'Cor_Modelo\uCor_ModeloModel.pas',
+  uListaCores in 'Cor\uListaCores.pas';
 
 {$R *.res}
 

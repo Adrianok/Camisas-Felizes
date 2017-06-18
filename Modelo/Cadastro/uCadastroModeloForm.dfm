@@ -5,7 +5,6 @@ inherited CadastroModeloForm: TCadastroModeloForm
   ClientHeight = 480
   ClientWidth = 707
   Position = poDesigned
-  ExplicitTop = -53
   ExplicitWidth = 713
   ExplicitHeight = 509
   PixelsPerInch = 96
@@ -115,7 +114,8 @@ inherited CadastroModeloForm: TCadastroModeloForm
     ParentBackground = False
     ParentColor = False
     TabOrder = 2
-    object LabeledEdit1: TLabeledEdit
+    object edtCor: TLabeledEdit
+      Tag = 888
       Left = 48
       Top = 28
       Width = 335
@@ -142,43 +142,13 @@ inherited CadastroModeloForm: TCadastroModeloForm
       ParentFont = False
       TabOrder = 0
     end
-    object DBGrid1: TDBGrid
-      Left = 3
-      Top = 72
-      Width = 455
-      Height = 204
-      DataSource = DataSource
-      Enabled = False
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'cor_idcor'
-          Title.Caption = 'C'#243'digo'
-          Width = 91
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'descricao'
-          Title.Caption = 'Descri'#231#227'o'
-          Width = 321
-          Visible = True
-        end>
-    end
     object btnAdicionar: TBitBtn
       Left = 389
       Top = 11
       Width = 58
       Height = 28
       Caption = '+'
-      TabOrder = 2
+      TabOrder = 1
     end
     object btnRemover: TBitBtn
       Left = 389
@@ -186,23 +156,19 @@ inherited CadastroModeloForm: TCadastroModeloForm
       Width = 58
       Height = 28
       Caption = '-'
-      TabOrder = 3
+      TabOrder = 2
     end
-  end
-  object MemTableCor: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 64
-    Top = 336
-  end
-  object DataSource: TDataSource
-    DataSet = MemTableCor
-    Left = 64
-    Top = 416
+    object ListView1: TListView
+      Left = 24
+      Top = 80
+      Width = 393
+      Height = 177
+      Checkboxes = True
+      Columns = <>
+      GridLines = True
+      MultiSelect = True
+      TabOrder = 3
+      ViewStyle = vsList
+    end
   end
 end

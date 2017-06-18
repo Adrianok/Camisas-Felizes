@@ -16,12 +16,11 @@ type
     edtModelo: TLabeledEdit;
     edtPreco: TLabeledEdit;
     GroupBox1: TGroupBox;
-    LabeledEdit1: TLabeledEdit;
-    DBGrid1: TDBGrid;
-    MemTableCor: TFDMemTable;
-    DataSource: TDataSource;
+    edtCor: TLabeledEdit;
     btnAdicionar: TBitBtn;
     btnRemover: TBitBtn;
+    ListView1: TListView;
+
   private
     { Private declarations }
   public
@@ -32,5 +31,8 @@ type
 implementation
 
 {$R *.dfm}
+
+
+
 
 end.

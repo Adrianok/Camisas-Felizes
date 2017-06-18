@@ -86,14 +86,24 @@ begin
 end;
 
 function TCor_ModeloModel.SelectRegistros(var oListaIdCores : TList; const IdModelo : Integer):boolean;
+var
+  Query : TFDQuery;
 begin
   try
+    Query := TFDQuery.Create(nil);
+    Query.Connection := TConexaoSigleton.GetInstancia;
     Query.SQL.Clear;
     Query.Open('SELECT * FROM cor_modelo WHERE modelo_idmodelo =' + IntToStr(IdModelo));
     if (not(Query.IsEmpty)) then
     begin
       oListaIdCores.Clear;
-      oListaIdCores.Add(pointer(Query.FieldByName('cor_idcor').AsInteger));
+      Query.First;
+      while (not(Query.Eof)) do
+      begin
+        oListaIdCores.Add(pointer(Query.FieldByName('cor_idcor').AsInteger));
+
+        Query.Next;
+      end;
       Result := True;
     end
     else
@@ -101,6 +111,7 @@ begin
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;
+  FreeAndNil(Query);
 end;
 
 end.

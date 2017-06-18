@@ -56,7 +56,8 @@ var
   iIndice: integer;
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if (oFormulario.Components[iIndice] is TWinControl) and
+    if ((oFormulario.Components[iIndice] is TLabeledEdit)
+    or  (oFormulario.Components[iIndice] is TGroupBox)) and
       ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
     begin
       (oFormulario.Components[iIndice] as TWinControl).Enabled := True;
@@ -80,7 +81,9 @@ var
 
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if (oFormulario.Components[iIndice] is TWinControl) then
+    if (oFormulario.Components[iIndice] is TLabeledEdit)
+    or (oFormulario.Components[iIndice] is TGroupBox)
+    then
     begin
       (oFormulario.Components[iIndice] as TWinControl).Enabled := False;
     end;
@@ -186,7 +189,8 @@ begin
           .EditLabel.Caption;
       itamanho := length(sCampo);
       if ((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
-        ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+        ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
+         ((oFormulario.Components[iIndice] as TWinControl).Tag <> 888) then
       begin
         if (auxiliar = False) then
           sStringMessage := sStringMessage + sSeparador;

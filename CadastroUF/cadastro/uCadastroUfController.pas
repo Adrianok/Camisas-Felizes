@@ -38,7 +38,7 @@ implementation
 procedure TCadastroUfController.Consulta;
 begin
   inherited;
-  if (oCadastroUfDto.Id > -1) then
+  if (oCadastroUfDto.Id > 0) then
   begin
     if (oCadastroUfRegra.SelectUf(oCadastroUfModel, oCadastroUfDto)) then
       with (oFormulario as TCadastroUfForm) do
@@ -49,10 +49,11 @@ begin
       end;
   end
   else
-  begin
-    ShowMessage('Nenhum Registro Selecionado');
-    Inicial;
-  end;
+    if(oCadastroUfDto.uf = '!')then
+    begin
+      ShowMessage('Nenhum Registro Selecionado');
+      Inicial;
+    end;
 end;
 
 constructor TCadastroUfController.Create;

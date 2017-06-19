@@ -15,6 +15,7 @@ type
   TCadastroTamanhoController = class(TClassInterfaceViewBase)
   private
   public
+    procedure Excluir; override;
     procedure Inicial; override;
     procedure Consulta; override;
     procedure Pesquisar(Aowner : TComponent); override;
@@ -48,6 +49,7 @@ inherited;
     end;
   end
   else
+  if(oCadastroTamanhoDto.Descricao = '!')then
   begin
     ShowMessage('Nenhum Registro Selecionado');
     Inicial;
@@ -91,6 +93,12 @@ end;
 
 
 
+procedure TCadastroTamanhoController.Excluir;
+begin
+  inherited;
+  oCadastroTamanhoRegra.Deletar(oCadastroTamanhoModel, oCadastroTamanhoDto.IdTamanho);
+end;
+
 procedure TCadastroTamanhoController.Inicial;
 begin
   inherited;
@@ -114,9 +122,11 @@ var
  sIdTamanho : string;
 begin
   inherited;
+  sIdTamanho   :=  (oFormulario as TCadastroTamanhoForm).edtCodigo.Text;
+
   if(sIdTamanho <> '')then
     oCadastroTamanhoDto.IdTamanho        :=  StrToInt(sIdTamanho);
-  oCadastroTamanhoDto.Descricao    :=(oFormulario as TCadastroTamanhoForm).edtTamanho.Text;;
+  oCadastroTamanhoDto.Descricao    :=(oFormulario as TCadastroTamanhoForm).edtTamanho.Text;
 
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoController := TConsultaTamanhoController.Create;

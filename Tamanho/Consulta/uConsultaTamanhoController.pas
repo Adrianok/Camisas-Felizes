@@ -57,6 +57,9 @@ begin
   if (not(assigned(oCadastroTamanhoDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
+  if(not(oCadastroTamanhoDto.IdTamanho > 0))then
+    oCadastroTamanhoDto.Descricao := '!';
+
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoModel := TConsultaTamanhoModel.Create;
 
@@ -66,7 +69,6 @@ end;
 
 procedure TConsultaTamanhoController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
   begin
     oFormulario :=  TConsultaTamanhoForm.Create(Aowner);
@@ -76,7 +78,7 @@ begin
   oFormulario.Show;
 
   oFormulario.edtPesquisa.Text := oCadastroTamanhoDto.Descricao;
-
+  inherited;
 end;
 
 destructor TConsultaTamanhoController.Destroy;

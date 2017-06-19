@@ -44,25 +44,35 @@ begin
   oController.Excluir;
 end;
 
+
+
 procedure TfrmBase.btnFecharClick(Sender: TObject);
 begin
   oController.Fechar;
 end;
+
+
 
 procedure TfrmBase.btnNovoClick(Sender: TObject);
 begin
   oController.Novo
 end;
 
+
+
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);
 begin
   oController.Pesquisar(Self);
 end;
 
+
+
 procedure TfrmBase.btnSalvarClick(Sender: TObject);
 begin
   oController.Salvar;
 end;
+
+
 
 procedure TfrmBase.FormActivate(Sender: TObject);
 begin
@@ -70,10 +80,11 @@ begin
     oController.Consulta;
 end;
 
+
+
 procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if key = vk_F2 then
-    oController.Pesquisar(Self);
+  oController.KeyDown(Key, Self);
 end;
 
 end.

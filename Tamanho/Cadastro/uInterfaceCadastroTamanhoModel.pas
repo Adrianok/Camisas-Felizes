@@ -11,7 +11,7 @@ type
     function SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
-    function Deletar(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
+    function Deletar(const IdTamanho: integer): Boolean;
     function NovoId(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
 
   end;

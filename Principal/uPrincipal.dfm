@@ -24,6 +24,7 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Cadastros'
       object CadastrodeModelos1: TMenuItem
         Caption = 'Cadastro de Modelos'
+        OnClick = CadastrodeModelos1Click
       end
       object C1: TMenuItem
         Caption = 'Cadastro de UF'
@@ -32,6 +33,10 @@ object frmPrincipal: TfrmPrincipal
       object CadastrodeCor: TMenuItem
         Caption = 'Cadastro de Cor'
         OnClick = CadastrodeCorClick
+      end
+      object CadastrodeTamanho: TMenuItem
+        Caption = 'Cadastro de Tamanho'
+        OnClick = CadastrodeTamanhoClick
       end
     end
   end

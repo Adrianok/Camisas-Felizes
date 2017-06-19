@@ -1,36 +1,35 @@
 inherited CadastroModeloForm: TCadastroModeloForm
+  Left = 340
+  Top = 55
   Caption = 'CadastroModeloForm'
-  ClientHeight = 291
-  ClientWidth = 597
-  ExplicitWidth = 613
-  ExplicitHeight = 330
+  ClientHeight = 480
+  ClientWidth = 707
+  Position = poDesigned
+  ExplicitWidth = 713
+  ExplicitHeight = 509
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 597
-    ExplicitWidth = 597
+    Width = 707
+    ExplicitWidth = 707
     inherited Panel3: TPanel
-      Left = 388
-      ExplicitLeft = 388
-      inherited btnFechar: TBitBtn
-        Cancel = True
-        OnClick = btnFecharClick
-      end
+      Left = 506
+      ExplicitLeft = 506
     end
   end
   inherited pgControll: TPageControl
-    Width = 597
-    Height = 202
-    ExplicitWidth = 597
-    ExplicitHeight = 202
+    Width = 707
+    Height = 391
+    ExplicitWidth = 707
+    ExplicitHeight = 391
     inherited Cadastro: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 589
-      ExplicitHeight = 174
+      ExplicitWidth = 699
+      ExplicitHeight = 363
       object edtCodigo: TLabeledEdit
         Tag = 999
-        Left = 70
+        Left = 78
         Top = 16
         Width = 153
         Height = 26
@@ -53,33 +52,10 @@ inherited CadastroModeloForm: TCadastroModeloForm
         ParentFont = False
         TabOrder = 0
       end
-      object edtPreco: TLabeledEdit
-        Left = 320
-        Top = 16
-        Width = 237
-        Height = 26
-        EditLabel.Width = 46
-        EditLabel.Height = 23
-        EditLabel.Caption = 'Pre'#231'o:'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -17
-        EditLabel.Font.Name = 'Segoe UI Light'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 1
-      end
       object edtModelo: TLabeledEdit
-        Left = 70
-        Top = 75
-        Width = 487
+        Left = 318
+        Top = 16
+        Width = 355
         Height = 26
         EditLabel.Width = 60
         EditLabel.Height = 23
@@ -90,6 +66,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
         EditLabel.Font.Name = 'Segoe UI Light'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -97,31 +74,85 @@ inherited CadastroModeloForm: TCadastroModeloForm
         Font.Style = []
         LabelPosition = lpLeft
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
       end
-      object edtCor: TLabeledEdit
-        Left = 70
-        Top = 128
-        Width = 487
+      object edtPreco: TLabeledEdit
+        Left = 78
+        Top = 80
+        Width = 105
         Height = 26
-        EditLabel.Width = 32
+        EditLabel.Width = 46
         EditLabel.Height = 23
-        EditLabel.Caption = 'Cor:'
+        EditLabel.Caption = 'Preco:'
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = clWindowText
         EditLabel.Font.Height = -17
         EditLabel.Font.Name = 'Segoe UI Light'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = 'Tahoma'
         Font.Style = []
         LabelPosition = lpLeft
+        NumbersOnly = True
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
       end
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 216
+    Top = 193
+    Width = 461
+    Height = 279
+    Caption = 'Selecione as cores referentes ao modelo'
+    Color = clWhite
+    Enabled = False
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 2
+    object edtCor: TLabeledEdit
+      Tag = 888
+      Left = 48
+      Top = 28
+      Width = 401
+      Height = 26
+      EditLabel.Width = 32
+      EditLabel.Height = 23
+      EditLabel.BiDiMode = bdLeftToRight
+      EditLabel.Caption = 'Cor:'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -17
+      EditLabel.Font.Name = 'Segoe UI Light'
+      EditLabel.Font.Style = []
+      EditLabel.ParentBiDiMode = False
+      EditLabel.ParentFont = False
+      EditLabel.Transparent = True
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      LabelPosition = lpLeft
+      ParentFont = False
+      TabOrder = 0
+    end
+    object ListView1: TListView
+      Left = 24
+      Top = 80
+      Width = 425
+      Height = 177
+      Checkboxes = True
+      Columns = <>
+      GridLines = True
+      MultiSelect = True
+      TabOrder = 1
+      ViewStyle = vsList
     end
   end
 end

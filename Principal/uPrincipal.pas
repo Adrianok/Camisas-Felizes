@@ -16,6 +16,7 @@ type
   TfrmPrincipal = class(TForm)
     MainMenu1: TMainMenu;
     C1: TMenuItem;
+    CadastrodeCor: TMenuItem;
     procedure C1Click(Sender: TObject);
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);

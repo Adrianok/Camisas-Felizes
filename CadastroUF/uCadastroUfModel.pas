@@ -35,8 +35,9 @@ implementation
 
 function TCadastroUfModel.Alterar(var aEstado: TCadastroUfDTO): boolean;
 begin
-  QuerySql := ('update uf set iduf = ' + inttostr(aEstado.id) + ' , sigla = ' +
-    quotedStr(aEstado.uf) + ' , nome = ' + quotedStr(aEstado.nome) +
+  QuerySql := ('update uf set iduf = ' + inttostr(aEstado.id) +
+                         ' , sigla = ' + quotedStr(aEstado.uf) +
+                         ' , nome = ' + quotedStr(aEstado.nome) +
     ' Where iduf = ' + inttostr(aEstado.id));
 
   result := Query.Connection.ExecSQL(QuerySql) > 0;

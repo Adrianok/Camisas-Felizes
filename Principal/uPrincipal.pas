@@ -10,7 +10,7 @@ uses
   Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus,
   uCadastroModeloController, uConexaoSingleTon,
   uCadastroUfController,  uCadastroCorController,
-  uCadastroTamanhoController;
+  uCadastroTamanhoController, uCadastroMunicipioController;
 
 type
   TfrmPrincipal = class(TForm)
@@ -18,11 +18,13 @@ type
     C1: TMenuItem;
     CadastrodeCor: TMenuItem;
     CadastrodeTamanho: TMenuItem;
+    CadastrodeMunicipio1: TMenuItem;
     procedure C1Click(Sender: TObject);
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure CadastrodeCorClick(Sender: TObject);
     procedure CadastrodeTamanhoClick(Sender: TObject);
+    procedure CadastrodeMunicipio1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,6 +58,13 @@ begin
   if (not(Assigned(oCadastroModeloController))) then
     oCadastroModeloController := TCadastroModeloController.Create;
   oCadastroModeloController.CriarForm(Self);
+end;
+
+procedure TfrmPrincipal.CadastrodeMunicipio1Click(Sender: TObject);
+begin
+      if (not(Assigned(oCadastroMunicipioController))) then
+    oCadastroMunicipioController := TCadastroMunicipioController.Create;
+  oCadastroMunicipioController.CriarForm(Self);
 end;
 
 procedure TfrmPrincipal.CadastrodeTamanhoClick(Sender: TObject);

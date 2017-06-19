@@ -149,6 +149,42 @@
         <DCCReference Include="Cor\Consulta\uConsultaCorModel.pas"/>
         <DCCReference Include="Cor\Consulta\uConsultaCorRegra.pas"/>
         <DCCReference Include="Cor\Consulta\uInterfaceConsultaCorModel.pas"/>
+        <DCCReference Include="CadastroMunicipio\cadastro\uCadastroMunicipioController.pas"/>
+        <DCCReference Include="CadastroMunicipio\cadastro\uCadastroMunicipioDto.pas"/>
+        <DCCReference Include="CadastroMunicipio\cadastro\uCadastroMunicipioModel.pas"/>
+        <DCCReference Include="CadastroMunicipio\cadastro\uCadastroMunicipioRegra.pas"/>
+        <DCCReference Include="CadastroMunicipio\cadastro\uInterfaceCadastroMunicipioModel.pas"/>
+        <DCCReference Include="CadastroMunicipio\consulta\uConsultaMunicipioController.pas"/>
+        <DCCReference Include="CadastroMunicipio\consulta\uConsultaMunicipioForm.pas">
+            <Form>ConsultaUfForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CadastroMunicipio\consulta\uConsultaMunicipioModel.pas"/>
+        <DCCReference Include="CadastroMunicipio\consulta\uConsultaMunicipioRegra.pas"/>
+        <DCCReference Include="CadastroMunicipio\consulta\uInterfaceConsultaMunicipioModel.pas"/>
+        <DCCReference Include="CadastroMunicipio\consulta\uInterfaceMunicipioModel.pas"/>
+        <DCCReference Include="Tamanho\Cadastro\uCadastroTamanhoController.pas"/>
+        <DCCReference Include="Tamanho\Cadastro\uCadastroTamanhoDto.pas"/>
+        <DCCReference Include="Tamanho\Cadastro\uCadastroTamanhoForm.pas">
+            <Form>CadastroTamanhoForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Tamanho\Cadastro\uCadastroTamanhoModel.pas"/>
+        <DCCReference Include="Tamanho\Cadastro\uCadastroTamanhoRegra.pas"/>
+        <DCCReference Include="Tamanho\Cadastro\uInterfaceCadastroTamanhoModel.pas"/>
+        <DCCReference Include="Tamanho\Consulta\uConsultaTamanhoController.pas"/>
+        <DCCReference Include="Tamanho\Consulta\uConsultaTamanhoForm.pas">
+            <Form>ConsultaTamanhoForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Tamanho\Consulta\uConsultaTamanhoModel.pas"/>
+        <DCCReference Include="Tamanho\Consulta\uConsultaTamanhoRegra.pas"/>
+        <DCCReference Include="Tamanho\Consulta\uInterfaceConsultaTamanhoModel.pas"/>
+        <DCCReference Include="Tamanho\Consulta\uInterfaceTamanhoModel.pas"/>
+        <DCCReference Include="CadastroMunicipio\cadastro\uCadastroMunicipioForm.pas">
+            <Form>CadastroMunicipioForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

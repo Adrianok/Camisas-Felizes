@@ -38,6 +38,10 @@ object frmPrincipal: TfrmPrincipal
         Caption = 'Cadastro de Tamanho'
         OnClick = CadastrodeTamanhoClick
       end
+      object CadastrodeMunicipio1: TMenuItem
+        Caption = 'Cadastro de Municipio'
+        OnClick = CadastrodeMunicipio1Click
+      end
     end
   end
 end

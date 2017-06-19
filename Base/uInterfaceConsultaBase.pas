@@ -4,18 +4,22 @@ interface
 
 uses
   System.Classes, FireDAC.Comp.Client,
-  Vcl.DbGrids, uCadastroCorDto;
+  Vcl.DbGrids;
 
 type
   IInterfaceConsultaBase = interface
-    procedure PesquisarGrid;
-    procedure AlimentarDto(Column : TColumn);
-    function PreencherGrid:boolean;
-    procedure CriarForm(Aowner: TComponent);
-    procedure Pesquisar;
-    procedure Cancelar;
-    procedure Fechar;
 
+    procedure AlimentarDto(Column : TColumn);
+    procedure CriarForm   (Aowner : TComponent);
+    procedure KeyDown     (var Key: Word);
+
+    procedure Fechar;
+    procedure Cancelar;
+    procedure Confirmar;
+    procedure Pesquisar;
+    procedure PesquisarGrid;
+
+    function  PreencherGrid: boolean;
   end;
 
 implementation

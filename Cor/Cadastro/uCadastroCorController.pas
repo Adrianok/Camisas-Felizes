@@ -9,12 +9,14 @@ uses
   uCadastroCorDto, uClasseInterfaceViewBase,
   uCadastroCorRegra, uCadastroCorModel,
   uCadastroCorForm, uInterfaceViewBase,
-  uConsultaCorForm, uConsultaCorController;
+  uConsultaCorForm, uConsultaCorController,
+  uCor_ModeloModel;
 
 type
   TCadastroCorController = class(TClassInterfaceViewBase)
   private
   public
+    procedure Excluir; override;
     procedure Inicial; override;
     procedure Consulta; override;
     procedure Pesquisar(Aowner : TComponent); override;
@@ -37,7 +39,7 @@ implementation
 
 procedure TCadastroCorController.Consulta;
 begin
-inherited;
+  inherited;
   if(oCadastroCorDto.IdCor <> 0)then
   begin
     if(oCadastroCorRegra.SelectCor(oCadastroCorModel, oCadastroCorDto))then
@@ -48,14 +50,19 @@ inherited;
     end;
   end
   else
-  begin
-    ShowMessage('Nenhum Registro Selecionado');
-    Inicial;
-  end;
+    if(oCadastroCorDto.Descricao = '!')then
+    begin
+      ShowMessage('Nenhum Registro Selecionado');
+      Inicial;
+    end;
+
 end;
 
 constructor TCadastroCorController.Create;
 begin
+  if (not(assigned(oCor_ModeloModel))) then
+    oCor_ModeloModel := TCor_ModeloModel.Create;
+
   if (not(assigned(oCadastroCorModel))) then
     oCadastroCorModel := TCadastroCorModel.Create;
 
@@ -77,6 +84,9 @@ end;
 
 destructor TCadastroCorController.Destroy;
 begin
+  if (assigned(oCor_ModeloModel)) then
+    FreeAndNil(oCor_ModeloModel);
+
   if (assigned(oCadastroCorModel)) then
     FreeAndNil(oCadastroCorModel);
 
@@ -90,6 +100,12 @@ begin
 end;
 
 
+
+procedure TCadastroCorController.Excluir;
+begin
+  inherited;
+  oCadastroCorRegra.Deletar(oCor_ModeloModel, oCadastroCorModel, oCadastroCorDto.IdCor);
+end;
 
 procedure TCadastroCorController.Inicial;
 begin
@@ -114,9 +130,11 @@ var
  sIdCor : string;
 begin
   inherited;
+  sIdCor :=    (oFormulario as TCadastroCorForm).edtCodigo.Text;
+
   if(sIdCor <> '')then
     oCadastroCorDto.IdCor        :=  StrToInt(sIdCor);
-  oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;;
+  oCadastroCorDto.Descricao    :=(oFormulario as TCadastroCorForm).edtCor.Text;
 
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorController := TConsultaCorController.Create;

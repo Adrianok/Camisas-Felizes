@@ -57,6 +57,9 @@ begin
   if (not(assigned(oCadastroCorDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
+  if(not(oCadastroCorDto.IdCor > 0))then
+    oCadastroCorDto.Descricao := '!';
+
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorModel := TConsultaCorModel.Create;
 
@@ -66,7 +69,6 @@ end;
 
 procedure TConsultaCorController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
   begin
     oFormulario :=  TConsultaCorForm.Create(Aowner);
@@ -76,7 +78,7 @@ begin
   oFormulario.Show;
 
   oFormulario.edtPesquisa.Text := oCadastroCorDto.Descricao;
-
+  inherited;
 end;
 
 destructor TConsultaCorController.Destroy;

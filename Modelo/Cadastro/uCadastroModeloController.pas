@@ -28,6 +28,7 @@ type
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
+    procedure Excluir; override;
     procedure NovoID;
 
     constructor Create;
@@ -61,6 +62,7 @@ inherited;
       GridCor(StrToIntDef(edtCodigo.Text, 0));
     end
     else
+    if(oCadastroCorDto.Descricao = '!')then
     begin
       ShowMessage('Nenhum Registro Selecionado');
       Inicial;
@@ -144,6 +146,12 @@ end;
 
 
 
+procedure TCadastroModeloController.Excluir;
+begin
+  inherited;
+  oCadastroModeloRegra.Deletar(oCadastroModeloModel, oCor_ModeloModel, oCadastroModeloDto.IdModelo);
+end;
+
 procedure TCadastroModeloController.GridCor(const idModelo : Integer);
 var
   oListaIdCores : TList;
@@ -189,7 +197,7 @@ end;
 procedure TCadastroModeloController.Inicial;
 begin
   inherited;
-
+  (oFormulario as TCadastroModeloForm).ListView1.Clear;
 end;
 
 procedure TCadastroModeloController.Novo;

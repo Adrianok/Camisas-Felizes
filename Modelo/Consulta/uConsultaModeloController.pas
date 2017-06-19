@@ -41,7 +41,6 @@ end;
 procedure TConsultaModeloController.Cancelar;
 begin
   inherited;
-
 end;
 
 procedure TConsultaModeloController.Confirmar;
@@ -57,16 +56,21 @@ begin
   if (not(assigned(oCadastroModeloDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
+  if(not(oCadastroModeloDto.IdModelo > 0))then
+    oCadastroModeloDto.Descricao := '!';
+
   if (not(assigned(oConsultaModeloController))) then
     oConsultaModeloModel := TConsultaModeloModel.Create;
 
   if (not(assigned(oConsultaModeloRegra))) then
     oConsultaModeloRegra := TConsultaModeloRegra.Create;
+
+
 end;
 
 procedure TConsultaModeloController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
+
   if not(assigned(oFormulario)) then
   begin
     oFormulario :=  TConsultaModeloForm.Create(Aowner);
@@ -75,8 +79,10 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroModeloDto.Descricao;
+  if(oCadastroModeloDto.Descricao <> '!')then
+    oFormulario.edtPesquisa.Text := oCadastroModeloDto.Descricao;
 
+  inherited;
 end;
 
 destructor TConsultaModeloController.Destroy;

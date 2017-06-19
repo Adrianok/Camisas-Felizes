@@ -31,7 +31,6 @@ object frmBase: TfrmBase
     Align = alTop
     Locked = True
     TabOrder = 0
-    ExplicitWidth = 620
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -555,7 +554,6 @@ object frmBase: TfrmBase
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
-      ExplicitLeft = 419
       object btnExcluir: TBitBtn
         Left = 8
         Top = 7
@@ -894,12 +892,8 @@ object frmBase: TfrmBase
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1
-    ExplicitWidth = 620
-    ExplicitHeight = 333
     object Cadastro: TTabSheet
       Caption = 'Cadastro'
-      ExplicitWidth = 612
-      ExplicitHeight = 305
     end
   end
 end

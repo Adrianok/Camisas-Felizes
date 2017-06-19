@@ -20,7 +20,7 @@ type
     function SelectDescricao(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
-    function Deletar(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+    function Deletar(const IdModelo : integer): Boolean;
     function NovoId(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
 
     constructor Create;
@@ -35,14 +35,17 @@ implementation
 { TCadastroModeloModel }
 
 function TCadastroModeloModel.Atualizar(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+var
+  sSql : string;
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' UPDATE Modelo SET descricao = '''
-    + oCadastroModeloDto.Descricao + ''', preco = '
-    +CurrToStr(oCadastroModeloDto.Preco)+
-    ' WHERE idModelo= '
-    + IntToStr(oCadastroModeloDto.IdModelo) + ';');
+    sSql := ' UPDATE Modelo SET descricao = '''
+            + oCadastroModeloDto.Descricao + ''', preco = '
+            + CurrToStr(oCadastroModeloDto.Preco)+
+            ' WHERE idModelo= '
+            + IntToStr(oCadastroModeloDto.IdModelo);
+    Query.SQL.Add(sSql);
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
     begin
@@ -67,14 +70,20 @@ begin
   inherited;
 end;
 
-function TCadastroModeloModel.Deletar(
-  var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+function TCadastroModeloModel.Deletar(const IdModelo : integer): Boolean;
 begin
-
+  try
+    Query.SQL.Clear;
+    Query.SQL.Add(' DELETE FROM Modelo WHERE idmodelo = ' + IntToStr(IdModelo));
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
-
-
-
 
 
 
@@ -88,9 +97,7 @@ begin
     + CurrToStr(oCadastroModeloDto.Preco) + ');');
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
-    begin
-      Result := True;
-    end
+      Result := True
     else
       Result := False;
   except
@@ -121,9 +128,7 @@ begin
     Query.SQL.Clear;
     Query.Open('SELECT * FROM Modelo WHERE idModelo =' + IntToStr(oCadastroModeloDto.IdModelo));
     if (not(Query.IsEmpty)) then
-    begin
-      Result := True;
-    end
+      Result := True
     else
       Result := False;
   except

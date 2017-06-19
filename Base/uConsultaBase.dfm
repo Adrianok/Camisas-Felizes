@@ -28,7 +28,6 @@ object frmPesquisaBase: TfrmPesquisaBase
     Height = 57
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 379
     object edtPesquisa: TEdit
       Left = 8
       Top = 19
@@ -94,8 +93,6 @@ object frmPesquisaBase: TfrmPesquisaBase
     Height = 80
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 249
-    ExplicitWidth = 379
     object btnFechar: TBitBtn
       Left = 280
       Top = 6

@@ -43,46 +43,46 @@ implementation
 
 procedure TfrmPesquisaBase.btnCancelarClick(Sender: TObject);
 begin
-    oController.Fechar;
+  oController.Fechar;
 end;
+
+
 
 procedure TfrmPesquisaBase.btnConfirmarClick(Sender: TObject);
 begin
-    oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-    oController.Fechar;
+  oController.Confirmar;
 end;
+
+
 
 procedure TfrmPesquisaBase.btnFecharClick(Sender: TObject);
 begin
-    oController.Fechar;
+  oController.Fechar;
 end;
+
+
 
 procedure TfrmPesquisaBase.btnPesquisaClick(Sender: TObject);
 begin
   oController.PesquisarGrid;
 end;
 
+
+
 procedure TfrmPesquisaBase.edtPesquisaChange(Sender: TObject);
 begin
   oController.PesquisarGrid;
 end;
 
+
+
 procedure TfrmPesquisaBase.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if key = VK_ESCAPE then
-  begin
-    oController.Fechar;
-    char(Key) := #0
-  end
-  else
-  if key = VK_RETURN then
-  begin
-    oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-    oController.Fechar;
-    char(Key) := #0
-  end;
+  oController.KeyDown(Key);
 end;
+
+
 
 end.
 

@@ -9,7 +9,7 @@ uses
   Vcl.Forms, Vcl.Controls,
   System.Classes, uConsultaBase,
   FireDAC.Comp.Client, Vcl.DbGrids,
-  uCadastroCorDto;
+  uCadastroCorDto, Winapi.Windows;
 type
   TClassInterfaceConsultaBase = class(TInterfacedObject, IInterfaceConsultaBase)
   private
@@ -21,6 +21,7 @@ type
     function PreencherGrid:boolean; virtual;
     procedure CriarForm(Aowner: TComponent); virtual;
     procedure Pesquisar; virtual;
+    procedure KeyDown(var Key: Word);
     procedure Cancelar;  virtual;
     procedure Confirmar; virtual;
     procedure Fechar; virtual;
@@ -32,24 +33,36 @@ implementation
 
 procedure TClassInterfaceConsultaBase.AlimentarDto(Column: TColumn);
 begin
-
-
 end;
+
+
 
 procedure TClassInterfaceConsultaBase.Cancelar;
 begin
-
 end;
+
+
 
 procedure TClassInterfaceConsultaBase.Confirmar;
 begin
-
+  AlimentarDto(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]);
+  Fechar;
 end;
+
+
 
 procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent);
 begin
-
+  with oFormulario do
+  begin
+    if(edtPesquisa.Text = '!')then
+      edtPesquisa.Text := '';
+    ActiveControl :=  oFormulario.DBGrid1;
+    DBGrid1.SelectedIndex := 1;
+  end;
 end;
+
+
 
 procedure TClassInterfaceConsultaBase.Fechar;
 begin
@@ -58,18 +71,39 @@ begin
     FreeAndNil(oFormulario);
 end;
 
+
+
+procedure TClassInterfaceConsultaBase.KeyDown(var Key: Word);
+begin
+  if key = VK_ESCAPE then
+  begin
+    Fechar;
+    char(Key) := #0
+  end
+  else
+  if key = VK_RETURN then
+  begin
+    Confirmar;
+    char(Key) := #0
+  end;
+end;
+
+
+
 procedure TClassInterfaceConsultaBase.Pesquisar;
 begin
-
 end;
+
+
 
 procedure TClassInterfaceConsultaBase.PesquisarGrid;
 begin
-
 end;
+
+
+
 function TClassInterfaceConsultaBase.PreencherGrid: boolean;
 begin
-
 end;
 
 end.

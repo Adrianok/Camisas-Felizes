@@ -19,7 +19,7 @@ type
     function SelectModelo(const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto : TCadastroModeloDto) : boolean;
     function Novo(const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto : TCadastroModeloDto) : boolean;
     function Salvar(var oListaIdCores : Tlist; const oCor_ModeloModel : TCor_ModeloModel; const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
-
+    procedure Deletar(const oCadastroModeloModel : TCadastroModeloModel; const oCor_ModeloModel : TCor_ModeloModel; const IdModelo: integer);
   end;
 
 var
@@ -31,6 +31,14 @@ implementation
 
 
 
+procedure TCadastroModeloRegra.Deletar(const oCadastroModeloModel : TCadastroModeloModel;
+const oCor_ModeloModel : TCor_ModeloModel; const IdModelo: integer);
+begin
+  if(oCor_ModeloModel.SelectPorIdModelo(IdModelo))then
+    oCor_ModeloModel.DeletarModelo(IdModelo);
+  oCadastroModeloModel.Deletar(IdModelo);
+end;
+
 function TCadastroModeloRegra.Novo(const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto : TCadastroModeloDto) : boolean;
 begin
   Result := oCadastroModeloModel.NovoId(oCadastroModeloDto);
@@ -39,6 +47,9 @@ end;
 function TCadastroModeloRegra.Salvar(var oListaIdCores : Tlist; const oCor_ModeloModel : TCor_ModeloModel; const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
 begin
     //funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
+    if(oCadastroModeloDto.IdModelo < 0)then
+      oCadastroCorModel.NovoId(oCadastroCorDto);
+
     if(oCadastroModeloModel.SelectModelo(oCadastroModeloDto))then
     begin
       oCadastroModeloModel.Atualizar(oCadastroModeloDto);

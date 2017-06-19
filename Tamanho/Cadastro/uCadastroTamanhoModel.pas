@@ -20,7 +20,7 @@ type
     function SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function Inserir(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function Atualizar(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
-    function Deletar(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function Deletar(const IdTamanho: integer): Boolean;
     function NovoId(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 
     constructor Create;
@@ -43,9 +43,7 @@ begin
     + IntToStr(oCadastroTamanhoDto.IdTamanho) + ';');
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
-    begin
-      Result := True;
-    end
+      Result := True
     else
       Result := False;
   except
@@ -65,10 +63,19 @@ begin
   inherited;
 end;
 
-function TCadastroTamanhoModel.Deletar(
-  var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+function TCadastroTamanhoModel.Deletar(const IdTamanho: integer): Boolean;
 begin
-
+  try
+    Query.SQL.Clear;
+    Query.SQL.Add(' DELETE FROM Tamanho WHERE idtamanho = ' + IntToStr(oCadastroTamanhoDto.IdTamanho));
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 
@@ -85,9 +92,7 @@ begin
     + oCadastroTamanhoDto.Descricao + ''');');
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
-    begin
-      Result := True;
-    end
+      Result := True
     else
       Result := False;
   except
@@ -118,9 +123,7 @@ begin
     Query.SQL.Clear;
     Query.Open('SELECT * FROM Tamanho WHERE idTamanho =' + IntToStr(oCadastroTamanhoDto.IdTamanho));
     if (not(Query.IsEmpty)) then
-    begin
-      Result := True;
-    end
+      Result := True
     else
       Result := False;
   except

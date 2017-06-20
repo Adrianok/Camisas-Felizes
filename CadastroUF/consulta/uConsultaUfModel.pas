@@ -41,7 +41,7 @@ function TConsultaUfModel.SelectAll(MemTable: TFDMemTable): boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT iduf, UPPER(sigla) as sigla, descricao FROM uf');
+    Query.Open('SELECT iduf, UPPER(sigla) as sigla, UPPER(descricao) as descricao FROM uf');
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;

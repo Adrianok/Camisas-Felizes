@@ -1,6 +1,6 @@
-inherited ConsultaUfForm: TConsultaUfForm
+inherited ConsultaMunicipioForm: TConsultaMunicipioForm
   Left = 893
-  Caption = 'Consulta cadastro de UF'
+  Caption = 'Consulta cadastro de Municipio'
   ClientHeight = 522
   ClientWidth = 374
   Position = poDesigned
@@ -21,18 +21,12 @@ inherited ConsultaUfForm: TConsultaUfForm
   inherited DBGrid1: TDBGrid
     Width = 374
     Height = 385
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     Columns = <
       item
         Expanded = False
-        FieldName = 'iduf'
-        Width = 60
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'sigla'
-        ImeName = 'sigla'
-        Title.Caption = 'Sigla'
+        FieldName = 'idMunicipio'
+        Title.Caption = 'C'#243'digo'
         Width = 60
         Visible = True
       end
@@ -41,6 +35,14 @@ inherited ConsultaUfForm: TConsultaUfForm
         FieldName = 'descricao'
         Title.Caption = 'Descri'#231#227'o'
         Width = 210
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'uf_iduf'
+        ImeName = 'sigla'
+        Title.Caption = 'Estado'
+        Width = 60
         Visible = True
       end>
   end

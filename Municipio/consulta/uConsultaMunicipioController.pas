@@ -56,6 +56,9 @@ begin
   if (not(assigned(oCadastroMunicipioDto))) then
     raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
+  if(not(oCadastroMunicipioDto.id > 0))then
+    oCadastroMunicipioDto.Municipio := '!';
+
   if (not(assigned(oConsultaMunicipioController))) then
     oConsultaMunicipioModel := TConsultaMunicipioModel.Create;
 
@@ -65,7 +68,6 @@ end;
 
 procedure TConsultaMunicipioController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
   begin
     oFormulario :=  TConsultaMunicipioForm.Create(Aowner);
@@ -74,8 +76,8 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroMunicipioDto.municipio;
-
+  oFormulario.edtPesquisa.Text := oCadastroMunicipioDto.Municipio;
+  inherited;
 end;
 
 destructor TConsultaMunicipioController.Destroy;
@@ -96,8 +98,7 @@ end;
 procedure TConsultaMunicipioController.PesquisarGrid;
 begin
   inherited;
-  oFormulario.FDMemTableGrid.Filter := 'sigla like ''%' + oFormulario.edtPesquisa.Text + '%'' '
-                                      +'or iduf  like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+  oFormulario.FDMemTableGrid.Filter := 'idMunicipio  like ''%' + oFormulario.edtPesquisa.Text + '%'' '
                                       +'or descricao  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';;
   oFormulario.FDMemTableGrid.Filtered := True;
  end;

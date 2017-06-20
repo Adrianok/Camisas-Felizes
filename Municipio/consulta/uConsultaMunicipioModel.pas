@@ -41,7 +41,7 @@ function TConsultaMunicipioModel.SelectAll(MemTable: TFDMemTable): boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT iduf, UPPER(sigla) as sigla, descricao FROM uf');
+    Query.Open('SELECT idMunicipio, UPPER(descricao) as descricao, uf_iduf FROM Municipio');
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;
@@ -58,10 +58,10 @@ function TConsultaMunicipioModel.SelectId(sDescricao: String): Integer;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM uf where descricao = '+QuotedStr(sDescricao));
+    Query.Open('SELECT * FROM Municipio where descricao = '+QuotedStr(sDescricao));
     if (not(Query.IsEmpty)) then
     begin
-      Result := Query.FieldByName('iduf').AsInteger;
+      Result := Query.FieldByName('idMunicipio').AsInteger;
     end
     else
       Result := 0;

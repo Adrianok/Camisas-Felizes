@@ -38,10 +38,10 @@ function TCadastroMunicipioModel.Atualizar(var oCadastroMunicipioDto: TCadastroM
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add('UPDATE Municipio SET ' +
-                  'descricao =' + QuotedStr(oCadastroMunicipioDto.municipio) +
-                  ', uf_iduf =' + IntToStr(oCadastroMunicipioDto.estadoid) +
-                  ' WHERE idmunicipio = ' + IntToStr(oCadastroMunicipioDto.id));
+    Query.SQL.Add('UPDATE Municipio SET descricao =' + QuotedStr(oCadastroMunicipioDto.Estado) +
+                  'AND uf_iduf ='                    + QuotedStr(oCadastroMunicipioDto.estado) +
+                          ' WHERE descricao = '      + QuotedStr(oCadastroMunicipioDto.Municipio));
+
     Query.ExecSQL;
 
     if (not(Query.IsEmpty)) then
@@ -71,7 +71,7 @@ function TCadastroMunicipioModel.Deletar(var oCadastroMunicipioDto: TCadastroMun
 begin
    try
     Query.SQL.Clear;
-    Query.SQL.Add(' DELETE FROM Municipio WHERE iduf = '+ IntToStr(oCadastroMunicipioDto.Id));
+    Query.SQL.Add(' DELETE FROM Municipio WHERE idMunicipio = '+ IntToStr(oCadastroMunicipioDto.Id));
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
     begin
@@ -89,10 +89,10 @@ function TCadastroMunicipioModel.Inserir(var oCadastroMunicipioDto: TCadastroMun
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add('INSERT INTO Municipio (idmunicipio, descricao, id_iduf) VALUES ('
+    Query.SQL.Add('INSERT INTO Municipio (idMunicipio, descricao, uf_iduf) VALUES ('
                   + IntToStr(oCadastroMunicipioDto.Id) + ','
-                  + QuotedStr(oCadastroMunicipioDto.municipio) + ','
-                  + IntToStr(oCadastroMunicipioDto.estadoid) + ')');
+                  + QuotedStr(oCadastroMunicipioDto.Municipio) + ','
+                  + QuotedStr(oCadastroMunicipioDto.Estado) + ')');
 
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
@@ -127,7 +127,7 @@ function TCadastroMunicipioModel.SelectMunicipio(var oCadastroMunicipioDto: TCad
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT idmunicipio, descricao, uf_iduf FROM municipio WHERE sigla =' + QuotedStr(oCadastroMunicipioDto.municipio));
+    Query.Open('SELECT idMunicipio, descricao, uf_iduf FROM Municipio WHERE descricao =' + QuotedStr(oCadastroMunicipioDto.Municipio));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
@@ -143,7 +143,7 @@ function TCadastroMunicipioModel.SelectDescricao(var oCadastroMunicipioDto: TCad
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT idmunicipio, descricao, uf_iduf  FROM municipio WHERE descricao =''' + QuotedStr(oCadastroMunicipioDto.municipio) + ''' ');
+    Query.Open('SELECT idMunicipio, descricao, uf_iduf FROM Municipio WHERE descricao =''' + QuotedStr(oCadastroMunicipioDto.Municipio) + ''' ');
     if (not(Query.IsEmpty)) then
     begin
       oCadastroMunicipioDto.Id := Query.FieldByName('idMunicipio').AsInteger;
@@ -160,12 +160,12 @@ function TCadastroMunicipioModel.SelectPorId(
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT iduf, sigla, descricao FROM Municipio WHERE idMunicipio =' + IntToStr(oCadastroMunicipioDto.Id));
+    Query.Open('SELECT idMunicipio, descricao, uf_iduf FROM Municipio WHERE idMunicipio =' + IntToStr(oCadastroMunicipioDto.Id));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
-      oCadastroMunicipioDto.estado := Query.FieldByName('iduf').AsString;
-      oCadastroMunicipioDto.municipio := Query.FieldByName('descricao').AsString;
+      oCadastroMunicipioDto.Municipio := Query.FieldByName('descricao').AsString;
+      oCadastroMunicipioDto.Estado := Query.FieldByName('uf_iduf').AsString;
     end
     else
       Result := False;

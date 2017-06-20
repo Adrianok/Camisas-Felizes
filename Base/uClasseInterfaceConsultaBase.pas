@@ -24,6 +24,7 @@ type
     procedure KeyDown(var Key: Word);
     procedure Cancelar;  virtual;
     procedure Confirmar; virtual;
+    procedure MarcarPassagem; virtual;
     procedure Fechar; virtual;
   end;
 
@@ -89,6 +90,10 @@ begin
 end;
 
 
+
+procedure TClassInterfaceConsultaBase.MarcarPassagem;
+begin
+end;
 
 procedure TClassInterfaceConsultaBase.Pesquisar;
 begin

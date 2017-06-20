@@ -20,6 +20,7 @@ type
     procedure CriarForm(Aowner: TComponent); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
+    procedure MarcarPassagem; override;
 
     constructor Create;
     destructor Destroy; override;
@@ -57,8 +58,7 @@ begin
   if (not(assigned(oCadastroCorDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
-  if(not(oCadastroCorDto.IdCor > 0))then
-    oCadastroCorDto.Descricao := '!';
+  MarcarPassagem;
 
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorModel := TConsultaCorModel.Create;
@@ -95,6 +95,13 @@ begin
   inherited;
 end;
 
+
+procedure TConsultaCorController.MarcarPassagem;
+begin
+  inherited;
+  if(not(oCadastroCorDto.IdCor > 0))then
+    oCadastroCorDto.Descricao := '!';
+end;
 
 procedure TConsultaCorController.PesquisarGrid;
 begin

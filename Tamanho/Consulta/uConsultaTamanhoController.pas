@@ -20,6 +20,7 @@ type
     procedure CriarForm(Aowner: TComponent); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
+    procedure MarcarPassagem; override;
 
     constructor Create;
     destructor Destroy; override;
@@ -57,8 +58,7 @@ begin
   if (not(assigned(oCadastroTamanhoDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
-  if(not(oCadastroTamanhoDto.IdTamanho > 0))then
-    oCadastroTamanhoDto.Descricao := '!';
+  MarcarPassagem;
 
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoModel := TConsultaTamanhoModel.Create;
@@ -95,6 +95,13 @@ begin
   inherited;
 end;
 
+
+procedure TConsultaTamanhoController.MarcarPassagem;
+begin
+  inherited;
+  if(not(oCadastroTamanhoDto.IdTamanho > 0))then
+    oCadastroTamanhoDto.Descricao := '!';
+end;
 
 procedure TConsultaTamanhoController.PesquisarGrid;
 begin

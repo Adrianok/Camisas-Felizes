@@ -18,6 +18,7 @@ object frmPesquisaBase: TfrmPesquisaBase
   OldCreateOrder = False
   ParentBiDiMode = False
   Visible = True
+  OnActivate = FormActivate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13

@@ -25,6 +25,7 @@ inherited ConsultaUfForm: TConsultaUfForm
       item
         Expanded = False
         FieldName = 'iduf'
+        Title.Caption = 'C'#243'digo'
         Width = 60
         Visible = True
       end

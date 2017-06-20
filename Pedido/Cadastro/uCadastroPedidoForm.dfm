@@ -1,0 +1,66 @@
+inherited CadastroPedidoForm: TCadastroPedidoForm
+  Caption = 'CadastroPedidoForm'
+  ClientHeight = 239
+  ExplicitHeight = 268
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pgControll: TPageControl
+    Height = 150
+    ExplicitHeight = 150
+    inherited Cadastro: TTabSheet
+      object edtCodigo: TLabeledEdit
+        Tag = 999
+        Left = 78
+        Top = 16
+        Width = 153
+        Height = 26
+        CharCase = ecUpperCase
+        EditLabel.Width = 58
+        EditLabel.Height = 23
+        EditLabel.Caption = 'C'#243'digo:'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -17
+        EditLabel.Font.Name = 'Segoe UI Light'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        LabelPosition = lpLeft
+        ParentFont = False
+        TabOrder = 0
+      end
+      object edtPedido: TLabeledEdit
+        Left = 78
+        Top = 72
+        Width = 487
+        Height = 27
+        CharCase = ecUpperCase
+        EditLabel.Width = 68
+        EditLabel.Height = 23
+        EditLabel.Caption = 'Pedido:'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -17
+        EditLabel.Font.Name = 'Segoe UI Light'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        LabelPosition = lpLeft
+        MaxLength = 2
+        ParentFont = False
+        TabOrder = 1
+        TextHint = 'Informe os Pedidos dispon'#237'veis'
+      end
+    end
+  end
+end

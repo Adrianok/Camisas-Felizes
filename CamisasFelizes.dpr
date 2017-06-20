@@ -63,7 +63,19 @@ uses
   uInterfaceModeloModel in 'Modelo\Consulta\uInterfaceModeloModel.pas',
   uCor_ModeloModel in 'Cor_Modelo\uCor_ModeloModel.pas',
   uInterfaceCor_ModeloModel in 'Cor_Modelo\uInterfaceCor_ModeloModel.pas',
-  uListaCores in 'Cor\uListaCores.pas';
+  uListaCores in 'Cor\uListaCores.pas',
+  uCadastroPedidoController in 'Pedido\Cadastro\uCadastroPedidoController.pas',
+  uCadastroPedidoDto in 'Pedido\Cadastro\uCadastroPedidoDto.pas',
+  uCadastroPedidoForm in 'Pedido\Cadastro\uCadastroPedidoForm.pas' {CadastroPedidoForm},
+  uCadastroPedidoModel in 'Pedido\Cadastro\uCadastroPedidoModel.pas',
+  uCadastroPedidoRegra in 'Pedido\Cadastro\uCadastroPedidoRegra.pas',
+  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas',
+  uConsultaPedidoController in 'Pedido\Consulta\uConsultaPedidoController.pas',
+  uConsultaPedidoForm in 'Pedido\Consulta\uConsultaPedidoForm.pas' {ConsultaPedidoForm},
+  uConsultaPedidoModel in 'Pedido\Consulta\uConsultaPedidoModel.pas',
+  uConsultaPedidooRegra in 'Pedido\Consulta\uConsultaPedidooRegra.pas',
+  uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas',
+  uInterfacePedidoModel in 'Pedido\Consulta\uInterfacePedidoModel.pas';
 
 {$R *.res}
 
@@ -72,5 +84,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TCadastroPedidoForm, CadastroPedidoForm);
   Application.Run;
 end.

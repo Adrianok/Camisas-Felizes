@@ -48,12 +48,6 @@ inherited;
       edtPedido.Text    :=  oCadastroPedidoDto.Descricao;
     end;
   end
-  else
-  if(oCadastroPedidoDto.Descricao = '!')then
-  begin
-    ShowMessage('Nenhum Registro Selecionado');
-    Inicial;
-  end;
 end;
 
 constructor TCadastroPedidoController.Create;

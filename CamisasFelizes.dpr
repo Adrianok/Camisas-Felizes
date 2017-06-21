@@ -48,7 +48,6 @@ uses
   uConsultaTamanhoModel in 'Tamanho\Consulta\uConsultaTamanhoModel.pas',
   uConsultaTamanhoRegra in 'Tamanho\Consulta\uConsultaTamanhoRegra.pas',
   uInterfaceConsultaTamanhoModel in 'Tamanho\Consulta\uInterfaceConsultaTamanhoModel.pas',
-  uInterfaceTamanhoModel in 'Tamanho\Consulta\uInterfaceTamanhoModel.pas',
   uCadastroModeloController in 'Modelo\Cadastro\uCadastroModeloController.pas',
   uCadastroModeloDto in 'Modelo\Cadastro\uCadastroModeloDto.pas',
   uCadastroModeloForm in 'Modelo\Cadastro\uCadastroModeloForm.pas' {CadastroModeloForm},
@@ -73,9 +72,8 @@ uses
   uConsultaPedidoController in 'Pedido\Consulta\uConsultaPedidoController.pas',
   uConsultaPedidoForm in 'Pedido\Consulta\uConsultaPedidoForm.pas' {ConsultaPedidoForm},
   uConsultaPedidoModel in 'Pedido\Consulta\uConsultaPedidoModel.pas',
-  uConsultaPedidooRegra in 'Pedido\Consulta\uConsultaPedidooRegra.pas',
-  uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas',
-  uInterfacePedidoModel in 'Pedido\Consulta\uInterfacePedidoModel.pas';
+  uConsultaPedidoRegra in 'Pedido\Consulta\uConsultaPedidoRegra.pas',
+  uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas';
 
 {$R *.res}
 
@@ -84,6 +82,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TCadastroPedidoForm, CadastroPedidoForm);
   Application.Run;
 end.

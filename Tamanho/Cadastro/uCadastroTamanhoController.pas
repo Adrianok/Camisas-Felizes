@@ -48,12 +48,6 @@ inherited;
       edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
     end;
   end
-  else
-  if(oCadastroTamanhoDto.Descricao = '!')then
-  begin
-    ShowMessage('Nenhum Registro Selecionado');
-    Inicial;
-  end;
 end;
 
 constructor TCadastroTamanhoController.Create;

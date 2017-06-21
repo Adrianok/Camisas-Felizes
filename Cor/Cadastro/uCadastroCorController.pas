@@ -49,13 +49,6 @@ begin
       edtCor.Text    :=  oCadastroCorDto.Descricao;
     end;
   end
-  else
-    if(oCadastroCorDto.Descricao = '!')then
-    begin
-      ShowMessage('Nenhum Registro Selecionado');
-      Inicial;
-    end;
-
 end;
 
 constructor TCadastroCorController.Create;

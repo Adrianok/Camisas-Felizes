@@ -41,7 +41,9 @@ function TConsultaPedidoModel.SelectAll(MemTable: TFDMemTable): boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT idPedido, UPPER(descricao) as descricao FROM Pedido');
+    Query.Open('SELECT p.idpedido AS idpedido , p.data AS data, '
+             + ' p.valortotal AS valortotal , c.nome AS nome FROM pedido p '
+             + ' LEFT JOIN cliente c on c.idcliente = p.idcliente ');
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;

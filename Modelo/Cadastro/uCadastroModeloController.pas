@@ -49,7 +49,6 @@ end;
 
 procedure TCadastroModeloController.Consulta;
 begin
-inherited;
   with (oFormulario as TCadastroModeloForm) do
   begin
     if(oCadastroModeloDto.IdModelo <> 0)then
@@ -60,14 +59,9 @@ inherited;
       edtPreco.Text    :=  CurrToStr(oCadastroModeloDto.Preco);
 
       GridCor(StrToIntDef(edtCodigo.Text, 0));
-    end
-    else
-    if(oCadastroCorDto.Descricao = '!')then
-    begin
-      ShowMessage('Nenhum Registro Selecionado');
-      Inicial;
     end;
   end;
+  inherited;
 end;
 
 procedure TCadastroModeloController.ConsultaGridCor(Sender : Tobject);

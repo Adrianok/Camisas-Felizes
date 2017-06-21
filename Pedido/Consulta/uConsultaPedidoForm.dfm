@@ -1,28 +1,35 @@
 inherited ConsultaPedidoForm: TConsultaPedidoForm
   Left = 893
   Caption = 'Consulta cadastro de Pedido'
-  ClientHeight = 522
-  ClientWidth = 374
+  ClientHeight = 540
+  ClientWidth = 794
   Position = poDesigned
-  ExplicitWidth = 380
-  ExplicitHeight = 551
+  ExplicitWidth = 800
+  ExplicitHeight = 569
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 374
-    ExplicitWidth = 374
+    Width = 794
+    ExplicitWidth = 794
   end
   inherited Panel2: TPanel
-    Top = 442
-    Width = 374
-    ExplicitTop = 442
-    ExplicitWidth = 374
+    Top = 460
+    Width = 794
+    ExplicitLeft = -224
+    ExplicitTop = 452
+    ExplicitWidth = 794
+    inherited Panel3: TPanel
+      Left = 496
+      Width = 297
+      ExplicitLeft = 496
+      ExplicitWidth = 297
+    end
   end
   object DBGrid: TDBGrid [2]
     Left = 0
     Top = 57
-    Width = 374
-    Height = 385
+    Width = 794
+    Height = 403
     Align = alClient
     DataSource = DataSourceGrid
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -49,8 +56,9 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
       end>
   end
   inherited DBGrid1: TDBGrid
-    Width = 374
-    Height = 385
+    Width = 794
+    Height = 403
+    DataSource = nil
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 3
     Columns = <
@@ -63,9 +71,23 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
       end
       item
         Expanded = False
-        FieldName = 'descricao'
-        Title.Caption = 'Descri'#231#227'o'
+        FieldName = 'nome'
+        Title.Caption = 'Nome do Cliente'
         Width = 273
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'data'
+        Title.Caption = 'Data do pedido'
+        Width = 106
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'valortotal'
+        Title.Caption = 'Valor do Pedido'
+        Width = 86
         Visible = True
       end>
   end

@@ -15,21 +15,20 @@ type
   TfrmPesquisaBase = class(TForm)
     Panel1: TPanel;
     edtPesquisa: TEdit;
-    btnPesquisa: TBitBtn;
     Panel2: TPanel;
-    btnFechar: TBitBtn;
-    btnCancelar: TBitBtn;
-    btnConfirmar: TBitBtn;
     DataSourceGrid: TDataSource;
     FDMemTableGrid: TFDMemTable;
     DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    btnFechar: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnConfirmar: TBitBtn;
     procedure btnFecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
     procedure edtPesquisaChange(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,11 +70,7 @@ begin
   oController.PesquisarGrid;
 end;
 
-procedure TfrmPesquisaBase.FormActivate(Sender: TObject);
-begin
-  if(assigned(oController))then
-    oController.MarcarPassagem;
-end;
+
 
 procedure TfrmPesquisaBase.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);

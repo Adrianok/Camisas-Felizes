@@ -20,7 +20,6 @@ type
     procedure CriarForm(Aowner: TComponent); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
-    procedure MarcarPassagem; override;
 
     constructor Create;
     destructor Destroy; override;
@@ -58,8 +57,6 @@ begin
   if (not(assigned(oCadastroPedidoDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
-  MarcarPassagem;
-
   if (not(assigned(oConsultaPedidoController))) then
     oConsultaPedidoModel := TConsultaPedidoModel.Create;
 
@@ -93,14 +90,6 @@ begin
     FreeAndNil(oConsultaPedidoModel);
 
   inherited;
-end;
-
-
-procedure TConsultaPedidoController.MarcarPassagem;
-begin
-  inherited;
-  if(not(oCadastroPedidoDto.IdPedido > 0))then
-    oCadastroPedidoDto.Descricao := '!';
 end;
 
 procedure TConsultaPedidoController.PesquisarGrid;

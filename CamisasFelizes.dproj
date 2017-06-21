@@ -170,7 +170,6 @@
         <DCCReference Include="Tamanho\Consulta\uConsultaTamanhoModel.pas"/>
         <DCCReference Include="Tamanho\Consulta\uConsultaTamanhoRegra.pas"/>
         <DCCReference Include="Tamanho\Consulta\uInterfaceConsultaTamanhoModel.pas"/>
-        <DCCReference Include="Tamanho\Consulta\uInterfaceTamanhoModel.pas"/>
         <DCCReference Include="Modelo\Cadastro\uCadastroModeloController.pas"/>
         <DCCReference Include="Modelo\Cadastro\uCadastroModeloDto.pas"/>
         <DCCReference Include="Modelo\Cadastro\uCadastroModeloForm.pas">
@@ -207,9 +206,8 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Pedido\Consulta\uConsultaPedidoModel.pas"/>
-        <DCCReference Include="Pedido\Consulta\uConsultaPedidooRegra.pas"/>
+        <DCCReference Include="Pedido\Consulta\uConsultaPedidoRegra.pas"/>
         <DCCReference Include="Pedido\Consulta\uInterfaceConsultaPedidoModel.pas"/>
-        <DCCReference Include="Pedido\Consulta\uInterfacePedidoModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

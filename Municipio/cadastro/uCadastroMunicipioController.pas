@@ -4,16 +4,21 @@ interface
 
 uses
   Dialogs, Vcl.ExtCtrls,
-  Vcl.StdCtrls,
+  Vcl.StdCtrls, vcl.Controls,
   System.classes, System.SysUtils,
   uCadastroMunicipioDto, uClasseInterfaceViewBase,
+  uClasseInterfaceConsultaBase,
   uCadastroMunicipioRegra, uCadastroMunicipioModel,
   uCadastroMunicipioForm, uInterfaceViewBase,
-  uConsultaMunicipioForm, uConsultaMunicipioController;
+  uConsultaMunicipioForm, uConsultaMunicipioController,
+  uConsultaUfController, uConsultaUfRegra, uConsultaUfModel;
 
-type
+  type
   TCadastroMunicipioController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoEstado(AID: Integer);
+    var oNomeEstado : String;
+
   public
     procedure Inicial; override;
     procedure Consulta; override;
@@ -40,7 +45,8 @@ begin
   inherited;
   if (oCadastroMunicipioDto.Id > 0) then
   begin
-    if (oCadastroMunicipioRegra.SelectMunicipio(oCadastroMunicipioModel, oCadastroMunicipioDto)) then
+    if (oCadastroMunicipioRegra.SelectMunicipio(oCadastroMunicipioModel,
+      oCadastroMunicipioDto)) then
       with (oFormulario as TCadastroMunicipioForm) do
       begin
         ledtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
@@ -48,12 +54,11 @@ begin
         ledtEstado.Text := oCadastroMunicipioDto.Estado;
       end;
   end
-  else
-    if(oCadastroMunicipioDto.Municipio = '!')then
-    begin
-      ShowMessage('Nenhum Registro Selecionado');
-      Inicial;
-    end;
+  else if (oCadastroMunicipioDto.Municipio = '!') then
+  begin
+    ShowMessage('Nenhum Registro Selecionado');
+    Inicial;
+  end;
 end;
 
 constructor TCadastroMunicipioController.Create;
@@ -80,7 +85,8 @@ end;
 procedure TCadastroMunicipioController.Excluir;
 begin
   inherited;
-  if (oCadastroMunicipioRegra.Deletar(oCadastroMunicipioModel, oCadastroMunicipioDto)) then
+  if (oCadastroMunicipioRegra.Deletar(oCadastroMunicipioModel,
+    oCadastroMunicipioDto)) then
     ShowMessage('Registro deletado com sucesso')
 end;
 
@@ -112,23 +118,49 @@ end;
 
 procedure TCadastroMunicipioController.NovoID;
 begin
-  if (oCadastroMunicipioRegra.Novo(oCadastroMunicipioModel, oCadastroMunicipioDto)) then
-    (oFormulario as TCadastroMunicipioForm).ledtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
+  if (oCadastroMunicipioRegra.Novo(oCadastroMunicipioModel,
+    oCadastroMunicipioDto)) then
+    (oFormulario as TCadastroMunicipioForm).ledtCodigo.Text :=
+      IntToStr(oCadastroMunicipioDto.Id);
 end;
 
 procedure TCadastroMunicipioController.Pesquisar(Aowner: TComponent);
 var
- sIdMunicipio : string;
+  sIdMunicipio: string;
+  ControleAtivo: TWinControl;
 begin
   inherited;
-  if(sIdMunicipio <> '')then
-    oCadastroMunicipioDto.id   :=  StrToInt(sIdMunicipio);
-    oCadastroMunicipioDto.Municipio   :=(oFormulario as TCadastroMunicipioForm).ledtMunicipio.Text;
-    oCadastroMunicipioDto.Estado := (oFormulario as TCadastroMunicipioForm).LedtEstado.Text;
+  with (oFormulario as TCadastroMunicipioForm) do
+  begin
+    if (sIdMunicipio <> '') then
+    begin
+      oCadastroMunicipioDto.Id := StrToInt(sIdMunicipio);
+      oCadastroMunicipioDto.Municipio := (oFormulario as TCadastroMunicipioForm).ledtMunicipio.Text;
+      oCadastroMunicipioDto.Estado := (oFormulario as TCadastroMunicipioForm).ledtEstado.Text;
+    end;
 
-  if (not(assigned(oConsultaMunicipioController))) then
-    oConsultaMunicipioController := TConsultaMunicipioController.Create;
-  oConsultaMunicipioController.CriarForm(Aowner);
+
+    if (Aowner = (oFormulario as TCadastroMunicipioForm).LedtEstado) then
+    begin
+      oConsultaUfController := TConsultaUfController.Create;
+      oConsultaUfController.CriarFormTeste(oFormulario, RetornoEstado);
+    end
+    else
+    begin
+      if (not(assigned(oConsultaMunicipioController))) then
+        oConsultaMunicipioController := TConsultaMunicipioController.Create;
+      oConsultaMunicipioController.CriarForm(oFormulario);
+    end;
+  end;
+end;
+
+procedure TCadastroMunicipioController.RetornoEstado(AID: Integer);
+begin
+ uConsultaUfRegra.SelectId(oConsultaUfModel, inttostr(AID));
+
+
+  showmessage(oNomeEstado);
+
 end;
 
 procedure TCadastroMunicipioController.Salvar;
@@ -140,11 +172,14 @@ begin
     oCadastroMunicipioDto.Municipio := ledtMunicipio.Text;
     oCadastroMunicipioDto.Estado := ledtEstado.Text;
   end;
-  if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel, oCadastroMunicipioDto)) then
-    ShowMessage('Registro: ' + oCadastroMunicipioDto.Municipio + ' Atualizado com sucesso')
+  if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel,
+    oCadastroMunicipioDto)) then
+    ShowMessage('Registro: ' + oCadastroMunicipioDto.Municipio +
+      ' Atualizado com sucesso')
   else
   begin
-    ShowMessage('Registro: ' + oCadastroMunicipioDto.Municipio + ' Inserido com sucesso');
+    ShowMessage('Registro: ' + oCadastroMunicipioDto.Municipio +
+      ' Inserido com sucesso');
   end;
 end;
 

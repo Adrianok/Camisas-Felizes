@@ -15,7 +15,6 @@ type
   private
   public
     procedure PesquisarGrid;  override;
-    procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; virtual;
     procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta); override;
     procedure Confirmar; override;
@@ -31,12 +30,6 @@ var
 implementation
 
 { TConsultaModeloConsultaController }
-
-procedure TConsultaModeloController.AlimentarDto(Column: TColumn);
-begin
-  inherited;
-   oCadastroModeloDto.IdModelo := StrToInt(Column.Field.Text);
-end;
 
 procedure TConsultaModeloController.Cancelar;
 begin

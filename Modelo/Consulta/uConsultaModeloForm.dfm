@@ -10,15 +10,9 @@ inherited ConsultaModeloForm: TConsultaModeloForm
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 458
-    ExplicitWidth = 374
+    ExplicitWidth = 458
   end
-  inherited Panel2: TPanel
-    Top = 442
-    Width = 458
-    ExplicitTop = 442
-    ExplicitWidth = 374
-  end
-  object DBGrid: TDBGrid [2]
+  object DBGrid: TDBGrid [1]
     Left = 0
     Top = 57
     Width = 458
@@ -26,7 +20,7 @@ inherited ConsultaModeloForm: TConsultaModeloForm
     Align = alClient
     DataSource = DataSourceGrid
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 2
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -52,7 +46,7 @@ inherited ConsultaModeloForm: TConsultaModeloForm
     Width = 458
     Height = 385
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 3
+    TabOrder = 2
     Columns = <
       item
         Expanded = False
@@ -75,6 +69,11 @@ inherited ConsultaModeloForm: TConsultaModeloForm
         Width = 88
         Visible = True
       end>
+  end
+  inherited Panel2: TPanel
+    Top = 442
+    Width = 458
+    TabOrder = 3
   end
   inherited DataSourceGrid: TDataSource
     Left = 8

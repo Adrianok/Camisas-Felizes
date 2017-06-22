@@ -19,7 +19,6 @@ object frmBase: TfrmBase
   ParentBiDiMode = False
   Position = poDesktopCenter
   Visible = True
-  OnActivate = FormActivate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13

@@ -82,6 +82,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TCadastroPedidoForm, CadastroPedidoForm);
   Application.Run;
 end.

@@ -12,13 +12,6 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
     Width = 794
     ExplicitWidth = 794
   end
-  inherited Panel2: TPanel
-    Top = 460
-    Width = 794
-    ExplicitLeft = -96
-    ExplicitTop = 460
-    ExplicitWidth = 794
-  end
   inherited DBGrid1: TDBGrid
     Width = 794
     Height = 403
@@ -59,6 +52,10 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
         Width = 102
         Visible = True
       end>
+  end
+  inherited Panel2: TPanel
+    Top = 460
+    Width = 794
   end
   inherited DataSourceGrid: TDataSource
     Left = 8

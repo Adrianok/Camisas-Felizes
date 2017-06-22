@@ -18,7 +18,6 @@ type
   public
     procedure Excluir; override;
     procedure Inicial; override;
-    procedure Consulta; override;
     procedure Pesquisar(Aowner : TComponent); override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
@@ -36,20 +35,6 @@ implementation
 
 
 { TControllerCadastroPedido }
-
-procedure TCadastroPedidoController.Consulta;
-begin
-inherited;
-  if(oCadastroPedidoDto.IdPedido <> 0)then
-  begin
-    if(oCadastroPedidoRegra.SelectPedido(oCadastroPedidoModel, oCadastroPedidoDto))then
-    with (oFormulario as TCadastroPedidoForm) do
-    begin
-      edtCodigo.Text :=   IntToStr(oCadastroPedidoDto.IdPedido);
-      edtPedido.Text    :=  oCadastroPedidoDto.Descricao;
-    end;
-  end
-end;
 
 constructor TCadastroPedidoController.Create;
 begin
@@ -141,6 +126,8 @@ inherited;
       edtPedido.Text    :=  oCadastroPedidoDto.Descricao;
     end;
   end
+  else
+    raise Exception.Create('Não foi escolhido registro');
 end;
 
 procedure TCadastroPedidoController.Salvar;

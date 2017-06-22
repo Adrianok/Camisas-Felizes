@@ -12,16 +12,7 @@ inherited ConsultaCorForm: TConsultaCorForm
     Width = 374
     ExplicitWidth = 374
   end
-  inherited Panel2: TPanel
-    Top = 442
-    Width = 374
-    ExplicitTop = 442
-    ExplicitWidth = 374
-    inherited Panel3: TPanel
-      Left = 73
-    end
-  end
-  object DBGrid: TDBGrid [2]
+  object DBGrid: TDBGrid [1]
     Left = 0
     Top = 57
     Width = 374
@@ -29,7 +20,7 @@ inherited ConsultaCorForm: TConsultaCorForm
     Align = alClient
     DataSource = DataSourceGrid
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 2
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -55,7 +46,7 @@ inherited ConsultaCorForm: TConsultaCorForm
     Width = 374
     Height = 385
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 3
+    TabOrder = 2
     Columns = <
       item
         Expanded = False
@@ -71,6 +62,11 @@ inherited ConsultaCorForm: TConsultaCorForm
         Width = 273
         Visible = True
       end>
+  end
+  inherited Panel2: TPanel
+    Top = 442
+    Width = 374
+    TabOrder = 3
   end
   inherited DataSourceGrid: TDataSource
     Left = 8

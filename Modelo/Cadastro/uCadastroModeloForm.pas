@@ -12,12 +12,12 @@ uses
 
 type
   TCadastroModeloForm = class(TfrmBase)
-    edtCodigo: TLabeledEdit;
-    edtModelo: TLabeledEdit;
-    edtPreco: TLabeledEdit;
     GroupBox1: TGroupBox;
     edtCor: TLabeledEdit;
     ListView1: TListView;
+    edtPreco: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
+    edtModelo: TLabeledEdit;
 
   private
     { Private declarations }

@@ -9,9 +9,9 @@ uses
 
 type
   TCadastroPedidoForm = class(TfrmBase)
-    edtCodigo: TLabeledEdit;
     edtPedido: TLabeledEdit;
     LabeledEdit1: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
     dteDataAtual: TDateTimePicker;
     Label1: TLabel;
   private

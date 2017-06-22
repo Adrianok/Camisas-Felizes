@@ -882,17 +882,4 @@ object frmBase: TfrmBase
       end
     end
   end
-  object pgControll: TPageControl
-    Left = 0
-    Top = 89
-    Width = 630
-    Height = 343
-    ActivePage = Cadastro
-    Align = alClient
-    Anchors = [akLeft, akRight, akBottom]
-    TabOrder = 1
-    object Cadastro: TTabSheet
-      Caption = 'Cadastro'
-    end
-  end
 end

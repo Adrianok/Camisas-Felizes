@@ -12,8 +12,6 @@ uses
 type
   TfrmBase = class(TForm)
     Panel1: TPanel;
-    pgControll: TPageControl;
-    Cadastro: TTabSheet;
     Panel2: TPanel;
     btnSalvar: TBitBtn;
     btnPesquisar: TBitBtn;

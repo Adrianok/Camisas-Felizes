@@ -9,8 +9,8 @@ uses
 
 type
   TCadastroTamanhoForm = class(TfrmBase)
-    edtCodigo: TLabeledEdit;
     edtTamanho: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
   private
     { Private declarations }
   public

@@ -38,6 +38,7 @@ implementation
 
 procedure TClassInterfaceConsultaBase.AlimentarDto(Column: TColumn);
 begin
+  oProcedureRetorno(StrToInt(Column.Field.Text));
 end;
 
 

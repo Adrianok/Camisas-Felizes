@@ -16,13 +16,14 @@ type
     Panel1: TPanel;
     edtPesquisa: TEdit;
     btnPesquisa: TBitBtn;
-    Panel2: TPanel;
-    btnFechar: TBitBtn;
-    btnCancelar: TBitBtn;
-    btnConfirmar: TBitBtn;
     DataSourceGrid: TDataSource;
     FDMemTableGrid: TFDMemTable;
     DBGrid1: TDBGrid;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    btnConfirmar: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnFechar: TBitBtn;
     procedure btnFecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnConfirmarClick(Sender: TObject);

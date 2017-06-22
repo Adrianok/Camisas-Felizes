@@ -15,6 +15,7 @@ uses
 type
   TCadastroCorController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoCor(aIdCor : integer);
   public
     procedure Excluir; override;
     procedure Inicial; override;
@@ -52,13 +53,6 @@ inherited;
       edtCor.Text    :=  oCadastroCorDto.Descricao;
     end;
   end
-  else
-    if(oCadastroCorDto.Descricao = '!')then
-    begin
-      ShowMessage('Nenhum Registro Selecionado');
-      Inicial;
-    end;
-
 end;
 
 constructor TCadastroCorController.Create;
@@ -78,11 +72,11 @@ end;
 
 procedure TCadastroCorController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroCorForm.Create(Aowner);
   oFormulario.oController := oCadastroCorController;
   oFormulario.Show;
+  inherited;
 end;
 
 destructor TCadastroCorController.Destroy;
@@ -141,7 +135,23 @@ begin
 
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorController := TConsultaCorController.Create;
-  oConsultaCorController.CriarForm(Aowner);
+  oConsultaCorController.CriarForm(Aowner, RetornoCor);
+end;
+
+procedure TCadastroCorController.RetornoCor(aIdCor: integer);
+begin
+  if(aIdCor <> 0)then
+  begin
+    oCadastroCorDto.IdCor :=  aIdCor;
+    if(oCadastroCorRegra.SelectCor(oCadastroCorModel, oCadastroCorDto))then
+    with (oFormulario as TCadastroCorForm) do
+    begin
+      edtCodigo.Text :=   IntToStr(oCadastroCorDto.IdCor);
+      edtCor.Text    :=  oCadastroCorDto.Descricao;
+    end;
+  end
+  else
+  raise Exception.Create('Não foi escolhido registro');
 end;
 
 procedure TCadastroCorController.Salvar;

@@ -1,10 +1,10 @@
-unit uInterfaceModeloModel;
+unit uInterfacePedidoModel;
 
 interface
 uses
   System.Generics.Collections;
 type
-  IInterfaceConsultaModeloModel = interface
+  IInterfaceConsultaPedidoModel = interface
 
     function SelectDescricao: Boolean;
     function Inserir:boolean;

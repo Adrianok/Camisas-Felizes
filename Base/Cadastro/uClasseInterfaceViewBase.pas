@@ -6,7 +6,7 @@ uses
   uInterfaceViewBase, dialogs,
   uBase, System.SysUtils,
   Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Forms, Vcl.Controls,
+  Vcl.Forms,Vcl.ComCtrls, Vcl.Controls,
   System.Classes, System.UITypes,
   uConsultaBase, Winapi.Windows;
 
@@ -59,12 +59,16 @@ var
   iIndice: integer;
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
+  begin
     if ((oFormulario.Components[iIndice] is TLabeledEdit)
     or  (oFormulario.Components[iIndice] is TGroupBox)) and
-      ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
-    begin
-      (oFormulario.Components[iIndice] as TWinControl).Enabled := True;
-    end;
+    ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+      (oFormulario.Components[iIndice] as TWinControl).Enabled := True
+    else if(oFormulario.Components[iIndice] is TLabel)then
+      (oFormulario.Components[iIndice] as TLabel).Enabled := True
+    else if(oFormulario.Components[iIndice] is TDateTimePicker) then
+      (oFormulario.Components[iIndice] as TDateTimePicker).Enabled := True;
+  end;
 end;
 
 
@@ -77,6 +81,7 @@ end;
 
 procedure TClassInterfaceViewBase.CriarForm(Aowner: TComponent);
 begin
+  DesativarCampos;
 end;
 
 
@@ -84,16 +89,19 @@ end;
 procedure TClassInterfaceViewBase.DesativarCampos;
 var
   iIndice: integer;
-
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if (oFormulario.Components[iIndice] is TLabeledEdit)
-    or (oFormulario.Components[iIndice] is TGroupBox)
-    then
-    begin
-      (oFormulario.Components[iIndice] as TWinControl).Enabled := False;
-    end;
+  begin
+    if ((oFormulario.Components[iIndice] is TLabeledEdit)
+    or(oFormulario.Components[iIndice] is TGroupBox)) then
+      (oFormulario.Components[iIndice] as TWinControl).Enabled := False
+    else if(oFormulario.Components[iIndice] is TLabel)then
+      (oFormulario.Components[iIndice] as TLabel).Enabled := False
+    else if(oFormulario.Components[iIndice] is TDateTimePicker) then
+      (oFormulario.Components[iIndice] as TDateTimePicker).Enabled := False;
+  end;
 end;
+
 
 
 
@@ -192,37 +200,37 @@ var
   iIndice: integer;
   sStringMessage: string;
   auxiliar: boolean;
-  itamanho: integer;
   sCampo: string;
   iQuantidadeCampos: integer;
   iNumeroCampo: integer;
 begin
   inherited;
-  iNumeroCampo      := 0   ;
-  sSeparador        := #13 ; // Separa os nomes dos campos
-  sStringMessage    := ''  ; // zera os nomes dos campos que aparecerão no raise exception
-  auxiliar          := True; // auxiliar para não iniciar com caractere especial na mensagem
-  iQuantidadeCampos := 0   ;
+  iNumeroCampo      := 0    ;
+  sSeparador        := #13  ; // Separa os nomes dos campos
+  sStringMessage    := ''   ; // zera os nomes dos campos que aparecerão no raise exception
+  auxiliar          := True ; // auxiliar para não iniciar com caractere especial na mensagem
+  iQuantidadeCampos := 0    ;
+
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if (oFormulario.Components[iIndice] is TLabeledEdit) then
+  begin
+    if((oFormulario.Components[iIndice] is TLabeledEdit))then
     begin
-      if (oFormulario.Components[iIndice] is TLabeledEdit) then
-        sCampo := (oFormulario.Components[iIndice] as TLabeledEdit)
-          .EditLabel.Caption;
-      itamanho := length(sCampo);
-      if ((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
+      sCampo := (oFormulario.Components[iIndice] as TWinControl).Hint;
+      if (((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
          ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
-         ((oFormulario.Components[iIndice] as TWinControl).Tag <> 888) then
+         ((oFormulario.Components[iIndice] as TWinControl).Tag <> 888)) then
       begin
         if (auxiliar = False) then
           sStringMessage := sStringMessage + sSeparador;
-        sStringMessage := sStringMessage + copy(sCampo, 1, itamanho - 1);
+        sStringMessage := sStringMessage + sCampo;
         auxiliar := False;
         iQuantidadeCampos := iQuantidadeCampos + 1;
         if (iQuantidadeCampos = 1) then
           iNumeroCampo := iIndice;
       end;
+
     end;
+  end;
   if (iQuantidadeCampos = 1) then
   begin
     (oFormulario.Components[iNumeroCampo] as TWinControl).SetFocus;

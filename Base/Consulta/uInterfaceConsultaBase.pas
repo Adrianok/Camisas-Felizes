@@ -4,13 +4,13 @@ interface
 
 uses
   System.Classes, FireDAC.Comp.Client,
-  Vcl.DbGrids;
+  Vcl.DbGrids, uFuncaoRetorno;
 
 type
   IInterfaceConsultaBase = interface
 
     procedure AlimentarDto(Column : TColumn);
-    procedure CriarForm   (Aowner : TComponent);
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
     procedure KeyDown     (var Key: Word);
 
     procedure Fechar;

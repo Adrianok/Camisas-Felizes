@@ -7,7 +7,7 @@ uses
   Vcl.StdCtrls, System.classes, System.SysUtils,
   uClasseInterfaceConsultaBase, uConsultaTamanhoModel,
   uInterfaceConsultaBase,uCadastroTamanhoDto, uConsultaTamanhoForm,
-  FireDac.Comp.Client, uConsultaTamanhoRegra,
+  FireDac.Comp.Client, uConsultaTamanhoRegra, uFuncaoRetorno,
   Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows;
 
 type
@@ -17,7 +17,7 @@ type
     procedure PesquisarGrid;  override;
     procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);  override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -67,7 +67,7 @@ begin
     oConsultaTamanhoRegra := TConsultaTamanhoRegra.Create;
 end;
 
-procedure TConsultaTamanhoController.CriarForm(Aowner: TComponent);
+procedure TConsultaTamanhoController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
 begin
   if not(assigned(oFormulario)) then
   begin

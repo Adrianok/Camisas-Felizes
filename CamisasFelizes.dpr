@@ -41,7 +41,6 @@ uses
   uConsultaModeloModel in 'Modelo\Consulta\uConsultaModeloModel.pas',
   uConsultaModeloRegra in 'Modelo\Consulta\uConsultaModeloRegra.pas',
   uInterfaceConsultaModeloModel in 'Modelo\Consulta\uInterfaceConsultaModeloModel.pas',
-  uInterfaceModeloModel in 'Modelo\Consulta\uInterfaceModeloModel.pas',
   uInterfaceCor_ModeloModel in 'Cor_Modelo\uInterfaceCor_ModeloModel.pas',
   uCor_ModeloModel in 'Cor_Modelo\uCor_ModeloModel.pas',
   uListaCores in 'Cor\uListaCores.pas',
@@ -62,7 +61,19 @@ uses
   uConsultaUfModel in 'CadastroUF\consulta\uConsultaUfModel.pas',
   uConsultaUfRegra in 'CadastroUF\consulta\uConsultaUfRegra.pas',
   uInterfaceConsultaUfModel in 'CadastroUF\consulta\uInterfaceConsultaUfModel.pas',
-  uInterfaceUfModel in 'CadastroUF\consulta\uInterfaceUfModel.pas';
+  uInterfaceUfModel in 'CadastroUF\consulta\uInterfaceUfModel.pas',
+  uConsultaPedidoController in 'Pedido\Consulta\uConsultaPedidoController.pas',
+  uConsultaPedidoForm in 'Pedido\Consulta\uConsultaPedidoForm.pas' {ConsultaPedidoForm},
+  uConsultaPedidoModel in 'Pedido\Consulta\uConsultaPedidoModel.pas',
+  uConsultaPedidoRegra in 'Pedido\Consulta\uConsultaPedidoRegra.pas',
+  uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas',
+  uInterfacePedidoModel in 'Pedido\Consulta\uInterfacePedidoModel.pas',
+  uCadastroPedidoController in 'Pedido\Cadastro\uCadastroPedidoController.pas',
+  uCadastroPedidoDto in 'Pedido\Cadastro\uCadastroPedidoDto.pas',
+  uCadastroPedidoForm in 'Pedido\Cadastro\uCadastroPedidoForm.pas' {CadastroPedidoForm},
+  uCadastroPedidoModel in 'Pedido\Cadastro\uCadastroPedidoModel.pas',
+  uCadastroPedidoRegra in 'Pedido\Cadastro\uCadastroPedidoRegra.pas',
+  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas';
 
 {$R *.res}
 
@@ -71,5 +82,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TCadastroPedidoForm, CadastroPedidoForm);
   Application.Run;
 end.

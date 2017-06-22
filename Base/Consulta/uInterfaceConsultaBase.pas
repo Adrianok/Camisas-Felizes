@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, FireDAC.Comp.Client,
-  Vcl.DbGrids, uCadastroCorDto;
+  Vcl.DbGrids;
 
 type
   IInterfaceConsultaBase = interface

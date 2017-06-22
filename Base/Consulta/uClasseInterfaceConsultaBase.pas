@@ -10,16 +10,22 @@ uses
   System.Classes, uConsultaBase,
   FireDAC.Comp.Client, Vcl.DbGrids,
   uCadastroCorDto, Winapi.Windows;
+
 type
+  TRetorno = procedure (ARetorno: integer) of object;
+
   TClassInterfaceConsultaBase = class(TInterfacedObject, IInterfaceConsultaBase)
   private
   protected
     oFormulario : TfrmPesquisaBase;
+    oProcedureRetorno: TRetorno;
   public
+
     procedure PesquisarGrid; virtual;
     procedure AlimentarDto(Column : TColumn); virtual;
     function PreencherGrid:boolean; virtual;
     procedure CriarForm(Aowner: TComponent); virtual;
+    procedure CriarFormTeste(Aowner: TComponent; ARetorno: TRetorno); virtual;
     procedure Pesquisar; virtual;
     procedure KeyDown(var Key: Word);
     procedure Cancelar;  virtual;
@@ -45,7 +51,7 @@ end;
 
 procedure TClassInterfaceConsultaBase.Confirmar;
 begin
-  AlimentarDto(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]);
+  oProcedureRetorno(Integer(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]));
   Fechar;
 end;
 
@@ -62,6 +68,18 @@ begin
   end;
 end;
 
+
+procedure TClassInterfaceConsultaBase.CriarFormTeste(Aowner: TComponent; ARetorno: TRetorno);
+begin
+  with oFormulario do
+  begin
+    if(edtPesquisa.Text = '!')then
+      edtPesquisa.Text := '';
+    ActiveControl :=  oFormulario.DBGrid1;
+    DBGrid1.SelectedIndex := 1;
+  end;
+  oProcedureRetorno := ARetorno;
+end;
 
 
 procedure TClassInterfaceConsultaBase.Fechar;
@@ -107,3 +125,4 @@ begin
 end;
 
 end.
+

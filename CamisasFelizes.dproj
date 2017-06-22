@@ -102,26 +102,9 @@
         </DelphiCompile>
         <DCCReference Include="ConexãoBD\uConexao.pas"/>
         <DCCReference Include="ConexãoBD\uConexaoSingleTon.pas"/>
-        <DCCReference Include="Base\uBase.pas">
-            <Form>frmBase</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Base\uConsultaBase.pas">
-            <Form>frmPesquisaBase</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="Principal\uPrincipal.pas">
             <Form>frmPrincipal</Form>
         </DCCReference>
-        <DCCReference Include="CadastroUF\uCadastroUfController.pas"/>
-        <DCCReference Include="CadastroUF\uCadastroUfDto.pas"/>
-        <DCCReference Include="CadastroUF\uCadastroUfForm.pas">
-            <Form>Cadastro de UF</Form>
-        </DCCReference>
-        <DCCReference Include="CadastroUF\uCadastroUfModel.pas"/>
-        <DCCReference Include="CadastroUF\uCadastroUfRegra.pas"/>
-        <DCCReference Include="Base\uClasseInterfaceViewBase.pas"/>
-        <DCCReference Include="Base\uInterfaceViewBase.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorController.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorDto.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorForm.pas">
@@ -130,9 +113,6 @@
         <DCCReference Include="Cor\Cadastro\uCadastroCorModel.pas"/>
         <DCCReference Include="Cor\Cadastro\uCadastroCorRegra.pas"/>
         <DCCReference Include="Cor\Cadastro\uInterfaceCadastroCorModel.pas"/>
-        <DCCReference Include="CadastroUF\uIterfaceCadastroUfModel.pas"/>
-        <DCCReference Include="Base\uInterfaceConsultaBase.pas"/>
-        <DCCReference Include="Base\uClasseInterfaceConsultaBase.pas"/>
         <DCCReference Include="Cor\Consulta\uConsultaCorController.pas"/>
         <DCCReference Include="Cor\Consulta\uConsultaCorForm.pas">
             <Form>ConsultaCorForma</Form>
@@ -179,6 +159,36 @@
         <DCCReference Include="Cor_Modelo\uInterfaceCor_ModeloModel.pas"/>
         <DCCReference Include="Cor_Modelo\uCor_ModeloModel.pas"/>
         <DCCReference Include="Cor\uListaCores.pas"/>
+        <DCCReference Include="Base\Cadastro\uBase.pas">
+            <Form>frmBase</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Base\Cadastro\uClasseInterfaceViewBase.pas"/>
+        <DCCReference Include="Base\Cadastro\uInterfaceViewBase.pas"/>
+        <DCCReference Include="Base\Consulta\uClasseInterfaceConsultaBase.pas"/>
+        <DCCReference Include="Base\Consulta\uConsultaBase.pas">
+            <Form>frmPesquisaBase</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Base\Consulta\uInterfaceConsultaBase.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfController.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfDto.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfForm.pas">
+            <Form>CadastroUfForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfModel.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uCadastroUfRegra.pas"/>
+        <DCCReference Include="CadastroUF\cadastro\uInterfaceCadastroUfModel.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfController.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfForm.pas">
+            <Form>ConsultaUfForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfModel.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uConsultaUfRegra.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uInterfaceConsultaUfModel.pas"/>
+        <DCCReference Include="CadastroUF\consulta\uInterfaceUfModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -213,12 +223,27 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -569,27 +594,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>

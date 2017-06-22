@@ -156,10 +156,8 @@ end;
 
 procedure TCadastroMunicipioController.RetornoEstado(AID: Integer);
 begin
- uConsultaUfRegra.SelectId(oConsultaUfModel, inttostr(AID));
 
-
-  showmessage(oNomeEstado);
+  showmessage('chegou aqui');
 
 end;
 

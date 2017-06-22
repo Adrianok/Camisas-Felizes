@@ -17,7 +17,6 @@ type
     procedure RetornoUf(aIdUf: integer);
   public
     procedure Inicial; override;
-    procedure Consulta; override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
@@ -36,11 +35,6 @@ implementation
 
 { TControllerCadastroUf }
 
-procedure TCadastroUfController.Consulta;
-begin
-  inherited;
-
-end;
 
 constructor TCadastroUfController.Create;
 begin

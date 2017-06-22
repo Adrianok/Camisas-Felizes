@@ -7,7 +7,6 @@ uses
 
 type
   IInterfaceViewBase = interface
-    procedure Consulta;
     procedure CriarForm(Aowner: TComponent);
     procedure Novo;
     procedure Salvar;

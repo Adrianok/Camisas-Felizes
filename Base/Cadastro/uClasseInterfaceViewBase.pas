@@ -19,7 +19,6 @@ type
     procedure CriarForm(Aowner: TComponent); virtual;
     procedure Pesquisar(Aowner: TComponent); virtual;
     procedure Inicial; virtual;
-    procedure Consulta; virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
     procedure KeyDown(var Key: Word; Aowner: TComponent);
@@ -69,12 +68,6 @@ begin
     else if(oFormulario.Components[iIndice] is TDateTimePicker) then
       (oFormulario.Components[iIndice] as TDateTimePicker).Enabled := True;
   end;
-end;
-
-
-
-procedure TClassInterfaceViewBase.Consulta;
-begin
 end;
 
 

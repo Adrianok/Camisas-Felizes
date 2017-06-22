@@ -27,7 +27,6 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,14 +69,6 @@ end;
 procedure TfrmBase.btnSalvarClick(Sender: TObject);
 begin
   oController.Salvar;
-end;
-
-
-
-procedure TfrmBase.FormActivate(Sender: TObject);
-begin
-  if(assigned(oController))then
-    oController.Consulta;
 end;
 
 

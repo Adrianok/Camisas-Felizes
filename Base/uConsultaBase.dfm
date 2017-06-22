@@ -18,7 +18,6 @@ object frmPesquisaBase: TfrmPesquisaBase
   OldCreateOrder = False
   ParentBiDiMode = False
   Visible = True
-  OnActivate = FormActivate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
@@ -588,7 +587,7 @@ object frmPesquisaBase: TfrmPesquisaBase
     Height = 202
     Align = alClient
     DataSource = DataSourceGrid
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    Options = [dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

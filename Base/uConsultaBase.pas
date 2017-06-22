@@ -29,7 +29,6 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
     procedure edtPesquisaChange(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,7 +50,6 @@ end;
 
 procedure TfrmPesquisaBase.btnConfirmarClick(Sender: TObject);
 begin
-//  oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
   oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
   oController.Fechar;
 end;
@@ -69,12 +67,6 @@ end;
 procedure TfrmPesquisaBase.edtPesquisaChange(Sender: TObject);
 begin
   oController.PesquisarGrid;
-end;
-
-procedure TfrmPesquisaBase.FormActivate(Sender: TObject);
-begin
-  if(assigned(oController))then
-    oController.MarcarPassagem;
 end;
 
 procedure TfrmPesquisaBase.FormKeyDown(Sender: TObject; var Key: Word;

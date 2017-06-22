@@ -16,7 +16,6 @@ type
     procedure Fechar;
     procedure Cancelar;
     procedure Confirmar;
-    procedure MarcarPassagem;
     procedure Pesquisar;
     procedure PesquisarGrid;
 

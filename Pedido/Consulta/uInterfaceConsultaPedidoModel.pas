@@ -1,11 +1,11 @@
-unit uInterfaceConsultaModeloModel;
+unit uInterfaceConsultaPedidoModel;
 
 interface
 uses
   System.Generics.Collections,
-  uCadastroModeloDto, FireDac.Comp.Client;
+  uCadastroPedidoDto, FireDac.Comp.Client;
 type
-  IInterfaceConsultaModeloModel = interface
+  IInterfaceConsultaPedidoModel = interface
 
    function SelectAll(MemTable: TFDMemTable) : boolean;
   end;

@@ -13,7 +13,6 @@ type
   private
     Query: TFDQuery;
   public
-   function SelectId(sDescricao : String): Integer;
    function SelectAll(MemTable: TFDMemTable) : boolean;
 
     constructor Create;
@@ -49,22 +48,6 @@ begin
     end
     else
       Result := False;
-  except
-    raise Exception.Create('Não Foi possível acessar o banco de dados');
-  end;
-end;
-
-function TConsultaTamanhoModel.SelectId(sDescricao: String): Integer;
-begin
-  try
-    Query.SQL.Clear;
-    Query.Open('SELECT * FROM Tamanho where descricao = '+QuotedStr(sDescricao));
-    if (not(Query.IsEmpty)) then
-    begin
-      Result := Query.FieldByName('idTamanho').AsInteger;
-    end
-    else
-      Result := 0;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;

@@ -14,6 +14,7 @@ uses
 type
   TCadastroTamanhoController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoTamanho(aIdTamanho : integer);
   public
     procedure Excluir; override;
     procedure Inicial; override;
@@ -48,12 +49,6 @@ inherited;
       edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
     end;
   end
-  else
-  if(oCadastroTamanhoDto.Descricao = '!')then
-  begin
-    ShowMessage('Nenhum Registro Selecionado');
-    Inicial;
-  end;
 end;
 
 constructor TCadastroTamanhoController.Create;
@@ -70,11 +65,11 @@ end;
 
 procedure TCadastroTamanhoController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroTamanhoForm.Create(Aowner);
   oFormulario.oController := oCadastroTamanhoController;
   oFormulario.Show;
+  inherited;
 end;
 
 destructor TCadastroTamanhoController.Destroy;
@@ -130,7 +125,21 @@ begin
 
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoController := TConsultaTamanhoController.Create;
-  oConsultaTamanhoController.CriarForm(Aowner);
+  oConsultaTamanhoController.CriarForm(Aowner, RetornoTamanho);
+end;
+
+procedure TCadastroTamanhoController.RetornoTamanho(aIdTamanho: integer);
+begin
+  if(oCadastroTamanhoDto.IdTamanho <> 0)then
+  begin
+    if(oCadastroTamanhoRegra.SelectTamanho(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+    with (oFormulario as TCadastroTamanhoForm) do
+    begin
+      edtCodigo.Text :=   IntToStr(oCadastroTamanhoDto.IdTamanho);
+      edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
+    end;
+  end
+
 end;
 
 procedure TCadastroTamanhoController.Salvar;

@@ -10,7 +10,6 @@ uses
 type
   TConsultaTamanhoRegra = class
   public
-    function SelectId(const oConsultaTamanhoModel: TConsultaTamanhoModel; sDescricao : String) : Integer;
     function SelectAll(const oConsultaTamanhoModel: TConsultaTamanhoModel; MemTable: TFDMemTable) : boolean;
   end;
 
@@ -25,12 +24,6 @@ begin
 
   Result:= oConsultaTamanhoModel.SelectAll(MemTable);
 
-end;
-
-function TConsultaTamanhoRegra.SelectId(const oConsultaTamanhoModel: TConsultaTamanhoModel;
-  sDescricao: String): Integer;
-begin
-  Result := oConsultaTamanhoModel.SelectId(sDescricao);
 end;
 
 end.

@@ -14,6 +14,7 @@ uses
 type
   TCadastroUfController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoUf(aIdUf: integer);
   public
     procedure Inicial; override;
     procedure Consulta; override;
@@ -38,22 +39,7 @@ implementation
 procedure TCadastroUfController.Consulta;
 begin
   inherited;
-  if (oCadastroUfDto.Id > 0) then
-  begin
-    if (oCadastroUfRegra.SelectUf(oCadastroUfModel, oCadastroUfDto)) then
-      with (oFormulario as TCadastroUfForm) do
-      begin
-        ledtCodigo.Text := IntToStr(oCadastroUfDto.Id);
-        ledtUf.Text := oCadastroUfDto.uf;
-        ledtNome.Text := oCadastroUfDto.nome;
-      end;
-  end
-  else
-    if(oCadastroUfDto.uf = '!')then
-    begin
-      ShowMessage('Nenhum Registro Selecionado');
-      Inicial;
-    end;
+
 end;
 
 constructor TCadastroUfController.Create;
@@ -70,11 +56,11 @@ end;
 
 procedure TCadastroUfController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroUfForm.Create(Aowner);
   oFormulario.oController := oCadastroUfController;
   oFormulario.Show;
+  inherited;
 end;
 
 procedure TCadastroUfController.Excluir;
@@ -128,7 +114,28 @@ begin
 
   if (not(assigned(oConsultaUfController))) then
     oConsultaUfController := TConsultaUfController.Create;
-  oConsultaUfController.CriarForm(Aowner);
+  oConsultaUfController.CriarForm(Aowner, RetornoUf);
+end;
+
+procedure TCadastroUfController.RetornoUf(aIdUf: integer);
+begin
+  if (aIdUf > 0) then
+  begin
+    oCadastroUfDto.Id := aIdUf;
+    if (oCadastroUfRegra.SelectUf(oCadastroUfModel, oCadastroUfDto)) then
+      with (oFormulario as TCadastroUfForm) do
+      begin
+        ledtCodigo.Text := IntToStr(oCadastroUfDto.Id);
+        ledtUf.Text := oCadastroUfDto.uf;
+        ledtNome.Text := oCadastroUfDto.nome;
+      end;
+  end
+  else
+    if(oCadastroUfDto.uf = '!')then
+    begin
+      ShowMessage('Nenhum Registro Selecionado');
+      Inicial;
+    end;
 end;
 
 procedure TCadastroUfController.Salvar;

@@ -10,8 +10,7 @@ uses
 type
   TConsultaCorRegra = class
   public
-    function SelectId(const oConsultaCorModel: TConsultaCorModel; sDescricao : String) : Integer;
-    function SelectAll(const oConsultaCorModel: TConsultaCorModel; MemTable: TFDMemTable) : boolean;
+     function SelectAll(const oConsultaCorModel: TConsultaCorModel; MemTable: TFDMemTable) : boolean;
   end;
 
 var
@@ -25,12 +24,6 @@ begin
 
   Result:= oConsultaCorModel.SelectAll(MemTable);
 
-end;
-
-function TConsultaCorRegra.SelectId(const oConsultaCorModel: TConsultaCorModel;
-  sDescricao: String): Integer;
-begin
-  Result := oConsultaCorModel.SelectId(sDescricao);
 end;
 
 end.

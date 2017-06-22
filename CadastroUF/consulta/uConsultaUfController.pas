@@ -7,7 +7,7 @@ uses
   Vcl.StdCtrls, System.classes, System.SysUtils,
   uClasseInterfaceConsultaBase, uConsultaUfModel,
   uInterfaceConsultaBase, uCadastroUfDto, uConsultaUfForm,
-  FireDac.Comp.Client, uConsultaUfRegra,
+  FireDac.Comp.Client, uConsultaUfRegra, uFuncaoRetorno,
   Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows;
 
 type
@@ -15,9 +15,8 @@ type
   private
   public
     procedure PesquisarGrid;  override;
-    procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; override;
-    procedure CriarForm(Aowner: TComponent); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno : TRetornoConsulta); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -31,12 +30,6 @@ var
 implementation
 
 { TConsultaCorConsultaController }
-
-procedure TConsultaUfController.AlimentarDto(Column: TColumn);
-begin
-  inherited;
-  oCadastroUfDto.id := StrToInt(Column.Field.Text);
-end;
 
 procedure TConsultaUfController.Cancelar;
 begin
@@ -66,7 +59,7 @@ begin
     oConsultaUfRegra := TConsultaUfRegra.Create;
 end;
 
-procedure TConsultaUfController.CriarForm(Aowner: TComponent);
+procedure TConsultaUfController.CriarForm(Aowner: TComponent; aRetorno : TRetornoConsulta);
 begin
   if not(assigned(oFormulario)) then
   begin

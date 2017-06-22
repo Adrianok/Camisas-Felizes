@@ -4,8 +4,8 @@ inherited ConsultaCorForm: TConsultaCorForm
   ClientHeight = 522
   ClientWidth = 374
   Position = poDesigned
-  ExplicitWidth = 390
-  ExplicitHeight = 561
+  ExplicitWidth = 380
+  ExplicitHeight = 551
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -17,6 +17,9 @@ inherited ConsultaCorForm: TConsultaCorForm
     Width = 374
     ExplicitTop = 442
     ExplicitWidth = 374
+    inherited Panel3: TPanel
+      Left = 73
+    end
   end
   object DBGrid: TDBGrid [2]
     Left = 0

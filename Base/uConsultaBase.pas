@@ -50,7 +50,6 @@ end;
 
 procedure TfrmPesquisaBase.btnConfirmarClick(Sender: TObject);
 begin
-//  oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
   oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
   oController.Fechar;
 end;

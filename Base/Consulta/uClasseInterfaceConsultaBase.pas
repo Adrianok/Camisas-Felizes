@@ -9,17 +9,19 @@ uses
   Vcl.Forms, Vcl.Controls,
   System.Classes, uConsultaBase,
   FireDAC.Comp.Client, Vcl.DbGrids,
-  uCadastroCorDto, Winapi.Windows;
+  uCadastroCorDto, Winapi.Windows, uFuncaoRetorno;
 type
+
   TClassInterfaceConsultaBase = class(TInterfacedObject, IInterfaceConsultaBase)
   private
   protected
+    oRetorno: TRetornoConsulta;
     oFormulario : TfrmPesquisaBase;
   public
     procedure PesquisarGrid; virtual;
     procedure AlimentarDto(Column : TColumn); virtual;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent); virtual;
+    procedure CriarForm(Aowner: TComponent; ARetorno: TRetornoConsulta); virtual;
     procedure Pesquisar; virtual;
     procedure KeyDown(var Key: Word);
     procedure Cancelar;  virtual;
@@ -51,13 +53,14 @@ end;
 
 
 
-procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent);
+procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent; ARetorno: TRetornoConsulta);
 begin
   with oFormulario do
   begin
     ActiveControl :=  oFormulario.DBGrid1;
     DBGrid1.SelectedIndex := 1;
   end;
+  oRetorno := ARetorno;
 end;
 
 

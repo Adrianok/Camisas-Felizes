@@ -14,6 +14,7 @@ uses
 type
   TCadastroPedidoController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoPedido(aIdPedido : Integer);
   public
     procedure Excluir; override;
     procedure Inicial; override;
@@ -124,7 +125,22 @@ begin
 
   if (not(assigned(oConsultaPedidoController))) then
     oConsultaPedidoController := TConsultaPedidoController.Create;
-  oConsultaPedidoController.CriarForm(Aowner);
+  oConsultaPedidoController.CriarForm(Aowner, RetornoPedido);
+end;
+
+procedure TCadastroPedidoController.RetornoPedido(aIdPedido: Integer);
+begin
+inherited;
+  if(aIdPedido <> 0)then
+  begin
+    oCadastroPedidoDto.IdPedido :=  aIdPedido;
+    if(oCadastroPedidoRegra.SelectPedido(oCadastroPedidoModel, oCadastroPedidoDto))then
+    with (oFormulario as TCadastroPedidoForm) do
+    begin
+      edtCodigo.Text :=   IntToStr(oCadastroPedidoDto.IdPedido);
+      edtPedido.Text    :=  oCadastroPedidoDto.Descricao;
+    end;
+  end
 end;
 
 procedure TCadastroPedidoController.Salvar;

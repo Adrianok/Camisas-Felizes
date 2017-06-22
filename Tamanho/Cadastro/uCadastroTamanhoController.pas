@@ -14,6 +14,7 @@ uses
 type
   TCadastroTamanhoController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoTamanho(aIdTamanho : integer);
   public
     procedure Excluir; override;
     procedure Inicial; override;
@@ -124,7 +125,21 @@ begin
 
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoController := TConsultaTamanhoController.Create;
-  oConsultaTamanhoController.CriarForm(Aowner);
+  oConsultaTamanhoController.CriarForm(Aowner, RetornoTamanho);
+end;
+
+procedure TCadastroTamanhoController.RetornoTamanho(aIdTamanho: integer);
+begin
+  if(oCadastroTamanhoDto.IdTamanho <> 0)then
+  begin
+    if(oCadastroTamanhoRegra.SelectTamanho(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+    with (oFormulario as TCadastroTamanhoForm) do
+    begin
+      edtCodigo.Text :=   IntToStr(oCadastroTamanhoDto.IdTamanho);
+      edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
+    end;
+  end
+
 end;
 
 procedure TCadastroTamanhoController.Salvar;

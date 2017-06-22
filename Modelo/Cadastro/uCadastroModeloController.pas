@@ -17,6 +17,7 @@ uses
 type
   TCadastroModeloController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoModelo(aIdModelo : integer);
   public
     procedure ChecarCores(oListaIdCores : TList);
     procedure VerificarChecados(oListaIdCores : TList);
@@ -219,7 +220,25 @@ begin
 
   if (not(assigned(oConsultaModeloController))) then
     oConsultaModeloController := TConsultaModeloController.Create;
-  oConsultaModeloController.CriarForm(Aowner);
+  oConsultaModeloController.CriarForm(Aowner, RetornoModelo);
+end;
+
+procedure TCadastroModeloController.RetornoModelo(aIdModelo: integer);
+begin
+  with (oFormulario as TCadastroModeloForm) do
+  begin
+    if(aIdModelo <> 0)then
+    begin
+      oCadastroModeloDto.IdModelo := aIdModelo;
+      if(oCadastroModeloRegra.SelectModelo(oCadastroModeloModel, oCadastroModeloDto))then
+        edtCodigo.Text :=   IntToStr(oCadastroModeloDto.IdModelo);
+      edtModelo.Text    :=  oCadastroModeloDto.Descricao;
+      edtPreco.Text    :=  CurrToStr(oCadastroModeloDto.Preco);
+
+      GridCor(StrToIntDef(edtCodigo.Text, 0));
+    end;
+  end;
+
 end;
 
 procedure TCadastroModeloController.Salvar;

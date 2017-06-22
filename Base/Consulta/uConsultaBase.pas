@@ -37,7 +37,7 @@ type
   end;
 
 var
-  frmPesquisaBase: TfrmPesquisaBase;
+  frmPesquisaBase: IInterfaceConsultaBase;
 
 implementation
 

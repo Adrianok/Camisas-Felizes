@@ -60,13 +60,10 @@ begin
 
   if (not(assigned(oConsultaModeloRegra))) then
     oConsultaModeloRegra := TConsultaModeloRegra.Create;
-
-
 end;
 
 procedure TConsultaModeloController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
   begin
     oFormulario :=  TConsultaModeloForm.Create(Aowner);
@@ -74,6 +71,7 @@ begin
     PreencherGrid;
   end;
   oFormulario.Show;
+  inherited;
 end;
 
 destructor TConsultaModeloController.Destroy;

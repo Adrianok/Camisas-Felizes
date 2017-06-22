@@ -8,7 +8,6 @@ type
   IInterfaceConsultaModeloModel = interface
 
    function SelectAll(MemTable: TFDMemTable) : boolean;
-
   end;
 
 implementation

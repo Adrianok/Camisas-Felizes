@@ -68,11 +68,11 @@ end;
 
 procedure TCadastroCorController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroCorForm.Create(Aowner);
   oFormulario.oController := oCadastroCorController;
   oFormulario.Show;
+  inherited;
 end;
 
 destructor TCadastroCorController.Destroy;

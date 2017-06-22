@@ -8,12 +8,17 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
     Height = 150
     ExplicitHeight = 150
     inherited Cadastro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 622
+      ExplicitHeight = 122
       object edtCodigo: TLabeledEdit
         Tag = 999
         Left = 78
         Top = 16
         Width = 153
         Height = 26
+        Hint = 'C'#243'digo do tamanho'
         CharCase = ecUpperCase
         EditLabel.Width = 58
         EditLabel.Height = 23
@@ -38,7 +43,8 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
         Left = 78
         Top = 72
         Width = 487
-        Height = 27
+        Height = 26
+        Hint = 'Tamanho'
         CharCase = ecUpperCase
         EditLabel.Width = 68
         EditLabel.Height = 23
@@ -49,7 +55,6 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
         EditLabel.Font.Name = 'Segoe UI Light'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15

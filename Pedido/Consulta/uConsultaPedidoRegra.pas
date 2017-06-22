@@ -10,7 +10,6 @@ uses
 type
   TConsultaPedidoRegra = class
   public
-    function SelectId(const oConsultaPedidoModel: TConsultaPedidoModel; sDescricao : String) : Integer;
     function SelectAll(const oConsultaPedidoModel: TConsultaPedidoModel; MemTable: TFDMemTable) : boolean;
   end;
 
@@ -25,12 +24,6 @@ begin
 
   Result:= oConsultaPedidoModel.SelectAll(MemTable);
 
-end;
-
-function TConsultaPedidoRegra.SelectId(const oConsultaPedidoModel: TConsultaPedidoModel;
-  sDescricao: String): Integer;
-begin
-  Result := oConsultaPedidoModel.SelectId(sDescricao);
 end;
 
 end.

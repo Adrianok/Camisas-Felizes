@@ -13,7 +13,6 @@ type
   private
     Query: TFDQuery;
   public
-   function SelectId(sDescricao : String): Integer;
    function SelectAll(MemTable: TFDMemTable) : boolean;
 
     constructor Create;
@@ -42,7 +41,8 @@ begin
   try
     Query.SQL.Clear;
     Query.Open('SELECT p.idpedido AS idpedido , p.data AS data, '
-             + ' p.valortotal AS valortotal , c.nome AS nome FROM pedido p '
+              +' (select count(i.iditensPedido) from itenspedido i where i.idpedido = p.idpedido) as total, '
+             + ' p.valortotal AS valortotal , UPPER(c.nome) AS nome FROM pedido p '
              + ' LEFT JOIN cliente c on c.idcliente = p.idcliente ');
     if (not(Query.IsEmpty)) then
     begin
@@ -51,22 +51,6 @@ begin
     end
     else
       Result := False;
-  except
-    raise Exception.Create('Não Foi possível acessar o banco de dados');
-  end;
-end;
-
-function TConsultaPedidoModel.SelectId(sDescricao: String): Integer;
-begin
-  try
-    Query.SQL.Clear;
-    Query.Open('SELECT * FROM Pedido where descricao = '+QuotedStr(sDescricao));
-    if (not(Query.IsEmpty)) then
-    begin
-      Result := Query.FieldByName('idPedido').AsInteger;
-    end
-    else
-      Result := 0;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;

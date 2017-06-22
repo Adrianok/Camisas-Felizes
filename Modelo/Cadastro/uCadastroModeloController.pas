@@ -106,12 +106,11 @@ end;
 
 procedure TCadastroModeloController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroModeloForm.Create(Aowner);
   oFormulario.oController := oCadastroModeloController;
   oFormulario.Show;
-
+  inherited;
     (oFormulario as TCadastroModeloForm).edtCor.OnChange := ConsultaGridCor;
 end;
 

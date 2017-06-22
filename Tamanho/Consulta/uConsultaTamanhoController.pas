@@ -38,17 +38,20 @@ begin
    oCadastroTamanhoDto.IdTamanho := StrToInt(Column.Field.Text);
 end;
 
+
+
 procedure TConsultaTamanhoController.Cancelar;
 begin
   inherited;
-
 end;
+
+
 
 procedure TConsultaTamanhoController.Confirmar;
 begin
   inherited;
-
 end;
+
 
 
 constructor TConsultaTamanhoController.Create;
@@ -56,7 +59,6 @@ begin
   //falta reiniciarSistema
   if (not(assigned(oCadastroTamanhoDto))) then
        raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
 
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoModel := TConsultaTamanhoModel.Create;
@@ -78,6 +80,8 @@ begin
   oFormulario.edtPesquisa.Text := oCadastroTamanhoDto.Descricao;
   inherited;
 end;
+
+
 
 destructor TConsultaTamanhoController.Destroy;
 begin
@@ -102,6 +106,8 @@ begin
                                       +'or idTamanho  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';
   oFormulario.FDMemTableGrid.Filtered := True;
  end;
+
+
 
 function TConsultaTamanhoController.PreencherGrid: boolean;
 begin

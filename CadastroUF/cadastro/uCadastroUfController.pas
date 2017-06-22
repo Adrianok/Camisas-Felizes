@@ -70,11 +70,11 @@ end;
 
 procedure TCadastroUfController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroUfForm.Create(Aowner);
   oFormulario.oController := oCadastroUfController;
   oFormulario.Show;
+  inherited;
 end;
 
 procedure TCadastroUfController.Excluir;

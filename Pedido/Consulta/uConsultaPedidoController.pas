@@ -74,7 +74,7 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroPedidoDto.Descricao;
+  oFormulario.edtPesquisa.Text := IntToStr(oCadastroPedidoDto.IdPedido);
   inherited;
 end;
 
@@ -95,8 +95,10 @@ end;
 procedure TConsultaPedidoController.PesquisarGrid;
 begin
   inherited;
-  oFormulario.FDMemTableGrid.Filter := 'descricao like ''%' + oFormulario.edtPesquisa.Text + '%'' '
-                                      +'or idPedido  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';
+  oFormulario.FDMemTableGrid.Filter := 'idpedido like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+                                      +'or valortotal  like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+                                      +'or nome  like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+                                      +'or data  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';
   oFormulario.FDMemTableGrid.Filtered := True;
  end;
 

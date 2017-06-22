@@ -55,8 +55,6 @@ procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent);
 begin
   with oFormulario do
   begin
-    if(edtPesquisa.Text = '!')then
-      edtPesquisa.Text := '';
     ActiveControl :=  oFormulario.DBGrid1;
     DBGrid1.SelectedIndex := 1;
   end;

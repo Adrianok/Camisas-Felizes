@@ -11,6 +11,9 @@ type
   TCadastroPedidoForm = class(TfrmBase)
     edtCodigo: TLabeledEdit;
     edtPedido: TLabeledEdit;
+    LabeledEdit1: TLabeledEdit;
+    dteDataAtual: TDateTimePicker;
+    Label1: TLabel;
   private
     { Private declarations }
   public

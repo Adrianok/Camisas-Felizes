@@ -1,5 +1,5 @@
 inherited ConsultaPedidoForm: TConsultaPedidoForm
-  Left = 893
+  Left = 566
   Caption = 'Consulta cadastro de Pedido'
   ClientHeight = 540
   ClientWidth = 794
@@ -15,8 +15,7 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
   inherited Panel2: TPanel
     Top = 460
     Width = 794
-    ExplicitLeft = -224
-    ExplicitTop = 452
+    ExplicitTop = 460
     ExplicitWidth = 794
     inherited Panel3: TPanel
       Left = 496
@@ -25,62 +24,30 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
       ExplicitWidth = 297
     end
   end
-  object DBGrid: TDBGrid [2]
-    Left = 0
-    Top = 57
-    Width = 794
-    Height = 403
-    Align = alClient
-    DataSource = DataSourceGrid
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'idPedido'
-        Title.Caption = 'C'#243'digo'
-        Width = 54
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'descricao'
-        Title.Caption = 'Descri'#231#227'o'
-        Width = 308
-        Visible = True
-      end>
-  end
   inherited DBGrid1: TDBGrid
     Width = 794
     Height = 403
-    DataSource = nil
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 3
     Columns = <
       item
         Expanded = False
         FieldName = 'idPedido'
-        Title.Caption = 'C'#243'digo'
-        Width = 59
+        Title.Caption = 'C'#243'digo do pedido'
+        Width = 120
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'nome'
         Title.Caption = 'Nome do Cliente'
-        Width = 273
+        Width = 298
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'data'
         Title.Caption = 'Data do pedido'
-        Width = 106
+        Width = 141
         Visible = True
       end
       item
@@ -88,6 +55,13 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
         FieldName = 'valortotal'
         Title.Caption = 'Valor do Pedido'
         Width = 86
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'total'
+        Title.Caption = 'Quantidade de itens'
+        Width = 102
         Visible = True
       end>
   end

@@ -64,11 +64,11 @@ end;
 
 procedure TCadastroPedidoController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroPedidoForm.Create(Aowner);
   oFormulario.oController := oCadastroPedidoController;
   oFormulario.Show;
+  inherited;
 end;
 
 destructor TCadastroPedidoController.Destroy;

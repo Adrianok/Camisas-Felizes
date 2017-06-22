@@ -4,13 +4,7 @@ uses
   Vcl.Forms,
   uConexao in 'ConexãoBD\uConexao.pas',
   uConexaoSingleTon in 'ConexãoBD\uConexaoSingleTon.pas',
-  uBase in 'Base\uBase.pas' {frmBase},
-  uConsultaBase in 'Base\uConsultaBase.pas' {frmPesquisaBase},
   uPrincipal in 'Principal\uPrincipal.pas' {frmPrincipal},
-  uClasseInterfaceViewBase in 'Base\uClasseInterfaceViewBase.pas',
-  uInterfaceViewBase in 'Base\uInterfaceViewBase.pas',
-  uInterfaceConsultaBase in 'Base\uInterfaceConsultaBase.pas',
-  uClasseInterfaceConsultaBase in 'Base\uClasseInterfaceConsultaBase.pas',
   Vcl.Themes,
   Vcl.Styles,
   uConsultaUfController in 'CadastroUF\consulta\uConsultaUfController.pas',
@@ -36,7 +30,6 @@ uses
   uConsultaCorModel in 'Cor\Consulta\uConsultaCorModel.pas',
   uConsultaCorRegra in 'Cor\Consulta\uConsultaCorRegra.pas',
   uInterfaceConsultaCorModel in 'Cor\Consulta\uInterfaceConsultaCorModel.pas',
-  uInterfaceCorModel in 'Cor\Consulta\uInterfaceCorModel.pas',
   uCadastroTamanhoController in 'Tamanho\Cadastro\uCadastroTamanhoController.pas',
   uCadastroTamanhoDto in 'Tamanho\Cadastro\uCadastroTamanhoDto.pas',
   uCadastroTamanhoForm in 'Tamanho\Cadastro\uCadastroTamanhoForm.pas' {CadastroTamanhoForm},
@@ -59,7 +52,6 @@ uses
   uConsultaModeloModel in 'Modelo\Consulta\uConsultaModeloModel.pas',
   uConsultaModeloRegra in 'Modelo\Consulta\uConsultaModeloRegra.pas',
   uInterfaceConsultaModeloModel in 'Modelo\Consulta\uInterfaceConsultaModeloModel.pas',
-  uInterfaceModeloModel in 'Modelo\Consulta\uInterfaceModeloModel.pas',
   uCor_ModeloModel in 'Cor_Modelo\uCor_ModeloModel.pas',
   uInterfaceCor_ModeloModel in 'Cor_Modelo\uInterfaceCor_ModeloModel.pas',
   uListaCores in 'Cor\uListaCores.pas',
@@ -73,7 +65,13 @@ uses
   uConsultaPedidoForm in 'Pedido\Consulta\uConsultaPedidoForm.pas' {ConsultaPedidoForm},
   uConsultaPedidoModel in 'Pedido\Consulta\uConsultaPedidoModel.pas',
   uConsultaPedidoRegra in 'Pedido\Consulta\uConsultaPedidoRegra.pas',
-  uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas';
+  uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas',
+  uBase in 'Base\Cadastro\uBase.pas' {frmBase},
+  uClasseInterfaceViewBase in 'Base\Cadastro\uClasseInterfaceViewBase.pas',
+  uInterfaceViewBase in 'Base\Cadastro\uInterfaceViewBase.pas',
+  uClasseInterfaceConsultaBase in 'Base\Consulta\uClasseInterfaceConsultaBase.pas',
+  uConsultaBase in 'Base\Consulta\uConsultaBase.pas' {frmPesquisaBase},
+  uInterfaceConsultaBase in 'Base\Consulta\uInterfaceConsultaBase.pas';
 
 {$R *.res}
 

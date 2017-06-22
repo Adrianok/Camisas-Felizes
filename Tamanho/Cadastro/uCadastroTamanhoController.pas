@@ -64,11 +64,11 @@ end;
 
 procedure TCadastroTamanhoController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroTamanhoForm.Create(Aowner);
   oFormulario.oController := oCadastroTamanhoController;
   oFormulario.Show;
+  inherited;
 end;
 
 destructor TCadastroTamanhoController.Destroy;

@@ -11,13 +11,13 @@ uses
   uCadastroMunicipioRegra, uCadastroMunicipioModel,
   uCadastroMunicipioForm, uInterfaceViewBase,
   uConsultaMunicipioForm, uConsultaMunicipioController,
-  uConsultaUfController, uConsultaUfRegra, uConsultaUfModel;
+  uConsultaUfController, uConsultaUfRegra, uConsultaUfModel,
+  uCadastroUfDto;
 
   type
   TCadastroMunicipioController = class(TClassInterfaceViewBase)
   private
     procedure RetornoEstado(AID: Integer);
-    var oNomeEstado : String;
 
   public
     procedure Inicial; override;
@@ -71,6 +71,7 @@ begin
 
   if (not(assigned(oCadastroMunicipioRegra))) then
     oCadastroMunicipioRegra := TCadastroMunicipioRegra.Create;
+
 end;
 
 procedure TCadastroMunicipioController.CriarForm(Aowner: TComponent);
@@ -118,10 +119,8 @@ end;
 
 procedure TCadastroMunicipioController.NovoID;
 begin
-  if (oCadastroMunicipioRegra.Novo(oCadastroMunicipioModel,
-    oCadastroMunicipioDto)) then
-    (oFormulario as TCadastroMunicipioForm).ledtCodigo.Text :=
-      IntToStr(oCadastroMunicipioDto.Id);
+  if (oCadastroMunicipioRegra.Novo(oCadastroMunicipioModel, oCadastroMunicipioDto)) then
+    (oFormulario as TCadastroMunicipioForm).ledtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
 end;
 
 procedure TCadastroMunicipioController.Pesquisar(Aowner: TComponent);

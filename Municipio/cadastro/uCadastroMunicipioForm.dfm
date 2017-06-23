@@ -68,7 +68,7 @@ inherited CadastroMunicipioForm: TCadastroMunicipioForm
         EditLabel.Caption = 'Estado:'
         LabelPosition = lpLeft
         TabOrder = 2
-        TextHint = 'nome Municipio'
+        TextHint = 'nome estado (Tecle F2)'
       end
     end
   end

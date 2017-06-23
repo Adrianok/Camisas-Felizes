@@ -46,11 +46,8 @@ end;
 constructor TConsultaUfController.Create;
 begin
   //falta reiniciarSistema
-  if (not(assigned(oCadastroUfDto))) then
-    raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
-  if(not(oCadastroUfDto.id > 0))then
-    oCadastroUfDto.uf := '!';
+//  if (not(assigned(oCadastroUfDto))) then
+//    raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
   if (not(assigned(oConsultaUfController))) then
     oConsultaUfModel := TConsultaUfModel.Create;
@@ -69,7 +66,7 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroUfDto.uf;
+//  oFormulario.edtPesquisa.Text := oCadastroUfDto.uf;
   inherited;
 end;
 

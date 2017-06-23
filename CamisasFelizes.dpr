@@ -73,7 +73,19 @@ uses
   uCadastroPedidoForm in 'Pedido\Cadastro\uCadastroPedidoForm.pas' {CadastroPedidoForm},
   uCadastroPedidoModel in 'Pedido\Cadastro\uCadastroPedidoModel.pas',
   uCadastroPedidoRegra in 'Pedido\Cadastro\uCadastroPedidoRegra.pas',
-  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas';
+  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas',
+  uCadastroMunicipioController in 'Municipio\cadastro\uCadastroMunicipioController.pas',
+  uCadastroMunicipioDto in 'Municipio\cadastro\uCadastroMunicipioDto.pas',
+  uCadastroMunicipioForm in 'Municipio\cadastro\uCadastroMunicipioForm.pas' {CadastroMunicipioForm},
+  uCadastroMunicipioModel in 'Municipio\cadastro\uCadastroMunicipioModel.pas',
+  uCadastroMunicipioRegra in 'Municipio\cadastro\uCadastroMunicipioRegra.pas',
+  uInterfaceCadastroMunicipioModel in 'Municipio\cadastro\uInterfaceCadastroMunicipioModel.pas',
+  uConsultaMunicipioController in 'Municipio\consulta\uConsultaMunicipioController.pas',
+  uConsultaMunicipioForm in 'Municipio\consulta\uConsultaMunicipioForm.pas' {ConsultaMunicipioForm},
+  uConsultaMunicipioModel in 'Municipio\consulta\uConsultaMunicipioModel.pas',
+  uConsultaMunicipioRegra in 'Municipio\consulta\uConsultaMunicipioRegra.pas',
+  uInterfaceConsultaMunicipioModel in 'Municipio\consulta\uInterfaceConsultaMunicipioModel.pas',
+  uInterfaceMunicipioModel in 'Municipio\consulta\uInterfaceMunicipioModel.pas';
 
 {$R *.res}
 

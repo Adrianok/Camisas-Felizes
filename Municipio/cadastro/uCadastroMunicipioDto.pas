@@ -35,6 +35,9 @@ begin
   Fid := 0;
   Festado := EmptyStr;
   FMunicipio := EmptyStr;
+
+
+
 end;
 
 procedure TCadastroMunicipioDto.Setid(const Value: Integer);

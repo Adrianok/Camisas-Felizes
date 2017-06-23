@@ -21,7 +21,7 @@ uses
 
   public
     procedure Inicial; override;
-    procedure Consulta; override;
+    procedure Consulta;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
@@ -75,11 +75,11 @@ end;
 
 procedure TCadastroMunicipioController.CriarForm(Aowner: TComponent);
 begin
-  inherited;
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroMunicipioForm.Create(Aowner);
   oFormulario.oController := oCadastroMunicipioController;
   oFormulario.Show;
+    inherited;
 end;
 
 procedure TCadastroMunicipioController.Excluir;
@@ -143,21 +143,19 @@ begin
     if (Aowner = (oFormulario as TCadastroMunicipioForm).LedtEstado) then
     begin
       oConsultaUfController := TConsultaUfController.Create;
-      oConsultaUfController.CriarFormTeste(oFormulario, RetornoEstado);
+      oConsultaUfController.CriarForm(oFormulario, RetornoEstado);
     end
     else
     begin
       if (not(assigned(oConsultaMunicipioController))) then
         oConsultaMunicipioController := TConsultaMunicipioController.Create;
-      oConsultaMunicipioController.CriarForm(oFormulario);
+      oConsultaMunicipioController.CriarForm(oFormulario, RetornoEstado);
     end;
   end;
 end;
 
 procedure TCadastroMunicipioController.RetornoEstado(AID: Integer);
 begin
-
-  showmessage('chegou aqui');
 
 end;
 

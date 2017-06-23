@@ -8,7 +8,7 @@ uses
   uClasseInterfaceConsultaBase, uConsultaMunicipioModel,
   uInterfaceConsultaBase, uCadastroMunicipioDto, uConsultaMunicipioForm,
   FireDac.Comp.Client, uConsultaMunicipioRegra,
-  Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows;
+  Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows, uFuncaoRetorno;
 
 type
   TConsultaMunicipioController = class(TClassInterfaceConsultaBase)
@@ -17,7 +17,7 @@ type
     procedure PesquisarGrid;  override;
     procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; override;
-    procedure CriarForm(Aowner: TComponent); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -56,9 +56,6 @@ begin
   if (not(assigned(oCadastroMunicipioDto))) then
     raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
-  if(not(oCadastroMunicipioDto.id > 0))then
-    oCadastroMunicipioDto.Municipio := '!';
-
   if (not(assigned(oConsultaMunicipioController))) then
     oConsultaMunicipioModel := TConsultaMunicipioModel.Create;
 
@@ -66,7 +63,7 @@ begin
     oConsultaMunicipioRegra := TConsultaMunicipioRegra.Create;
 end;
 
-procedure TConsultaMunicipioController.CriarForm(Aowner: TComponent);
+procedure TConsultaMunicipioController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
 begin
   if not(assigned(oFormulario)) then
   begin

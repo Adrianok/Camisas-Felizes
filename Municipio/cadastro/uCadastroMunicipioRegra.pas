@@ -4,7 +4,8 @@ interface
 
 uses
   System.SysUtils, uCadastroMunicipioDto,
-  uCadastroMunicipioForm, uCadastroMunicipioModel;
+  uCadastroMunicipioForm, uCadastroMunicipioModel,
+  uCadastroUfRegra, uCadastroMunicipioModel;
 
 type
   TCadastroMunicipioRegra = class
@@ -60,7 +61,8 @@ end;
 function TCadastroMunicipioRegra.SelectMunicipio(const oCadastroMunicipioModel: TCadastroMunicipioModel;
   var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
 begin
-  Result := oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto);
+  if (oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto)) then
+   {}{}{}
 end;
 
 function TCadastroMunicipioRegra.SelectDescricao(const oCadastroMunicipioModel

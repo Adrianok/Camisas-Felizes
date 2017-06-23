@@ -42,6 +42,10 @@ object frmPrincipal: TfrmPrincipal
         Caption = 'Cadastro de Pedidos'
         OnClick = CadastrodePedidosClick
       end
+      object CadastrodeMunicipio1: TMenuItem
+        Caption = 'Cadastro de Municipio'
+        OnClick = CadastrodeMunicipio1Click
+      end
     end
   end
 end

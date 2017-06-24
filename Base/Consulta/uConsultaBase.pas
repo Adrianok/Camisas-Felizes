@@ -15,14 +15,15 @@ type
   TfrmPesquisaBase = class(TForm)
     Panel1: TPanel;
     edtPesquisa: TEdit;
-    Panel2: TPanel;
+    btnPesquisa: TBitBtn;
     DataSourceGrid: TDataSource;
     FDMemTableGrid: TFDMemTable;
     DBGrid1: TDBGrid;
+    Panel2: TPanel;
     Panel3: TPanel;
-    btnFechar: TBitBtn;
-    btnCancelar: TBitBtn;
     btnConfirmar: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnFechar: TBitBtn;
     procedure btnFecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnConfirmarClick(Sender: TObject);
@@ -37,7 +38,7 @@ type
   end;
 
 var
-  frmPesquisaBase: IInterfaceConsultaBase;
+  frmPesquisaBase: TfrmPesquisaBase;
 
 implementation
 
@@ -45,14 +46,12 @@ implementation
 
 procedure TfrmPesquisaBase.btnCancelarClick(Sender: TObject);
 begin
-  oController.Fechar;
+  oController.Cancelar;
 end;
 
 procedure TfrmPesquisaBase.btnConfirmarClick(Sender: TObject);
 begin
-//  oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-  oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-  oController.Fechar;
+  oController.Confirmar;
 end;
 
 procedure TfrmPesquisaBase.btnFecharClick(Sender: TObject);
@@ -70,22 +69,10 @@ begin
   oController.PesquisarGrid;
 end;
 
-
-
 procedure TfrmPesquisaBase.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if Key = VK_ESCAPE then
-  begin
-    oController.Fechar;
-    char(Key) := #0
-  end
-  else if Key = VK_RETURN then
-  begin
-    oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-    oController.Fechar;
-    char(Key) := #0
-  end;
+  oController.KeyDown(Key)
 end;
 
 end.

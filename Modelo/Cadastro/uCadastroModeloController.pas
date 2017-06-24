@@ -17,13 +17,13 @@ uses
 type
   TCadastroModeloController = class(TClassInterfaceViewBase)
   private
+    oListaIdCores : TList;
+    oListaCores : TListaCores;
     procedure RetornoModelo(aIdModelo : integer);
   public
-    procedure ChecarCores(oListaIdCores : TList);
     procedure VerificarChecados(oListaIdCores : TList);
     procedure GridCor(const idModelo : Integer);
     procedure Inicial; override;
-    procedure Consulta; override;
     procedure ConsultaGridCor(Sender : Tobject);
     procedure Pesquisar(Aowner : TComponent); override;
     procedure CriarForm(Aowner: TComponent); override;
@@ -42,28 +42,6 @@ implementation
 
 
 { TControllerCadastroModelo }
-
-procedure TCadastroModeloController.ChecarCores(oListaIdCores: TList);
-begin
-
-end;
-
-procedure TCadastroModeloController.Consulta;
-begin
-  with (oFormulario as TCadastroModeloForm) do
-  begin
-    if(oCadastroModeloDto.IdModelo <> 0)then
-    begin
-      if(oCadastroModeloRegra.SelectModelo(oCadastroModeloModel, oCadastroModeloDto))then
-        edtCodigo.Text :=   IntToStr(oCadastroModeloDto.IdModelo);
-      edtModelo.Text    :=  oCadastroModeloDto.Descricao;
-      edtPreco.Text    :=  CurrToStr(oCadastroModeloDto.Preco);
-
-      GridCor(StrToIntDef(edtCodigo.Text, 0));
-    end;
-  end;
-  inherited;
-end;
 
 procedure TCadastroModeloController.ConsultaGridCor(Sender : Tobject);
 var
@@ -91,9 +69,6 @@ begin
 
   if (not(assigned(oCor_ModeloModel))) then
     oCor_ModeloModel := TCor_ModeloModel.Create;
-
-  if (not(assigned(oCadastroCorDto))) then
-    oCadastroCorDto := TCadastroCorDto.Create;
 
   if (not(assigned(oCadastroCorModel))) then
     oCadastroCorModel := TCadastroCorModel.Create;
@@ -126,8 +101,11 @@ begin
   if (assigned(oCadastroModeloDto)) then
     FreeAndNil(oCadastroModeloDto);
 
-  if (assigned(oCadastroCorDto)) then
-    FreeAndNil(oCadastroCorDto);
+  if(assigned(oListaIdCores))then
+    FreeAndNil(oListaIdCores);
+
+  if(assigned(oListaCores))then
+    FreeAndNil(oListaCores);
 
   if (assigned(oCadastroCorModel)) then
     FreeAndNil(oCadastroCorModel);
@@ -148,8 +126,6 @@ end;
 
 procedure TCadastroModeloController.GridCor(const idModelo : Integer);
 var
-  oListaIdCores : TList;
-  oListaCores : TListaCores;
   oCadastroCorDto : TCadastroCorDto;
   iIndice : Integer;
   iIndiceLista : Integer;
@@ -220,7 +196,7 @@ begin
 
   if (not(assigned(oConsultaModeloController))) then
     oConsultaModeloController := TConsultaModeloController.Create;
-  oConsultaModeloController.CriarForm(Aowner, RetornoModelo);
+  oConsultaModeloController.CriarForm(Aowner, RetornoModelo, oCadastroModeloDto.Descricao);
 end;
 
 procedure TCadastroModeloController.RetornoModelo(aIdModelo: integer);
@@ -236,9 +212,13 @@ begin
       edtPreco.Text    :=  CurrToStr(oCadastroModeloDto.Preco);
 
       GridCor(StrToIntDef(edtCodigo.Text, 0));
+    end
+    else
+    begin
+      Inicial;
+      raise Exception.Create('Não foi escolhido registro');
     end;
   end;
-
 end;
 
 procedure TCadastroModeloController.Salvar;

@@ -19,7 +19,6 @@ type
     procedure CriarForm(Aowner: TComponent); virtual;
     procedure Pesquisar(Aowner: TComponent); virtual;
     procedure Inicial; virtual;
-    procedure Consulta; virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
     procedure KeyDown(var Key: Word; Aowner: TComponent);
@@ -43,7 +42,7 @@ var
   iIndice: integer;
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-    if (oFormulario.Components[iIndice] is TLabeledEdit) and
+    if (oFormulario.Components[iIndice] is TWinControl) and
       ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
       ((oFormulario.Components[iIndice] as TWinControl).Enabled = True) then
     begin
@@ -60,21 +59,20 @@ var
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
   begin
-    if ((oFormulario.Components[iIndice] is TLabeledEdit)
-    or  (oFormulario.Components[iIndice] is TGroupBox)) and
-    ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+   if((oFormulario.Components[iIndice] is TWinControl))then
+    if((oFormulario.Components[iIndice] as TWinControl).Tag = 666)then
+      (oFormulario.Components[iIndice] as TWinControl).Enabled := True;
+
+
+   if((oFormulario.Components[iIndice] is TCustomEdit) or
+       (oFormulario.Components[iIndice] is TGroupBox))   and
+      ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
       (oFormulario.Components[iIndice] as TWinControl).Enabled := True
     else if(oFormulario.Components[iIndice] is TLabel)then
       (oFormulario.Components[iIndice] as TLabel).Enabled := True
     else if(oFormulario.Components[iIndice] is TDateTimePicker) then
       (oFormulario.Components[iIndice] as TDateTimePicker).Enabled := True;
   end;
-end;
-
-
-
-procedure TClassInterfaceViewBase.Consulta;
-begin
 end;
 
 
@@ -92,9 +90,14 @@ var
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
   begin
-    if ((oFormulario.Components[iIndice] is TLabeledEdit)
-    or(oFormulario.Components[iIndice] is TGroupBox)) then
-      (oFormulario.Components[iIndice] as TWinControl).Enabled := False
+   if((oFormulario.Components[iIndice] is TWinControl))then
+    if((oFormulario.Components[iIndice] as TWinControl).Tag = 666)then
+      (oFormulario.Components[iIndice] as TWinControl).Enabled := False;
+
+    if((oFormulario.Components[iIndice] is TCustomEdit) or
+        (oFormulario.Components[iIndice] is TGroupBox))     and
+       ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+        (oFormulario.Components[iIndice] as TWinControl).Enabled := False
     else if(oFormulario.Components[iIndice] is TLabel)then
       (oFormulario.Components[iIndice] as TLabel).Enabled := False
     else if(oFormulario.Components[iIndice] is TDateTimePicker) then
@@ -216,7 +219,7 @@ begin
     if((oFormulario.Components[iIndice] is TLabeledEdit))then
     begin
       sCampo := (oFormulario.Components[iIndice] as TWinControl).Hint;
-      if (((oFormulario.Components[iIndice] as TLabeledEdit).Text = EmptyStr) and
+      if (((oFormulario.Components[iIndice] as TCustomEdit).Text = EmptyStr) and
          ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
          ((oFormulario.Components[iIndice] as TWinControl).Tag <> 888)) then
       begin

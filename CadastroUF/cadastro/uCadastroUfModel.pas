@@ -39,7 +39,8 @@ begin
   try
     Query.SQL.Clear;
     Query.SQL.Add('UPDATE Uf SET descricao =' + QuotedStr(oCadastroUfDto.nome) +
-                          ' WHERE sigla = ' + QuotedStr(oCadastroUfDto.uf));
+                           ', sigla = ' + QuotedStr(oCadastroUfDto.uf) +
+                           ' WHERE iduf = ' + IntToStr(oCadastroUfDto.id));
     Query.ExecSQL;
 
     if (not(Query.IsEmpty)) then
@@ -125,7 +126,7 @@ function TCadastroUfModel.SelectUf(var oCadastroUfDto: TCadastroUfDto): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT iduf, sigla, descricao FROM Uf WHERE sigla =' + QuotedStr(oCadastroUfDto.uf));
+    Query.Open('SELECT iduf, sigla, descricao FROM Uf WHERE iduf =' + IntToStr(oCadastroUfDto.id));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;

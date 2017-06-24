@@ -14,9 +14,9 @@ uses
 type
   TCadastroUfController = class(TClassInterfaceViewBase)
   private
+    procedure RetornoUf(aIdUf: integer);
   public
     procedure Inicial; override;
-    procedure Consulta; override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
@@ -35,26 +35,6 @@ implementation
 
 { TControllerCadastroUf }
 
-procedure TCadastroUfController.Consulta;
-begin
-  inherited;
-  if (oCadastroUfDto.Id > 0) then
-  begin
-    if (oCadastroUfRegra.SelectUf(oCadastroUfModel, oCadastroUfDto)) then
-      with (oFormulario as TCadastroUfForm) do
-      begin
-        ledtCodigo.Text := IntToStr(oCadastroUfDto.Id);
-        ledtUf.Text := oCadastroUfDto.uf;
-        ledtNome.Text := oCadastroUfDto.nome;
-      end;
-  end
-  else
-    if(oCadastroUfDto.uf = '!')then
-    begin
-      ShowMessage('Nenhum Registro Selecionado');
-      Inicial;
-    end;
-end;
 
 constructor TCadastroUfController.Create;
 begin
@@ -128,7 +108,27 @@ begin
 
   if (not(assigned(oConsultaUfController))) then
     oConsultaUfController := TConsultaUfController.Create;
-  oConsultaUfController.CriarForm(Aowner);
+  oConsultaUfController.CriarForm(Aowner, RetornoUf, oCadastroUfDto.uf);
+end;
+
+procedure TCadastroUfController.RetornoUf(aIdUf: integer);
+begin
+  if (aIdUf > 0) then
+  begin
+    oCadastroUfDto.Id := aIdUf;
+    if (oCadastroUfRegra.SelectUf(oCadastroUfModel, oCadastroUfDto)) then
+      with (oFormulario as TCadastroUfForm) do
+      begin
+        ledtCodigo.Text := IntToStr(oCadastroUfDto.Id);
+        ledtUf.Text := oCadastroUfDto.uf;
+        ledtNome.Text := oCadastroUfDto.nome;
+      end;
+  end
+  else
+  begin
+    Inicial;
+    raise Exception.Create('Não foi escolhido registro');
+  end;
 end;
 
 procedure TCadastroUfController.Salvar;

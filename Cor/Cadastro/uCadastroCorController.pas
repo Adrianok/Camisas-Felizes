@@ -19,7 +19,6 @@ type
   public
     procedure Excluir; override;
     procedure Inicial; override;
-    procedure Consulta; override;
     procedure Pesquisar(Aowner : TComponent); override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
@@ -37,20 +36,6 @@ implementation
 
 
 { TControllerCadastroCor }
-
-procedure TCadastroCorController.Consulta;
-begin
-  inherited;
-  if(oCadastroCorDto.IdCor <> 0)then
-  begin
-    if(oCadastroCorRegra.SelectCor(oCadastroCorModel, oCadastroCorDto))then
-    with (oFormulario as TCadastroCorForm) do
-    begin
-      edtCodigo.Text :=   IntToStr(oCadastroCorDto.IdCor);
-      edtCor.Text    :=  oCadastroCorDto.Descricao;
-    end;
-  end
-end;
 
 constructor TCadastroCorController.Create;
 begin
@@ -132,7 +117,7 @@ begin
 
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorController := TConsultaCorController.Create;
-  oConsultaCorController.CriarForm(Aowner, RetornoCor);
+  oConsultaCorController.CriarForm(Aowner, RetornoCor, oCadastroCorDto.Descricao);
 end;
 
 procedure TCadastroCorController.RetornoCor(aIdCor: integer);
@@ -148,7 +133,10 @@ begin
     end;
   end
   else
-  raise Exception.Create('Não foi escolhido registro');
+  begin
+    Inicial;
+    raise Exception.Create('Não foi escolhido registro');
+  end;
 end;
 
 procedure TCadastroCorController.Salvar;

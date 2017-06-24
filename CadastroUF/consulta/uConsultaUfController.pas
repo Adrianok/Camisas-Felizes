@@ -7,7 +7,7 @@ uses
   Vcl.StdCtrls, System.classes, System.SysUtils,
   uClasseInterfaceConsultaBase, uConsultaUfModel,
   uInterfaceConsultaBase, uCadastroUfDto, uConsultaUfForm,
-  FireDac.Comp.Client, uConsultaUfRegra,
+  FireDac.Comp.Client, uConsultaUfRegra, uFuncaoRetorno,
   Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows;
 
 type
@@ -15,9 +15,8 @@ type
   private
   public
     procedure PesquisarGrid;  override;
-    procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; override;
-    procedure CriarForm(Aowner: TComponent); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -31,12 +30,6 @@ var
 implementation
 
 { TConsultaCorConsultaController }
-
-procedure TConsultaUfController.AlimentarDto(Column: TColumn);
-begin
-  inherited;
-  oCadastroUfDto.id := StrToInt(Column.Field.Text);
-end;
 
 procedure TConsultaUfController.Cancelar;
 begin
@@ -52,13 +45,6 @@ end;
 
 constructor TConsultaUfController.Create;
 begin
-  //falta reiniciarSistema
-  if (not(assigned(oCadastroUfDto))) then
-    raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
-  if(not(oCadastroUfDto.id > 0))then
-    oCadastroUfDto.uf := '!';
-
   if (not(assigned(oConsultaUfController))) then
     oConsultaUfModel := TConsultaUfModel.Create;
 
@@ -66,7 +52,7 @@ begin
     oConsultaUfRegra := TConsultaUfRegra.Create;
 end;
 
-procedure TConsultaUfController.CriarForm(Aowner: TComponent);
+procedure TConsultaUfController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   if not(assigned(oFormulario)) then
   begin
@@ -76,7 +62,7 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroUfDto.uf;
+  oFormulario.edtPesquisa.Text := aString;
   inherited;
 end;
 

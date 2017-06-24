@@ -12,8 +12,6 @@ uses
 type
   TfrmBase = class(TForm)
     Panel1: TPanel;
-    pgControll: TPageControl;
-    Cadastro: TTabSheet;
     Panel2: TPanel;
     btnSalvar: TBitBtn;
     btnPesquisar: TBitBtn;
@@ -27,7 +25,6 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,7 +59,7 @@ end;
 
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);
 begin
-  oController.Pesquisar(Self);
+  oController.Pesquisar(ActiveControl);
 end;
 
 
@@ -74,17 +71,9 @@ end;
 
 
 
-procedure TfrmBase.FormActivate(Sender: TObject);
-begin
-  if(assigned(oController))then
-    oController.Consulta;
-end;
-
-
-
 procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  oController.KeyDown(Key, Self);
+  oController.KeyDown(Key, ActiveControl);
 end;
 
 end.

@@ -15,9 +15,8 @@ type
   private
   public
     procedure PesquisarGrid;  override;
-    procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; oRetorno: TRetornoConsulta); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -32,12 +31,6 @@ implementation
 
 { TConsultaModeloConsultaController }
 
-procedure TConsultaModeloController.AlimentarDto(Column: TColumn);
-begin
-  inherited;
-   oCadastroModeloDto.IdModelo := StrToInt(Column.Field.Text);
-end;
-
 procedure TConsultaModeloController.Cancelar;
 begin
   inherited;
@@ -46,15 +39,12 @@ end;
 procedure TConsultaModeloController.Confirmar;
 begin
   inherited;
+
 end;
 
 
 constructor TConsultaModeloController.Create;
 begin
-  //falta reiniciarSistema
-  if (not(assigned(oCadastroModeloDto))) then
-       raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
   if (not(assigned(oConsultaModeloController))) then
     oConsultaModeloModel := TConsultaModeloModel.Create;
 
@@ -62,8 +52,9 @@ begin
     oConsultaModeloRegra := TConsultaModeloRegra.Create;
 end;
 
-procedure TConsultaModeloController.CriarForm(Aowner: TComponent; oRetorno: TRetornoConsulta);
+procedure TConsultaModeloController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
+
   if not(assigned(oFormulario)) then
   begin
     oFormulario :=  TConsultaModeloForm.Create(Aowner);
@@ -71,6 +62,8 @@ begin
     PreencherGrid;
   end;
   oFormulario.Show;
+
+    oFormulario.edtPesquisa.Text := aString;
   inherited;
 end;
 
@@ -87,7 +80,6 @@ begin
 
   inherited;
 end;
-
 
 
 procedure TConsultaModeloController.PesquisarGrid;

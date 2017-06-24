@@ -7,20 +7,15 @@ type
   TCadastroPedidoDto = class
   private
     Fobservacao: string;
-    Fenderecoentrega: string;
     Fnomereceptor: string;
-    Fdataentrega: string;
-    FDescricao: string;
     Fnomevendedor: string;
     Fvalortotal: currency;
     FIdPedido: Integer;
     Fidcliente: Integer;
     Fusuario: string;
-    Fdata: string;
-    procedure Setdata(const Value: string);
-    procedure Setdataentrega(const Value: string);
-    procedure SetDescricao(const Value: string);
-    procedure Setenderecoentrega(const Value: string);
+    Fdata: TDate;
+    Fdataentrega: TDate;
+    Fenderecoentrega: string;
     procedure Setidcliente(const Value: Integer);
     procedure SetIdPedido(const Value: Integer);
     procedure Setnomereceptor(const Value: string);
@@ -28,6 +23,9 @@ type
     procedure Setobservacao(const Value: string);
     procedure Setusuario(const Value: string);
     procedure Setvalortotal(const Value: currency);
+    procedure Setdata(const Value: TDate);
+    procedure Setdataentrega(const Value: TDate);
+    procedure Setenderecoentrega(const Value: string);
 
 
 
@@ -35,20 +33,17 @@ type
     constructor Create;
 
     property IdPedido : Integer read FIdPedido write SetIdPedido;
-    property data : string read Fdata write Setdata;
-    property dataentrega : string read Fdataentrega write Setdataentrega;
+    property data : TDate read Fdata write Setdata;
+    property dataentrega : TDate  read Fdataentrega write Setdataentrega;
     property enderecoentrega : string read Fenderecoentrega write Setenderecoentrega;
     property nomereceptor : string read Fnomereceptor write Setnomereceptor;
     property nomevendedor : string read Fnomevendedor write Setnomevendedor;
     property valortotal : currency read Fvalortotal write Setvalortotal;
-    property Descricao : string read FDescricao write SetDescricao;
     property observacao : string read Fobservacao write Setobservacao;
     property idcliente : Integer read Fidcliente write Setidcliente;
     property usuario : string read Fusuario write Setusuario;
   end;
 
-var
-  oCadastroPedidoDto : TCadastroPedidoDto;
 implementation
 
 { TDtoPedido }
@@ -58,29 +53,25 @@ begin
     Fobservacao      := EmptyStr;
     Fenderecoentrega := EmptyStr;
     Fnomereceptor    := EmptyStr;
-    Fdataentrega     := EmptyStr;
-    FDescricao       := EmptyStr;
+    Fdataentrega     := 0;
     Fnomevendedor    := EmptyStr;
     Fvalortotal      := 0;
     FIdPedido        := 0;
     Fidcliente       := 0;
     Fusuario         := EmptyStr;
-    Fdata            := EmptyStr;
+    Fdata            := 0;
 end;
 
-procedure TCadastroPedidoDto.Setdata(const Value: string);
+
+
+procedure TCadastroPedidoDto.Setdata(const Value: TDate);
 begin
   Fdata := Value;
 end;
 
-procedure TCadastroPedidoDto.Setdataentrega(const Value: string);
+procedure TCadastroPedidoDto.Setdataentrega(const Value: TDate);
 begin
   Fdataentrega := Value;
-end;
-
-procedure TCadastroPedidoDto.SetDescricao(const Value: string);
-begin
-  FDescricao := Value;
 end;
 
 procedure TCadastroPedidoDto.Setenderecoentrega(const Value: string);

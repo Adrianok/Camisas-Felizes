@@ -10,18 +10,21 @@ uses
   System.Classes, uConsultaBase,
   FireDAC.Comp.Client, Vcl.DbGrids,
   uCadastroCorDto, Winapi.Windows, uFuncaoRetorno;
+
 type
+  TRetorno = procedure (ARetorno: integer) of object;
 
   TClassInterfaceConsultaBase = class(TInterfacedObject, IInterfaceConsultaBase)
   private
   protected
-    oRetorno: TRetornoConsulta;
     oFormulario : TfrmPesquisaBase;
+    oProcedureRetorno: TRetorno;
   public
+
     procedure PesquisarGrid; virtual;
     procedure AlimentarDto(Column : TColumn); virtual;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; ARetorno: TRetornoConsulta); virtual;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);    virtual;
     procedure Pesquisar; virtual;
     procedure KeyDown(var Key: Word);
     procedure Cancelar;  virtual;
@@ -35,12 +38,14 @@ implementation
 
 procedure TClassInterfaceConsultaBase.AlimentarDto(Column: TColumn);
 begin
+  oProcedureRetorno(StrToInt(Column.Field.Text));
 end;
 
 
 
 procedure TClassInterfaceConsultaBase.Cancelar;
 begin
+  oFormulario.DBGrid1.SelectedIndex := 1;
 end;
 
 
@@ -48,21 +53,24 @@ end;
 procedure TClassInterfaceConsultaBase.Confirmar;
 begin
   AlimentarDto(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]);
-  Fechar;
+  oFormulario.FDMemTableGrid.Close;
+  if assigned(oFormulario) then
+    FreeAndNil(oFormulario);
 end;
 
 
 
-procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent; ARetorno: TRetornoConsulta);
+procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   with oFormulario do
   begin
+    if(edtPesquisa.Text = '!')then
+      edtPesquisa.Text := '';
     ActiveControl :=  oFormulario.DBGrid1;
     DBGrid1.SelectedIndex := 1;
   end;
-  oRetorno := ARetorno;
+  oProcedureRetorno := ARetorno;
 end;
-
 
 
 procedure TClassInterfaceConsultaBase.Fechar;
@@ -70,6 +78,7 @@ begin
   oFormulario.FDMemTableGrid.Close;
   if assigned(oFormulario) then
     FreeAndNil(oFormulario);
+  oProcedureRetorno(0);
 end;
 
 

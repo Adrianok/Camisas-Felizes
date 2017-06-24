@@ -15,9 +15,8 @@ type
   private
   public
     procedure PesquisarGrid;  override;
-    procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; ARetorno: TRetornoConsulta); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);  override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -32,11 +31,6 @@ implementation
 
 { TConsultaCorConsultaController }
 
-procedure TConsultaCorController.AlimentarDto(Column: TColumn);
-begin
-  inherited;
-  oRetorno(StrToInt(Column.Field.Text));
-end;
 
 procedure TConsultaCorController.Cancelar;
 begin
@@ -53,10 +47,6 @@ end;
 
 constructor TConsultaCorController.Create;
 begin
-  //falta reiniciarSistema
-  if (not(assigned(oCadastroCorDto))) then
-       raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorModel := TConsultaCorModel.Create;
 
@@ -64,8 +54,7 @@ begin
     oConsultaCorRegra := TConsultaCorRegra.Create;
 end;
 
-
-procedure TConsultaCorController.CriarForm(Aowner: TComponent; ARetorno: TRetornoConsulta);
+procedure TConsultaCorController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   if not(assigned(oFormulario)) then
   begin
@@ -75,7 +64,7 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroCorDto.Descricao;
+  oFormulario.edtPesquisa.Text := aString;
   inherited;
 end;
 
@@ -94,7 +83,6 @@ begin
 end;
 
 
-
 procedure TConsultaCorController.PesquisarGrid;
 begin
   inherited;
@@ -110,6 +98,5 @@ begin
   else
     ShowMessage('Não foram encontrados registros');
 end;
-
 
 end.

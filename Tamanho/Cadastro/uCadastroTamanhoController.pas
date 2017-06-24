@@ -18,7 +18,6 @@ type
   public
     procedure Excluir; override;
     procedure Inicial; override;
-    procedure Consulta; override;
     procedure Pesquisar(Aowner : TComponent); override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
@@ -37,19 +36,6 @@ implementation
 
 { TControllerCadastroTamanho }
 
-procedure TCadastroTamanhoController.Consulta;
-begin
-inherited;
-  if(oCadastroTamanhoDto.IdTamanho <> 0)then
-  begin
-    if(oCadastroTamanhoRegra.SelectTamanho(oCadastroTamanhoModel, oCadastroTamanhoDto))then
-    with (oFormulario as TCadastroTamanhoForm) do
-    begin
-      edtCodigo.Text :=   IntToStr(oCadastroTamanhoDto.IdTamanho);
-      edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
-    end;
-  end
-end;
 
 constructor TCadastroTamanhoController.Create;
 begin
@@ -125,13 +111,14 @@ begin
 
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoController := TConsultaTamanhoController.Create;
-  oConsultaTamanhoController.CriarForm(Aowner, RetornoTamanho);
+  oConsultaTamanhoController.CriarForm(Aowner, RetornoTamanho, oCadastroTamanhoDto.Descricao);
 end;
 
 procedure TCadastroTamanhoController.RetornoTamanho(aIdTamanho: integer);
 begin
-  if(oCadastroTamanhoDto.IdTamanho <> 0)then
+  if(aIdTamanho <> 0)then
   begin
+    oCadastroTamanhoDto.IdTamanho := aIdTamanho;
     if(oCadastroTamanhoRegra.SelectTamanho(oCadastroTamanhoModel, oCadastroTamanhoDto))then
     with (oFormulario as TCadastroTamanhoForm) do
     begin
@@ -139,6 +126,11 @@ begin
       edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
     end;
   end
+  else
+  begin
+    Inicial;
+    raise Exception.Create('Não foi escolhido registro');
+  end;
 
 end;
 
@@ -157,8 +149,5 @@ begin
       ShowMessage('Registro: '+ oCadastroTamanhoDto.Descricao +' Inserido com sucesso');
     end;
 end;
-
-
-
 
 end.

@@ -4,7 +4,7 @@ interface
 
 uses
   Dialogs, Vcl.ExtCtrls,
-  Vcl.StdCtrls,
+  Vcl.StdCtrls, Vcl.Controls,
   System.classes, System.SysUtils,
   uCadastroModeloDto, uClasseInterfaceViewBase,
   uCadastroModeloRegra, uCadastroModeloModel,
@@ -25,7 +25,7 @@ type
     procedure GridCor(const idModelo : Integer);
     procedure Inicial; override;
     procedure ConsultaGridCor(Sender : Tobject);
-    procedure Pesquisar(Aowner : TComponent); override;
+    procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);  override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
@@ -183,7 +183,7 @@ begin
   (oFormulario as TCadastroModeloForm).edtCodigo.Text := IntToStr(oCadastroModeloDto.IdModelo);
 end;
 
-procedure TCadastroModeloController.Pesquisar(Aowner : TComponent);
+procedure TCadastroModeloController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
 var
  sIdModelo : string;
 begin

@@ -31,20 +31,31 @@ implementation
 { TCadastroModeloModel }
 
 function TCadastroPedidoModel.Atualizar(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+var
+  sSql : string;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' UPDATE Pedido SET descricao ='''
-//    + oCadastroPedidoDto.Descricao + ''' WHERE idPedido= '
-//    + IntToStr(oCadastroPedidoDto.IdPedido) + ';');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    Query.SQL.Clear;
+    Query.SQL.Add(' UPDATE pedido'
+    + ' SET data =' + DateToStr(oCadastroPedidoDto.data)
+    + ', dataentrega = ' + DateToStr(oCadastroPedidoDto.dataentrega)
+    + ', idendereco = ' + IntToStr(oCadastroPedidoDto.idendereco)
+    + ', nomereceptor = ' + QuotedStr(oCadastroPedidoDto.nomereceptor)
+    + ', nomevendedor = ' + QuotedStr(oCadastroPedidoDto.nomevendedor)
+    + ', valortotal = ' + StringReplace(CurrToStr(oCadastroPedidoDto.valortotal), ',', '.', [rfReplaceAll])
+    + ', observacao = ' + QuotedStr(oCadastroPedidoDto.observacao)
+    + ', idcliente = ' + IntToStr(oCadastroPedidoDto.idcliente)
+    + ', usuario = ' + QuotedStr(oCadastroPedidoDto.usuario)
+    + ' WHERE idpedido = ' + IntToStr(oCadastroPedidoDto.IdPedido)
+    + ';');
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 constructor TCadastroPedidoModel.Create;
@@ -63,7 +74,7 @@ function TCadastroPedidoModel.Deletar(const IdPedido: integer): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' DELETE FROM Pedido WHERE idPedido = ' + IntToStr(oCadastroPedidoDto.IdPedido));
+    Query.SQL.Add(' DELETE FROM Pedido WHERE idPedido = ' + IntToStr(IdPedido));
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
       Result := True
@@ -80,17 +91,25 @@ end;
 
 
 function TCadastroPedidoModel.Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+var
+  sSql : string;
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' INSERT INTO Pedido (idPedido, data, dataentrega, enderecoentrega,'
+    sSql := ' INSERT INTO Pedido (idPedido, data, dataentrega, idendereco,'
     +'nomereceptor, nomevendedor, valortotal, observacao, idcliente, usuario) VALUES ('
-    + QuotedStr(IntToStr(oCadastroPedidoDto.IdPedido)) + ','+ QuotedStr(DateToStr(oCadastroPedidoDto.data))
-    + QuotedStr(DateToStr(oCadastroPedidoDto.dataentrega)) + ','+ QuotedStr(oCadastroPedidoDto.enderecoentrega)
-    + QuotedStr(oCadastroPedidoDto.nomereceptor) + ','+ QuotedStr(oCadastroPedidoDto.nomevendedor)
-    + QuotedStr(CurrToStr(oCadastroPedidoDto.valortotal)) + ','+ QuotedStr(oCadastroPedidoDto.observacao)
-    + QuotedStr(IntToStr(oCadastroPedidoDto.idcliente)) + ','+ QuotedStr(oCadastroPedidoDto.usuario)
-    + ');');
+    + IntToStr(oCadastroPedidoDto.IdPedido) + ','
+    + DateToStr(oCadastroPedidoDto.data) + ','
+    + DateToStr(oCadastroPedidoDto.dataentrega) + ','
+    + IntToStr(oCadastroPedidoDto.IdPedido) + ','
+    + QuotedStr(oCadastroPedidoDto.nomereceptor) + ','
+    + QuotedStr(oCadastroPedidoDto.nomevendedor)+ ','
+    + CurrToStr(oCadastroPedidoDto.valortotal) + ','
+    + QuotedStr(oCadastroPedidoDto.observacao)+ ','
+    + IntToStr(oCadastroPedidoDto.idcliente) + ','
+    + QuotedStr(oCadastroPedidoDto.usuario)
+    + ');';
+    Query.SQL.Add(sSql);
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
       Result := True
@@ -143,7 +162,7 @@ begin
     begin
       oCadastroPedidoDto.data            := Query.FieldByName('data').AsDateTime;
       oCadastroPedidoDto.dataentrega     := Query.FieldByName('dataentrega').AsDateTime;
-      oCadastroPedidoDto.enderecoentrega := Query.FieldByName('enderecoentrega').AsString;
+      oCadastroPedidoDto.idendereco      := Query.FieldByName('idendereco').AsInteger;
       oCadastroPedidoDto.nomereceptor    := Query.FieldByName('nomereceptor').AsString;
       oCadastroPedidoDto.nomevendedor    := Query.FieldByName('nomevendedor').AsString;
       oCadastroPedidoDto.valortotal      := Query.FieldByName('valortotal').AsCurrency;

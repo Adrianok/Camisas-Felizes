@@ -208,15 +208,26 @@
         <DCCReference Include="Pedido\Cadastro\uCadastroPedidoModel.pas"/>
         <DCCReference Include="Pedido\Cadastro\uCadastroPedidoRegra.pas"/>
         <DCCReference Include="Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas"/>
-        <DCCReference Include="Cliente\uCadastroClienteDto.pas"/>
-        <DCCReference Include="Cliente\uCadastroClienteModel.pas"/>
-        <DCCReference Include="Cliente\uInterfaceCadastroClienteModel.pas"/>
         <DCCReference Include="Endereço\uCadastroEnderecoDto.pas"/>
         <DCCReference Include="Endereço\uCadastroEnderecoModel.pas"/>
         <DCCReference Include="Endereço\uInterfaceCadastroEnderecoModel.pas"/>
         <DCCReference Include="Bairro\uCadastroBairroDto.pas"/>
         <DCCReference Include="Bairro\uCadastroBairroModel.pas"/>
         <DCCReference Include="Bairro\uInterfaceCadastroBairroModel.pas"/>
+        <DCCReference Include="Municipio\uCadastroMunicipioDto.pas"/>
+        <DCCReference Include="Municipio\uCadastroMunicipioModel.pas"/>
+        <DCCReference Include="Municipio\uInterfaceCadastroMunicipioModel.pas"/>
+        <DCCReference Include="Cliente\Cadastro\uCadastroClienteDto.pas"/>
+        <DCCReference Include="Cliente\Cadastro\uCadastroClienteModel.pas"/>
+        <DCCReference Include="Cliente\Cadastro\uInterfaceCadastroClienteModel.pas"/>
+        <DCCReference Include="Cliente\Consulta\uConsultaClienteController.pas"/>
+        <DCCReference Include="Cliente\Consulta\uConsultaClienteForm.pas">
+            <Form>ConsultaClienteForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cliente\Consulta\uConsultaClienteModel.pas"/>
+        <DCCReference Include="Cliente\Consulta\uConsultaClienteRegra.pas"/>
+        <DCCReference Include="Cliente\Consulta\uInterfaceConsultaClienteModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

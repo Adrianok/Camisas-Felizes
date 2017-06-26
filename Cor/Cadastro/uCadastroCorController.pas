@@ -4,7 +4,7 @@ interface
 
 uses
   Dialogs, Vcl.ExtCtrls,
-  Vcl.StdCtrls,
+  Vcl.StdCtrls, Vcl.Controls,
   System.classes, System.SysUtils,
   uCadastroCorDto, uClasseInterfaceViewBase,
   uCadastroCorRegra, uCadastroCorModel,
@@ -19,7 +19,7 @@ type
   public
     procedure Excluir; override;
     procedure Inicial; override;
-    procedure Pesquisar(Aowner : TComponent); override;
+    procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl); override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
@@ -104,7 +104,7 @@ begin
   (oFormulario as TCadastroCorForm).edtCodigo.Text := IntToStr(oCadastroCorDto.IdCor);
 end;
 
-procedure TCadastroCorController.Pesquisar(Aowner : TComponent);
+procedure TCadastroCorController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
 var
  sIdCor : string;
 begin

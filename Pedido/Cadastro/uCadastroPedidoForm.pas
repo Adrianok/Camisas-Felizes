@@ -15,7 +15,7 @@ type
     gpCliente: TGroupBox;
     edtCpfCnpj: TLabeledEdit;
     edtNomeCliente: TLabeledEdit;
-    gpVenda: TGroupBox;
+    gpEntrega: TGroupBox;
     edtReceptor: TLabeledEdit;
     edtCidade: TLabeledEdit;
     edtRua: TLabeledEdit;
@@ -38,6 +38,7 @@ type
     edtValorTotal: TLabeledEdit;
     Label6: TLabel;
     Label7: TLabel;
+    chkAltEnd: TCheckBox;
   private
     { Private declarations }
   public

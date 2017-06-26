@@ -59,7 +59,7 @@ end;
 
 procedure TfrmBase.btnPesquisarClick(Sender: TObject);
 begin
-  oController.Pesquisar(ActiveControl);
+  oController.Pesquisar(Self, ActiveControl);
 end;
 
 
@@ -73,7 +73,7 @@ end;
 
 procedure TfrmBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  oController.KeyDown(Key, ActiveControl);
+  oController.KeyDown(Key, Self, ActiveControl);
 end;
 
 end.

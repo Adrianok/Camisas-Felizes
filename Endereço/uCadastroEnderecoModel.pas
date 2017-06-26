@@ -14,6 +14,7 @@ type
   private
     Query: TFDQuery;
   public
+    function SelectMax(var oCadastroEndereciDti: TCadastroEnderecoDto): Boolean;
     function SelectPorId(var oCadastroEnderecoDto: TCadastroEnderecoDto): Boolean;
     function SelectEndereco(var oCadastroEnderecoDto: TCadastroEnderecoDto): Boolean;
     function Inserir(var oCadastroEnderecoDto: TCadastroEnderecoDto): Boolean;
@@ -31,19 +32,23 @@ implementation
 
 function TCadastroEnderecoModel.Atualizar(var oCadastroEnderecoDto: TCadastroEnderecoDto): Boolean;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' UPDATE Endereco SET descricao ='''
-//    + oCadastroEnderecoDto.Descricao + ''' WHERE idEndereco= '
-//    + IntToStr(oCadastroEnderecoDto.IdEndereco) + ';');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    Query.SQL.Clear;
+    Query.SQL.Add(' UPDATE endereco'
+    + ' SET endereco =' + QuotedStr(oCadastroEnderecoDto.Endereco)
+    + ', numero = ' + QuotedStr(oCadastroEnderecoDto.Numero)
+    + ', idbairro = ' + IntToStr(oCadastroEnderecoDto.idbairro)
+    + ', status = ' + IntToStr(oCadastroEnderecoDto.status)
+    + ' WHERE idendereco = ' + IntToStr(oCadastroEnderecoDto.IdEndereco)
+    + ';');
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 constructor TCadastroEnderecoModel.Create;
@@ -80,19 +85,24 @@ end;
 
 function TCadastroEnderecoModel.Inserir(var oCadastroEnderecoDto: TCadastroEnderecoDto): Boolean;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' INSERT INTO Endereco (idEndereco, descricao) VALUES ('
-//    + IntToStr(oCadastroEnderecoDto.IdEndereco) + ', '''
-//    + oCadastroEnderecoDto.Descricao + ''');');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    Query.SQL.Clear;
+    Query.SQL.Add(' INSERT INTO endereco (idendereco, endereco, numero,'
+    + ' idbairro, status) VALUES ('
+    + IntToStr(oCadastroEnderecoDto.IdEndereco) + ','
+    + QuotedStr(oCadastroEnderecoDto.Endereco) + ','
+    + QuotedStr(oCadastroEnderecoDto.Numero) + ','
+    + IntToStr(oCadastroEnderecoDto.idbairro) + ','
+    + IntToStr(oCadastroEnderecoDto.status)
+    + ');');
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 function TCadastroEnderecoModel.NovoId(var oCadastroEnderecoDto: TCadastroEnderecoDto): Boolean;
@@ -127,6 +137,23 @@ begin
   end;
 end;
 
+
+function TCadastroEnderecoModel.SelectMax(var oCadastroEndereciDti: TCadastroEnderecoDto): Boolean;
+begin
+  try
+    Query.SQL.Clear;
+    Query.Open('SELECT MAX(idendereco) AS idendereco FROM cor');
+    if (not(Query.IsEmpty)) then
+    begin
+      oCadastroEndereciDti.IdEndereco := (Query.FieldByName('idendereco').AsInteger) + 1;
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
 
 function TCadastroEnderecoModel.SelectPorId(var oCadastroEnderecoDto: TCadastroEnderecoDto): Boolean;
 begin

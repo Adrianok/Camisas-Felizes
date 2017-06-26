@@ -14,6 +14,7 @@ type
   private
     Query: TFDQuery;
   public
+    function SelectPorDescricao(var oCadastroBairroDto: TCadastroBairroDto): Boolean;
     function SelectPorId(var oCadastroBairroDto: TCadastroBairroDto): Boolean;
     function SelectBairro(var oCadastroBairroDto: TCadastroBairroDto): Boolean;
     function Inserir(var oCadastroBairroDto: TCadastroBairroDto): Boolean;
@@ -127,6 +128,25 @@ begin
   end;
 end;
 
+
+function TCadastroBairroModel.SelectPorDescricao(var oCadastroBairroDto: TCadastroBairroDto): Boolean;
+begin
+  try
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM bairro WHERE descricao =''' + oCadastroBairroDto.Descricao + ''' ');
+    if (not(Query.IsEmpty)) then
+    begin
+      oCadastroBairroDto.IdBairro := Query.FieldByName('idbairro').AsInteger;
+      oCadastroBairroDto.cep := Query.FieldByName('cep').AsCurrency;
+      oCadastroBairroDto.idmunicipio := Query.FieldByName('municipio_idmunicipio').AsInteger;
+      Result := True;
+    end
+    else
+      Result := True;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
 
 function TCadastroBairroModel.SelectPorId(var oCadastroBairroDto: TCadastroBairroDto): Boolean;
 begin

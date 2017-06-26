@@ -2,7 +2,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 1114
-  ExplicitTop = -191
   ExplicitWidth = 1120
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -73,7 +72,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
+          NumbersOnly = True
           ParentFont = False
           TabOrder = 0
         end
@@ -81,7 +80,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           AlignWithMargins = True
           Left = 118
           Top = 66
-          Width = 442
+          Width = 435
           Height = 26
           Hint = 'Nome do Cliente'
           CharCase = ecUpperCase
@@ -100,7 +99,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
           ParentFont = False
           TabOrder = 1
         end
@@ -132,12 +130,14 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           TabOrder = 2
         end
       end
-      object gpVenda: TGroupBox
+      object gpEntrega: TGroupBox
+        Tag = 999
         Left = 571
         Top = 3
         Width = 532
         Height = 254
         Caption = 'Dados da entrega'
+        Enabled = False
         TabOrder = 1
         object Label2: TLabel
           Left = 208
@@ -153,12 +153,13 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           ParentFont = False
         end
         object edtReceptor: TLabeledEdit
+          Tag = 888
           AlignWithMargins = True
           Left = 88
           Top = 204
           Width = 432
           Height = 26
-          Hint = 'Nome do vendedor'
+          Hint = 'Nome do receptor'
           CharCase = ecUpperCase
           EditLabel.Width = 71
           EditLabel.Height = 23
@@ -175,16 +176,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
           ParentFont = False
           TabOrder = 0
         end
         object edtCidade: TLabeledEdit
+          Tag = 888
           Left = 114
           Top = 156
           Width = 406
           Height = 26
-          Hint = 'Valor total do pedido'
+          Hint = 'Cidade'
           CharCase = ecUpperCase
           EditLabel.Width = 60
           EditLabel.Height = 23
@@ -201,16 +202,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
           ParentFont = False
           TabOrder = 1
         end
         object edtRua: TLabeledEdit
+          Tag = 888
           Left = 114
           Top = 106
           Width = 406
           Height = 26
-          Hint = 'Valor total do pedido'
+          Hint = 'Rua'
           CharCase = ecUpperCase
           EditLabel.Width = 30
           EditLabel.Height = 23
@@ -227,16 +228,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
           ParentFont = False
           TabOrder = 2
         end
         object edtNmr: TLabeledEdit
+          Tag = 888
           Left = 114
           Top = 58
           Width = 84
           Height = 26
-          Hint = 'Valor total do pedido'
+          Hint = 'Numero'
           CharCase = ecUpperCase
           EditLabel.Width = 23
           EditLabel.Height = 23
@@ -253,7 +254,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
           NumbersOnly = True
           ParentFont = False
           TabOrder = 3
@@ -275,11 +275,12 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           TabOrder = 4
         end
         object edtBairro: TLabeledEdit
+          Tag = 888
           Left = 293
           Top = 58
           Width = 227
           Height = 26
-          Hint = 'Valor total do pedido'
+          Hint = 'Bairro'
           CharCase = ecUpperCase
           EditLabel.Width = 46
           EditLabel.Height = 23
@@ -296,7 +297,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
           ParentFont = False
           TabOrder = 5
         end
@@ -400,16 +400,17 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Name = 'Tahoma'
           Font.Style = []
           LabelPosition = lpLeft
-          MaxLength = 2
           ParentFont = False
           TabOrder = 2
         end
       end
       object edtObservacoes: TMemo
+        Tag = 888
         Left = 2
         Top = 288
         Width = 504
         Height = 159
+        Hint = 'Observa'#231#227'o'
         CharCase = ecUpperCase
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -419,10 +420,23 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         ParentFont = False
         TabOrder = 3
       end
+      object chkAltEnd: TCheckBox
+        Tag = 666
+        Left = 579
+        Top = 21
+        Width = 174
+        Height = 17
+        Caption = 'Adicionar endere'#231'o'
+        TabOrder = 4
+      end
     end
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   inherited Panel1: TPanel
@@ -498,7 +512,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     end
     object edtValorTotal: TLabeledEdit
       Tag = 999
-      Left = 834
+      Left = 829
       Top = 15
       Width = 265
       Height = 26
@@ -520,7 +534,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
       Font.Name = 'Tahoma'
       Font.Style = []
       LabelPosition = lpLeft
-      MaxLength = 2
       ParentFont = False
       TabOrder = 1
     end

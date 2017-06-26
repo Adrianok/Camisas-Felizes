@@ -4,7 +4,7 @@ interface
 
 uses
   Dialogs, Vcl.ExtCtrls,
-  Vcl.StdCtrls,
+  Vcl.StdCtrls, Vcl.Controls,
   System.classes, System.SysUtils,
   uCadastroTamanhoDto, uClasseInterfaceViewBase,
   uCadastroTamanhoRegra, uCadastroTamanhoModel,
@@ -18,7 +18,7 @@ type
   public
     procedure Excluir; override;
     procedure Inicial; override;
-    procedure Pesquisar(Aowner : TComponent); override;
+    procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);  override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
@@ -98,7 +98,7 @@ begin
   (oFormulario as TCadastroTamanhoForm).edtCodigo.Text := IntToStr(oCadastroTamanhoDto.IdTamanho);
 end;
 
-procedure TCadastroTamanhoController.Pesquisar(Aowner : TComponent);
+procedure TCadastroTamanhoController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
 var
  sIdTamanho : string;
 begin

@@ -15,7 +15,7 @@ type
     Fusuario: string;
     Fdata: TDate;
     Fdataentrega: TDate;
-    Fenderecoentrega: string;
+    Fidendereco: integer;
     procedure Setidcliente(const Value: Integer);
     procedure SetIdPedido(const Value: Integer);
     procedure Setnomereceptor(const Value: string);
@@ -25,7 +25,7 @@ type
     procedure Setvalortotal(const Value: currency);
     procedure Setdata(const Value: TDate);
     procedure Setdataentrega(const Value: TDate);
-    procedure Setenderecoentrega(const Value: string);
+    procedure Setidendereco(const Value: integer);
 
 
 
@@ -35,7 +35,7 @@ type
     property IdPedido : Integer read FIdPedido write SetIdPedido;
     property data : TDate read Fdata write Setdata;
     property dataentrega : TDate  read Fdataentrega write Setdataentrega;
-    property enderecoentrega : string read Fenderecoentrega write Setenderecoentrega;
+    property idendereco : integer read Fidendereco write Setidendereco;
     property nomereceptor : string read Fnomereceptor write Setnomereceptor;
     property nomevendedor : string read Fnomevendedor write Setnomevendedor;
     property valortotal : currency read Fvalortotal write Setvalortotal;
@@ -51,7 +51,7 @@ implementation
 constructor TCadastroPedidoDto.Create;
 begin
     Fobservacao      := EmptyStr;
-    Fenderecoentrega := EmptyStr;
+    Fidendereco      := 0;
     Fnomereceptor    := EmptyStr;
     Fdataentrega     := 0;
     Fnomevendedor    := EmptyStr;
@@ -74,14 +74,16 @@ begin
   Fdataentrega := Value;
 end;
 
-procedure TCadastroPedidoDto.Setenderecoentrega(const Value: string);
-begin
-  Fenderecoentrega := Value;
-end;
+
 
 procedure TCadastroPedidoDto.Setidcliente(const Value: Integer);
 begin
   Fidcliente := Value;
+end;
+
+procedure TCadastroPedidoDto.Setidendereco(const Value: integer);
+begin
+  Fidendereco := Value;
 end;
 
 procedure TCadastroPedidoDto.SetIdPedido(const Value: Integer);

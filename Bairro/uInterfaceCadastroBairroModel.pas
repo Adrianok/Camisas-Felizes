@@ -7,6 +7,7 @@ uses
   uCadastroBairroDto;
 type
   IInterfaceCadastroBairroModel = interface
+    function SelectPorDescricao(var oCadastroBairroDto: TCadastroBairroDto): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroBairroDto):boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroBairroDto):boolean;
     function Deletar(const IdBairro : integer): Boolean;

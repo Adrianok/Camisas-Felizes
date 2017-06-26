@@ -61,7 +61,7 @@ begin
     Query.Open('SELECT * FROM uf where descricao = '+QuotedStr(sDescricao));
     if (not(Query.IsEmpty)) then
     begin
-      Result := Query.FieldByName('descricao').AsInteger;
+      Result := Query.FieldByName('iduf').AsInteger;
     end
     else
       Result := 0;

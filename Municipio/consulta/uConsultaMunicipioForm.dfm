@@ -4,18 +4,13 @@ inherited ConsultaMunicipioForm: TConsultaMunicipioForm
   ClientHeight = 522
   ClientWidth = 374
   Position = poDesigned
+  ExplicitTop = -95
   ExplicitWidth = 380
   ExplicitHeight = 551
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 374
-    ExplicitWidth = 374
-  end
-  inherited Panel2: TPanel
-    Top = 442
-    Width = 374
-    ExplicitTop = 442
     ExplicitWidth = 374
   end
   inherited DBGrid1: TDBGrid
@@ -46,12 +41,22 @@ inherited ConsultaMunicipioForm: TConsultaMunicipioForm
         Visible = True
       end>
   end
+  inherited Panel2: TPanel
+    Top = 442
+    Width = 374
+    ExplicitLeft = 0
+    ExplicitTop = 442
+    ExplicitWidth = 374
+    inherited Panel3: TPanel
+      Left = 89
+      ExplicitLeft = 89
+    end
+  end
   inherited DataSourceGrid: TDataSource
     Left = 128
     Top = 328
   end
   inherited FDMemTableGrid: TFDMemTable
-    Left = 48
     Top = 329
   end
 end

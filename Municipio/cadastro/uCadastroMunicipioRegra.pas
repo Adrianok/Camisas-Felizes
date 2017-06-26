@@ -62,7 +62,7 @@ function TCadastroMunicipioRegra.SelectMunicipio(const oCadastroMunicipioModel: 
   var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
 begin
   if (oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto)) then
-    oConsultaUfModel.SelectId(oCadastroMunicipioDto.estado);
+    oConsultaUfModel.SelectId(IntToStr(oCadastroMunicipioDto.estado));
 end;
 
 function TCadastroMunicipioRegra.SelectDescricao(const oCadastroMunicipioModel

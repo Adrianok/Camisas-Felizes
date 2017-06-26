@@ -11,15 +11,15 @@ type
   private
     FMunicipio: string;
     Fid: Integer;
-    Festado: string;
+    Festado: Integer;
     procedure Setid(const Value: Integer);
-    procedure Setestado(const Value: string);
+    procedure Setestado(const Value: Integer);
     procedure SetMunicipio(const Value: string);
 
   public
     property id: Integer read Fid write Setid;
     property Municipio: string read FMunicipio write SetMunicipio;
-    property estado: string read Festado write Setestado;
+    property estado: Integer read Festado write Setestado;
     constructor Create;
   end;
 
@@ -33,11 +33,8 @@ implementation
 constructor TCadastroMunicipioDto.Create;
 begin
   Fid := 0;
-  Festado := EmptyStr;
+  Festado := 0;
   FMunicipio := EmptyStr;
-
-
-
 end;
 
 procedure TCadastroMunicipioDto.Setid(const Value: Integer);
@@ -45,7 +42,7 @@ begin
   Fid := Value;
 end;
 
-procedure TCadastroMunicipioDto.Setestado(const Value: string);
+procedure TCadastroMunicipioDto.Setestado(const Value: Integer);
 begin
   Festado := Value;
 end;

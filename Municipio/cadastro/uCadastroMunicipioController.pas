@@ -51,7 +51,7 @@ begin
       begin
         ledtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
         ledtMunicipio.Text := oCadastroMunicipioDto.Municipio;
-        ledtEstado.Text := oCadastroMunicipioDto.Estado;
+        ledtEstado.Text := IntToStr(oCadastroMunicipioDto.Estado);
       end;
   end
   else if (oCadastroMunicipioDto.Municipio = '!') then
@@ -135,11 +135,11 @@ begin
     begin
       oCadastroMunicipioDto.Id := StrToInt(sIdMunicipio);
       oCadastroMunicipioDto.Municipio := (oFormulario as TCadastroMunicipioForm).ledtMunicipio.Text;
-      oCadastroMunicipioDto.Estado := (oFormulario as TCadastroMunicipioForm).ledtEstado.Text;
+      oCadastroMunicipioDto.Estado := StrToInt(ledtEstado.Text);
     end;
 
 
-    if (Aowner = (oFormulario as TCadastroMunicipioForm).LedtEstado) then
+    if (Aowner = ledtEstado.Text) then
     begin
       oConsultaUfController := TConsultaUfController.Create;
       oConsultaUfController.CriarForm(oFormulario, RetornoEstado);
@@ -155,7 +155,19 @@ end;
 
 procedure TCadastroMunicipioController.RetornoEstado(AID: Integer);
 begin
-
+  if(AID <> 0)then
+  begin
+    oCadastroMunicipioDto.id :=  AID;
+    if(oCadastroMunicipioRegra.SelectMunicipio(oCadastroMunicipioModel, oCadastroMunicipioDto))then
+    with (oFormulario as TCadastroMunicipioForm) do
+    begin
+      LedtCodigo.Text :=   IntToStr(oCadastroMunicipioDto.id);
+      LedtMunicipio.Text    :=  oCadastroMunicipioDto.Municipio;
+      LedtEstado.Text    :=  oCadastroMunicipioDto.estado;
+    end;
+  end
+  else
+  raise Exception.Create('Não foi escolhido registro');
 end;
 
 procedure TCadastroMunicipioController.Salvar;

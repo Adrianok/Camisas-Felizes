@@ -38,8 +38,8 @@ function TCadastroMunicipioModel.Atualizar(var oCadastroMunicipioDto: TCadastroM
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add('UPDATE Municipio SET descricao =' + QuotedStr(oCadastroMunicipioDto.Estado) +
-                  'AND uf_iduf ='                    + QuotedStr(oCadastroMunicipioDto.estado) +
+    Query.SQL.Add('UPDATE Municipio SET descricao =' + IntToStr(oCadastroMunicipioDto.Estado) +
+                  'AND uf_iduf ='                    + IntToStr(oCadastroMunicipioDto.estado) +
                           ' WHERE descricao = '      + QuotedStr(oCadastroMunicipioDto.Municipio));
 
     Query.ExecSQL;
@@ -92,7 +92,7 @@ begin
     Query.SQL.Add('INSERT INTO Municipio (idMunicipio, descricao, uf_iduf) VALUES ('
                   + IntToStr(oCadastroMunicipioDto.Id) + ','
                   + QuotedStr(oCadastroMunicipioDto.Municipio) + ','
-                  + QuotedStr(oCadastroMunicipioDto.Estado) + ')');
+                  + IntToStr(oCadastroMunicipioDto.Estado) + ')');
 
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
@@ -165,7 +165,7 @@ begin
     begin
       Result := True;
       oCadastroMunicipioDto.Municipio := Query.FieldByName('descricao').AsString;
-      oCadastroMunicipioDto.Estado := Query.FieldByName('uf_iduf').AsString;
+      oCadastroMunicipioDto.Estado := Query.FieldByName('uf_iduf').AsInteger;
     end
     else
       Result := False;

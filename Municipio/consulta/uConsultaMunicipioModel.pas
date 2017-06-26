@@ -61,7 +61,7 @@ begin
     Query.Open('SELECT * FROM Municipio where descricao = '+QuotedStr(sDescricao));
     if (not(Query.IsEmpty)) then
     begin
-      Result := Query.FieldByName('idMunicipio').AsInteger;
+      Result := Query.FieldByName('descricao').AsInteger;
     end
     else
       Result := 0;

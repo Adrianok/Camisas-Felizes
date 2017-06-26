@@ -16,7 +16,7 @@ type
   public
     procedure PesquisarGrid;  override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);  override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);  override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -47,13 +47,6 @@ end;
 
 constructor TConsultaCorController.Create;
 begin
-  //falta reiniciarSistema
-  if (not(assigned(oCadastroCorDto))) then
-       raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
-  if(not(oCadastroCorDto.IdCor > 0))then
-    oCadastroCorDto.Descricao := '!';
-
   if (not(assigned(oConsultaCorController))) then
     oConsultaCorModel := TConsultaCorModel.Create;
 
@@ -61,7 +54,7 @@ begin
     oConsultaCorRegra := TConsultaCorRegra.Create;
 end;
 
-procedure TConsultaCorController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
+procedure TConsultaCorController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   if not(assigned(oFormulario)) then
   begin
@@ -71,7 +64,7 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroCorDto.Descricao;
+  oFormulario.edtPesquisa.Text := aString;
   inherited;
 end;
 

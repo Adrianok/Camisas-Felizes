@@ -46,13 +46,12 @@ implementation
 
 procedure TfrmPesquisaBase.btnCancelarClick(Sender: TObject);
 begin
-  oController.Fechar;
+  oController.Cancelar;
 end;
 
 procedure TfrmPesquisaBase.btnConfirmarClick(Sender: TObject);
 begin
-  oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-  oController.Fechar;
+  oController.Confirmar;
 end;
 
 procedure TfrmPesquisaBase.btnFecharClick(Sender: TObject);
@@ -73,17 +72,7 @@ end;
 procedure TfrmPesquisaBase.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if Key = VK_ESCAPE then
-  begin
-    oController.Fechar;
-    char(Key) := #0
-  end
-  else if Key = VK_RETURN then
-  begin
-    oController.AlimentarDto(DBGrid1.Columns[DBGrid1.SelectedIndex]);
-    oController.Fechar;
-    char(Key) := #0
-  end;
+  oController.KeyDown(Key)
 end;
 
 end.

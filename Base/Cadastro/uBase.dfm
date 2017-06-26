@@ -7,7 +7,7 @@ object frmBase: TfrmBase
   Caption = 'Formul'#225'rio Base'
   ClientHeight = 432
   ClientWidth = 630
-  Color = clBtnFace
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -880,23 +880,6 @@ object frmBase: TfrmBase
         TabOrder = 1
         OnClick = btnFecharClick
       end
-    end
-  end
-  object pgControll: TPageControl
-    Left = 0
-    Top = 89
-    Width = 630
-    Height = 343
-    ActivePage = Cadastro
-    Align = alClient
-    Anchors = [akLeft, akRight, akBottom]
-    TabOrder = 1
-    object Cadastro: TTabSheet
-      Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
 end

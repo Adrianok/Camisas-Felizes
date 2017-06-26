@@ -10,9 +10,9 @@ uses
 
 type
   TCadastroUfForm = class(TfrmBase)
-    LedtCodigo: TLabeledEdit;
-    LedtUf: TLabeledEdit;
     LedtNome: TLabeledEdit;
+    LedtUf: TLabeledEdit;
+    LedtCodigo: TLabeledEdit;
 
   private
     { Private declarations }

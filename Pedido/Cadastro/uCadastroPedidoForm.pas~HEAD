@@ -1,4 +1,4 @@
-unit uCadastroTamanhoForm;
+unit uCadastroPedidoForm;
 
 interface
 
@@ -8,9 +8,12 @@ uses
   Vcl.Buttons, Vcl.ExtCtrls;
 
 type
-  TCadastroTamanhoForm = class(TfrmBase)
-    edtTamanho: TLabeledEdit;
+  TCadastroPedidoForm = class(TfrmBase)
     edtCodigo: TLabeledEdit;
+    edtPedido: TLabeledEdit;
+    LabeledEdit1: TLabeledEdit;
+    dteDataAtual: TDateTimePicker;
+    Label1: TLabel;
   private
     { Private declarations }
   public
@@ -18,7 +21,7 @@ type
   end;
 
 var
-  CadastroTamanhoForm: TCadastroTamanhoForm;
+  CadastroPedidoForm: TCadastroPedidoForm;
 
 implementation
 

@@ -16,7 +16,7 @@ type
   public
     procedure PesquisarGrid;  override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);  override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -46,13 +46,6 @@ end;
 
 constructor TConsultaTamanhoController.Create;
 begin
-  //falta reiniciarSistema
-  if (not(assigned(oCadastroTamanhoDto))) then
-       raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
-  if(not(oCadastroTamanhoDto.IdTamanho > 0))then
-    oCadastroTamanhoDto.Descricao := '!';
-
   if (not(assigned(oConsultaTamanhoController))) then
     oConsultaTamanhoModel := TConsultaTamanhoModel.Create;
 
@@ -60,7 +53,7 @@ begin
     oConsultaTamanhoRegra := TConsultaTamanhoRegra.Create;
 end;
 
-procedure TConsultaTamanhoController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
+procedure TConsultaTamanhoController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   if not(assigned(oFormulario)) then
   begin
@@ -70,7 +63,7 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := oCadastroTamanhoDto.Descricao;
+  oFormulario.edtPesquisa.Text := aString;
   inherited;
 end;
 

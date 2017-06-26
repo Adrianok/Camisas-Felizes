@@ -24,7 +24,7 @@ type
     procedure PesquisarGrid; virtual;
     procedure AlimentarDto(Column : TColumn); virtual;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);    virtual;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);    virtual;
     procedure Pesquisar; virtual;
     procedure KeyDown(var Key: Word);
     procedure Cancelar;  virtual;
@@ -45,19 +45,22 @@ end;
 
 procedure TClassInterfaceConsultaBase.Cancelar;
 begin
+  oFormulario.DBGrid1.SelectedIndex := 1;
 end;
 
 
 
 procedure TClassInterfaceConsultaBase.Confirmar;
 begin
-  oProcedureRetorno(Integer(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]));
-  Fechar;
+  AlimentarDto(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]);
+  oFormulario.FDMemTableGrid.Close;
+  if assigned(oFormulario) then
+    FreeAndNil(oFormulario);
 end;
 
 
 
-procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
+procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   with oFormulario do
   begin
@@ -75,6 +78,7 @@ begin
   oFormulario.FDMemTableGrid.Close;
   if assigned(oFormulario) then
     FreeAndNil(oFormulario);
+  oProcedureRetorno(0);
 end;
 
 

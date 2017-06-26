@@ -10,7 +10,7 @@ type
   IInterfaceConsultaBase = interface
 
     procedure AlimentarDto(Column : TColumn);
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
     procedure KeyDown     (var Key: Word);
 
     procedure Fechar;

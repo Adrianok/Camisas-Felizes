@@ -4,7 +4,7 @@ interface
 
 uses
   Dialogs, Vcl.ExtCtrls,
-  Vcl.StdCtrls,
+  Vcl.StdCtrls, Vcl.Controls,
   System.classes, System.SysUtils,
   uCadastroUfDto, uClasseInterfaceViewBase,
   uCadastroUfRegra, uCadastroUfModel,
@@ -20,7 +20,7 @@ type
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
-    procedure Pesquisar(Aowner: TComponent); override;
+    procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl); override;
     procedure NovoID;
     procedure Excluir; override;
 
@@ -96,7 +96,7 @@ begin
     (oFormulario as TCadastroUfForm).ledtCodigo.Text := IntToStr(oCadastroUfDto.Id);
 end;
 
-procedure TCadastroUfController.Pesquisar(Aowner: TComponent);
+procedure TCadastroUfController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
 var
  sIdUf : string;
 begin
@@ -108,7 +108,7 @@ begin
 
   if (not(assigned(oConsultaUfController))) then
     oConsultaUfController := TConsultaUfController.Create;
-  oConsultaUfController.CriarForm(Aowner, RetornoUf);
+  oConsultaUfController.CriarForm(Aowner, RetornoUf, oCadastroUfDto.uf);
 end;
 
 procedure TCadastroUfController.RetornoUf(aIdUf: integer);
@@ -125,11 +125,10 @@ begin
       end;
   end
   else
-    if(oCadastroUfDto.uf = '!')then
-    begin
-      ShowMessage('Nenhum Registro Selecionado');
-      Inicial;
-    end;
+  begin
+    Inicial;
+    raise Exception.Create('Não foi escolhido registro');
+  end;
 end;
 
 procedure TCadastroUfController.Salvar;

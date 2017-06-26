@@ -25,7 +25,7 @@ uses
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
-    procedure Pesquisar(Aowner: TComponent); override;
+    procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);  override;
     procedure NovoID;
     procedure Excluir; override;
 
@@ -123,7 +123,7 @@ begin
     (oFormulario as TCadastroMunicipioForm).ledtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
 end;
 
-procedure TCadastroMunicipioController.Pesquisar(Aowner: TComponent);
+procedure TCadastroMunicipioController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
 var
   sIdMunicipio: string;
   ControleAtivo: TWinControl;
@@ -139,16 +139,16 @@ begin
     end;
 
 
-    if (Aowner = ledtEstado.Text) then
+    if(ActiveControl =  (oFormulario as TCadastroMunicipioForm).LedtEstado) then
     begin
       oConsultaUfController := TConsultaUfController.Create;
-      oConsultaUfController.CriarForm(oFormulario, RetornoEstado);
+      oConsultaUfController.CriarForm(Owner, RetornoEstado, '');
     end
     else
     begin
       if (not(assigned(oConsultaMunicipioController))) then
         oConsultaMunicipioController := TConsultaMunicipioController.Create;
-      oConsultaMunicipioController.CriarForm(oFormulario, RetornoEstado);
+      oConsultaMunicipioController.CriarForm(Owner, RetornoEstado, '');
     end;
   end;
 end;
@@ -163,7 +163,7 @@ begin
     begin
       LedtCodigo.Text :=   IntToStr(oCadastroMunicipioDto.id);
       LedtMunicipio.Text    :=  oCadastroMunicipioDto.Municipio;
-      LedtEstado.Text    :=  oCadastroMunicipioDto.estado;
+      LedtEstado.Text    :=  IntToStr(oCadastroMunicipioDto.estado);
     end;
   end
   else
@@ -177,7 +177,7 @@ begin
   begin
     oCadastroMunicipioDto.Id := StrToInt(ledtCodigo.Text);
     oCadastroMunicipioDto.Municipio := ledtMunicipio.Text;
-    oCadastroMunicipioDto.Estado := ledtEstado.Text;
+    oCadastroMunicipioDto.Estado := StrToInt(ledtEstado.Text);
   end;
   if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel,
     oCadastroMunicipioDto)) then

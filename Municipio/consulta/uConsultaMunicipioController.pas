@@ -17,7 +17,7 @@ type
     procedure PesquisarGrid;  override;
     procedure AlimentarDto(Column : TColumn); override;
     function PreencherGrid:boolean; override;
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -63,7 +63,7 @@ begin
     oConsultaMunicipioRegra := TConsultaMunicipioRegra.Create;
 end;
 
-procedure TConsultaMunicipioController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta);
+procedure TConsultaMunicipioController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   if not(assigned(oFormulario)) then
   begin

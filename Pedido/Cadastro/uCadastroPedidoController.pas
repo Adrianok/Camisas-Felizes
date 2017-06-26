@@ -29,8 +29,7 @@ type
     oCadastroMunicipioDto   : TCadastroMunicipioDto;
 
     oCadastroPedidoRegra   : TCadastroPedidoRegra;
-    oCadastroPedidoModel   : TCadastroPedidoM
-    odel;
+    oCadastroPedidoModel   : TCadastroPedidoModel;
     oCadastroPedidoDto     : TCadastroPedidoDto;
     procedure RetornoPedido(aIdPedido : Integer);
     procedure RetornoCliente(aIdCliente : Integer);
@@ -301,7 +300,7 @@ begin
           chkAltEnd.Caption := 'Alterar Endereço';
           edtNmr.Text :=  oCadastroEnderecoDto.Numero;
           edtRua.Text :=  oCadastroEnderecoDto.Endereco;
-          edtCidade.Text := oCadastroMunicipioDto.Descricao;
+          edtCidade.Text := oCadastroMunicipioDto.Municipio;
           edtBairro.Text := oCadastroBairroDto.Descricao;
         end;
       end;
@@ -342,7 +341,7 @@ begin
         oCadastroEnderecoDto.Numero := edtNmr.Text;
         oCadastroBairroDto.Descricao := edtBairro.Text;
         oCadastroEnderecoDto.status := 2;
-        oCadastroMunicipioDto.Descricao := edtCidade.Text;
+        oCadastroMunicipioDto.Municipio := edtCidade.Text;
         oCadastroEnderecoDto.IdEndereco := oCadastroPedidoDto.idendereco;
         if (not(oCadastroPedidoRegra.SalvarEndereco(oCadastroEnderecoModel,
         oCadastroEnderecoDto, oCadastroBairroModel, oCadastroBairroDto,

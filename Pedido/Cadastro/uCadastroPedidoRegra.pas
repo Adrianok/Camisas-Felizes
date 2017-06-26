@@ -88,9 +88,9 @@ begin
     +'Por favor vá até o cadastro de bairros e cadastre o mesmo')
   end;
 
-  if(oCadastroMunicipioModel.SelectPorDescricao(oCadastroMunicipioDto))then
+  if(oCadastroMunicipioModel.SelectDescricao(oCadastroMunicipioDto))then
   begin
-    if(oCadastroMunicipioDto.IdMunicipio <> oCadastroBairroDto.idmunicipio)then
+    if(oCadastroMunicipioDto.id <> oCadastroBairroDto.idmunicipio)then
       raise Exception.Create('Esse bairro não pertence'
       +' a essa cidade, por favor, verifique')
   end
@@ -154,7 +154,7 @@ begin
   oCadastroBairroDto.IdBairro := oCadastroEnderecoDto.idbairro;
   oCadastroBairroModel.SelectPorId(oCadastroBairroDto);
 
-  oCadastroMunicipioDto.IdMunicipio := oCadastroBairroDto.idmunicipio;
+  oCadastroMunicipioDto.Id := oCadastroBairroDto.idmunicipio;
   oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto);
   Result := True
 end;

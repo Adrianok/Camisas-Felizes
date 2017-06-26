@@ -13,10 +13,11 @@ uses
 type
   TConsultaPedidoController = class(TClassInterfaceConsultaBase)
   private
+    oCadastroPedidoDto : TCadastroPedidoDto;
   public
     procedure PesquisarGrid;  override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; oRetorno: TRetornoConsulta); override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string); override;
     procedure Confirmar; override;
     procedure Cancelar; override;
 
@@ -46,10 +47,6 @@ end;
 
 constructor TConsultaPedidoController.Create;
 begin
-  //falta reiniciarSistema
-  if (not(assigned(oCadastroPedidoDto))) then
-       raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
-
   if (not(assigned(oConsultaPedidoController))) then
     oConsultaPedidoModel := TConsultaPedidoModel.Create;
 
@@ -57,7 +54,7 @@ begin
     oConsultaPedidoRegra := TConsultaPedidoRegra.Create;
 end;
 
-procedure TConsultaPedidoController.CriarForm(Aowner: TComponent; oRetorno: TRetornoConsulta);
+procedure TConsultaPedidoController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
 begin
   if not(assigned(oFormulario)) then
   begin
@@ -67,7 +64,7 @@ begin
   end;
   oFormulario.Show;
 
-  oFormulario.edtPesquisa.Text := IntToStr(oCadastroPedidoDto.IdPedido);
+  oFormulario.edtPesquisa.Text := aString;
   inherited;
 end;
 

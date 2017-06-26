@@ -7,7 +7,7 @@ object frmBase: TfrmBase
   Caption = 'Formul'#225'rio Base'
   ClientHeight = 432
   ClientWidth = 630
-  Color = clBtnFace
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

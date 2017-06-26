@@ -1,0 +1,266 @@
+﻿-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema db_cf
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema db_cf
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `db_cf` DEFAULT CHARACTER SET utf8 ;
+USE `db_cf` ;
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`uf`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`uf` (
+  `iduf` INT(11) NOT NULL,
+  `sigla` VARCHAR(2) NULL DEFAULT NULL,
+  `descricao` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`iduf`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`municipio`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`municipio` (
+  `idmunicipio` INT(11) NOT NULL,
+  `descricao` VARCHAR(100) NOT NULL,
+  `uf_iduf` INT(11) NOT NULL,
+  PRIMARY KEY (`idmunicipio`),
+  INDEX `fk_municipio_uf1_idx` (`uf_iduf` ASC),
+  CONSTRAINT `fk_municipio_uf1`
+    FOREIGN KEY (`uf_iduf`)
+    REFERENCES `db_cf`.`uf` (`iduf`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`bairro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`bairro` (
+  `idbairro` INT(11) NOT NULL,
+  `descricao` VARCHAR(100) NOT NULL,
+  `cep` DOUBLE NULL DEFAULT NULL,
+  `municipio_idmunicipio` INT(11) NOT NULL,
+  PRIMARY KEY (`idbairro`),
+  INDEX `fk_bairro_municipio1_idx` (`municipio_idmunicipio` ASC),
+  CONSTRAINT `fk_bairro_municipio1`
+    FOREIGN KEY (`municipio_idmunicipio`)
+    REFERENCES `db_cf`.`municipio` (`idmunicipio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`endereco`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`endereco` (
+  `idendereco` INT(11) NOT NULL AUTO_INCREMENT,
+  `endereco` VARCHAR(255) NULL DEFAULT NULL,
+  `numero` VARCHAR(100) NULL DEFAULT NULL,
+  `idbairro` INT(11) NOT NULL,
+  `status` INT(11) NULL DEFAULT NULL COMMENT '1 - Principal\n2 - Alternativo\n',
+  PRIMARY KEY (`idendereco`),
+  INDEX `fk_endereco_bairro1_idx` (`idbairro` ASC),
+  CONSTRAINT `fk_endereco_bairro1`
+    FOREIGN KEY (`idbairro`)
+    REFERENCES `db_cf`.`bairro` (`idbairro`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COMMENT = '	';
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`cliente` (
+  `idcliente` INT(11) NOT NULL,
+  `nome` VARCHAR(255) NOT NULL,
+  `cpf_cnpj` DOUBLE NULL DEFAULT NULL,
+  `telefone` INT(11) NULL DEFAULT NULL,
+  `celular` INT(11) NOT NULL,
+  `observacao` VARCHAR(255) NULL DEFAULT NULL,
+  `idendereco` INT(11) NOT NULL,
+  PRIMARY KEY (`idcliente`),
+  INDEX `fk_cliente_endereco1_idx` (`idendereco` ASC),
+  CONSTRAINT `fk_cliente_endereco1`
+    FOREIGN KEY (`idendereco`)
+    REFERENCES `db_cf`.`endereco` (`idendereco`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`cor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`cor` (
+  `idcor` INT(11) NOT NULL,
+  `descricao` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`idcor`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COMMENT = '		';
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`modelo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`modelo` (
+  `idmodelo` INT(11) NOT NULL,
+  `modelo` VARCHAR(100) NULL DEFAULT NULL,
+  `preco` DOUBLE NULL DEFAULT NULL,
+  PRIMARY KEY (`idmodelo`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`cor_modelo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`cor_modelo` (
+  `cor_idcor` INT(11) NOT NULL,
+  `modelo_idmodelo` INT(11) NOT NULL,
+  PRIMARY KEY (`cor_idcor`, `modelo_idmodelo`),
+  INDEX `fk_cor_has_modelo_modelo1_idx` (`modelo_idmodelo` ASC),
+  INDEX `fk_cor_has_modelo_cor1_idx` (`cor_idcor` ASC),
+  CONSTRAINT `fk_cor_has_modelo_cor1`
+    FOREIGN KEY (`cor_idcor`)
+    REFERENCES `db_cf`.`cor` (`idcor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cor_has_modelo_modelo1`
+    FOREIGN KEY (`modelo_idmodelo`)
+    REFERENCES `db_cf`.`modelo` (`idmodelo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`pedido` (
+  `idpedido` INT(11) NOT NULL,
+  `data` DATE NOT NULL,
+  `dataentrega` DATE NULL DEFAULT NULL,
+  `nomereceptor` VARCHAR(100) NULL DEFAULT NULL,
+  `nomevendedor` VARCHAR(100) NULL DEFAULT NULL,
+  `valortotal` DOUBLE NULL DEFAULT NULL,
+  `observacao` VARCHAR(255) NULL DEFAULT NULL,
+  `idendereco` INT(11) NOT NULL,
+  `idcliente` INT(11) NOT NULL,
+  `usuario` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`idpedido`),
+  INDEX `fk_pedido_endereco1_idx` (`idendereco` ASC),
+  INDEX `fk_pedido_cliente1_idx` (`idcliente` ASC),
+  CONSTRAINT `fk_pedido_cliente1`
+    FOREIGN KEY (`idcliente`)
+    REFERENCES `db_cf`.`cliente` (`idcliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedido_endereco1`
+    FOREIGN KEY (`idendereco`)
+    REFERENCES `db_cf`.`endereco` (`idendereco`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`itenspedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`itenspedido` (
+  `iditensPedido` INT(11) NOT NULL,
+  `sequencia` INT(11) NULL DEFAULT NULL,
+  `valorItem` DOUBLE NULL DEFAULT NULL,
+  `idpedido` INT(11) NOT NULL,
+  `quantidade` INT(11) NULL DEFAULT NULL,
+  `idmodelo` INT(11) NOT NULL,
+  PRIMARY KEY (`iditensPedido`),
+  UNIQUE INDEX `sequencia_UNIQUE` (`sequencia` ASC),
+  INDEX `fk_itensPedido_pedido1_idx` (`idpedido` ASC),
+  INDEX `fk_itensPedido_modelo1_idx` (`idmodelo` ASC),
+  CONSTRAINT `fk_itensPedido_modelo1`
+    FOREIGN KEY (`idmodelo`)
+    REFERENCES `db_cf`.`modelo` (`idmodelo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_itensPedido_pedido1`
+    FOREIGN KEY (`idpedido`)
+    REFERENCES `db_cf`.`pedido` (`idpedido`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`tamanho`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`tamanho` (
+  `idtamanho` INT(11) NOT NULL,
+  `descricao` VARCHAR(2) NOT NULL,
+  PRIMARY KEY (`idtamanho`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `db_cf`.`detalheitem`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_cf`.`detalheitem` (
+  `iddetalheitem` INT(11) NOT NULL,
+  `iditensPedido` INT(11) NOT NULL,
+  `idtamanho` INT(11) NOT NULL,
+  `idcor` INT(11) NOT NULL,
+  `quantidade` INT(11) NOT NULL,
+  PRIMARY KEY (`iddetalheitem`),
+  UNIQUE INDEX `idtamanho_UNIQUE` (`idtamanho` ASC),
+  UNIQUE INDEX `iditensPedido_UNIQUE` (`iditensPedido` ASC),
+  UNIQUE INDEX `idcor_UNIQUE` (`idcor` ASC),
+  INDEX `fk_detalheitem_itensPedido1_idx` (`iditensPedido` ASC),
+  INDEX `fk_detalheitem_tamanho1_idx` (`idtamanho` ASC),
+  INDEX `fk_detalheitem_cor1_idx` (`idcor` ASC),
+  CONSTRAINT `fk_detalheitem_cor1`
+    FOREIGN KEY (`idcor`)
+    REFERENCES `db_cf`.`cor` (`idcor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_detalheitem_itensPedido1`
+    FOREIGN KEY (`iditensPedido`)
+    REFERENCES `db_cf`.`itenspedido` (`iditensPedido`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_detalheitem_tamanho1`
+    FOREIGN KEY (`idtamanho`)
+    REFERENCES `db_cf`.`tamanho` (`idtamanho`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

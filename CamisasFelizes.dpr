@@ -73,7 +73,24 @@ uses
   uCadastroPedidoForm in 'Pedido\Cadastro\uCadastroPedidoForm.pas' {CadastroPedidoForm},
   uCadastroPedidoModel in 'Pedido\Cadastro\uCadastroPedidoModel.pas',
   uCadastroPedidoRegra in 'Pedido\Cadastro\uCadastroPedidoRegra.pas',
-  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas';
+  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas',
+  uCadastroEnderecoDto in 'Endereço\uCadastroEnderecoDto.pas',
+  uCadastroEnderecoModel in 'Endereço\uCadastroEnderecoModel.pas',
+  uInterfaceCadastroEnderecoModel in 'Endereço\uInterfaceCadastroEnderecoModel.pas',
+  uCadastroClienteDto in 'Cliente\Cadastro\uCadastroClienteDto.pas',
+  uCadastroClienteModel in 'Cliente\Cadastro\uCadastroClienteModel.pas',
+  uInterfaceCadastroClienteModel in 'Cliente\Cadastro\uInterfaceCadastroClienteModel.pas',
+  uConsultaClienteController in 'Cliente\Consulta\uConsultaClienteController.pas',
+  uConsultaClienteForm in 'Cliente\Consulta\uConsultaClienteForm.pas' {ConsultaClienteForm},
+  uConsultaClienteModel in 'Cliente\Consulta\uConsultaClienteModel.pas',
+  uConsultaClienteRegra in 'Cliente\Consulta\uConsultaClienteRegra.pas',
+  uInterfaceConsultaClienteModel in 'Cliente\Consulta\uInterfaceConsultaClienteModel.pas',
+  uCadastroMunicipioDto in 'Municipio\uCadastroMunicipioDto.pas',
+  uCadastroMunicipioModel in 'Municipio\uCadastroMunicipioModel.pas',
+  uInterfaceCadastroMunicipioModel in 'Municipio\uInterfaceCadastroMunicipioModel.pas',
+  uCadastroBairroDto in 'Bairro\uCadastroBairroDto.pas',
+  uCadastroBairroModel in 'Bairro\uCadastroBairroModel.pas',
+  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas';
 
 {$R *.res}
 

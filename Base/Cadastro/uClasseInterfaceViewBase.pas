@@ -21,7 +21,7 @@ type
     procedure Inicial; virtual;
     procedure Novo; virtual;
     procedure Salvar; virtual;
-    procedure Aguardando;
+    procedure Aguardando; virtual;
     procedure KeyDown(var Key: Word; Aowner: TComponent; AcTiveControl: TWinControl);
     function ValidarVazio: boolean;
     procedure Excluir; virtual;
@@ -49,7 +49,6 @@ procedure TClassInterfaceViewBase.Aguardando;
 begin
   oFormulario.btnNovo.Enabled := False;
   oFormulario.btnSalvar.Enabled := True;
-  oFormulario.btnExcluir.Caption := 'Cancelar';
   oFormulario.btnExcluir.Enabled := True;
 end;
 
@@ -147,7 +146,6 @@ procedure TClassInterfaceViewBase.Inicial;
 begin
   oFormulario.btnNovo.Enabled := True;
   oFormulario.btnSalvar.Enabled := False;
-  oFormulario.btnExcluir.Caption := 'Excluir';
   oFormulario.btnExcluir.Enabled := False;
   LimparCampos;
   DesativarCampos;
@@ -180,7 +178,6 @@ procedure TClassInterfaceViewBase.Novo;
 begin
   oFormulario.btnNovo.Enabled := False;
   oFormulario.btnSalvar.Enabled := True;
-  oFormulario.btnExcluir.Caption := 'Cancelar';
   oFormulario.btnExcluir.Enabled := True;
   LimparCampos;
   AtivarCampos;
@@ -193,7 +190,6 @@ procedure TClassInterfaceViewBase.Pesquisar(Aowner: TComponent; ActiveControl: T
 begin
   oFormulario.btnNovo.Enabled := False;
   oFormulario.btnSalvar.Enabled := True;
-  oFormulario.btnExcluir.Caption := 'Excluir';
   oFormulario.btnExcluir.Enabled := True;
   AtivarCampos;
   AjustarFoco;
@@ -205,7 +201,6 @@ procedure TClassInterfaceViewBase.Salvar;
 begin
   oFormulario.btnNovo.Enabled := True;
   oFormulario.btnSalvar.Enabled := False;
-  oFormulario.btnExcluir.Caption := 'Excluir';
   oFormulario.btnExcluir.Enabled := False;
   if (ValidarVazio) then
     DesativarCampos;

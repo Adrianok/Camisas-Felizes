@@ -28,16 +28,15 @@ type
     oCadastroMunicipioModel : TCadastroMunicipioModel;
     oCadastroMunicipioDto   : TCadastroMunicipioDto;
 
-    oCadastroPedidoRegra   : TCadastroPedidoRegra;
-    oCadastroPedidoModel   : TCadastroPedidoM
-    odel;
-    oCadastroPedidoDto     : TCadastroPedidoDto;
+    oCadastroPedidoRegra    : TCadastroPedidoRegra;
+    oCadastroPedidoModel    : TCadastroPedidoModel;
+    oCadastroPedidoDto      : TCadastroPedidoDto;
     procedure RetornoPedido(aIdPedido : Integer);
     procedure RetornoCliente(aIdCliente : Integer);
   public
     procedure Excluir; override;
+    procedure Aguardando; override;
     procedure Inicial; override;
-    procedure PreencherCliente(Sender : Tobject);
     procedure AlterarEndereco(Sender : Tobject);
     procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl); override;
     procedure CriarForm(Aowner: TComponent); override;
@@ -56,6 +55,12 @@ implementation
 
 
 { TControllerCadastroPedido }
+
+procedure TCadastroPedidoController.Aguardando;
+begin
+  inherited;
+
+end;
 
 procedure TCadastroPedidoController.AlterarEndereco(Sender : Tobject);
 begin
@@ -128,7 +133,6 @@ begin
     dteData.Date := Now;
     dtePrev.Date := Now;
     chkAltEnd.OnClick := AlterarEndereco;
-    edtNomeCliente.OnChange := PreencherCliente;
   end;
   inherited;
 end;
@@ -207,8 +211,7 @@ begin
     if((oFormulario as TCadastroPedidoForm).edtCodigo.Text <> '')then
       oCadastroPedidoDto.IdPedido := StrToInt((oFormulario as TCadastroPedidoForm).edtCodigo.Text);
   end;
-  if((ActiveControl =  (oFormulario as TCadastroPedidoForm).edtNomeCliente) or
-    (ActiveControl =  (oFormulario as TCadastroPedidoForm).edtCpfCnpj))then
+  if(ActiveControl =  (oFormulario as TCadastroPedidoForm).edtCpfCnpj)then
   begin
     if (not(assigned(oConsultaClienteController))) then
       oConsultaClienteController := TConsultaClienteController.Create;
@@ -223,11 +226,6 @@ begin
 
 end;
 
-procedure TCadastroPedidoController.PreencherCliente(Sender: Tobject);
-begin
-  with (oFormulario as TCadastroPedidoForm) do
-    edtNomeClienteEx.Text := edtNomeCliente.Text;
-end;
 
 procedure TCadastroPedidoController.RetornoCliente(aIdCliente: Integer);
 begin
@@ -240,12 +238,11 @@ begin
       begin
         edtNmClient.Text :=   IntToStr(oCadastroClienteDto.IdCliente);
         edtCpfCnpj.Text    :=  CurrToStr(oCadastroClienteDto.cpf_cnpj);
-        edtNomeCliente.Text    :=  oCadastroClienteDto.Nome;
       end;
     end
     else
     begin
-      Inicial;
+      Aguardando;
       raise Exception.Create('Não foi escolhido registro');
     end;
   end;
@@ -253,12 +250,13 @@ end;
 
 procedure TCadastroPedidoController.RetornoPedido(aIdPedido: Integer);
 begin
+  with (oFormulario as TCadastroPedidoForm) do
+  begin
     if(aIdPedido <> 0)then
     begin
       oCadastroPedidoDto.IdPedido :=  aIdPedido;
       if(oCadastroPedidoRegra.SelectPedido(oCadastroPedidoModel, oCadastroPedidoDto,
       oCadastroClienteModel, oCadastroClienteDto))then
-      with (oFormulario as TCadastroPedidoForm) do
       begin
         Show;
         edtCodigo.Text        :=   IntToStr(oCadastroPedidoDto.IdPedido);
@@ -268,7 +266,6 @@ begin
         dteData.Date := oCadastroPedidoDto.data;
         edtValorTotal.Text := CurrToStr(oCadastroPedidoDto.valortotal);
         edtReceptor.Text := oCadastroPedidoDto.nomereceptor;
-        edtNomeCliente.Text := oCadastroClienteDto.Nome;
         edtNomeClienteEx.Text :=  oCadastroClienteDto.Nome;
         edtNmClient.Text := IntToStr(oCadastroClienteDto.IdCliente);
         edtCpfCnpj.Text := CurrToStr(oCadastroClienteDto.cpf_cnpj);
@@ -308,9 +305,13 @@ begin
     end
     else
     begin
-      Inicial;
-      raise Exception.Create('Não foi escolhido registro');
+      if(edtCodigo.Text = '')then
+      begin
+        Inicial;
+        raise Exception.Create('Não foi escolhido registro');
+      end;
     end;
+  end;
 end;
 
 procedure TCadastroPedidoController.Salvar;
@@ -333,7 +334,6 @@ begin
 
     oCadastroPedidoDto.valortotal   := StrToCurr(edtValorTotal.Text);
     oCadastroPedidoDto.idcliente    := StrToInt(edtNmClient.Text);
-    oCadastroClienteDto.Nome        := edtNomeCliente.Text;
     oCadastroPedidoDto.nomereceptor := edtReceptor.Text;
 
     if(chkAltEnd.Checked)then

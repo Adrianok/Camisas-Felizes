@@ -14,7 +14,7 @@ type
   private
     Query: TFDQuery;
   public
-    function SelectPorNome(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
+    function SelectDescricao(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
     function SelectPorId(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
     function SelectCliente(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
     function Inserir(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
@@ -26,25 +26,16 @@ type
     destructor Destroy; override;
   end;
 
+var
+  oCadastroClienteModel: TCadastroClienteModel;
+
 implementation
 
 { TCadastroModeloModel }
 
 function TCadastroClienteModel.Atualizar(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' UPDATE Cliente SET descricao ='''
-//    + oCadastroClienteDto.Descricao + ''' WHERE idCliente= '
-//    + IntToStr(oCadastroClienteDto.IdCliente) + ';');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+
 end;
 
 constructor TCadastroClienteModel.Create;
@@ -81,19 +72,7 @@ end;
 
 function TCadastroClienteModel.Inserir(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' INSERT INTO Cliente (idCliente, descricao) VALUES ('
-//    + IntToStr(oCadastroClienteDto.IdCliente) + ', '''
-//    + oCadastroClienteDto.Descricao + ''');');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+
 end;
 
 function TCadastroClienteModel.NovoId(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
@@ -143,7 +122,7 @@ begin
       begin
         Result := True;
         oCadastroClienteDto.Nome       := Query.FieldByName('nome').AsString;
-        oCadastroClienteDto.cpf_cnpj   := Query.FieldByName('cpf_cnpj').AsCurrency;
+        oCadastroClienteDto.cpf_cnpj   := Query.FieldByName('cpf_cnpj').AsString;
         oCadastroClienteDto.telefone   := Query.FieldByName('telefone').AsInteger;
         oCadastroClienteDto.celular    := Query.FieldByName('celular').AsInteger;
         oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;
@@ -159,7 +138,7 @@ begin
   end;
 end;
 
-function TCadastroClienteModel.SelectPorNome(
+function TCadastroClienteModel.SelectDescricao(
   var oCadastroClienteDto: TCadastroClienteDto): Boolean;
 begin
   try
@@ -168,7 +147,7 @@ begin
     if (not(Query.IsEmpty)) then
     begin
       oCadastroClienteDto.IdCliente := Query.FieldByName('idcliente').AsInteger;
-      oCadastroClienteDto.cpf_cnpj := Query.FieldByName('cpf_cnpj').AsCurrency;
+      oCadastroClienteDto.cpf_cnpj := Query.FieldByName('cpf_cnpj').AsString;
       oCadastroClienteDto.telefone := Query.FieldByName('telefone').AsInteger;
       oCadastroClienteDto.celular := Query.FieldByName('celular').AsInteger;
       oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;

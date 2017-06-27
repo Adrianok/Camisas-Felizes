@@ -86,20 +86,24 @@ uses
   uConsultaPedidoRegra in 'Pedido\Consulta\uConsultaPedidoRegra.pas',
   uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas',
   uInterfacePedidoModel in 'Pedido\Consulta\uInterfacePedidoModel.pas',
-  uCadastroClienteDto in 'Cliente\Cadastro\uCadastroClienteDto.pas',
-  uCadastroClienteModel in 'Cliente\Cadastro\uCadastroClienteModel.pas',
-  uInterfaceCadastroClienteModel in 'Cliente\Cadastro\uInterfaceCadastroClienteModel.pas',
-  uConsultaClienteController in 'Cliente\Consulta\uConsultaClienteController.pas',
-  uConsultaClienteForm in 'Cliente\Consulta\uConsultaClienteForm.pas' {ConsultaClienteForm},
-  uConsultaClienteModel in 'Cliente\Consulta\uConsultaClienteModel.pas',
-  uConsultaClienteRegra in 'Cliente\Consulta\uConsultaClienteRegra.pas',
-  uInterfaceConsultaClienteModel in 'Cliente\Consulta\uInterfaceConsultaClienteModel.pas',
   uCadastroEnderecoDto in 'Endereço\uCadastroEnderecoDto.pas',
   uCadastroEnderecoModel in 'Endereço\uCadastroEnderecoModel.pas',
   uInterfaceCadastroEnderecoModel in 'Endereço\uInterfaceCadastroEnderecoModel.pas',
   uCadastroBairroDto in 'Bairro\uCadastroBairroDto.pas',
   uCadastroBairroModel in 'Bairro\uCadastroBairroModel.pas',
-  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas';
+  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas',
+  uConsultaClienteController in 'Cliente\consulta\uConsultaClienteController.pas',
+  uConsultaClienteForm in 'Cliente\consulta\uConsultaClienteForm.pas' {ConsultaClienteForm},
+  uConsultaClienteModel in 'Cliente\consulta\uConsultaClienteModel.pas',
+  uConsultaClienteRegra in 'Cliente\consulta\uConsultaClienteRegra.pas',
+  uInterfaceClienteModel in 'Cliente\consulta\uInterfaceClienteModel.pas',
+  uInterfaceConsultaClienteModel in 'Cliente\consulta\uInterfaceConsultaClienteModel.pas',
+  uCadastroClienteController in 'Cliente\cadastro\uCadastroClienteController.pas',
+  uCadastroClienteDto in 'Cliente\cadastro\uCadastroClienteDto.pas',
+  uCadastroClienteForm in 'Cliente\cadastro\uCadastroClienteForm.pas' {CadastroClienteForm},
+  uCadastroClienteModel in 'Cliente\cadastro\uCadastroClienteModel.pas',
+  uCadastroClienteRegra in 'Cliente\cadastro\uCadastroClienteRegra.pas',
+  uInterfaceCadastroClienteModel in 'Cliente\cadastro\uInterfaceCadastroClienteModel.pas';
 
 {$R *.res}
 
@@ -108,5 +112,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TCadastroClienteForm, CadastroClienteForm);
   Application.Run;
 end.

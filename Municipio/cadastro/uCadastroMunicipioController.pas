@@ -126,8 +126,8 @@ end;
 procedure TCadastroMunicipioController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
 var
   sIdMunicipio: string;
-  ControleAtivo: TWinControl;
-begin
+
+  begin
   inherited;
   with (oFormulario as TCadastroMunicipioForm) do
   begin

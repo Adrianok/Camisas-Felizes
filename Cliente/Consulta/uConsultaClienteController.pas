@@ -8,7 +8,7 @@ uses
   uClasseInterfaceConsultaBase, uConsultaClienteModel,
   uInterfaceConsultaBase,uCadastroClienteDto, uConsultaClienteForm,
   FireDac.Comp.Client, uConsultaClienteRegra, uFuncaoRetorno,
-  Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows;
+  Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows, uCadastroClienteRegra;
 
 type
   TConsultaClienteController = class(TClassInterfaceConsultaBase)
@@ -20,12 +20,14 @@ type
     procedure Confirmar; override;
     procedure Cancelar; override;
 
+
     constructor Create;
     destructor Destroy; override;
   end;
 
 var
   oConsultaClienteController: IInterfaceConsultaBase;
+  oConsultaClienteRegra: TConsultaClienteRegra;
 
 implementation
 
@@ -93,10 +95,12 @@ begin
 
 function TConsultaClienteController.PreencherGrid: boolean;
 begin
-  if(oConsultaClienteRegra.SelectAll(oConsultaClienteModel, oFormulario.FDMemTableGrid))then
-  oFormulario.FDMemTableGrid.Open
-  else
-    ShowMessage('Não foram encontrados registros');
+//  if(oConsultaClienteRegra.SelectAll(oConsultaClienteModel, oFormulario.FDMemTableGrid))then
+//  oFormulario.FDMemTableGrid.Open
+//  else
+//    ShowMessage('Não foram encontrados registros');
 end;
+
+
 
 end.

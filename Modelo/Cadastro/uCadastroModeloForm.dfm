@@ -4,17 +4,22 @@ inherited CadastroModeloForm: TCadastroModeloForm
   Caption = 'CadastroModeloForm'
   ClientHeight = 480
   ClientWidth = 707
-  Position = poDesigned
+  Position = poDefault
   ExplicitWidth = 713
   ExplicitHeight = 509
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   inherited Panel1: TPanel
     Width = 707
     ExplicitWidth = 707
+    inherited Panel2: TPanel
+      ExplicitTop = 1
+      ExplicitHeight = 70
+    end
     inherited Panel3: TPanel
-      Left = 506
-      ExplicitLeft = 506
+      Left = 621
+      ExplicitLeft = 621
+      ExplicitHeight = 70
     end
   end
   object GroupBox1: TGroupBox

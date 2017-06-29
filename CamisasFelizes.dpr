@@ -90,7 +90,11 @@ uses
   uInterfaceCadastroMunicipioModel in 'Municipio\uInterfaceCadastroMunicipioModel.pas',
   uCadastroBairroDto in 'Bairro\uCadastroBairroDto.pas',
   uCadastroBairroModel in 'Bairro\uCadastroBairroModel.pas',
-  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas';
+  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas',
+  uCadastroItensDto in 'ItensPedido\uCadastroItensDto.pas',
+  uListaItens in 'ItensPedido\uListaItens.pas',
+  uCadastroDetalheItemDto in 'ItensPedido\uCadastroDetalheItemDto.pas',
+  uListaDetalheItem in 'ItensPedido\uListaDetalheItem.pas';
 
 {$R *.res}
 

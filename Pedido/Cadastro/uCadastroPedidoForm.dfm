@@ -8,9 +8,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   TextHeight = 16
   inherited Panel1: TPanel
     Width = 964
-    ExplicitLeft = -8
-    ExplicitTop = 20
-    ExplicitWidth = 1144
+    ExplicitWidth = 964
     inherited Panel2: TPanel
       ExplicitTop = 1
       ExplicitHeight = 70
@@ -21,7 +19,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     end
     inherited Panel3: TPanel
       Left = 878
-      ExplicitLeft = 1028
+      ExplicitLeft = 878
       ExplicitHeight = 70
     end
   end
@@ -33,7 +31,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     Align = alBottom
     Caption = 'Dados gerais'
     TabOrder = 1
-    ExplicitWidth = 1111
     object Label4: TLabel
       Left = 6
       Top = 16
@@ -119,7 +116,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   end
   object pgItens: TPageControl
     Tag = 666
-    Left = 1
+    Left = 0
     Top = 84
     Width = 1113
     Height = 478
@@ -128,10 +125,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     TabOrder = 2
     object pgCabecalho: TTabSheet
       Caption = 'Cabe'#231'alho'
-      ExplicitLeft = 0
-      ExplicitTop = 31
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object gpEntrega: TGroupBox
         Left = 420
         Top = 3
@@ -759,9 +752,35 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     object TabSheet1: TTabSheet
       Caption = 'Itens'
       ImageIndex = 1
+      object Label19: TLabel
+        Left = 59
+        Top = 236
+        Width = 88
+        Height = 16
+        Caption = 'Itens do pedido'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label20: TLabel
+        Left = 599
+        Top = 236
+        Width = 106
+        Height = 16
+        Caption = 'Tamanhos e cores'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object GroupBox6: TGroupBox
         Left = 61
-        Top = 15
+        Top = -13
         Width = 732
         Height = 202
         Caption = 'Dados do cliente'
@@ -818,32 +837,20 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Style = []
           ParentFont = False
         end
-        object edtPrecoModelo: TLabeledEdit
-          Left = 505
-          Top = 48
-          Width = 109
-          Height = 26
-          Hint = 'CPF/CNPJ'
-          CharCase = ecUpperCase
-          EditLabel.Width = 5
-          EditLabel.Height = 23
-          EditLabel.Font.Charset = DEFAULT_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -17
-          EditLabel.Font.Name = 'Segoe UI Light'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
+        object Label21: TLabel
+          Left = 401
+          Top = 80
+          Width = 64
+          Height = 16
+          Caption = 'Sequencia:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -15
+          Font.Height = -13
           Font.Name = 'Tahoma'
           Font.Style = []
-          LabelPosition = lpLeft
-          NumbersOnly = True
           ParentFont = False
-          TabOrder = 0
         end
-        object edtCdModelo: TLabeledEdit
+        object edtCdItensPedido: TLabeledEdit
           Tag = 999
           Left = 121
           Top = 16
@@ -868,16 +875,17 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Style = []
           LabelPosition = lpLeft
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 0
         end
         object edtModelo: TLabeledEdit
-          Left = 121
+          Left = 120
           Top = 48
           Width = 255
           Height = 26
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 80
           EditLabel.Height = 23
+          EditLabel.Caption = 'edtModelo'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -892,7 +900,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           LabelPosition = lpLeft
           NumbersOnly = True
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 1
         end
         object GroupBox7: TGroupBox
           Left = 25
@@ -900,7 +908,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Width = 637
           Height = 91
           Caption = 'Tamanho e cor'
-          TabOrder = 3
+          TabOrder = 2
           object Label15: TLabel
             Left = 19
             Top = 21
@@ -947,8 +955,9 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             Height = 26
             Hint = 'CPF/CNPJ'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 79
             EditLabel.Height = 23
+            EditLabel.Caption = 'edtQntTam'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -991,15 +1000,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             ParentFont = False
             TabOrder = 1
           end
-          object LabeledEdit11: TLabeledEdit
+          object edtCor: TLabeledEdit
             Left = 54
             Top = 50
             Width = 255
             Height = 26
             Hint = 'CPF/CNPJ'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 51
             EditLabel.Height = 23
+            EditLabel.Caption = 'edtCor'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -1016,7 +1026,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             ParentFont = False
             TabOrder = 2
           end
-          object BitBtn1: TBitBtn
+          object btnAddModelo: TBitBtn
             Left = 544
             Top = 27
             Width = 57
@@ -1042,8 +1052,9 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'CPF/CNPJ'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 83
           EditLabel.Height = 23
+          EditLabel.Caption = 'edtQntItem'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -1058,11 +1069,11 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           LabelPosition = lpLeft
           NumbersOnly = True
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 3
         end
-        object BitBtn2: TBitBtn
-          Left = 656
-          Top = 23
+        object btnAddItem: TBitBtn
+          Left = 632
+          Top = 16
           Width = 57
           Height = 46
           Caption = '+'
@@ -1075,25 +1086,83 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           ParentFont = False
           ParentShowHint = False
           ShowHint = False
-          TabOrder = 5
+          TabOrder = 4
           OnClick = btnNovoClick
         end
+        object edtPrecoModelo: TLabeledEdit
+          Left = 505
+          Top = 48
+          Width = 109
+          Height = 26
+          Hint = 'CPF/CNPJ'
+          CharCase = ecUpperCase
+          EditLabel.Width = 122
+          EditLabel.Height = 23
+          EditLabel.Caption = 'edtPrecoModelo'
+          EditLabel.Font.Charset = DEFAULT_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -17
+          EditLabel.Font.Name = 'Segoe UI Light'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          LabelPosition = lpLeft
+          NumbersOnly = True
+          ParentFont = False
+          TabOrder = 5
+        end
+        object edtSequencia: TLabeledEdit
+          Left = 505
+          Top = 80
+          Width = 109
+          Height = 26
+          Hint = 'CPF/CNPJ'
+          CharCase = ecUpperCase
+          EditLabel.Width = 97
+          EditLabel.Height = 23
+          EditLabel.Caption = 'edtSequencia'
+          EditLabel.Font.Charset = DEFAULT_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -17
+          EditLabel.Font.Name = 'Segoe UI Light'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          LabelPosition = lpLeft
+          NumbersOnly = True
+          ParentFont = False
+          TabOrder = 6
+        end
       end
-      object DBGrid1: TDBGrid
-        Left = 61
-        Top = 267
-        Width = 804
-        Height = 184
+      object btnExcluirModelo: TBitBtn
+        Left = 704
+        Top = 225
+        Width = 176
+        Height = 29
+        Caption = '-'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -25
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Layout = blGlyphTop
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = False
         TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -13
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
+        OnClick = btnNovoClick
       end
-      object BitBtn3: TBitBtn
-        Left = 61
-        Top = 232
+      object btnExcluirItem: TBitBtn
+        Left = 356
+        Top = 225
         Width = 176
         Height = 29
         Caption = '-'
@@ -1109,6 +1178,24 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         TabOrder = 2
         OnClick = btnNovoClick
       end
+      object lvModelos: TListView
+        Left = 599
+        Top = 271
+        Width = 193
+        Height = 162
+        Columns = <>
+        TabOrder = 3
+        ViewStyle = vsList
+      end
     end
+  end
+  object lvItens: TListView
+    Left = 58
+    Top = 378
+    Width = 511
+    Height = 167
+    Columns = <>
+    TabOrder = 3
+    ViewStyle = vsList
   end
 end

@@ -14,23 +14,27 @@ uses
   uCadastroEnderecoModel, uCadastroEnderecoDto,
   uCadastroBairroModel, uCadastroBairroDto,
   uCadastroMunicipioModel, uCadastroMunicipioDto,
-  uConsultaClienteController, uConsultaClienteForm;
+  uConsultaClienteController, uConsultaClienteForm,
+  System.Generics.Collections, uCadastroItensDto;
 
 type
   TCadastroPedidoController = class(TClassInterfaceViewBase)
   private
-    oCadastroEnderecoDto    : TCadastroEnderecoDto;
-    oCadastroEnderecoModel  : TCadastroEnderecoModel;
-    oCadastroClienteModel   : TCadastroClienteModel;
-    oCadastroClienteDto     : TCadastroClienteDto;
-    oCadastroBairroModel    : TCadastroBairroModel;
-    oCadastroBairroDto      : TCadastroBairroDto;
-    oCadastroMunicipioModel : TCadastroMunicipioModel;
-    oCadastroMunicipioDto   : TCadastroMunicipioDto;
+    oCadastroEnderecoDto      : TCadastroEnderecoDto;
+    oCadastroEnderecoModel    : TCadastroEnderecoModel;
+    oCadastroClienteModel     : TCadastroClienteModel;
+    oCadastroClienteDto       : TCadastroClienteDto;
+    oCadastroBairroModel      : TCadastroBairroModel;
+    oCadastroBairroDto        : TCadastroBairroDto;
+    oCadastroMunicipioModel   : TCadastroMunicipioModel;
+    oCadastroMunicipioDto     : TCadastroMunicipioDto;
 
-    oCadastroPedidoRegra    : TCadastroPedidoRegra;
-    oCadastroPedidoModel    : TCadastroPedidoModel;
-    oCadastroPedidoDto      : TCadastroPedidoDto;
+    oCadastroDetalheItensDto  : TCadastroItensDto;
+    oCadastroItensDto         : TCadastroItensDto;
+    oCadastroPedidoRegra      : TCadastroPedidoRegra;
+    oCadastroPedidoModel      : TCadastroPedidoModel;
+    oCadastroPedidoDto        : TCadastroPedidoDto;
+
     procedure RetornoPedido(aIdPedido : Integer);
     procedure RetornoCliente(aIdCliente : Integer);
   public
@@ -41,6 +45,8 @@ type
     procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl); override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
+    procedure AdicionarItem(Sender : TObject);
+    procedure AdicionarCor;
     procedure Salvar; override;
     procedure NovoID;
 
@@ -54,7 +60,33 @@ var
 implementation
 
 
-{ TControllerCadastroPedido }
+procedure TCadastroPedidoController.AdicionarCor;
+begin
+
+end;
+
+procedure TCadastroPedidoController.AdicionarItem(Sender : TObject);
+var
+  oCadastroCorDto : TCadastroItensDto;
+  iIndice : Integer;
+  iSequencia : Integer;
+begin
+  with (oFormulario as TCadastroPedidoForm) do
+  begin
+    iIndice := 0;
+    iSequencia := 0;
+    for oCadastroItensDto in oCadastroPedidoDto.ItensPedido.Values  do
+    begin
+      if(oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia > iSequencia)then
+        iSequencia := oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia;
+      iIndice := +1;
+    end;
+
+    oCadastroItensDto.IdItensPedido := StrToInt(edtCdItensPedido.Text);
+    oCadastroItensDto.Sequencia := iSequencia;
+    oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
+  end;
+end;
 
 procedure TCadastroPedidoController.Aguardando;
 begin
@@ -133,12 +165,13 @@ begin
     dteData.Date := Now;
     dtePrev.Date := Now;
     chkAltEnd.OnClick := AlterarEndereco;
+    btnAddItem.OnClick  := AdicionarItem;
   end;
   inherited;
 end;
 
 destructor TCadastroPedidoController.Destroy;
-begin
+ begin
   if (assigned(oCadastroMunicipioDto)) then
     FreeAndNil(oCadastroMunicipioDto);
 

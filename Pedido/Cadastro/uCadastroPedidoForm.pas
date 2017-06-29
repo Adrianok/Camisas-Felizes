@@ -55,8 +55,7 @@ type
     Label13: TLabel;
     Label12: TLabel;
     Label14: TLabel;
-    edtPrecoModelo: TLabeledEdit;
-    edtCdModelo: TLabeledEdit;
+    edtCdItensPedido: TLabeledEdit;
     edtModelo: TLabeledEdit;
     GroupBox7: TGroupBox;
     Label15: TLabel;
@@ -64,13 +63,20 @@ type
     Label17: TLabel;
     edtQntTam: TLabeledEdit;
     edtTamanho: TLabeledEdit;
-    LabeledEdit11: TLabeledEdit;
-    DBGrid1: TDBGrid;
+    edtCor: TLabeledEdit;
     edtQntItem: TLabeledEdit;
     Label18: TLabel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
+    btnAddModelo: TBitBtn;
+    btnAddItem: TBitBtn;
+    btnExcluirModelo: TBitBtn;
+    lvItens: TListView;
+    Label19: TLabel;
+    btnExcluirItem: TBitBtn;
+    Label20: TLabel;
+    lvModelos: TListView;
+    edtPrecoModelo: TLabeledEdit;
+    edtSequencia: TLabeledEdit;
+    Label21: TLabel;
   private
     { Private declarations }
   public

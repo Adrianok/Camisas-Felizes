@@ -2,7 +2,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 964
-  ExplicitTop = -63
   ExplicitWidth = 970
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -4235,6 +4234,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           CharCase = ecUpperCase
           EditLabel.Width = 5
           EditLabel.Height = 23
+          EditLabel.Hint = 'Pre'#231'o'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -4332,6 +4332,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         CharCase = ecUpperCase
         EditLabel.Width = 5
         EditLabel.Height = 23
+        EditLabel.Hint = 'Quantidade total itens'
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = clWindowText
         EditLabel.Font.Height = -17

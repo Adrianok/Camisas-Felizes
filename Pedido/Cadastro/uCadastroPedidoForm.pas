@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uBase, Vcl.ComCtrls, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.CheckLst;
 
 type
   TCadastroPedidoForm = class(TfrmBase)
@@ -38,7 +38,6 @@ type
     gpNota: TGroupBox;
     Label1: TLabel;
     Label7: TLabel;
-    Label10: TLabel;
     Label11: TLabel;
     edtCodigo: TLabeledEdit;
     dteData: TDateTimePicker;
@@ -64,19 +63,23 @@ type
     edtQntTam: TLabeledEdit;
     edtTamanho: TLabeledEdit;
     edtCor: TLabeledEdit;
-    edtQntItem: TLabeledEdit;
-    Label18: TLabel;
-    btnAddModelo: TBitBtn;
     btnAddItem: TBitBtn;
     btnExcluirModelo: TBitBtn;
-    lvItens: TListView;
     Label19: TLabel;
     btnExcluirItem: TBitBtn;
     Label20: TLabel;
-    lvModelos: TListView;
-    edtPrecoModelo: TLabeledEdit;
-    edtSequencia: TLabeledEdit;
+    edtPrecoItem: TLabeledEdit;
+    lvItens: TListView;
+    chlDetalheItem: TCheckListBox;
+    Label10: TLabel;
     Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    logo: TImage;
+    edtQntItem: TLabeledEdit;
+    Label18: TLabel;
   private
     { Private declarations }
   public

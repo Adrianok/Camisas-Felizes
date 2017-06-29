@@ -27,6 +27,7 @@ type
 
 var
   oConsultaMunicipioController: IInterfaceConsultaBase;
+  oCadastroMunicipioDto : TCadastroMunicipioDto;
 
 implementation
 
@@ -52,15 +53,16 @@ end;
 
 constructor TConsultaMunicipioController.Create;
 begin
-  //falta reiniciarSistema
-  if (not(assigned(oCadastroMunicipioDto))) then
-    raise Exception.Create('Não foi possível abrir este formulário, o sistema será reiniciado');
 
   if (not(assigned(oConsultaMunicipioController))) then
     oConsultaMunicipioModel := TConsultaMunicipioModel.Create;
 
   if (not(assigned(oConsultaMunicipioRegra))) then
     oConsultaMunicipioRegra := TConsultaMunicipioRegra.Create;
+
+  if (not(assigned(oCadastroMunicipioDto))) then
+    oCadastroMunicipioDto := TCadastroMunicipioDto.Create;
+
 end;
 
 procedure TConsultaMunicipioController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
@@ -87,6 +89,9 @@ begin
 
   if (assigned(oConsultaMunicipioModel)) then
     FreeAndNil(oConsultaMunicipioModel);
+
+  if (assigned(oCadastroMunicipioDto)) then
+    FreeAndNil(oCadastroMunicipioDto);
 
   inherited;
 end;

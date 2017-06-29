@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, uCadastroMunicipioDto,
   uCadastroMunicipioForm, uCadastroMunicipioModel,
-  uConsultaUfModel;
+  uConsultaUfModel, uCadastroUfDto;
 
 type
   TCadastroMunicipioRegra = class
@@ -17,14 +17,31 @@ type
     function Salvar(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
     function Deletar(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
 
+    constructor Create;
+    destructor Destroy; override;
   end;
 
 var
   oCadastroMunicipioRegra: TCadastroMunicipioRegra;
+  oCadastroMunicipioDto: TCadastroMunicipioDto;
+  oConsultaUfModel : TConsultaUfModel;
+  oCadastroUfDto : TCadastroUfDto;
 
 implementation
 
 { TCadastroMunicipioRegra }
+
+constructor TCadastroMunicipioRegra.Create;
+begin
+  if (not(Assigned(oCadastroMunicipioDto))) then
+    oCadastroMunicipioDto := TCadastroMunicipioDto.Create;
+
+  if (not(Assigned(oCadastroUfDto))) then
+    oCadastroUfDto := TCadastroUfDto.Create;
+
+  if (not(Assigned(oConsultaUfModel))) then
+   oConsultaUfModel := TConsultaUfModel.Create;
+end;
 
 function TCadastroMunicipioRegra.Deletar(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
 begin
@@ -33,6 +50,19 @@ begin
     oCadastroMunicipioModel.Deletar(oCadastroMunicipioDto);
     Result := True
   end
+end;
+
+destructor TCadastroMunicipioRegra.Destroy;
+begin
+  if (Assigned(oCadastroMunicipioDto)) then
+    FreeAndNil(oCadastroMunicipioDto);
+
+  if (Assigned(oCadastroUfDto)) then
+    FreeAndNil(oCadastroUfDto);
+
+  if (Assigned(oConsultaUfModel)) then
+    FreeAndNil(oConsultaUfModel);
+  inherited;
 end;
 
 function TCadastroMunicipioRegra.Novo(const oCadastroMunicipioModel: TCadastroMunicipioModel;
@@ -62,7 +92,7 @@ function TCadastroMunicipioRegra.SelectMunicipio(const oCadastroMunicipioModel: 
   var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
 begin
   if (oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto)) then
-    oConsultaUfModel.SelectId(IntToStr(oCadastroMunicipioDto.estado));
+    oConsultaUfModel.SelectId(oCadastroMunicipioDto.estado, oCadastroUfDto);
 end;
 
 function TCadastroMunicipioRegra.SelectDescricao(const oCadastroMunicipioModel

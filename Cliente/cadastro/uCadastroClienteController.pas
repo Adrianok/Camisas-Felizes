@@ -93,7 +93,7 @@ end;
 procedure TCadastroClienteController.NovoID;
 begin
   if (oCadastroClienteRegra.Novo(oCadastroClienteModel, oCadastroClienteDto)) then
-    (oFormulario as TCadastroClienteForm).ledtCodigo.Text := IntToStr(oCadastroClienteDto.IdCliente);
+    (oFormulario as TCadastroClienteForm).EdtCodigo.Text := IntToStr(oCadastroClienteDto.IdCliente);
 end;
 
 procedure TCadastroClienteController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
@@ -108,7 +108,7 @@ begin
     oCadastroClienteDto.telefone := (oFormulario as TCadastroClienteForm).EdtTelefone.Text;
     oCadastroClienteDto.celular := (oFormulario as TCadastroClienteForm).EdtCelular.Text;
     oCadastroClienteDto.observacao := (oFormulario as TCadastroClienteForm).edtObservacoes.Text;
-    oCadastroClienteDto.idendereco := (oFormulario as TCadastroClienteForm).EdtEndereco.Text;
+    oCadastroClienteDto.idendereco := StrToInt((oFormulario as TCadastroClienteForm).EdtEndereco.Text);
 
   if (not(assigned(oConsultaClienteController))) then
     oConsultaClienteController := TConsultaClienteController.Create;
@@ -123,9 +123,13 @@ begin
     if (oCadastroClienteRegra.SelectCliente(oCadastroClienteModel, oCadastroClienteDto)) then
       with (oFormulario as TCadastroClienteForm) do
       begin
-        ledtCodigo.Text := IntToStr(oCadastroClienteDto.Id);
-        ledtCliente.Text := oCadastroClienteDto.Cliente;
-        ledtNome.Text := oCadastroClienteDto.nome;
+        EdtCodigo.Text := IntToStr(oCadastroClienteDto.IdCliente);
+        EdtNome.Text := oCadastroClienteDto.Nome;
+        EdtTelefone.Text := oCadastroClienteDto.telefone;
+        EdtCpfCnpj.Text := oCadastroClienteDto.cpf_cnpj;
+        EdtCelular.Text := oCadastroClienteDto.celular;
+        edtObservacoes.Text := oCadastroClienteDto.observacao;
+        EdtEndereco.Text := IntToStr(oCadastroClienteDto.idendereco);
       end;
   end
   else
@@ -140,15 +144,19 @@ begin
   inherited;
   with (oFormulario as TCadastroClienteForm) do
   begin
-    oCadastroClienteDto.Id := StrToInt(ledtCodigo.Text);
-    oCadastroClienteDto.Cliente := ledtCliente.Text;
-    oCadastroClienteDto.nome := ledtNome.Text;
+    oCadastroClienteDto.IdCliente := StrToInt(EdtCodigo.Text);
+    oCadastroClienteDto.Nome := EdtNome.Text;
+    oCadastroClienteDto.telefone := EdtTelefone.Text;
+    oCadastroClienteDto.cpf_cnpj := EdtCpfCnpj.Text;
+    oCadastroClienteDto.celular := EdtCelular.Text;
+    oCadastroClienteDto.observacao := edtObservacoes.Text;
+    oCadastroClienteDto.idendereco := StrToInt(EdtEndereco.Text);
   end;
   if (oCadastroClienteRegra.Salvar(oCadastroClienteModel, oCadastroClienteDto)) then
-    ShowMessage('Registro: ' + oCadastroClienteDto.Cliente + ' Atualizado com sucesso')
+    ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Atualizado com sucesso')
   else
   begin
-    ShowMessage('Registro: ' + oCadastroClienteDto.Cliente + ' Inserido com sucesso');
+    ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Inserido com sucesso');
   end;
 end;
 

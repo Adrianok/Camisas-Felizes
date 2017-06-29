@@ -10,7 +10,9 @@ uses
   Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus,
   uCadastroModeloController, uConexaoSingleTon,
   uCadastroUfController,  uCadastroCorController,
-  uCadastroTamanhoController, uCadastroPedidoController, uCadastroMunicipioController;
+  uCadastroTamanhoController,  uCadastroMunicipioController,
+  uCadastroClienteController;
+  //uCadastroPedidoController
 
 type
   TfrmPrincipal = class(TForm)
@@ -20,6 +22,7 @@ type
     CadastrodeTamanho: TMenuItem;
     CadastrodePedidos: TMenuItem;
     CadastrodeMunicipio1: TMenuItem;
+    CadastrodeCliente1: TMenuItem;
     procedure C1Click(Sender: TObject);
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -27,6 +30,7 @@ type
     procedure CadastrodeTamanhoClick(Sender: TObject);
     procedure CadastrodePedidosClick(Sender: TObject);
     procedure CadastrodeMunicipio1Click(Sender: TObject);
+    procedure CadastrodeCliente1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,6 +50,13 @@ begin
     oCadastroUfController := TCadastroUfController.Create;
   oCadastroUfController.CriarForm(Self);
 
+end;
+
+procedure TfrmPrincipal.CadastrodeCliente1Click(Sender: TObject);
+begin
+  if (not(Assigned(oCadastroClienteController))) then
+    oCadastroClienteController := TCadastroClienteController.Create;
+  oCadastroClienteController.CriarForm(Self);
 end;
 
 procedure TfrmPrincipal.CadastrodeCorClick(Sender: TObject);
@@ -71,9 +82,9 @@ end;
 
 procedure TfrmPrincipal.CadastrodePedidosClick(Sender: TObject);
 begin
-  if (not(Assigned(oCadastroPedidoController))) then
-    oCadastroPedidoController := TCadastroPedidoController.Create;
-  oCadastroPedidoController.CriarForm(Self);
+//  if (not(Assigned(oCadastroPedidoController))) then
+//    oCadastroPedidoController := TCadastroPedidoController.Create;
+//  oCadastroPedidoController.CriarForm(Self);
 end;
 
 procedure TfrmPrincipal.CadastrodeTamanhoClick(Sender: TObject);

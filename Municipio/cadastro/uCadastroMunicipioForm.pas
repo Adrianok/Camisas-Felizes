@@ -10,9 +10,9 @@ uses
 
 type
   TCadastroMunicipioForm = class(TfrmBase)
-    LedtCodigo: TLabeledEdit;
-    LedtMunicipio: TLabeledEdit;
-    LedtEstado: TLabeledEdit;
+    EdtEstado: TLabeledEdit;
+    EdtMunicipio: TLabeledEdit;
+    EdtCodigo: TLabeledEdit;
 
   private
     { Private declarations }

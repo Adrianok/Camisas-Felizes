@@ -35,6 +35,9 @@ uses
 
 var
   oCadastroMunicipioController: IInterfaceViewBase;
+  oCadastroMunicipioModel: TCadastroMunicipioModel;
+  oCadastroMunicipioDto: TCadastroMunicipioDto;
+  oCadastroMunicipioRegra: TCadastroMunicipioRegra;
 
 implementation
 
@@ -49,12 +52,12 @@ begin
       oCadastroMunicipioDto)) then
       with (oFormulario as TCadastroMunicipioForm) do
       begin
-        ledtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
-        ledtMunicipio.Text := oCadastroMunicipioDto.Municipio;
-        ledtEstado.Text := IntToStr(oCadastroMunicipioDto.Estado);
+        EdtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
+        EdtMunicipio.Text := oCadastroMunicipioDto.Municipio;
+        EdtEstado.Text := IntToStr(oCadastroMunicipioDto.Estado);
       end;
   end
-  else if (oCadastroMunicipioDto.Municipio = '!') then
+  else
   begin
     ShowMessage('Nenhum Registro Selecionado');
     Inicial;
@@ -68,6 +71,9 @@ begin
 
   if (not(assigned(oCadastroMunicipioDto))) then
     oCadastroMunicipioDto := TCadastroMunicipioDto.Create;
+
+  if (not(assigned(oCadastroUfDto))) then
+    oCadastroUfDto := TCadastroUfDto.Create;
 
   if (not(assigned(oCadastroMunicipioRegra))) then
     oCadastroMunicipioRegra := TCadastroMunicipioRegra.Create;
@@ -102,6 +108,9 @@ begin
   if (assigned(oCadastroMunicipioRegra)) then
     FreeAndNil(oCadastroMunicipioRegra);
 
+  if (assigned(oCadastroUfDto)) then
+    FreeAndNil(oCadastroUfDto);
+
   inherited;
 end;
 
@@ -120,7 +129,7 @@ end;
 procedure TCadastroMunicipioController.NovoID;
 begin
   if (oCadastroMunicipioRegra.Novo(oCadastroMunicipioModel, oCadastroMunicipioDto)) then
-    (oFormulario as TCadastroMunicipioForm).ledtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
+    (oFormulario as TCadastroMunicipioForm).EdtCodigo.Text := IntToStr(oCadastroMunicipioDto.Id);
 end;
 
 procedure TCadastroMunicipioController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
@@ -134,12 +143,12 @@ var
     if (sIdMunicipio <> '') then
     begin
       oCadastroMunicipioDto.Id := StrToInt(sIdMunicipio);
-      oCadastroMunicipioDto.Municipio := (oFormulario as TCadastroMunicipioForm).ledtMunicipio.Text;
-      oCadastroMunicipioDto.Estado := StrToInt(ledtEstado.Text);
+      oCadastroMunicipioDto.Municipio := (oFormulario as TCadastroMunicipioForm).EdtMunicipio.Text;
+      oCadastroMunicipioDto.Estado := StrToInt(EdtEstado.Text);
     end;
 
 
-    if(ActiveControl =  (oFormulario as TCadastroMunicipioForm).LedtEstado) then
+    if(ActiveControl =  (oFormulario as TCadastroMunicipioForm).EdtEstado) then
     begin
       oConsultaUfController := TConsultaUfController.Create;
       oConsultaUfController.CriarForm(Owner, RetornoEstado, '');
@@ -161,9 +170,9 @@ begin
     if(oCadastroMunicipioRegra.SelectMunicipio(oCadastroMunicipioModel, oCadastroMunicipioDto))then
     with (oFormulario as TCadastroMunicipioForm) do
     begin
-      LedtCodigo.Text :=   IntToStr(oCadastroMunicipioDto.id);
-      LedtMunicipio.Text    :=  oCadastroMunicipioDto.Municipio;
-      LedtEstado.Text    :=  IntToStr(oCadastroMunicipioDto.estado);
+      EdtCodigo.Text :=   IntToStr(oCadastroMunicipioDto.id);
+      EdtMunicipio.Text    :=  oCadastroMunicipioDto.Municipio;
+      EdtEstado.Text := oCadastroUfDto.nome;
     end;
   end
   else
@@ -175,9 +184,9 @@ begin
   inherited;
   with (oFormulario as TCadastroMunicipioForm) do
   begin
-    oCadastroMunicipioDto.Id := StrToInt(ledtCodigo.Text);
-    oCadastroMunicipioDto.Municipio := ledtMunicipio.Text;
-    oCadastroMunicipioDto.Estado := StrToInt(ledtEstado.Text);
+    oCadastroMunicipioDto.Id := StrToInt(EdtCodigo.Text);
+    oCadastroMunicipioDto.Municipio := EdtMunicipio.Text;
+    oCadastroMunicipioDto.Estado := StrToInt(EdtEstado.Text);
   end;
   if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel,
     oCadastroMunicipioDto)) then

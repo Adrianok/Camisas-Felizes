@@ -73,37 +73,13 @@ uses
   uConsultaMunicipioModel in 'Municipio\consulta\uConsultaMunicipioModel.pas',
   uConsultaMunicipioRegra in 'Municipio\consulta\uConsultaMunicipioRegra.pas',
   uInterfaceConsultaMunicipioModel in 'Municipio\consulta\uInterfaceConsultaMunicipioModel.pas',
-  uInterfaceMunicipioModel in 'Municipio\consulta\uInterfaceMunicipioModel.pas',
-  uCadastroPedidoController in 'Pedido\Cadastro\uCadastroPedidoController.pas',
-  uCadastroPedidoDto in 'Pedido\Cadastro\uCadastroPedidoDto.pas',
-  uCadastroPedidoForm in 'Pedido\Cadastro\uCadastroPedidoForm.pas' {CadastroPedidoForm},
-  uCadastroPedidoModel in 'Pedido\Cadastro\uCadastroPedidoModel.pas',
-  uCadastroPedidoRegra in 'Pedido\Cadastro\uCadastroPedidoRegra.pas',
-  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas',
-  uConsultaPedidoController in 'Pedido\Consulta\uConsultaPedidoController.pas',
-  uConsultaPedidoForm in 'Pedido\Consulta\uConsultaPedidoForm.pas' {ConsultaPedidoForm},
-  uConsultaPedidoModel in 'Pedido\Consulta\uConsultaPedidoModel.pas',
-  uConsultaPedidoRegra in 'Pedido\Consulta\uConsultaPedidoRegra.pas',
-  uInterfaceConsultaPedidoModel in 'Pedido\Consulta\uInterfaceConsultaPedidoModel.pas',
-  uInterfacePedidoModel in 'Pedido\Consulta\uInterfacePedidoModel.pas',
-  uCadastroEnderecoDto in 'Endereço\uCadastroEnderecoDto.pas',
-  uCadastroEnderecoModel in 'Endereço\uCadastroEnderecoModel.pas',
-  uInterfaceCadastroEnderecoModel in 'Endereço\uInterfaceCadastroEnderecoModel.pas',
-  uCadastroBairroDto in 'Bairro\uCadastroBairroDto.pas',
-  uCadastroBairroModel in 'Bairro\uCadastroBairroModel.pas',
-  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas',
-  uConsultaClienteController in 'Cliente\consulta\uConsultaClienteController.pas',
-  uConsultaClienteForm in 'Cliente\consulta\uConsultaClienteForm.pas' {ConsultaClienteForm},
-  uConsultaClienteModel in 'Cliente\consulta\uConsultaClienteModel.pas',
-  uConsultaClienteRegra in 'Cliente\consulta\uConsultaClienteRegra.pas',
-  uInterfaceClienteModel in 'Cliente\consulta\uInterfaceClienteModel.pas',
-  uInterfaceConsultaClienteModel in 'Cliente\consulta\uInterfaceConsultaClienteModel.pas',
-  uCadastroClienteController in 'Cliente\cadastro\uCadastroClienteController.pas',
-  uCadastroClienteDto in 'Cliente\cadastro\uCadastroClienteDto.pas',
-  uCadastroClienteForm in 'Cliente\cadastro\uCadastroClienteForm.pas' {CadastroClienteForm},
-  uCadastroClienteModel in 'Cliente\cadastro\uCadastroClienteModel.pas',
-  uCadastroClienteRegra in 'Cliente\cadastro\uCadastroClienteRegra.pas',
-  uInterfaceCadastroClienteModel in 'Cliente\cadastro\uInterfaceCadastroClienteModel.pas';
+  uInterfaceMunicipioModel in 'Municipio\consulta\uInterfaceMunicipioModel.pas';
+//  uCadastroEnderecoDto in 'Endereço\uCadastroEnderecoDto.pas',
+//  uCadastroEnderecoModel in 'Endereço\uCadastroEnderecoModel.pas',
+//  uInterfaceCadastroEnderecoModel in 'Endereço\uInterfaceCadastroEnderecoModel.pas',
+//  uCadastroBairroDto in 'Bairro\uCadastroBairroDto.pas',
+//  uCadastroBairroModel in 'Bairro\uCadastroBairroModel.pas',
+//  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas';
 
 {$R *.res}
 
@@ -112,6 +88,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TCadastroClienteForm, CadastroClienteForm);
   Application.Run;
 end.

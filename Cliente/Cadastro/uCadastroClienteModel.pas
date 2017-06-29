@@ -123,8 +123,8 @@ begin
         Result := True;
         oCadastroClienteDto.Nome       := Query.FieldByName('nome').AsString;
         oCadastroClienteDto.cpf_cnpj   := Query.FieldByName('cpf_cnpj').AsString;
-        oCadastroClienteDto.telefone   := Query.FieldByName('telefone').AsInteger;
-        oCadastroClienteDto.celular    := Query.FieldByName('celular').AsInteger;
+        oCadastroClienteDto.telefone   := Query.FieldByName('telefone').AsString;
+        oCadastroClienteDto.celular    := Query.FieldByName('celular').AsString;
         oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;
         oCadastroClienteDto.idendereco := Query.FieldByName('idendereco').AsInteger;
       end
@@ -148,8 +148,8 @@ begin
     begin
       oCadastroClienteDto.IdCliente := Query.FieldByName('idcliente').AsInteger;
       oCadastroClienteDto.cpf_cnpj := Query.FieldByName('cpf_cnpj').AsString;
-      oCadastroClienteDto.telefone := Query.FieldByName('telefone').AsInteger;
-      oCadastroClienteDto.celular := Query.FieldByName('celular').AsInteger;
+      oCadastroClienteDto.telefone := Query.FieldByName('telefone').AsString;
+      oCadastroClienteDto.celular := Query.FieldByName('celular').AsString;
       oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;
       oCadastroClienteDto.idendereco := Query.FieldByName('idendereco').AsInteger;
       Result := True;

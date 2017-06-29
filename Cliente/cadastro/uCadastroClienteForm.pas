@@ -12,7 +12,7 @@ type
   TCadastroClienteForm = class(TfrmBase)
     EdtCpfCnpj: TLabeledEdit;
     EdtNome: TLabeledEdit;
-    LedtCodigo: TLabeledEdit;
+    EdtCodigo: TLabeledEdit;
     EdtTelefone: TLabeledEdit;
     EdtCelular: TLabeledEdit;
     edtObservacoes: TMemo;

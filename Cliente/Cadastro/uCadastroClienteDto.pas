@@ -11,23 +11,23 @@ type
     Fidendereco: integer;
     FIdCliente: Integer;
     FNome: string;
-    Ftelefone: integer;
-    Fcelular: integer;
-    procedure Setcelular(const Value: integer);
+    Ftelefone: string;
+    Fcelular: string;
+    procedure Setcelular(const Value: string);
     procedure Setcpf_cnpj(const Value: string);
     procedure SetIdCliente(const Value: Integer);
     procedure Setidendereco(const Value: integer);
     procedure SetNome(const Value: string);
     procedure Setobservacao(const Value: string);
-    procedure Settelefone(const Value: integer);
+    procedure Settelefone(const Value: string);
 
   public
     constructor Create;
     property IdCliente : Integer read FIdCliente write SetIdCliente;
     property Nome : string read FNome write SetNome;
     property cpf_cnpj : string read Fcpf_cnpj write Setcpf_cnpj;
-    property telefone : integer read Ftelefone write Settelefone;
-    property celular : integer read Fcelular write Setcelular;
+    property telefone : string read Ftelefone write Settelefone;
+    property celular : string read Fcelular write Setcelular;
     property observacao : string read Fobservacao write Setobservacao;
     property idendereco : integer read Fidendereco write Setidendereco;
   end;
@@ -46,7 +46,7 @@ begin
   Fcpf_cnpj  := EmptyStr;
 end;
 
-procedure TCadastroClienteDto.Setcelular(const Value: integer);
+procedure TCadastroClienteDto.Setcelular(const Value: string);
 begin
   Fcelular := Value;
 end;
@@ -76,7 +76,7 @@ begin
   Fobservacao := Value;
 end;
 
-procedure TCadastroClienteDto.Settelefone(const Value: integer);
+procedure TCadastroClienteDto.Settelefone(const Value: string);
 begin
   Ftelefone := Value;
 end;

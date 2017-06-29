@@ -21,10 +21,10 @@ inherited CadastroClienteForm: TCadastroClienteForm
   end
   inherited Panel1: TPanel
     Width = 591
-    ExplicitWidth = 600
+    ExplicitWidth = 591
     inherited Panel3: TPanel
       Left = 390
-      ExplicitLeft = 399
+      ExplicitLeft = 390
     end
   end
   object EdtCpfCnpj: TLabeledEdit
@@ -78,7 +78,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TabOrder = 2
     TextHint = 'Nome'
   end
-  object LedtCodigo: TLabeledEdit
+  object EdtCodigo: TLabeledEdit
     Tag = 999
     Left = 108
     Top = 131

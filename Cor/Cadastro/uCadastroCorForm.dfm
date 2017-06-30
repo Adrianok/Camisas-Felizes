@@ -2,15 +2,16 @@ inherited CadastroCorForm: TCadastroCorForm
   Left = 360
   Top = 208
   Caption = 'CadastroCorForm'
-  ClientHeight = 247
+  ClientHeight = 191
   ClientWidth = 501
   Position = poDesigned
   ExplicitWidth = 507
-  ExplicitHeight = 276
+  ExplicitHeight = 220
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 501
+    TabOrder = 2
     ExplicitWidth = 501
     inherited Panel3: TPanel
       Left = 300
@@ -20,7 +21,7 @@ inherited CadastroCorForm: TCadastroCorForm
   object edtCodigo: TLabeledEdit
     Tag = 999
     Left = 78
-    Top = 120
+    Top = 110
     Width = 153
     Height = 26
     Hint = 'C'#243'digo da cor'
@@ -41,12 +42,12 @@ inherited CadastroCorForm: TCadastroCorForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
   end
   object edtCor: TLabeledEdit
     Left = 78
-    Top = 176
-    Width = 355
+    Top = 150
+    Width = 410
     Height = 26
     Hint = 'Cor'
     EditLabel.Width = 32
@@ -65,6 +66,6 @@ inherited CadastroCorForm: TCadastroCorForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
   end
 end

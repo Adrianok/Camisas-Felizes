@@ -207,7 +207,7 @@ object frmBase: TfrmBase
         Layout = blGlyphTop
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 0
+        TabOrder = 1
         OnClick = btnSalvarClick
       end
       object btnPesquisar: TBitBtn
@@ -535,7 +535,7 @@ object frmBase: TfrmBase
         Layout = blGlyphTop
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 1
+        TabOrder = 0
         OnClick = btnNovoClick
       end
     end

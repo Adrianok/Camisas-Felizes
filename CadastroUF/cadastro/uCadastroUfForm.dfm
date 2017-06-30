@@ -1,24 +1,26 @@
 inherited CadastroUfForm: TCadastroUfForm
   Caption = 'Cadastro de UF'
-  ClientHeight = 314
-  ClientWidth = 600
-  ExplicitWidth = 606
-  ExplicitHeight = 343
+  ClientHeight = 187
+  ClientWidth = 498
+  ExplicitWidth = 504
+  ExplicitHeight = 216
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 600
+    Width = 498
+    TabOrder = 3
     ExplicitWidth = 600
     inherited Panel3: TPanel
-      Left = 399
+      Left = 297
       ExplicitLeft = 399
     end
   end
   object LedtNome: TLabeledEdit
-    Left = 70
-    Top = 235
-    Width = 489
+    Left = 72
+    Top = 150
+    Width = 410
     Height = 26
+    Hint = 'Nome'
     CharCase = ecUpperCase
     EditLabel.Width = 44
     EditLabel.Height = 18
@@ -36,14 +38,15 @@ inherited CadastroUfForm: TCadastroUfForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 2
     TextHint = 'nome UF'
   end
   object LedtUf: TLabeledEdit
-    Left = 70
-    Top = 179
-    Width = 489
+    Left = 362
+    Top = 110
+    Width = 120
     Height = 26
+    Hint = 'UF'
     CharCase = ecUpperCase
     EditLabel.Width = 23
     EditLabel.Height = 18
@@ -62,15 +65,16 @@ inherited CadastroUfForm: TCadastroUfForm
     LabelPosition = lpLeft
     MaxLength = 2
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
     TextHint = 'Sigla'
   end
   object LedtCodigo: TLabeledEdit
     Tag = 999
     Left = 70
-    Top = 123
-    Width = 121
+    Top = 110
+    Width = 120
     Height = 26
+    Hint = 'Codigo'
     EditLabel.Width = 48
     EditLabel.Height = 18
     EditLabel.BiDiMode = bdLeftToRight
@@ -91,7 +95,7 @@ inherited CadastroUfForm: TCadastroUfForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 0
     TextHint = 'C'#211'DIGO'
   end
 end

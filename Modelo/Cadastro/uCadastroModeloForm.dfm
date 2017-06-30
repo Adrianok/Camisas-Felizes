@@ -2,37 +2,46 @@ inherited CadastroModeloForm: TCadastroModeloForm
   Left = 340
   Top = 55
   Caption = 'CadastroModeloForm'
-  ClientHeight = 480
-  ClientWidth = 707
+  ClientHeight = 407
+  ClientWidth = 663
   Position = poDesigned
-  ExplicitWidth = 713
-  ExplicitHeight = 509
+  ExplicitWidth = 669
+  ExplicitHeight = 436
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 707
+    Width = 663
+    TabOrder = 4
     ExplicitWidth = 707
     inherited Panel3: TPanel
-      Left = 506
+      Left = 462
       ExplicitLeft = 506
     end
   end
   object GroupBox1: TGroupBox
-    Left = 208
-    Top = 201
-    Width = 461
-    Height = 279
+    Left = 223
+    Top = 146
+    Width = 441
+    Height = 255
     Caption = 'Selecione as cores referentes ao modelo'
     Color = clWhite
     ParentBackground = False
     ParentColor = False
-    TabOrder = 1
+    TabOrder = 3
+    object Label1: TLabel
+      Left = 39
+      Top = 58
+      Width = 80
+      Height = 13
+      Caption = 'Seletor de Cores'
+    end
     object edtCor: TLabeledEdit
       Tag = 888
-      Left = 48
-      Top = 28
-      Width = 401
+      Left = 39
+      Top = 23
+      Width = 383
       Height = 26
+      Hint = 'Cor'
       EditLabel.Width = 32
       EditLabel.Height = 23
       EditLabel.BiDiMode = bdLeftToRight
@@ -56,10 +65,11 @@ inherited CadastroModeloForm: TCadastroModeloForm
       TabOrder = 0
     end
     object ListView1: TListView
-      Left = 24
-      Top = 80
-      Width = 425
-      Height = 177
+      Left = 39
+      Top = 74
+      Width = 383
+      Height = 169
+      Hint = 'Cores'
       Checkboxes = True
       Columns = <>
       GridLines = True
@@ -70,12 +80,13 @@ inherited CadastroModeloForm: TCadastroModeloForm
   end
   object edtPreco: TLabeledEdit
     Left = 70
-    Top = 201
+    Top = 150
     Width = 105
     Height = 26
+    Hint = 'Preco'
     EditLabel.Width = 46
     EditLabel.Height = 23
-    EditLabel.Caption = 'Preco:'
+    EditLabel.Caption = 'Pre'#231'o:'
     EditLabel.Font.Charset = DEFAULT_CHARSET
     EditLabel.Font.Color = clWindowText
     EditLabel.Font.Height = -17
@@ -95,9 +106,10 @@ inherited CadastroModeloForm: TCadastroModeloForm
   object edtCodigo: TLabeledEdit
     Tag = 999
     Left = 70
-    Top = 129
+    Top = 110
     Width = 105
     Height = 26
+    Hint = 'Codigo'
     EditLabel.Width = 58
     EditLabel.Height = 23
     EditLabel.Caption = 'C'#243'digo:'
@@ -114,13 +126,14 @@ inherited CadastroModeloForm: TCadastroModeloForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 0
   end
   object edtModelo: TLabeledEdit
-    Left = 278
-    Top = 129
-    Width = 355
+    Left = 262
+    Top = 110
+    Width = 383
     Height = 26
+    Hint = 'Modelo'
     EditLabel.Width = 60
     EditLabel.Height = 23
     EditLabel.Caption = 'Modelo:'
@@ -137,6 +150,6 @@ inherited CadastroModeloForm: TCadastroModeloForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 1
   end
 end

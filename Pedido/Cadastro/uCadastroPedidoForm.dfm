@@ -15,7 +15,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   end
   inherited Panel1: TPanel
     Width = 964
-    ExplicitTop = -2
     ExplicitWidth = 964
     inherited Panel2: TPanel
       ExplicitTop = 1
@@ -3811,7 +3810,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Top = 20
           Width = 255
           Height = 26
-          Hint = 'CPF/CNPJ'
+          Hint = 'Usu'#225'rio'
           CharCase = ecUpperCase
           EditLabel.Width = 58
           EditLabel.Height = 23
@@ -3906,6 +3905,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Top = 60
           Width = 310
           Height = 26
+          Hint = 'Modelo'
           CharCase = ecUpperCase
           EditLabel.Width = 60
           EditLabel.Height = 23
@@ -3938,7 +3938,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             Top = 20
             Width = 97
             Height = 26
-            Hint = 'CPF/CNPJ'
+            Hint = 'Quantidade'
             CharCase = ecUpperCase
             EditLabel.Width = 88
             EditLabel.Height = 23
@@ -3962,7 +3962,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           end
           object edtTamanho: TLabeledEdit
             Left = 101
-            Top = 20
+            Top = 28
             Width = 108
             Height = 26
             Hint = 'C'#243'digo do cliente'
@@ -3992,7 +3992,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             Top = 60
             Width = 310
             Height = 26
-            Hint = 'CPF/CNPJ'
+            Hint = 'Cor'
             CharCase = ecUpperCase
             EditLabel.Width = 32
             EditLabel.Height = 23
@@ -4020,7 +4020,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Top = 20
           Width = 109
           Height = 26
-          Hint = 'CPF/CNPJ'
+          Hint = 'Pre'#231'o Item'
           CharCase = ecUpperCase
           EditLabel.Width = 83
           EditLabel.Height = 23
@@ -4119,7 +4119,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Top = 195
         Width = 121
         Height = 26
-        Hint = 'CPF/CNPJ'
+        Hint = 'Quantidade de Itens'
         CharCase = ecUpperCase
         EditLabel.Width = 188
         EditLabel.Height = 23

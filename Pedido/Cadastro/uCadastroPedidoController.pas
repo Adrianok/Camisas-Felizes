@@ -71,21 +71,21 @@ var
   iIndice : Integer;
   iSequencia : Integer;
 begin
-  with (oFormulario as TCadastroPedidoForm) do
-  begin
-    iIndice := 0;
-    iSequencia := 0;
-    for oCadastroItensDto in oCadastroPedidoDto.ItensPedido.Values  do
-    begin
-      if(oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia > iSequencia)then
-        iSequencia := oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia;
-      iIndice := +1;
-    end;
-
-    oCadastroItensDto.IdItensPedido := StrToInt(edtCdItensPedido.Text);
-    oCadastroItensDto.Sequencia := iSequencia;
-    oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
-  end;
+//  with (oFormulario as TCadastroPedidoForm) do
+//  begin
+//    iIndice := 0;
+//    iSequencia := 0;
+//    for oCadastroItensDto in oCadastroPedidoDto.ItensPedido.Values  do
+//    begin
+//      if(oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia > iSequencia)then
+//        iSequencia := oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia;
+//      iIndice := +1;
+//    end;
+//
+//    oCadastroItensDto.IdItensPedido := StrToInt(edtCdItensPedido.Text);
+//    oCadastroItensDto.Sequencia := iSequencia;
+//    oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
+//  end;
 end;
 
 procedure TCadastroPedidoController.Aguardando;

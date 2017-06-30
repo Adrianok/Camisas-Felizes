@@ -60,7 +60,6 @@ type
     edtPrecoItem: TLabeledEdit;
     lvItens: TListView;
     chlDetalheItem: TCheckListBox;
-    Label10: TLabel;
     logo: TImage;
     edtQntItem: TLabeledEdit;
   private

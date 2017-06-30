@@ -15,6 +15,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   end
   inherited Panel1: TPanel
     Width = 964
+    ExplicitTop = -2
     ExplicitWidth = 964
     inherited Panel2: TPanel
       ExplicitTop = 1
@@ -132,7 +133,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     TabOrder = 2
     object pgCabecalho: TTabSheet
       Caption = 'Cabe'#231'alho'
-      ExplicitTop = 31
       object logo: TImage
         Left = 779
         Top = 340
@@ -3283,19 +3283,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Style = []
           ParentFont = False
         end
-        object Label25: TLabel
-          Left = 5
-          Top = 64
-          Width = 107
-          Height = 18
-          Caption = 'Nome Receptor:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object dtePrev: TDateTimePicker
           Left = 359
           Top = 20
@@ -3315,15 +3302,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         object edtReceptor: TLabeledEdit
           Tag = 888
           AlignWithMargins = True
-          Left = 118
+          Left = 136
           Top = 60
-          Width = 391
+          Width = 373
           Height = 26
           Hint = 'Nome do receptor'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 121
           EditLabel.Height = 23
           EditLabel.Hint = 'Nome do Receptor'
+          EditLabel.Caption = 'Nome Receptor:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -3475,69 +3463,18 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Style = []
           ParentFont = False
           TabOrder = 3
-          object Label21: TLabel
-            Left = 79
-            Top = 24
-            Width = 30
-            Height = 18
-            Caption = 'Rua:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label22: TLabel
-            Left = 87
-            Top = 64
-            Width = 22
-            Height = 18
-            Caption = 'N'#186':'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label23: TLabel
-            Left = 56
-            Top = 104
-            Width = 53
-            Height = 18
-            Caption = 'Cidade :'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label24: TLabel
-            Left = 234
-            Top = 64
-            Width = 42
-            Height = 18
-            Caption = 'Bairro:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
           object edtRua: TLabeledEdit
             Tag = 888
-            Left = 115
+            Left = 133
             Top = 20
-            Width = 394
+            Width = 376
             Height = 26
             Hint = 'Rua'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 30
             EditLabel.Height = 23
             EditLabel.Hint = 'Rua'
+            EditLabel.Caption = 'Rua:'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -3555,15 +3492,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           end
           object edtNmr: TLabeledEdit
             Tag = 888
-            Left = 115
-            Top = 61
-            Width = 102
+            Left = 133
+            Top = 60
+            Width = 84
             Height = 26
             Hint = 'Numero'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 23
             EditLabel.Height = 23
             EditLabel.Hint = 'N'#186' '
+            EditLabel.Caption = 'N'#186':'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -3588,9 +3526,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             Height = 26
             Hint = 'Bairro'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 46
             EditLabel.Height = 23
             EditLabel.Hint = 'Bairro'
+            EditLabel.Caption = 'Bairro:'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -3608,15 +3547,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           end
           object edtCidade: TLabeledEdit
             Tag = 888
-            Left = 115
+            Left = 133
             Top = 100
-            Width = 394
+            Width = 376
             Height = 26
             Hint = 'Cidade'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 55
             EditLabel.Height = 23
             EditLabel.Hint = 'Cidade'
+            EditLabel.Caption = 'Cidade:'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -3647,32 +3587,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        object Label6: TLabel
-          Left = 93
-          Top = 25
-          Width = 48
-          Height = 18
-          Caption = 'C'#243'digo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label8: TLabel
-          Left = 62
-          Top = 64
-          Width = 79
-          Height = 18
-          Caption = 'CPF / CNPJ:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object edtCpfCnpj: TLabeledEdit
           Left = 147
           Top = 60
@@ -3680,9 +3594,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'CPF/CNPJ'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 85
           EditLabel.Height = 23
           EditLabel.Hint = 'CPF ou CNPJ'
+          EditLabel.Caption = 'CPF - CNPJ:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -3707,10 +3622,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'C'#243'digo do cliente'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 112
           EditLabel.Height = 23
           EditLabel.Hint = 'C'#243'digo Cliente'
-          EditLabel.Caption = ' '
+          EditLabel.Caption = 'C'#243'digo Cliente:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -3754,32 +3669,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Font.Style = []
           ParentFont = False
         end
-        object Label7: TLabel
-          Left = 17
-          Top = 24
-          Width = 125
-          Height = 18
-          Caption = 'N'#250'mero do pedido:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label11: TLabel
-          Left = 75
-          Top = 64
-          Width = 67
-          Height = 18
-          Caption = 'Vendedor:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object edtCodigo: TLabeledEdit
           Tag = 999
           Left = 148
@@ -3788,10 +3677,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'C'#243'digo do pedido'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 151
           EditLabel.Height = 23
           EditLabel.Hint = 'Pedido'
-          EditLabel.Caption = ' '
+          EditLabel.Caption = ' N'#250'mero do pedido:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -3832,9 +3721,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'Nome do vendedor'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 126
           EditLabel.Height = 23
           EditLabel.Hint = 'Vendedor'
+          EditLabel.Caption = 'Nome Vendedor:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -3916,19 +3806,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        object Label9: TLabel
-          Left = 88
-          Top = 24
-          Width = 53
-          Height = 18
-          Caption = 'Usu'#225'rio:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object LabeledEdit1: TLabeledEdit
           Left = 147
           Top = 20
@@ -3936,9 +3813,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'CPF/CNPJ'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 58
           EditLabel.Height = 23
           EditLabel.Hint = 'Usu'#225'rio'
+          EditLabel.Caption = 'Usu'#225'rio:'
           EditLabel.Color = clBackground
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
@@ -3962,7 +3840,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     object TabSheet1: TTabSheet
       Caption = 'Itens'
       ImageIndex = 1
-      ExplicitTop = 31
       object Label19: TLabel
         Left = 61
         Top = 253
@@ -3989,19 +3866,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Font.Style = []
         ParentFont = False
       end
-      object Label18: TLabel
-        Left = 466
-        Top = 199
-        Width = 200
-        Height = 18
-        Caption = 'Quantidade Total de Produtos:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
       object GroupBox6: TGroupBox
         Left = 61
         Top = -13
@@ -4009,45 +3873,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Height = 202
         Caption = 'Dados do cliente'
         TabOrder = 0
-        object Label13: TLabel
-          Left = 7
-          Top = 24
-          Width = 120
-          Height = 18
-          Caption = 'C'#243'digo do Modelo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label12: TLabel
-          Left = 76
-          Top = 63
-          Width = 51
-          Height = 18
-          Caption = 'Modelo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label14: TLabel
-          Left = 508
-          Top = 24
-          Width = 74
-          Height = 18
-          Caption = 'Pre'#231'o (un):'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object edtCdItensPedido: TLabeledEdit
           Tag = 999
           Left = 133
@@ -4056,16 +3881,17 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'C'#243'digo do cliente'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 119
           EditLabel.Height = 23
           EditLabel.Hint = 'C'#243'digo Modelo'
-          EditLabel.Caption = ' '
+          EditLabel.Caption = 'C'#243'digo Modelo:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
           EditLabel.Font.Name = 'Segoe UI Light'
           EditLabel.Font.Style = []
           EditLabel.ParentFont = False
+          Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15
@@ -4081,9 +3907,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Width = 310
           Height = 26
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 60
           EditLabel.Height = 23
           EditLabel.Hint = 'Modelo'
+          EditLabel.Caption = 'Modelo:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -4100,61 +3927,23 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           TabOrder = 1
         end
         object GroupBox7: TGroupBox
-          Left = 40
+          Left = 32
           Top = 99
-          Width = 657
+          Width = 665
           Height = 100
           Caption = 'Tamanho e cor'
           TabOrder = 2
-          object Label15: TLabel
-            Left = 19
-            Top = 24
-            Width = 68
-            Height = 18
-            Caption = 'Tamanho:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label16: TLabel
-            Left = 60
-            Top = 64
-            Width = 27
-            Height = 18
-            Caption = 'Cor:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label17: TLabel
-            Left = 230
-            Top = 25
-            Width = 70
-            Height = 16
-            Caption = 'Quantidade:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
           object edtQntTam: TLabeledEdit
-            Left = 306
+            Left = 314
             Top = 20
             Width = 97
             Height = 26
             Hint = 'CPF/CNPJ'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 88
             EditLabel.Height = 23
             EditLabel.Hint = 'Quantidade'
+            EditLabel.Caption = 'Quantidade:'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -4172,16 +3961,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             TabOrder = 0
           end
           object edtTamanho: TLabeledEdit
-            Left = 93
+            Left = 101
             Top = 20
-            Width = 123
+            Width = 108
             Height = 26
             Hint = 'C'#243'digo do cliente'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 91
             EditLabel.Height = 23
             EditLabel.Hint = 'Tamanho'
-            EditLabel.Caption = ' '
+            EditLabel.Caption = 'C'#243'digo Cor:'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -4199,15 +3988,16 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             TabOrder = 1
           end
           object edtCor: TLabeledEdit
-            Left = 93
+            Left = 101
             Top = 60
             Width = 310
             Height = 26
             Hint = 'CPF/CNPJ'
             CharCase = ecUpperCase
-            EditLabel.Width = 5
+            EditLabel.Width = 32
             EditLabel.Height = 23
             EditLabel.Hint = 'Cor'
+            EditLabel.Caption = 'Cor:'
             EditLabel.Font.Charset = DEFAULT_CHARSET
             EditLabel.Font.Color = clWindowText
             EditLabel.Font.Height = -17
@@ -4232,9 +4022,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Height = 26
           Hint = 'CPF/CNPJ'
           CharCase = ecUpperCase
-          EditLabel.Width = 5
+          EditLabel.Width = 83
           EditLabel.Height = 23
           EditLabel.Hint = 'Pre'#231'o'
+          EditLabel.Caption = 'Pre'#231'o Item:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17
@@ -4330,9 +4121,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Height = 26
         Hint = 'CPF/CNPJ'
         CharCase = ecUpperCase
-        EditLabel.Width = 5
+        EditLabel.Width = 188
         EditLabel.Height = 23
         EditLabel.Hint = 'Quantidade total itens'
+        EditLabel.Caption = 'Quantidade Total de Itens:'
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = clWindowText
         EditLabel.Font.Height = -17

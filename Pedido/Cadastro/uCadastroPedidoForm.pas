@@ -63,6 +63,7 @@ type
     Label10: TLabel;
     logo: TImage;
     edtQntItem: TLabeledEdit;
+    BitBtn1: TBitBtn;
   private
     { Private declarations }
   public

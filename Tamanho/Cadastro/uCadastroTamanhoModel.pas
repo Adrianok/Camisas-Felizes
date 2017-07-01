@@ -17,7 +17,7 @@ type
   public
     function SelectPorId(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function SelectTamanho(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
-    function SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function SelectPorDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function Inserir(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function Atualizar(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function Deletar(const IdTamanho: integer): Boolean;
@@ -131,7 +131,7 @@ begin
   end;
 end;
 
-function TCadastroTamanhoModel.SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+function TCadastroTamanhoModel.SelectPorDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
 begin
   try
     Query.SQL.Clear;

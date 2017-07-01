@@ -16,6 +16,7 @@ type
 
   TClassInterfaceConsultaBase = class(TInterfacedObject, IInterfaceConsultaBase)
   private
+    aFormPai : TComponent;
   protected
     oFormulario : TfrmPesquisaBase;
     oProcedureRetorno: TRetorno;
@@ -24,7 +25,7 @@ type
     procedure PesquisarGrid; virtual;
     procedure AlimentarDto(Column : TColumn); virtual;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);    virtual;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');    virtual;
     procedure Pesquisar; virtual;
     procedure KeyDown(var Key: Word);
     procedure Cancelar;  virtual;
@@ -45,26 +46,33 @@ end;
 
 procedure TClassInterfaceConsultaBase.Cancelar;
 begin
-  oFormulario.DBGrid1.SelectedIndex := 1;
+  oFormulario.DBGrid1.SelectedRows.Clear;
 end;
 
 
 
 procedure TClassInterfaceConsultaBase.Confirmar;
 begin
-  AlimentarDto(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]);
-  oFormulario.FDMemTableGrid.Close;
-  if assigned(oFormulario) then
-    FreeAndNil(oFormulario);
+  if(oFormulario.DBGrid1.FieldCount > 0)then
+  begin
+    (aFormPai as TfrmBase).Enabled := True;
+    AlimentarDto(oFormulario.DBGrid1.Columns[oFormulario.DBGrid1.SelectedIndex]);
+    oFormulario.FDMemTableGrid.Close;
+    if assigned(oFormulario) then
+      FreeAndNil(oFormulario);
+  end
+  else
+    ShowMessage('Não foi escolhido nenhum registro');
 end;
 
 
 
-procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
+procedure TClassInterfaceConsultaBase.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');
 begin
   with oFormulario do
   begin
-    ActiveControl :=  oFormulario.edtPesquisa;
+    aFormPai := Aowner;
+    (Aowner as TfrmBase).Enabled := False;
   end;
   oProcedureRetorno := ARetorno;
 end;
@@ -72,6 +80,7 @@ end;
 
 procedure TClassInterfaceConsultaBase.Fechar;
 begin
+  (aFormPai as TfrmBase).Enabled := True;
   oFormulario.FDMemTableGrid.Close;
   if assigned(oFormulario) then
     FreeAndNil(oFormulario);

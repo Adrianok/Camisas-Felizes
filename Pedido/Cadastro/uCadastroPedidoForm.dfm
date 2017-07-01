@@ -15,7 +15,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   end
   inherited Panel1: TPanel
     Width = 964
-    ExplicitTop = -2
     ExplicitWidth = 964
     inherited Panel2: TPanel
       ExplicitTop = 1
@@ -128,11 +127,15 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     Top = 84
     Width = 1113
     Height = 478
-    ActivePage = pgCabecalho
+    ActivePage = TabSheet1
     Align = alCustom
     TabOrder = 2
     object pgCabecalho: TTabSheet
       Caption = 'Cabe'#231'alho'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object logo: TImage
         Left = 779
         Top = 340
@@ -3840,6 +3843,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     object TabSheet1: TTabSheet
       Caption = 'Itens'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label19: TLabel
         Left = 61
         Top = 253
@@ -4040,6 +4047,14 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           LabelPosition = lpLeft
           ParentFont = False
           TabOrder = 3
+        end
+        object BitBtn1: TBitBtn
+          Left = 488
+          Top = 72
+          Width = 75
+          Height = 25
+          Caption = 'BitBtn1'
+          TabOrder = 4
         end
       end
       object btnExcluirModelo: TBitBtn

@@ -12,11 +12,26 @@ inherited ConsultaTamanhoForm: TConsultaTamanhoForm
     Width = 374
     ExplicitWidth = 374
   end
-  inherited Panel2: TPanel
-    Top = 442
+  inherited DBGrid1: TDBGrid
     Width = 374
-    ExplicitTop = 442
-    ExplicitWidth = 374
+    Height = 385
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 3
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'idTamanho'
+        Title.Caption = 'C'#243'digo'
+        Width = 59
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'descricao'
+        Title.Caption = 'Descri'#231#227'o'
+        Width = 273
+        Visible = True
+      end>
   end
   object DBGrid: TDBGrid [2]
     Left = 0
@@ -25,7 +40,7 @@ inherited ConsultaTamanhoForm: TConsultaTamanhoForm
     Height = 385
     Align = alClient
     DataSource = DataSourceGrid
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -48,26 +63,16 @@ inherited ConsultaTamanhoForm: TConsultaTamanhoForm
         Visible = True
       end>
   end
-  inherited DBGrid1: TDBGrid
+  inherited Panel2: TPanel
+    Top = 442
     Width = 374
-    Height = 385
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 3
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'idTamanho'
-        Title.Caption = 'C'#243'digo'
-        Width = 59
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'descricao'
-        Title.Caption = 'Descri'#231#227'o'
-        Width = 273
-        Visible = True
-      end>
+    TabOrder = 1
+    ExplicitTop = 442
+    ExplicitWidth = 374
+    inherited Panel3: TPanel
+      Left = 89
+      ExplicitLeft = 89
+    end
   end
   inherited DataSourceGrid: TDataSource
     Left = 8

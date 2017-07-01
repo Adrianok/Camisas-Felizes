@@ -108,8 +108,6 @@ object frmPesquisaBase: TfrmPesquisaBase
     Height = 80
     Align = alBottom
     TabOrder = 2
-    ExplicitLeft = 64
-    ExplicitTop = 283
     object Panel3: TPanel
       Left = 104
       Top = 1
@@ -611,8 +609,9 @@ object frmPesquisaBase: TfrmPesquisaBase
     Top = 264
   end
   object FDMemTableGrid: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.AssignedValues = [evMode, evRowsetSize]
     FetchOptions.Mode = fmAll
+    FetchOptions.RowsetSize = -1
     ResourceOptions.AssignedValues = [rvSilentMode]
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]

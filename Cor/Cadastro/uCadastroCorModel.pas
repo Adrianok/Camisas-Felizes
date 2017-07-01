@@ -18,7 +18,7 @@ type
     function SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function SelectAllLista(var oListaCores: TListaCores): Boolean;
     function SelectDescricaoDivergente(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
+    function SelectPorDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Inserir(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Atualizar(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Deletar(const IdCor : integer): Boolean;
@@ -161,7 +161,7 @@ begin
   end;
 end;
 
-function TCadastroCorModel.SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroCorModel.SelectPorDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
 begin
   try
     Query.SQL.Clear;

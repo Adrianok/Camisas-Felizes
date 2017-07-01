@@ -14,8 +14,14 @@ uses
   uCadastroEnderecoModel, uCadastroEnderecoDto,
   uCadastroBairroModel, uCadastroBairroDto,
   uCadastroMunicipioModel, uCadastroMunicipioDto,
-  uConsultaClienteController, uConsultaClienteForm,
-  System.Generics.Collections, uCadastroItensDto;
+  uConsultaClienteController, uCadastroTamanhoDto,
+  uCadastroTamanhoModel,
+  System.Generics.Collections, uCadastroItensDto,
+  uListaDetalheItem, uCadastroDetalheItemDto,
+  uConsultaTamanhoController, uCadastroCorDto,
+  uCadastroCorModel, uConsultaCorController,
+  uConsultaModeloController, uCadastroModeloModel,
+  uCadastroModeloDto;
 
 type
   TCadastroPedidoController = class(TClassInterfaceViewBase)
@@ -29,12 +35,23 @@ type
     oCadastroMunicipioModel   : TCadastroMunicipioModel;
     oCadastroMunicipioDto     : TCadastroMunicipioDto;
 
-    oCadastroDetalheItensDto  : TCadastroItensDto;
+    oCadastroTamanhoModel     : TCadastroTamanhoModel;
+    oCadastroTamanhoDto       : TCadastroTamanhoDto;
+    oCadastroDetalheItensDto  : TCadastroDetalheItemDto;
     oCadastroItensDto         : TCadastroItensDto;
     oCadastroPedidoRegra      : TCadastroPedidoRegra;
     oCadastroPedidoModel      : TCadastroPedidoModel;
     oCadastroPedidoDto        : TCadastroPedidoDto;
+    oForm                     : TCadastroPedidoForm;
+    oListaDetalheItem         : TListaDetalheItem;
+    oCadastroCorDto           : TCadastroCorDto;
+    oCadastroCorModel         : TCadastroCorModel;
+    oCadastroModeloDto        : TCadastroModeloDto;
+    oCadastroModeloModel      : TCadastroModeloModel;
 
+    procedure RetornoModelo(aIdModelo : Integer);
+    procedure RetornoCor(aIdCor : Integer);
+    procedure RetornoTamanho(aIdTamanho : Integer);
     procedure RetornoPedido(aIdPedido : Integer);
     procedure RetornoCliente(aIdCliente : Integer);
   public
@@ -46,7 +63,7 @@ type
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure AdicionarItem(Sender : TObject);
-    procedure AdicionarCor;
+    procedure AdicionarDetalhe(Sender : TObject);
     procedure Salvar; override;
     procedure NovoID;
 
@@ -60,30 +77,43 @@ var
 implementation
 
 
-procedure TCadastroPedidoController.AdicionarCor;
-begin
-
-end;
-
-procedure TCadastroPedidoController.AdicionarItem(Sender : TObject);
-var
-  oCadastroCorDto : TCadastroItensDto;
-  iIndice : Integer;
-  iSequencia : Integer;
+procedure TCadastroPedidoController.AdicionarDetalhe(Sender : Tobject);
 begin
   with (oFormulario as TCadastroPedidoForm) do
   begin
-    iIndice := 0;
-    iSequencia := 0;
-    for oCadastroItensDto in oCadastroPedidoDto.ItensPedido.Values  do
-    begin
-      if(oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia > iSequencia)then
-        iSequencia := oCadastroPedidoDto.ItensPedido.Items[iIndice].Sequencia;
-      iIndice := +1;
-    end;
+    try
+      if(not(Assigned(oCadastroDetalheItensDto)))then
+        oListaDetalheItem := TListaDetalheItem.Create([doOwnsValues]);
+      oCadastroDetalheItensDto := TCadastroDetalheItemDto.Create;
+      oCadastroTamanhoDto.Descricao := edtTamanho.Text;
+      if(oCadastroPedidoRegra.SelectTamanhoPorDescricao(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+        oCadastroDetalheItensDto.idtamanho := oCadastroTamanhoDto.IdTamanho;
+      oCadastroCorDto.Descricao := edtCor.Text;
+      if(oCadastroPedidoRegra.SelectCorPorDescricao(oCadastroCorModel, oCadastroCorDto))then
+        oCadastroDetalheItensDto.idcor := oCadastroCorDto.IdCor;
+      oCadastroDetalheItensDto.quantidade := StrToInt(edtQntTam.Text);
+      oListaDetalheItem.Add(oCadastroDetalheItensDto.idtamanho, oCadastroDetalheItensDto);
+    finally
+      if(assigned(oCadastroDetalheItensDto))then
+        FreeAndNil(oCadastroDetalheItensDto);
 
+    end;
+  end;
+end;
+
+procedure TCadastroPedidoController.AdicionarItem(Sender : TObject);
+begin
+  with (oFormulario as TCadastroPedidoForm) do
+  begin
+    oCadastroItensDto.Create;
     oCadastroItensDto.IdItensPedido := StrToInt(edtCdItensPedido.Text);
-    oCadastroItensDto.Sequencia := iSequencia;
+    oCadastroItensDto.valorItem := StrToCurr(edtPrecoItem.Text);
+    oCadastroItensDto.quantidade := StrToInt(edtQntItem.Text);
+    oCadastroPedidoDto.ItensPedido.Items[StrToInt(edtCdItensPedido.Text)].DetalheItem:= oListaDetalheItem;
+//    for oCadastroDetalheItensDto in oListaDetalheItem.Values do
+//    begin
+//    end;
+
     oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
   end;
 end;
@@ -115,10 +145,29 @@ begin
       gpEntrega.Enabled := False;
     end;
   end;
+
 end;
 
 constructor TCadastroPedidoController.Create;
 begin
+  if (not(assigned(oCadastroModeloDto))) then
+    oCadastroModeloDto := TCadastroModeloDto.Create;
+
+  if (not(assigned(oCadastroModeloModel))) then
+    oCadastroModeloModel := TCadastroModeloModel.Create;
+
+  if (not(assigned(oCadastroCorDto))) then
+    oCadastroCorDto := TCadastroCorDto.Create;
+
+  if (not(assigned(oCadastroCorModel))) then
+    oCadastroCorModel := TCadastroCorModel.Create;
+
+  if (not(assigned(oCadastroTamanhoDto))) then
+    oCadastroTamanhoDto := TCadastroTamanhoDto.Create;
+
+  if (not(assigned(oCadastroTamanhoModel))) then
+    oCadastroTamanhoModel := TCadastroTamanhoModel.Create;
+
   if (not(assigned(oCadastroClienteDto))) then
     oCadastroClienteDto := TCadastroClienteDto.Create;
 
@@ -159,6 +208,7 @@ begin
   if not(assigned(oFormulario)) then
     oFormulario := TCadastroPedidoForm.Create(Aowner);
   oFormulario.oController := oCadastroPedidoController;
+  oForm := (oFormulario as TCadastroPedidoForm);
   oFormulario.Show;
   with (oFormulario as TCadastroPedidoForm) do
   begin
@@ -166,12 +216,25 @@ begin
     dtePrev.Date := Now;
     chkAltEnd.OnClick := AlterarEndereco;
     btnAddItem.OnClick  := AdicionarItem;
+    BitBtn1.OnClick  := AdicionarDetalhe;
   end;
   inherited;
 end;
 
 destructor TCadastroPedidoController.Destroy;
  begin
+   if (assigned(oCadastroModeloModel)) then
+    FreeAndNil(oCadastroModeloModel);
+
+  if (assigned(oCadastroModeloDto)) then
+    FreeAndNil(oCadastroModeloDto);
+
+  if (assigned(oCadastroTamanhoModel)) then
+    FreeAndNil(oCadastroTamanhoModel);
+
+  if (assigned(oCadastroTamanhoDto)) then
+    FreeAndNil(oCadastroTamanhoDto);
+
   if (assigned(oCadastroMunicipioDto)) then
     FreeAndNil(oCadastroMunicipioDto);
 
@@ -204,6 +267,18 @@ destructor TCadastroPedidoController.Destroy;
 
   if (assigned(oCadastroPedidoRegra)) then
     FreeAndNil(oCadastroPedidoRegra);
+
+  if (assigned(oCadastroCorModel)) then
+    FreeAndNil(oCadastroCorModel);
+
+  if (assigned(oCadastroCorDto)) then
+    FreeAndNil(oCadastroCorDto);
+
+  if (assigned(oCadastroDetalheItensDto)) then
+    FreeAndNil(oCadastroDetalheItensDto);
+
+  if (assigned(oCadastroItensDto)) then
+    FreeAndNil(oCadastroItensDto);
     inherited;
 end;
 
@@ -237,26 +312,44 @@ begin
 end;
 
 procedure TCadastroPedidoController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
+var
+  sWhere: string;
 begin
   inherited;
-  with  (oFormulario as TCadastroPedidoForm) do
+  if(ActiveControl =  oForm.edtCor)then
   begin
-    if((oFormulario as TCadastroPedidoForm).edtCodigo.Text <> '')then
-      oCadastroPedidoDto.IdPedido := StrToInt((oFormulario as TCadastroPedidoForm).edtCodigo.Text);
-  end;
-  if(ActiveControl =  (oFormulario as TCadastroPedidoForm).edtCpfCnpj)then
+    sWhere := oForm.edtCdItensPedido.Text;
+    if (not(assigned(oConsultaCorController))) then
+      oConsultaCorController := TConsultaCorController.Create;
+    oConsultaCorController.CriarForm(Aowner, RetornoCor, oForm.edtCor.Text, sWhere);
+  end
+  else
+  if(ActiveControl =  oForm.edtCpfCnpj)then
   begin
     if (not(assigned(oConsultaClienteController))) then
       oConsultaClienteController := TConsultaClienteController.Create;
-    oConsultaClienteController.CriarForm(Aowner, RetornoCliente, '');
+    oConsultaClienteController.CriarForm(Aowner, RetornoCliente, oForm.edtNomeClienteEx.Text);
+  end
+  else
+  if(ActiveControl =  oForm.edtTamanho)then
+  begin
+    if (not(assigned(oConsultaTamanhoController))) then
+      oConsultaTamanhoController := TConsultaTamanhoController.Create;
+    oConsultaTamanhoController.CriarForm(Aowner, RetornoTamanho, oForm.edtTamanho.Text);
+  end
+  else
+  if(ActiveControl =  oForm.edtCdItensPedido) or (ActiveControl =  oForm.edtModelo)then
+  begin
+    if (not(assigned(oConsultaModeloController))) then
+      oConsultaModeloController := TConsultaModeloController.Create;
+    oConsultaModeloController.CriarForm(Aowner, RetornoModelo, oForm.edtModelo.Text);
   end
   else
   begin
-    if (not(assigned(oConsultaPedidoController))) then
+   if (not(assigned(oConsultaPedidoController))) then
       oConsultaPedidoController := TConsultaPedidoController.Create;
-    oConsultaPedidoController.CriarForm(Aowner, RetornoPedido, '');
+    oConsultaPedidoController.CriarForm(Aowner, RetornoPedido, oForm.edtCodigo.Text, sWhere);
   end;
-
 end;
 
 
@@ -272,11 +365,6 @@ begin
         edtNmClient.Text :=   IntToStr(oCadastroClienteDto.IdCliente);
         edtCpfCnpj.Text    :=  CurrToStr(oCadastroClienteDto.cpf_cnpj);
       end;
-    end
-    else
-    begin
-      Aguardando;
-      raise Exception.Create('Não foi escolhido registro');
     end;
   end;
 end;
@@ -335,17 +423,44 @@ begin
           edtBairro.Text := oCadastroBairroDto.Descricao;
         end;
       end;
-    end
-    else
-    begin
-      if(edtCodigo.Text = '')then
-      begin
-        Inicial;
-        raise Exception.Create('Não foi escolhido registro');
-      end;
     end;
   end;
 end;
+
+procedure TCadastroPedidoController.RetornoCor(aIdCor: Integer);
+begin
+  if(aIdCor <> 0)then
+  begin
+    oCadastroCorDto.IdCor := aIdCor;
+    if(oCadastroPedidoRegra.SelectCorPorId(oCadastroCorModel, oCadastroCorDto))then
+      oForm.edtCor.Text := oCadastroCorDto.Descricao;
+  end;
+end;
+
+procedure TCadastroPedidoController.RetornoModelo(aIdModelo: Integer);
+begin
+  if(aIdModelo <> 0)then
+  begin
+    oCadastroModeloDto.IdModelo := aIdModelo;
+    if(oCadastroPedidoRegra.SelectModeloPorId(oCadastroModeloModel, oCadastroModeloDto))then
+    begin
+      oForm.edtModelo.Text := oCadastroModeloDto.Descricao;
+      oForm.edtCdItensPedido.Text := IntToStr(oCadastroModeloDto.IdModelo);
+    end;
+  end;
+end;
+
+procedure TCadastroPedidoController.RetornoTamanho(aIdTamanho: Integer);
+begin
+  if(aIdTamanho <> 0)then
+  begin
+    oCadastroTamanhoDto.IdTamanho := aIdTamanho;
+    if(oCadastroPedidoRegra.SelectCorPorId(oCadastroCorModel, oCadastroCorDto))then
+      oForm.edtTamanho.Text := oCadastroTamanhoDto.Descricao;
+  end;
+end;
+
+
 
 procedure TCadastroPedidoController.Salvar;
 var

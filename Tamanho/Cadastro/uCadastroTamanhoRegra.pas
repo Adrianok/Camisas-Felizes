@@ -10,8 +10,8 @@ type
   TCadastroTamanhoRegra = class
   private
   public
-    function SelectDescricao(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
-    function SelectTamanho(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
+    function SelectPorDescricao(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
+    function SelectPorId(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
     function Deletar(const oCadastroTamanhoModel : TCadastroTamanhoModel; const IdTamanho : integer) : boolean;
     function Novo(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto : TCadastroTamanhoDto) : boolean;
     function Salvar(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
@@ -29,7 +29,7 @@ implementation
 function TCadastroTamanhoRegra.Deletar(const oCadastroTamanhoModel: TCadastroTamanhoModel;
   const IdTamanho: integer): boolean;
 begin
-  if(not(oCadastroTamanhoModel.Deletar(IdTamanho)))then
+  if(oCadastroTamanhoModel.Deletar(IdTamanho))then
     raise Exception.Create('Falha ao excluir registro');
 end;
 
@@ -58,14 +58,14 @@ begin
 
 end;
 
-function TCadastroTamanhoRegra.SelectTamanho(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
+function TCadastroTamanhoRegra.SelectPorId(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
 begin
     Result := oCadastroTamanhoModel.SelectPorId(oCadastroTamanhoDto);
 end;
 
-function TCadastroTamanhoRegra.SelectDescricao(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
+function TCadastroTamanhoRegra.SelectPorDescricao(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
 begin
-  if(oCadastroTamanhoModel.SelectDescricao(oCadastroTamanhoDto))then
+  if(oCadastroTamanhoModel.SelectPorDescricao(oCadastroTamanhoDto))then
     Result := True
   else
     Result := oCadastroTamanhoModel.NovoId(oCadastroTamanhoDto);

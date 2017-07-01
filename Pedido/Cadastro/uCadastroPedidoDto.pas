@@ -18,7 +18,6 @@ type
     Fdataentrega: TDate;
     Fidendereco: integer;
     FItensPedido: TListaItens;
-    oCadastroItensDto : TCadastroItensDto;
 
     procedure Setidcliente(const Value: Integer);
     procedure SetIdPedido(const Value: Integer);
@@ -64,7 +63,6 @@ begin
     Fidcliente       := 0;
     Fusuario         := EmptyStr;
     Fdata            := 0;
-
     FItensPedido := TListaItens.Create([doOwnsValues]);
 end;
 

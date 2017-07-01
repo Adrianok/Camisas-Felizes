@@ -8,12 +8,25 @@ uses
   uCadastroClienteModel, uCadastroClienteDto,
   uCadastroEnderecoModel, uCadastroEnderecoDto,
   uCadastroBairroModel, uCadastroBairroDto,
-  uCadastroMunicipioModel, uCadastroMunicipioDto;
+  uCadastroMunicipioModel, uCadastroMunicipioDto,
+  uCadastroTamanhoModel, uCadastroTamanhoDto,
+  uCadastroCorModel, uCadastroCorDto,
+  uCadastroModeloModel, uCadastroModeloDto;
 
 type
   TCadastroPedidoRegra = class
   private
   public
+    function SelectModeloPorDescricao(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
+    function SelectModeloPorId(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
+
+
+    function SelectCorPorDescricao(const oCadastroCorModel: TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
+    function SelectCorPorId(const oCadastroCorModel: TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
+
+    function SelectTamanhoPorDescricao(const oCadastroTamanhoModel: TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
+    function SelectTamanhoPorId(const oCadastroTamanhoModel: TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
+
     function SelectCliente(const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto : TCadastroClienteDto): boolean;
 
     function SelectEndereco(const oCadastroEnderecoModel : TCadastroEnderecoModel; var oCadastroEnderecoDto: TCadastroEnderecoDto;
@@ -100,7 +113,7 @@ begin
     +'Por favor vá até o cadastro de municipios e cadastre o mesmo');
   end;
 
-  if(oCadastroEnderecoModel.SelectEndereco(oCadastroEnderecoDto))then
+  if(oCadastroEnderecoModel.SelectPorId(oCadastroEnderecoDto))then
   begin
     if(oCadastroEnderecoModel.Atualizar(oCadastroEnderecoDto))then
       Result := True;
@@ -125,12 +138,25 @@ begin
           Result  :=  True;
 end;
 
-
 function TCadastroPedidoRegra.SelectCliente(
   const oCadastroClienteModel: TCadastroClienteModel;
   var oCadastroClienteDto: TCadastroClienteDto): boolean;
 begin
   Result := oCadastroClienteModel.SelectPorId(oCadastroClienteDto);
+end;
+
+function TCadastroPedidoRegra.SelectCorPorDescricao(
+  const oCadastroCorModel: TCadastroCorModel;
+  var oCadastroCorDto: TCadastroCorDto): boolean;
+begin
+  Result := oCadastroCorModel.SelectPorDescricao(oCadastroCorDto);
+end;
+
+function TCadastroPedidoRegra.SelectCorPorId(
+  const oCadastroCorModel: TCadastroCorModel;
+  var oCadastroCorDto: TCadastroCorDto): boolean;
+begin
+  Result := oCadastroCorModel.SelectPorId(oCadastroCorDto);
 end;
 
 function TCadastroPedidoRegra.SelectDescricao(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto: TCadastroPedidoDto): boolean;
@@ -139,6 +165,13 @@ begin
 //    Result := True
 //  else
 //    Result := oCadastroPedidoModel.NovoId(oCadastroPedidoDto);
+end;
+
+function TCadastroPedidoRegra.SelectTamanhoPorDescricao(
+  const oCadastroTamanhoModel: TCadastroTamanhoModel;
+  var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
+begin
+  oCadastroTamanhoModel.SelectPorDescricao(oCadastroTamanhoDto)
 end;
 
 function TCadastroPedidoRegra.SelectEndereco(
@@ -157,6 +190,27 @@ begin
   oCadastroMunicipioDto.IdMunicipio := oCadastroBairroDto.idmunicipio;
   oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto);
   Result := True
+end;
+
+function TCadastroPedidoRegra.SelectModeloPorDescricao(
+  const oCadastroModeloModel: TCadastroModeloModel;
+  var oCadastroModeloDto: TCadastroModeloDto): boolean;
+begin
+  Result := oCadastroModeloModel.SelectPorDescricao(oCadastroModeloDto);
+end;
+
+function TCadastroPedidoRegra.SelectModeloPorId(
+  const oCadastroModeloModel: TCadastroModeloModel;
+  var oCadastroModeloDto: TCadastroModeloDto): boolean;
+begin
+  Result := oCadastroModeloModel.SelectPorId(oCadastroModeloDto);
+end;
+
+function TCadastroPedidoRegra.SelectTamanhoPorId(
+  const oCadastroTamanhoModel: TCadastroTamanhoModel;
+  var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
+begin
+  Result := oCadastroTamanhoModel.SelectPorId(oCadastroTamanhoDto);
 end;
 
 end.

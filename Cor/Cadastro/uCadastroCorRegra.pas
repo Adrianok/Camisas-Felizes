@@ -48,7 +48,7 @@ begin
     if(oCadastroCorDto.IdCor < 0)then
       oCadastroCorModel.NovoId(oCadastroCorDto);
 
-    if(oCadastroCorModel.SelectDescricao(oCadastroCorDto))then
+    if(oCadastroCorModel.SelectPorDescricao(oCadastroCorDto))then
       if(oCadastroCorModel.SelectCor(oCadastroCorDto))then
       begin
         oCadastroCorModel.Atualizar(oCadastroCorDto);
@@ -72,7 +72,7 @@ end;
 
 function TCadastroCorRegra.SelectDescricao(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
 begin
-  if(oCadastroCorModel.SelectDescricao(oCadastroCorDto))then
+  if(oCadastroCorModel.SelectPorDescricao(oCadastroCorDto))then
     Result := True
   else
     Result := oCadastroCorModel.NovoId(oCadastroCorDto);

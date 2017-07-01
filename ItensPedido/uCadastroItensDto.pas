@@ -7,8 +7,7 @@ uses
 type
   TCadastroItensDto = class
   private
-    FSequencia: Integer;
-    FvalorItens: Currency;
+    FvalorItem: Currency;
     Fquantidade: integer;
     FIdItensPedido: Integer;
     FdetalheItem: TListaDetalheItem;
@@ -16,8 +15,7 @@ type
 
     procedure SetIdItensPedido(const Value: Integer);
     procedure Setquantidade(const Value: integer);
-    procedure SetSequencia(const Value: Integer);
-    procedure SetvalorItens(const Value: Currency);
+    procedure SetvalorItem(const Value: Currency);
     procedure SetDetalheItem(const Value: TListaDetalheItem);
 
   public
@@ -25,8 +23,7 @@ type
     destructor Destroy; override;
 
     property IdItensPedido : Integer  read FIdItensPedido write SetIdItensPedido;
-    property Sequencia : Integer read FSequencia write SetSequencia;
-    property valorItens : Currency  read FvalorItens write SetvalorItens;
+    property valorItem : Currency  read FvalorItem write SetvalorItem;
     property quantidade : integer read Fquantidade write Setquantidade;
     property DetalheItem : TListaDetalheItem read FdetalheItem write SetDetalheItem;
   end;
@@ -36,7 +33,7 @@ implementation
 
 constructor TCadastroItensDto.Create;
 begin
-  FdetalheItem := TListaDetalheItem.Create([doOwnsValues]);
+
 end;
 
 
@@ -61,14 +58,9 @@ begin
   Fquantidade := Value;
 end;
 
-procedure TCadastroItensDto.SetSequencia(const Value: Integer);
+procedure TCadastroItensDto.SetvalorItem(const Value: Currency);
 begin
-  FSequencia := Value;
-end;
-
-procedure TCadastroItensDto.SetvalorItens(const Value: Currency);
-begin
-  FvalorItens := Value;
+  FvalorItem := Value;
 end;
 
 end.

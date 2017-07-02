@@ -192,7 +192,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_cf`.`itenspedido` (
   `iditensPedido` INT(11) NOT NULL,
-  `sequencia` INT(11) NULL DEFAULT NULL,
   `valorItem` DOUBLE NULL DEFAULT NULL,
   `idpedido` INT(11) NOT NULL,
   `quantidade` INT(11) NULL DEFAULT NULL,

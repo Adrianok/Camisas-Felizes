@@ -168,10 +168,8 @@ begin
     Query.Open('SELECT idcor FROM cor WHERE descricao =''' + oCadastroCorDto.Descricao + ''' ');
     if (not(Query.IsEmpty)) then
     begin
-      if(oCadastroCorDto.IdCor = Query.FieldByName('idcor').AsInteger)then
+        oCadastroCorDto.IdCor := Query.FieldByName('idcor').AsInteger;
         Result := True
-      else
-        Result := False;
     end
     else
       Result := True;

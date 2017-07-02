@@ -8,18 +8,22 @@ uses
   Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.Forms,Vcl.ComCtrls, Vcl.Controls,
   System.Classes, System.UITypes,
-  uConsultaBase, Winapi.Windows;
+  uConsultaBase, Winapi.Windows,
+  Winapi.Messages;
 
 type
   TClassInterfaceViewBase = class(TInterfacedObject, IInterfaceViewBase)
   private
   protected
     oFormulario: TfrmBase;
+    const NAOVALIDA : Integer = 999;
+    const NAOVALIDACTC : Integer = 888;
   public
     procedure CriarForm(Aowner: TComponent); virtual;
     procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl); virtual;
     procedure Inicial; virtual;
     procedure Novo; virtual;
+    procedure Verificar(ActiveControl: TWinControl); virtual;
     procedure Salvar; virtual;
     procedure Aguardando; virtual;
     procedure KeyDown(var Key: Word; Aowner: TComponent; AcTiveControl: TWinControl);
@@ -58,7 +62,8 @@ var
 begin
   for iIndice := 0 to (oFormulario.ComponentCount - 1) do
     if (oFormulario.Components[iIndice] is TWinControl) and
-      ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
+        ((oFormulario.Components[iIndice] as TWinControl).tag <> NAOVALIDA)and
+         ((oFormulario.Components[iIndice] as TWinControl).tag <> NAOVALIDACTC)and
       ((oFormulario.Components[iIndice] as TWinControl).Enabled = True) then
     begin
       (oFormulario.Components[iIndice] as TWinControl).SetFocus;
@@ -81,7 +86,7 @@ begin
 
    if((oFormulario.Components[iIndice] is TCustomEdit) or
        (oFormulario.Components[iIndice] is TGroupBox))   and
-      ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+      ((oFormulario.Components[iIndice] as TWinControl).Tag <> NAOVALIDA) then
       (oFormulario.Components[iIndice] as TWinControl).Enabled := True
     else if(oFormulario.Components[iIndice] is TLabel)then
       (oFormulario.Components[iIndice] as TLabel).Enabled := True
@@ -93,8 +98,9 @@ end;
 
 
 procedure TClassInterfaceViewBase.CriarForm(Aowner: TComponent);
+var
+  iIndice : integer;
 begin
-  DesativarCampos;
 end;
 
 
@@ -111,7 +117,7 @@ begin
 
     if((oFormulario.Components[iIndice] is TCustomEdit) or
         (oFormulario.Components[iIndice] is TGroupBox))     and
-       ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) then
+       ((oFormulario.Components[iIndice] as TWinControl).Tag <> NAOVALIDA) then
         (oFormulario.Components[iIndice] as TWinControl).Enabled := False
     else if(oFormulario.Components[iIndice] is TLabel)then
       (oFormulario.Components[iIndice] as TLabel).Enabled := False
@@ -148,7 +154,6 @@ begin
   oFormulario.btnSalvar.Enabled := False;
   oFormulario.btnExcluir.Enabled := False;
   LimparCampos;
-  DesativarCampos;
 end;
 
 
@@ -156,7 +161,14 @@ end;
 procedure TClassInterfaceViewBase.KeyDown(var Key: Word; Aowner: TComponent; ActiveControl : TWinControl);
 begin
   if key = vk_F2 then
-    Pesquisar(Aowner, ActiveControl);
+    Pesquisar(Aowner, ActiveControl)
+  else
+  if key = VK_RETURN then
+  begin
+    Verificar(AcTiveControl);
+    char(Key) := #0;
+    oFormulario.Perform(WM_NEXTDLGCTL,0, 0);
+  end;
 end;
 
 
@@ -180,7 +192,6 @@ begin
   oFormulario.btnSalvar.Enabled := True;
   oFormulario.btnExcluir.Enabled := True;
   LimparCampos;
-  AtivarCampos;
   AjustarFoco;
 end;
 
@@ -188,7 +199,7 @@ end;
 
 procedure TClassInterfaceViewBase.Pesquisar(Aowner: TComponent; ActiveControl: TWinControl);
 begin
-  oFormulario.btnNovo.Enabled := False;
+  oFormulario.btnNovo.Enabled := True;
   oFormulario.btnSalvar.Enabled := True;
   oFormulario.btnExcluir.Enabled := True;
   AtivarCampos;
@@ -202,8 +213,7 @@ begin
   oFormulario.btnNovo.Enabled := True;
   oFormulario.btnSalvar.Enabled := False;
   oFormulario.btnExcluir.Enabled := False;
-  if (ValidarVazio) then
-    DesativarCampos;
+  ValidarVazio;
 end;
 
 
@@ -231,8 +241,8 @@ begin
     begin
       sCampo := (oFormulario.Components[iIndice] as TWinControl).Hint;
       if (((oFormulario.Components[iIndice] as TCustomEdit).Text = EmptyStr) and
-         ((oFormulario.Components[iIndice] as TWinControl).Tag <> 999) and
-         ((oFormulario.Components[iIndice] as TWinControl).Tag <> 888) and
+         ((oFormulario.Components[iIndice] as TWinControl).Tag <> NAOVALIDA) and
+         ((oFormulario.Components[iIndice] as TWinControl).Tag <> NAOVALIDACTC) and
           (oFormulario.Components[iIndice] as TWinControl).Enabled) then
       begin
         if (auxiliar = False) then
@@ -263,4 +273,14 @@ begin
     Result := True;
 end;
 
+procedure TClassInterfaceViewBase.Verificar(ActiveControl: TWinControl);
+begin
+  if((ActiveControl is TCustomEdit) and ((ActiveControl.Tag <> NAOVALIDA)and
+    ((ActiveControl.Tag <> NAOVALIDACTC))))then
+    if((ActiveControl as TCustomEdit).Text = '')then
+    begin
+      raise Exception.Create('O Campo: '+ ActiveControl.Hint + #13 +'Deve ser preenchido');
+      (ActiveControl as TCustomEdit).SetFocus;
+    end;
+end;
 end.

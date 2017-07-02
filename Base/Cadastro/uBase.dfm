@@ -30,7 +30,6 @@ object frmBase: TfrmBase
     Align = alTop
     Locked = True
     TabOrder = 0
-    ExplicitWidth = 589
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -45,10 +44,8 @@ object frmBase: TfrmBase
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitTop = 0
-      ExplicitHeight = 71
       object btnSalvar: TBitBtn
-        Left = 165
+        Left = 85
         Top = 4
         Width = 76
         Height = 62
@@ -560,7 +557,7 @@ object frmBase: TfrmBase
         OnClick = btnNovoClick
       end
       object btnAlterar: TBitBtn
-        Left = 85
+        Left = 165
         Top = 4
         Width = 76
         Height = 62
@@ -729,7 +726,7 @@ object frmBase: TfrmBase
         OnClick = btnCancelarClick
       end
       object btnCancelar: TBitBtn
-        Left = 323
+        Left = 325
         Top = 4
         Width = 76
         Height = 62
@@ -1082,8 +1079,6 @@ object frmBase: TfrmBase
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
-      ExplicitLeft = 544
-      ExplicitHeight = 71
       object btnFechar: TBitBtn
         Left = 5
         Top = 4

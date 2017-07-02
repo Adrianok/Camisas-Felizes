@@ -104,7 +104,7 @@ begin
     + IntToStr(oCadastroPedidoDto.IdPedido) + ','
     + QuotedStr(oCadastroPedidoDto.nomereceptor) + ','
     + QuotedStr(oCadastroPedidoDto.nomevendedor)+ ','
-    + CurrToStr(oCadastroPedidoDto.valortotal) + ','
+    + StringReplace(CurrToStr(oCadastroPedidoDto.valortotal), ',', '.', [rfReplaceAll, rfIgnoreCase]) + ','
     + QuotedStr(oCadastroPedidoDto.observacao)+ ','
     + IntToStr(oCadastroPedidoDto.idcliente) + ','
     + QuotedStr(oCadastroPedidoDto.usuario)

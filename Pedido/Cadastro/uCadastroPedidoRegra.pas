@@ -11,12 +11,17 @@ uses
   uCadastroMunicipioModel, uCadastroMunicipioDto,
   uCadastroTamanhoModel, uCadastroTamanhoDto,
   uCadastroCorModel, uCadastroCorDto,
-  uCadastroModeloModel, uCadastroModeloDto;
+  uCadastroModeloModel, uCadastroModeloDto,
+  uCadastroItensPedidoModel, uCadastroItensDto,
+  uCadastroDetalhesItensModel, uCadastroDetalheItemDto;
 
 type
   TCadastroPedidoRegra = class
   private
   public
+    function NovoIdDetalheItens(const oCadastroDetalheItensModel :  TCadastroDetalheItensModel ;oCadastroDetalheItensDto: TCadastroDetalheItemDto): boolean;
+    function NovoIdItensPedido(const oCadastroItensModel : TCadastroItensPedidoModel; oCadastroItensDto: TCadastroItensDto): boolean;
+
     function SelectModeloPorDescricao(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
     function SelectModeloPorId(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
 
@@ -44,7 +49,8 @@ type
 
     function Novo(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto : TCadastroPedidoDto) : boolean;
     function Salvar(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto: TCadastroPedidoDto;
-    const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
+    const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto;
+    const oCadastroItensPedidoModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
   end;
 
 implementation
@@ -64,8 +70,22 @@ begin
   Result := oCadastroPedidoModel.NovoId(oCadastroPedidoDto);
 end;
 
+function TCadastroPedidoRegra.NovoIdDetalheItens(
+  const oCadastroDetalheItensModel: TCadastroDetalheItensModel;
+  oCadastroDetalheItensDto: TCadastroDetalheItemDto): boolean;
+begin
+  Result := oCadastroDetalheItensModel.NovoId(oCadastroDetalheItensDto);
+end;
+
+function TCadastroPedidoRegra.NovoIdItensPedido(const oCadastroItensModel: TCadastroItensPedidoModel;
+  oCadastroItensDto: TCadastroItensDto): boolean;
+begin
+  Result := oCadastroItensModel.NovoId(oCadastroItensDto);
+end;
+
 function TCadastroPedidoRegra.Salvar(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto: TCadastroPedidoDto;
-const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
+const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto;
+const oCadastroItensPedidoModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
 begin
   if(oCadastroClienteModel.SelectPorNome(oCadastroClienteDto))then
     oCadastroPedidoDto.idcliente := oCadastroClienteDto.IdCliente
@@ -81,8 +101,13 @@ begin
   else
   begin
     oCadastroPedidoModel.Inserir(oCadastroPedidoDto);
+
+
+    oCadastroItensPedidoModel.Inserir(oCadastroPedidoDto);
+
     Result := False;
   end;
+
 end;
 
 function TCadastroPedidoRegra.SalvarEndereco(const oCadastroEnderecoModel: TCadastroEnderecoModel;
@@ -171,7 +196,7 @@ function TCadastroPedidoRegra.SelectTamanhoPorDescricao(
   const oCadastroTamanhoModel: TCadastroTamanhoModel;
   var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
 begin
-  oCadastroTamanhoModel.SelectPorDescricao(oCadastroTamanhoDto)
+  Result := oCadastroTamanhoModel.SelectPorDescricao(oCadastroTamanhoDto)
 end;
 
 function TCadastroPedidoRegra.SelectEndereco(

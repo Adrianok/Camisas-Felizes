@@ -94,7 +94,11 @@ uses
   uCadastroItensDto in 'ItensPedido\uCadastroItensDto.pas',
   uListaItens in 'ItensPedido\uListaItens.pas',
   uCadastroDetalheItemDto in 'ItensPedido\uCadastroDetalheItemDto.pas',
-  uListaDetalheItem in 'ItensPedido\uListaDetalheItem.pas';
+  uListaDetalheItem in 'ItensPedido\uListaDetalheItem.pas',
+  uCadastroItensPedidoModel in 'ItensPedido\uCadastroItensPedidoModel.pas',
+  uInterfaceCadastroItensPedidoModel in 'ItensPedido\uInterfaceCadastroItensPedidoModel.pas',
+  uCadastroDetalhesItensModel in 'ItensPedido\uCadastroDetalhesItensModel.pas',
+  uInterfaceCadastroDetalhesItensModel in 'ItensPedido\uInterfaceCadastroDetalhesItensModel.pas';
 
 {$R *.res}
 

@@ -109,6 +109,9 @@ begin
     sCondicao := '';
     if (assigned(oCor_ModeloModel)) then
       FreeAndNil(oCor_ModeloModel);
+
+    if (assigned(oListaModelo)) then
+      FreeAndNil(oListaModelo);
   end
   else
     if(oConsultaCorRegra.SelectAll(oConsultaCorModel, oFormulario.FDMemTableGrid))then

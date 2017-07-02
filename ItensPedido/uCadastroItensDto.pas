@@ -12,11 +12,13 @@ type
     FIdItensPedido: Integer;
     FdetalheItem: TListaDetalheItem;
     oCadastroDetalheItemDto : TCadastroDetalheItemDto;
+    Fidmodelo: Integer;
 
     procedure SetIdItensPedido(const Value: Integer);
     procedure Setquantidade(const Value: integer);
     procedure SetvalorItem(const Value: Currency);
     procedure SetDetalheItem(const Value: TListaDetalheItem);
+    procedure Setidmodelo(const Value: Integer);
 
   public
     constructor Create;
@@ -26,6 +28,7 @@ type
     property valorItem : Currency  read FvalorItem write SetvalorItem;
     property quantidade : integer read Fquantidade write Setquantidade;
     property DetalheItem : TListaDetalheItem read FdetalheItem write SetDetalheItem;
+    property idmodelo : Integer read Fidmodelo write Setidmodelo;
   end;
 
 implementation
@@ -40,7 +43,8 @@ end;
 destructor TCadastroItensDto.Destroy;
 begin
   inherited;
-  FdetalheItem.Free;
+  if(assigned(FdetalheItem))then
+    FdetalheItem.Free;
 end;
 
 procedure TCadastroItensDto.SetDetalheItem(const Value: TListaDetalheItem);
@@ -51,6 +55,11 @@ end;
 procedure TCadastroItensDto.SetIdItensPedido(const Value: Integer);
 begin
   FIdItensPedido := Value;
+end;
+
+procedure TCadastroItensDto.Setidmodelo(const Value: Integer);
+begin
+  Fidmodelo := Value;
 end;
 
 procedure TCadastroItensDto.Setquantidade(const Value: integer);

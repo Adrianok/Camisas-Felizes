@@ -14,18 +14,13 @@ type
     Label4: TLabel;
     edtValorTotal: TLabeledEdit;
     Label5: TLabel;
-    pgItens: TPageControl;
+    pgpedido: TPageControl;
     pgCabecalho: TTabSheet;
     gpEntrega: TGroupBox;
     Label2: TLabel;
     dtePrev: TDateTimePicker;
     edtReceptor: TLabeledEdit;
-    GroupBox5: TGroupBox;
-    LabeledEdit2: TLabeledEdit;
-    LabeledEdit3: TLabeledEdit;
-    LabeledEdit4: TLabeledEdit;
-    LabeledEdit5: TLabeledEdit;
-    GroupBox2: TGroupBox;
+    gpEndereco: TGroupBox;
     edtRua: TLabeledEdit;
     edtNmr: TLabeledEdit;
     edtBairro: TLabeledEdit;
@@ -43,8 +38,8 @@ type
     Label3: TLabel;
     edtObservacoes: TMemo;
     GroupBox4: TGroupBox;
-    LabeledEdit1: TLabeledEdit;
-    TabSheet1: TTabSheet;
+    edtUsuario: TLabeledEdit;
+    pgItens: TTabSheet;
     GroupBox6: TGroupBox;
     edtCdItensPedido: TLabeledEdit;
     edtModelo: TLabeledEdit;
@@ -58,12 +53,12 @@ type
     btnExcluirItem: TBitBtn;
     Label20: TLabel;
     edtPrecoItem: TLabeledEdit;
-    lvItens: TListView;
     chlDetalheItem: TCheckListBox;
-    Label10: TLabel;
     logo: TImage;
-    edtQntItem: TLabeledEdit;
-    BitBtn1: TBitBtn;
+    Label6: TLabel;
+    edtQntTot: TLabeledEdit;
+    edtQntItm: TLabeledEdit;
+    chlItens: TCheckListBox;
   private
     { Private declarations }
   public

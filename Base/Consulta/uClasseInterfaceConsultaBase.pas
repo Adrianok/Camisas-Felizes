@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.Forms, Vcl.Controls,
   System.Classes, uConsultaBase,
-  FireDAC.Comp.Client, Vcl.DbGrids,
+  FireDAC.Comp.Client, Vcl.DbGrids, Winapi.Messages,
   uCadastroCorDto, Winapi.Windows, uFuncaoRetorno;
 
 type
@@ -99,6 +99,8 @@ begin
   else
   if key = VK_RETURN then
   begin
+    if(oFormulario.ActiveControl = oFormulario.edtPesquisa)then
+      oFormulario.Perform(WM_NEXTDLGCTL,0, 0);
     Confirmar;
     char(Key) := #0
   end;

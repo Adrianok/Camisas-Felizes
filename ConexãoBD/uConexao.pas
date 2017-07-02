@@ -26,11 +26,11 @@ begin
   inherited;
   Params.DriverID := 'MySql';
   LoginPrompt := False;
-  Params.Values['Database'] := 'db_cf';
-  Params.Values['User_Name'] := 'root';
-  Params.Values['Password'] := '';
+  Params.Values['Database'] := 'adriano_db_cf';
+  Params.Values['User_Name'] := 'adriano_adriano';
+  Params.Values['Password'] := '2345meia78';
   Params.Values['Port'] := '3306';
-  Params.Values['Server'] := '127.0.0.1';
+  Params.Values['Server'] := 'bdhost0010.servidorwebfacil.com';
   Connected := True;
 
   oWaitCursor := TFDGUIxWaitCursor.Create(nil);

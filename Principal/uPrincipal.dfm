@@ -43,5 +43,12 @@ object frmPrincipal: TfrmPrincipal
         OnClick = CadastrodePedidosClick
       end
     end
+    object Relatorios1: TMenuItem
+      Caption = 'Relatorios'
+      object Pedidos1: TMenuItem
+        Caption = 'Pedidos'
+        OnClick = Pedidos1Click
+      end
+    end
   end
 end

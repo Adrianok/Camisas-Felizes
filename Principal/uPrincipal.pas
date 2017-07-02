@@ -10,7 +10,8 @@ uses
   Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus,
   uCadastroModeloController, uConexaoSingleTon,
   uCadastroUfController,  uCadastroCorController,
-  uCadastroTamanhoController, uCadastroPedidoController;
+  uCadastroTamanhoController, uCadastroPedidoController,
+  uRelatorioController;
 
 type
   TfrmPrincipal = class(TForm)
@@ -19,12 +20,15 @@ type
     CadastrodeCor: TMenuItem;
     CadastrodeTamanho: TMenuItem;
     CadastrodePedidos: TMenuItem;
+    Relatorios1: TMenuItem;
+    Pedidos1: TMenuItem;
     procedure C1Click(Sender: TObject);
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure CadastrodeCorClick(Sender: TObject);
     procedure CadastrodeTamanhoClick(Sender: TObject);
     procedure CadastrodePedidosClick(Sender: TObject);
+    procedure Pedidos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +37,7 @@ type
 
 var
   frmPrincipal: TfrmPrincipal;
+  oRelatorioController: TRelatorioController;
 
 implementation
 
@@ -84,6 +89,13 @@ begin
     Application.Terminate;
   end;
 
+end;
+
+procedure TfrmPrincipal.Pedidos1Click(Sender: TObject);
+begin
+     if (not(Assigned(oRelatorioController))) then
+    oRelatorioController := TRelatorioController.Create;
+  oRelatorioController.CriarForm(Self);
 end;
 
 end.

@@ -36,10 +36,10 @@ procedure TRelatorioController.AlimentarDto;
 begin
   oRelatorioDto.ClienteInicial := StrToInt(oForm.EdtClienteInicial.Text);
   oRelatorioDto.ClienteFinal := StrToInt(oForm.EdtClienteFinal.Text);
-  oRelatorioDto.DataInicial := DateTimeToFileDate(oForm.DtpInicial.Date);
-  oRelatorioDto.DataFinal := DateTimeToFileDate(oForm.DtpFinal.Date);
+  oRelatorioDto.DataInicial := (oForm.DtpInicial.Date);
+  oRelatorioDto.DataFinal := (oForm.DtpFinal.Date);
   oRelatorioDto.PedidoInicial := StrToInt(oForm.EdtPedidoInicial.Text);
-  oRelatorioDto.PedidoFinal := StrToInt(oForm.EdtPedidoInicial.Text);
+  oRelatorioDto.PedidoFinal := StrToInt(oForm.EdtPedidoFinal.Text);
 end;
 
 constructor TRelatorioController.Create;

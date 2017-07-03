@@ -21,7 +21,8 @@
     Height = 68
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 787
+    ExplicitLeft = 8
+    ExplicitTop = -3
     object btnFechar: TBitBtn
       AlignWithMargins = True
       Left = 724
@@ -263,8 +264,6 @@
     Height = 326
     Align = alLeft
     TabOrder = 1
-    ExplicitTop = 64
-    ExplicitHeight = 330
     object Label1: TLabel
       Left = 80
       Top = 3
@@ -352,8 +351,10 @@
       Top = 125
       Width = 90
       Height = 21
-      Date = 42917.000000000000000000
-      Time = 42917.000000000000000000
+      Date = 42736.000000000000000000
+      Time = 42736.000000000000000000
+      DoubleBuffered = False
+      ParentDoubleBuffered = False
       TabOrder = 2
     end
     object DtpFinal: TDateTimePicker
@@ -361,8 +362,8 @@
       Top = 125
       Width = 90
       Height = 21
-      Date = 42917.000000000000000000
-      Time = 42917.000000000000000000
+      Date = 2958465.000000000000000000
+      Time = 2958465.000000000000000000
       DoubleBuffered = False
       ParentDoubleBuffered = False
       TabOrder = 3
@@ -376,7 +377,7 @@
       TabOrder = 4
       TextHint = 'Pedido Inicial'
     end
-    object Edit6: TEdit
+    object EdtPedidoFinal: TEdit
       Left = 137
       Top = 187
       Width = 90
@@ -401,7 +402,6 @@
       Height = 41
       Align = alBottom
       TabOrder = 6
-      ExplicitTop = 288
       object btnFiltrar: TButton
         Left = 74
         Top = 6
@@ -414,8 +414,8 @@
   end
   object DataSource1: TDataSource
     DataSet = FDMemTable1
-    Left = 456
-    Top = 16
+    Left = 584
+    Top = 8
   end
   object FDMemTable1: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -425,7 +425,49 @@
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 560
-    Top = 16
+    Left = 656
+    Top = 8
+  end
+  object ReportSintetico: TfrxReport
+    Version = '5.3.14'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 42918.994482592600000000
+    ReportOptions.LastChange = 42918.994482592600000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 400
+    Top = 8
+    Datasets = <>
+    Variables = <>
+    Style = <>
+  end
+  object ReportAnalitico: TfrxReport
+    Version = '5.3.14'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 42918.994770717590000000
+    ReportOptions.LastChange = 42918.994770717590000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 320
+    Top = 8
+    Datasets = <>
+    Variables = <>
+    Style = <>
   end
 end

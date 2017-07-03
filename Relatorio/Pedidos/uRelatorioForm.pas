@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons,
   Vcl.ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, frxClass;
 
 type
   TFrmRelatorio = class(TForm)
@@ -21,7 +21,7 @@ type
     btnFiltrar: TButton;
     EdtClienteInicial: TEdit;
     EdtPedidoinicial: TEdit;
-    Edit6: TEdit;
+    EdtPedidoFinal: TEdit;
     EdtClienteFinal: TEdit;
     DtpInicial: TDateTimePicker;
     Label2: TLabel;
@@ -34,6 +34,8 @@ type
     Panel3: TPanel;
     btnImprimir: TButton;
     Button1: TButton;
+    ReportSintetico: TfrxReport;
+    ReportAnalitico: TfrxReport;
   private
     { Private declarations }
   public

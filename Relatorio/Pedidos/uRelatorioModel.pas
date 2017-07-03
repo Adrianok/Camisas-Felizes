@@ -36,15 +36,21 @@ begin
 end;
 
 function TRelatorioModel.SelectAll(MemTable: TFDMemTable; filtros : TRelatorioDto) : boolean;
+var
+  oDataInicial, oDataFinal : String;
+
 begin
+  oDataInicial := FormatDateTime('yyyy/mm/dd', filtros.DataInicial);
+  oDataFinal := FormatDateTime('yyyy/mm/dd', filtros.DataFinal);
+
   try
     Query.SQL.Clear;
-    Query.Open('SELECT p.idpedido AS idpedido , p.data AS data, '
-              +' p.valortotal AS valortotal , UPPER(c.nome) AS nome, c.idcliente AS idcliente FROM pedido p '
-             + ' LEFT JOIN cliente c on c.idcliente = p.idcliente '
-             + 'WHERE idcliente >= ' + IntToStr(filtros.ClienteInicial) + ' AND idcliente <= ' + IntToStr(filtros.ClienteFinal)
-             + 'data >= ' + DateTimeToStr(filtros.DataInicial) + ' AND data <= ' + DateTimeToStr(filtros.DataFinal)
-             + 'idpedido >= '+ IntToStr(filtros.PedidoInicial) + ' AND idpedido <= ' + IntToStr(filtros.PedidoFinal));
+     Query.Open('SELECT p.idpedido AS idpedido , p.data AS data, p.valortotal AS valortotal , '
+             + 'UPPER(c.nome) AS nome, p.idcliente AS idcliente '
+             + 'FROM pedido p INNER JOIN cliente c on c.idcliente = p.idcliente '
+             + ' WHERE c.idcliente  BETWEEN ' + IntToStr(filtros.ClienteInicial) + ' AND ' + IntToStr(filtros.ClienteFinal)
+             + ' AND data BETWEEN ' + (oDataInicial) + ' AND ' + (oDataFinal)
+             + ' AND p.idpedido BETWEEN ' + IntToStr(filtros.PedidoInicial) + ' AND ' + IntToStr(filtros.PedidoFinal));
 
   if (not(Query.IsEmpty)) then
     begin

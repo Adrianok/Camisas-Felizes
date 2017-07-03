@@ -16,7 +16,7 @@ type
     Query: TFDQuery;
   public
     function SelectPorId(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
-    function SelectDetalheItens(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
+    function SelectDetalheItens(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
     function Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
     function Atualizar(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
     function Deletar(const IdDetalheItens : integer): Boolean;
@@ -94,16 +94,21 @@ begin
     bAux := False;
     for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
     begin
-      for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
-      sSql := sSql + '('  + IntToStr(oLoopControlDetalhe.IdDetalhe)
-                   + ', ' + IntToStr(oLoopControlItens.IdItensPedido)
-                   + ', ' + CurrToStr(oLoopControlDetalhe.idtamanho)
-                   + ', ' + IntToStr(oLoopControlDetalhe.idcor)
-                   + ', ' + IntToStr(oLoopControlDetalhe.quantidade)
-                   + ')';
       if(bAux)then
         sSql := sSql + ',';
-      bAux := True;
+      bAux := False;
+      for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
+      begin
+        if(bAux)then
+          sSql := sSql + ',';
+        bAux := True;
+         sSql := sSql + '('  + IntToStr(oLoopControlDetalhe.IdDetalhe)
+         + ', ' + IntToStr(oLoopControlItens.IdItensPedido)
+         + ', ' + CurrToStr(oLoopControlDetalhe.idtamanho)
+         + ', ' + IntToStr(oLoopControlDetalhe.idcor)
+         + ', ' + IntToStr(oLoopControlDetalhe.quantidade)
+         + ')';
+      end;
     end;
     Query.SQL.Add(sSql);
     Query.ExecSQL;
@@ -134,18 +139,49 @@ begin
 end;
 
 
-function TCadastroDetalheItensModel.SelectDetalheItens(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
+function TCadastroDetalheItensModel.SelectDetalheItens(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+var
+  oLoopControlItens   : TCadastroItensDto;
+  oCadastroDetalheDto : TCadastroDetalheItemDto;
+  sSql                : string;
+  bAux                : boolean;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.Open('SELECT * FROM DetalheItens WHERE idDetalheItens =' + IntToStr(oCadastroDetalheDetalheItensDto.IdDetalheItens));
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    bAux := False;
+    sSql :=  '(';
+    for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values  do
+    begin
+      if(bAux)then
+        sSql := sSql + ', ';
+      bAux := True;
+      sSql  := sSql + IntToStr(oLoopControlItens.IdItensPedido);
+      oLoopControlItens.DetalheItem.Clear;
+    end;
+      sSql := sSql + ')';
+
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM detalheitem WHERE iditenspedido in' + sSql);
+    if (not(Query.IsEmpty)) then
+    begin
+      Query.First;
+      while (not(Query.Eof)) do
+      begin
+        oCadastroDetalheDto := TCadastroDetalheItemDto.Create;
+        oCadastroDetalheDto.IdDetalhe := Query.FieldByName('iddetalheitem').AsInteger;
+        oCadastroDetalheDto.idtamanho := Query.FieldByName('idtamanho').AsInteger;
+        oCadastroDetalheDto.idcor := Query.FieldByName('idcor').AsInteger;
+        oCadastroDetalheDto.quantidade := Query.FieldByName('quantidade').AsInteger;
+
+        oCadastroPedidoDto.ItensPedido.Items[Query.FieldByName('iditenspedido').AsInteger].DetalheItem.Add(oCadastroDetalheDto.IdDetalhe, oCadastroDetalheDto);
+        Query.Next;
+      end;
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 

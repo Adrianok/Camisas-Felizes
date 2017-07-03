@@ -36,7 +36,7 @@ implementation
 
 constructor TCadastroItensDto.Create;
 begin
-
+  FdetalheItem := TListaDetalheItem.Create([doOwnsValues]);
 end;
 
 

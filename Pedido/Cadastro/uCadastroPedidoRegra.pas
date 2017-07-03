@@ -25,7 +25,6 @@ type
     function SelectModeloPorDescricao(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
     function SelectModeloPorId(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
 
-
     function SelectCorPorDescricao(const oCadastroCorModel: TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
     function SelectCorPorId(const oCadastroCorModel: TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
 
@@ -162,8 +161,9 @@ begin
     if(oCadastroPedidoModel.SelectPorId(oCadastroPedidoDto))then
         oCadastroClienteDto.IdCliente := oCadastroPedidoDto.idcliente;
         if(oCadastroClienteModel.SelectPorId(oCadastroClienteDto))then
+        Result := True;//por enquanto dps vai p baixo
           if(oCadastroItensPedidoModel.SelectItensPedido(oCadastroPedidoDto))then
-            Result := True;
+              oCadastroDetalhesItensModel.SelectDetalheItens(oCadastroPedidoDto);
 
 
 end;

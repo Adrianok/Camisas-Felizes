@@ -43,8 +43,11 @@ type
        const oCadastroMunicipioModel : TCadastroMunicipioModel ; var oCadastroMunicipioDto: TCadastroMunicipioDto):boolean;
 
     function SelectDescricao(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto : TCadastroPedidoDto) : boolean;
+
     function SelectPedido(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto: TCadastroPedidoDto;
-       const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
+       const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto;
+       const oCadastroItensPedidoModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
+
     function Deletar(const oCadastroPedidoModel : TCadastroPedidoModel; const IdPedido : integer) : boolean;
 
     function Novo(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto : TCadastroPedidoDto) : boolean;
@@ -101,10 +104,8 @@ begin
   else
   begin
     oCadastroPedidoModel.Inserir(oCadastroPedidoDto);
-
-
     oCadastroItensPedidoModel.Inserir(oCadastroPedidoDto);
-
+    oCadastroDetalhesItensModel.Inserir(oCadastroPedidoDto);
     Result := False;
   end;
 
@@ -152,7 +153,8 @@ end;
 
 function TCadastroPedidoRegra.SelectPedido
 (const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto: TCadastroPedidoDto;
- const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
+ const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto;
+ const oCadastroItensPedidoModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
 var
   sAuxiliar : string;
 begin
@@ -160,7 +162,10 @@ begin
     if(oCadastroPedidoModel.SelectPorId(oCadastroPedidoDto))then
         oCadastroClienteDto.IdCliente := oCadastroPedidoDto.idcliente;
         if(oCadastroClienteModel.SelectPorId(oCadastroClienteDto))then
-          Result  :=  True;
+          if(oCadastroItensPedidoModel.SelectItensPedido(oCadastroPedidoDto))then
+            Result := True;
+
+
 end;
 
 function TCadastroPedidoRegra.SelectCliente(

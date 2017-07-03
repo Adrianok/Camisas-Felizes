@@ -7,7 +7,8 @@ uses
   System.SysUtils, Data.DB, FireDAC.DApt,
   FireDAC.Comp.UI, System.Classes, Dialogs,
   uConexaoSingleTon, uCadastroDetalheItemDto,
-  uInterfaceCadastroDetalhesItensModel;
+  uInterfaceCadastroDetalhesItensModel, uCadastroPedidoDto,
+  uCadastroItensDto;
 
 type
   TCadastroDetalheItensModel = class(TinterfacedObject, IInterfaceCadastroDetalhesItensModel)
@@ -16,7 +17,7 @@ type
   public
     function SelectPorId(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
     function SelectDetalheItens(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
-    function Inserir(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
+    function Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
     function Atualizar(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
     function Deletar(const IdDetalheItens : integer): Boolean;
     function NovoId(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
@@ -78,21 +79,41 @@ begin
 end;
 
 
-function TCadastroDetalheItensModel.Inserir(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
+function TCadastroDetalheItensModel.Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+var
+  oLoopControlDetalhe : TCadastroDetalheItemDto;
+  oLoopControlItens   : TCadastroItensDto;
+  sSql                : string;
+  bAux                : boolean;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' INSERT INTO DetalheItens (idDetalheItens, descricao) VALUES ('
-//    + IntToStr(oCadastroDetalheDetalheItensDto.IdDetalheItens) + ', '''
-//    + oCadastroDetalheDetalheItensDto.Descricao + ''');');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    Query.SQL.Clear;
+    sSql := ' INSERT INTO detalheitem (iddetalheitem, iditenspedido, idtamanho, idcor'+
+    ',quantidade) '+
+    ' VALUES ';
+    bAux := False;
+    for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
+    begin
+      for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
+      sSql := sSql + '('  + IntToStr(oLoopControlDetalhe.IdDetalhe)
+                   + ', ' + IntToStr(oLoopControlItens.IdItensPedido)
+                   + ', ' + CurrToStr(oLoopControlDetalhe.idtamanho)
+                   + ', ' + IntToStr(oLoopControlDetalhe.idcor)
+                   + ', ' + IntToStr(oLoopControlDetalhe.quantidade)
+                   + ')';
+      if(bAux)then
+        sSql := sSql + ',';
+      bAux := True;
+    end;
+    Query.SQL.Add(sSql);
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 function TCadastroDetalheItensModel.NovoId(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;

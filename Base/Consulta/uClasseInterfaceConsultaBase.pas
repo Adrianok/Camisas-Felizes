@@ -39,7 +39,7 @@ implementation
 
 procedure TClassInterfaceConsultaBase.AlimentarDto(Column: TColumn);
 begin
-  oProcedureRetorno(StrToInt(Column.Field.Text));
+  oProcedureRetorno(StrToIntDef(Column.Field.Text, 0));
 end;
 
 

@@ -36,18 +36,25 @@ var
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' UPDATE pedido'
-    + ' SET data =' + DateToStr(oCadastroPedidoDto.data)
-    + ', dataentrega = ' + DateToStr(oCadastroPedidoDto.dataentrega)
-    + ', idendereco = ' + IntToStr(oCadastroPedidoDto.idendereco)
-    + ', nomereceptor = ' + QuotedStr(oCadastroPedidoDto.nomereceptor)
+    sSql :=
+      ' UPDATE pedido'
+    + ' SET data =' + QuotedStr(FormatDateTime('yyyy/mm/dd', oCadastroPedidoDto.data))
+    + ', dataentrega = ' + QuotedStr(FormatDateTime('yyyy/mm/dd', oCadastroPedidoDto.dataentrega))
+    + ', idendereco = ' ;
+    if(oCadastroPedidoDto.idendereco = 0)then
+      sSql := sSql + 'NULL,'
+    else
+      sSql := sSql + IntToStr(oCadastroPedidoDto.idendereco);
+    sSql := sSql +
+      ', nomereceptor = ' + QuotedStr(oCadastroPedidoDto.nomereceptor)
     + ', nomevendedor = ' + QuotedStr(oCadastroPedidoDto.nomevendedor)
     + ', valortotal = ' + StringReplace(CurrToStr(oCadastroPedidoDto.valortotal), ',', '.', [rfReplaceAll])
-    + ', observacao = ' + QuotedStr(oCadastroPedidoDto.observacao)
+    + ', observacao = ' + QuotedStr({oCadastroPedidoDto.observacao}'aaaa')
     + ', idcliente = ' + IntToStr(oCadastroPedidoDto.idcliente)
     + ', usuario = ' + QuotedStr(oCadastroPedidoDto.usuario)
     + ' WHERE idpedido = ' + IntToStr(oCadastroPedidoDto.IdPedido)
-    + ';');
+    + ';';
+    Query.SQL.Add(sSql);
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
       Result := True
@@ -99,13 +106,17 @@ begin
     sSql := ' INSERT INTO Pedido (idPedido, data, dataentrega, idendereco,'
     +'nomereceptor, nomevendedor, valortotal, observacao, idcliente, usuario) VALUES ('
     + IntToStr(oCadastroPedidoDto.IdPedido) + ','
-    + DateToStr(oCadastroPedidoDto.data) + ','
-    + DateToStr(oCadastroPedidoDto.dataentrega) + ','
-    + IntToStr(oCadastroPedidoDto.IdPedido) + ','
-    + QuotedStr(oCadastroPedidoDto.nomereceptor) + ','
+    + QuotedStr(FormatDateTime('yyyy/mm/dd', oCadastroPedidoDto.data)) + ','
+    + QuotedStr(FormatDateTime('yyyy/mm/dd', oCadastroPedidoDto.dataentrega)) + ',';
+    if(oCadastroPedidoDto.idendereco = 0)then
+      sSql := sSql + 'NULL,'
+    else
+      sSql := sSql + IntToStr(oCadastroPedidoDto.idendereco) + ',';
+    sSql := sSql +
+      QuotedStr(oCadastroPedidoDto.nomereceptor) + ','
     + QuotedStr(oCadastroPedidoDto.nomevendedor)+ ','
     + StringReplace(CurrToStr(oCadastroPedidoDto.valortotal), ',', '.', [rfReplaceAll, rfIgnoreCase]) + ','
-    + QuotedStr(oCadastroPedidoDto.observacao)+ ','
+    + QuotedStr({oCadastroPedidoDto.observacao}'aaaa') + ','
     + IntToStr(oCadastroPedidoDto.idcliente) + ','
     + QuotedStr(oCadastroPedidoDto.usuario)
     + ');';

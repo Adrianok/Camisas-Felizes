@@ -22,7 +22,7 @@ type
 
   public
     constructor Create;
-    destructor Destroy; override;
+    destructor Destroy;
 
     property IdItensPedido : Integer  read FIdItensPedido write SetIdItensPedido;
     property valorItem : Currency  read FvalorItem write SetvalorItem;
@@ -42,9 +42,6 @@ end;
 
 destructor TCadastroItensDto.Destroy;
 begin
-  inherited;
-  if(assigned(FdetalheItem))then
-    FdetalheItem.Free;
 end;
 
 procedure TCadastroItensDto.SetDetalheItem(const Value: TListaDetalheItem);

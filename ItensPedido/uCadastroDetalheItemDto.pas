@@ -18,7 +18,6 @@ type
 
   public
     constructor Create;
-
     property IdDetalhe : Integer read FIdDetalhe write SetIdDetalhe;
     property idtamanho : Integer read Fidtamanho write Setidtamanho;
     property idcor : integer read Fidcor write Setidcor;

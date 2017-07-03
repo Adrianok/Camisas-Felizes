@@ -69,9 +69,17 @@ end;
 
 
 destructor TCadastroPedidoDto.Destroy;
+var
+ oLoopControlItens : TCadastroItensDto;
 begin
   inherited;
-  FItensPedido.Free;
+//  if(Assigned(FItensPedido))then
+//    for oLoopControlItens in FItensPedido.Values do
+//    begin
+//      oLoopControlItens.Free
+//    end;
+
+
 end;
 
 procedure TCadastroPedidoDto.Setdata(const Value: TDate);

@@ -2,6 +2,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 957
+  ExplicitTop = -205
   ExplicitWidth = 963
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -3697,7 +3698,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         object edtObservacoes: TMemo
           Tag = 888
           Left = 16
-          Top = 40
+          Top = 42
           Width = 604
           Height = 109
           Hint = 'Observa'#231#227'o'

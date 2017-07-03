@@ -16,7 +16,7 @@ type
     Query: TFDQuery;
   public
     function SelectPorId(var oCadastroItensDto: TCadastroItensDto): Boolean;
-    function SelectItensPedido(var oCadastroItensDto: TCadastroItensDto): Boolean;
+    function SelectItensPedido(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
     function Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
     function Atualizar(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
     function Deletar(const IdItensPedido : integer): Boolean;
@@ -89,17 +89,17 @@ begin
   try
     Query.SQL.Clear;
     sSql := ' INSERT INTO ItensPedido (idItensPedido, valorItem, idpedido, quantidade'+
-    'idmodelo) '+
+    ',idmodelo) '+
     ' VALUES ';
 
-      bAux := False;
+    bAux := False;
     for oLoopControl in oCadastroPedidoDto.ItensPedido.Values do
     begin
       if(bAux)then
         sSql := sSql + ',';
       bAux := True;
       sSql := sSql + '('  + IntToStr(oLoopControl.IdItensPedido)
-                   + ', ' + CurrToStr(oLoopControl.valorItem)
+                   + ', ' + StringReplace(CurrToStr(oLoopControl.valorItem), ',', '.', [rfReplaceAll])
                    + ', ' + IntToStr(oCadastroPedidoDto.IdPedido)
                    + ', ' + CurrToStr(oLoopControl.quantidade)
                    + ', ' + IntToStr(oLoopControl.idmodelo)
@@ -134,18 +134,35 @@ begin
 end;
 
 
-function TCadastroItensPedidoModel.SelectItensPedido(var oCadastroItensDto: TCadastroItensDto): Boolean;
+function TCadastroItensPedidoModel.SelectItensPedido(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+var
+  oCadastroItensDto : TCadastroItensDto;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.Open('SELECT * FROM ItensPedido WHERE idItensPedido =' + IntToStr(oCadastroItensPedidoDto.IdItensPedido));
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM ItensPedido WHERE idpedido =' + IntToStr(oCadastroPedidoDto.IdPedido));
+  if (not(Query.IsEmpty)) then
+    begin
+      oCadastroPedidoDto.ItensPedido.Clear;
+      Query.First;
+      while (not(Query.Eof)) do
+      begin
+        oCadastroItensDto := TCadastroItensDto.Create;
+        oCadastroItensDto.IdItensPedido := Query.FieldByName('iditensPedido').AsInteger;
+        oCadastroItensDto.valorItem := Query.FieldByName('valoritem').AsCurrency;
+        oCadastroItensDto.quantidade := Query.FieldByName('quantidade').AsInteger;
+        oCadastroItensDto.idmodelo := Query.FieldByName('idmodelo').AsInteger;
+
+        oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
+        Query.Next;
+      end;
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 function TCadastroItensPedidoModel.SelectPorId(var oCadastroItensDto: TCadastroItensDto): Boolean;

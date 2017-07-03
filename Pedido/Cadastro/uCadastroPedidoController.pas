@@ -53,6 +53,7 @@ type
     oCadastroModeloModel      : TCadastroModeloModel;
     idDetalheItens            : integer;
     idItens                   : integer;
+    CampoAtivo                : TWinControl;
 
     procedure RetornoModelo(aIdModelo : Integer);
     procedure RetornoCor(aIdCor : Integer);
@@ -89,7 +90,8 @@ implementation
 
 procedure TCadastroPedidoController.AdicionarDetalhe;
 var
-  iIndice, MaiorId : integer;
+  oLoopControlDetalhe : TCadastroDetalheItemDto;
+  MaiorId : integer;
 begin
   with (oFormulario as TCadastroPedidoForm) do
   begin
@@ -115,9 +117,9 @@ begin
     else
     begin
       MaiorId := 0;
-      for iIndice := 1 to oListaDetalheItem.Count dO
-          if (oListaDetalheItem.Items[iIndice].IdDetalhe > MaiorId) then
-            MaiorId := oListaDetalheItem.Items[iIndice].IdDetalhe;
+      for oLoopControlDetalhe  in oListaDetalheItem.Values do
+          if (oLoopControlDetalhe.IdDetalhe > MaiorId) then
+            MaiorId := oLoopControlDetalhe.IdDetalhe;
       idDetalheItens := MaiorId;
       oCadastroDetalheItensDto.IdDetalhe := MaiorId + 1;
     end;
@@ -133,8 +135,9 @@ end;
 
 procedure TCadastroPedidoController.AdicionarItem(Sender : TObject);
 var
-  oLoopControl : TCadastroDetalheItemDto;
-  iIndice, iIndice2, MaiorId : integer;
+  oLoopControlItens : TCadastroItensDto;
+  oLoopControlDetalhe : TCadastroDetalheItemDto;
+  MaiorId : integer;
 begin
   with (oFormulario as TCadastroPedidoForm) do
   begin
@@ -161,9 +164,9 @@ begin
     else
     begin
       MaiorId := 0;
-      for iIndice := 1 to  oCadastroPedidoDto.ItensPedido.Count do
-        if (oCadastroPedidoDto.ItensPedido.Items[iIndice].IdItensPedido > MaiorId) then
-          MaiorId := oCadastroPedidoDto.ItensPedido.Items[iIndice].IdItensPedido;
+      for oLoopControlItens in  oCadastroPedidoDto.ItensPedido.Values do
+        if (oLoopControlItens.IdItensPedido > MaiorId) then
+          MaiorId := oLoopControlItens.IdItensPedido;
           idItens := MaiorId;
       oCadastroItensDto.IdItensPedido := MaiorId + 1;
     end;
@@ -174,12 +177,12 @@ begin
 
 
     oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
-    for oLoopControl in oListaDetalheItem.Values do
+    for oLoopControlDetalhe in oListaDetalheItem.Values do
     begin
       if(not(assigned(oCadastroPedidoDto.ItensPedido.Items[oCadastroItensDto.IdItensPedido].DetalheItem)))then
         oCadastroPedidoDto.ItensPedido.Items[oCadastroItensDto.IdItensPedido].DetalheItem := TListaDetalheItem.Create([doOwnsValues]);
 
-      oCadastroPedidoDto.ItensPedido.Items[oCadastroItensDto.IdItensPedido].DetalheItem.Add(oLoopControl.IdDetalhe, oLoopControl);
+      oCadastroPedidoDto.ItensPedido.Items[oCadastroItensDto.IdItensPedido].DetalheItem.Add(oLoopControlDetalhe.IdDetalhe, oLoopControlDetalhe);
     end;
     ChlAdd(True);
     edtCdItensPedido.Text := IntToStr(StrToInt(edtCdItensPedido.Text) + 1 );
@@ -240,8 +243,10 @@ begin
       oForm.chlDetalheItem.Clear;
     end;
     if(not(bAux))then
-       oForm.chlItens.AddItem(oForm.edtModelo.Text, TObject(oCadastroItensDto.IdItensPedido));
-  end
+    begin
+      oForm.chlItens.AddItem(oCadastroModeloDto.Descricao, TObject(oCadastroItensDto.IdItensPedido));
+    end;
+     end
   else
   begin
     oForm.chlDetalheItem.AddItem(oCadastroTamanhoDto.Descricao + ' - ' + oCadastroCorDto.Descricao, TObject(oCadastroDetalheItensDto.IdDetalhe));
@@ -382,9 +387,6 @@ var
   if (assigned(oCadastroPedidoModel)) then
     FreeAndNil(oCadastroPedidoModel);
 
-  if (assigned(oCadastroPedidoDto)) then
-    FreeAndNil(oCadastroPedidoDto);
-
   if (assigned(oCadastroPedidoRegra)) then
     FreeAndNil(oCadastroPedidoRegra);
 
@@ -397,6 +399,14 @@ var
    if (assigned(oCadastroItensPedidoModel)) then
     FreeAndNil(oCadastroItensPedidoModel);
 
+   if (assigned(oCadastroItensDto)) then
+    FreeAndNil(oCadastroItensDto);
+
+//    if(assigned(oListaDetalheItem))then
+//      oListaDetalheItem.Free;
+
+  if (assigned(oCadastroPedidoDto)) then
+    FreeAndNil(oCadastroPedidoDto);
     inherited;
 end;
 
@@ -411,7 +421,8 @@ end;
 procedure TCadastroPedidoController.ExibirChl(Sender: TObject);
 var
   iIndice, iIdItem : integer;
-  oLoopControl : TCadastroDetalheItemDto;
+  oLoopControlDetalhe : TCadastroDetalheItemDto;
+  oLoopControlItens   : TCadastroItensDto;
 begin
   iIdItem := 0;
   for iIndice := 0 to oForm.chlItens.Items.Count  - 1 do
@@ -423,15 +434,21 @@ begin
   if(iIdItem = 0)then
     Exit;
 
-  For oLoopControl in oCadastroPedidoDto.ItensPedido.Items[iIdItem].DetalheItem.Values do
+  For oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
   begin
-      oCadastroTamanhoDto.IdTamanho := oLoopControl.idtamanho;
-      oCadastroTamanhoDto.IdTamanho := oLoopControl.idtamanho;
-      oCadastroPedidoRegra.SelectTamanhoPorId(oCadastroTamanhoModel, oCadastroTamanhoDto);
-      oCadastroCorDto.IdCor := oLoopControl.idcor;
-      oCadastroPedidoRegra.SelectCorPorId(oCadastroCorModel, oCadastroCorDto);
-      oCadastroTamanhoDto.Descricao := oCadastroTamanhoDto.Descricao + ' - ' + oCadastroCorDto.Descricao;
-      oForm.chlDetalheItem.AddItem(oCadastroTamanhoDto.Descricao, TObject(oLoopControl.IdDetalhe));
+    if(oLoopControlItens.IdItensPedido = iIdItem)then
+      for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
+      begin
+        oCadastroTamanhoDto.IdTamanho := oLoopControlDetalhe.idtamanho;
+        oCadastroPedidoRegra.SelectTamanhoPorId(oCadastroTamanhoModel, oCadastroTamanhoDto);
+        oCadastroCorDto.IdCor := oLoopControlDetalhe.idcor;
+        oCadastroPedidoRegra.SelectCorPorId(oCadastroCorModel, oCadastroCorDto);
+        oCadastroTamanhoDto.Descricao := oCadastroTamanhoDto.Descricao + ' - ' + oCadastroCorDto.Descricao;
+        oForm.chlDetalheItem.AddItem(oCadastroTamanhoDto.Descricao, TObject(oLoopControlDetalhe.IdDetalhe));
+      end;
+
+
+
   end;
 end;
 
@@ -497,7 +514,7 @@ begin
   inherited;
   if(ActiveControl =  oForm.edtCor)then
   begin
-    if(oForm.edtCdItensPedido.Text = '')then
+    if((oForm.edtCdItensPedido.Text = '') or (oForm.edtModelo.Text = ''))then
       Verificar(oForm.edtModelo);
     sWhere := oForm.edtCdItensPedido.Text;
     if (not(assigned(oConsultaCorController))) then
@@ -521,12 +538,16 @@ begin
   else
   if(ActiveControl =  oForm.edtCdItensPedido) or (ActiveControl =  oForm.edtModelo)then
   begin
+
+    // implementar swhere mostrar apenas modelos q n estejam na lista
     if (not(assigned(oConsultaModeloController))) then
       oConsultaModeloController := TConsultaModeloController.Create;
     oConsultaModeloController.CriarForm(Aowner, RetornoModelo, oForm.edtModelo.Text);
   end
   else
   begin
+    if(ActiveControl is TCustomEdit) and (ActiveControl.CanFocus)then
+      CampoAtivo := ActiveControl;
    if (not(assigned(oConsultaPedidoController))) then
       oConsultaPedidoController := TConsultaPedidoController.Create;
     oConsultaPedidoController.CriarForm(Aowner, RetornoPedido, oForm.edtCodigo.Text, sWhere);
@@ -553,6 +574,9 @@ begin
 end;
 
 procedure TCadastroPedidoController.RetornoPedido(aIdPedido: Integer);
+var
+  oLoopControlItens : TCadastroItensDto;
+  oLoopControlDetalhe : TCadastroDetalheItemDto;
 begin
   with (oFormulario as TCadastroPedidoForm) do
   begin
@@ -566,7 +590,8 @@ begin
         end;
       oCadastroPedidoDto.IdPedido :=  aIdPedido;
       if(oCadastroPedidoRegra.SelectPedido(oCadastroPedidoModel, oCadastroPedidoDto,
-      oCadastroClienteModel, oCadastroClienteDto))then
+        oCadastroClienteModel, oCadastroClienteDto,
+        ocadastroItensPedidoModel, oCadastroDetalhesItensModel))then
       begin
         Show;
         edtCodigo.Text        :=   IntToStr(oCadastroPedidoDto.IdPedido);
@@ -612,11 +637,34 @@ begin
           edtCidade.Text := oCadastroMunicipioDto.Descricao;
           edtBairro.Text := oCadastroBairroDto.Descricao;
         end;
+
+        for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
+        begin
+          oCadastroItensDto.IdItensPedido := oLoopControlItens.IdItensPedido;
+          oCadastroModeloDto.IdModelo := oLoopControlItens.idmodelo;
+          if(oCadastroPedidoRegra.SelectModeloPorId(oCadastroModeloModel, oCadastroModeloDto))then
+          ChlAdd(True);
+          for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
+          begin
+            oCadastroDetalheItensDto.IdDetalhe := oLoopControlDetalhe.IdDetalhe;
+            oCadastroTamanhoDto.IdTamanho := oLoopControlDetalhe.idtamanho;
+            oCadastroPedidoRegra.SelectTamanhoPorId(oCadastroTamanhoModel, oCadastroTamanhoDto);
+            oCadastroCorDto.IdCor := oLoopControlDetalhe.idcor;
+            oCadastroPedidoRegra.SelectCorPorId(oCadastroCorModel, oCadastroCorDto);
+            ChlAdd(False);
+          end;
+        end;
       end;
       bPermite := True;
       oForm.pgpedido.ActivePage := oForm.pgCabecalho;
       oForm.edtCodigo.SetFocus;
-    end;
+    end
+    else
+      if(CampoAtivo <> nil)and(CampoAtivo.CanFocus)then
+      begin
+        CampoAtivo.SetFocus;
+        CampoAtivo := nil;
+      end;
   end;
 end;
 
@@ -667,7 +715,7 @@ begin
   begin
     oCadastroPedidoDto.IdPedido     := StrToInt(edtCodigo.Text);
     oCadastroPedidoDto.nomevendedor := edtNomeVendedor.Text;
-    oCadastroPedidoDto.observacao   := edtObservacoes.Text;
+    oCadastroPedidoDto.observacao   := edtObservacoes.Lines.Text;
     oCadastroPedidoDto.dataentrega  := dtePrev.Date;
     oCadastroPedidoDto.data         := dteData.Date;
     oCadastroPedidoDto.usuario      := edtUsuario.Text;
@@ -684,16 +732,16 @@ begin
 
     if(chkAltEnd.Checked)then
     begin
-        oCadastroEnderecoDto.Endereco := edtRua.Text;
-        oCadastroEnderecoDto.Numero := edtNmr.Text;
-        oCadastroBairroDto.Descricao := edtBairro.Text;
-        oCadastroEnderecoDto.status := 2;
-        oCadastroMunicipioDto.Descricao := edtCidade.Text;
-        oCadastroEnderecoDto.IdEndereco := oCadastroPedidoDto.idendereco;
-        if (not(oCadastroPedidoRegra.SalvarEndereco(oCadastroEnderecoModel,
-        oCadastroEnderecoDto, oCadastroBairroModel, oCadastroBairroDto,
-        oCadastroMunicipioModel, oCadastroMunicipioDto)))then
-          raise Exception.Create('Falha ao salvar o endereço');
+      oCadastroEnderecoDto.Endereco := edtRua.Text;
+      oCadastroEnderecoDto.Numero := edtNmr.Text;
+      oCadastroBairroDto.Descricao := edtBairro.Text;
+      oCadastroEnderecoDto.status := 2;
+      oCadastroMunicipioDto.Descricao := edtCidade.Text;
+      oCadastroEnderecoDto.IdEndereco := oCadastroPedidoDto.idendereco;
+      if (not(oCadastroPedidoRegra.SalvarEndereco(oCadastroEnderecoModel,
+      oCadastroEnderecoDto, oCadastroBairroModel, oCadastroBairroDto,
+      oCadastroMunicipioModel, oCadastroMunicipioDto)))then
+        raise Exception.Create('Falha ao salvar o endereço');
     end;
   end;
   if(oCadastroPedidoRegra.Salvar(oCadastroPedidoModel, oCadastroPedidoDto,
@@ -706,10 +754,17 @@ begin
   end;
   oForm.pgpedido.ActivePage := oForm.pgCabecalho;
   bPermite := False;
+  oForm.chlDetalheItem.Clear;
+  oForm.chlItens.Clear;
 
+  if(Assigned(oCadastroPedidoDto))then
+   begin
+    FreeAndNil(oCadastroPedidoDto);
+    oCadastroPedidoDto := TCadastroPedidoDto.Create;
+   end;
 
   if(assigned(oListaDetalheItem))then
-  FreeAndNil(oListaDetalheItem);
+    FreeAndNil(oListaDetalheItem);
 end;
 
 
@@ -779,10 +834,6 @@ begin
     oForm.pgpedido.ActivePage := oForm.pgItens;
     oForm.edtModelo.SetFocus;
     abort;
-  end;
-  if(ActiveControl = oForm.edtQntItm)then
-  begin
-    ChlAdd(True);
   end;
   inherited;
 end;

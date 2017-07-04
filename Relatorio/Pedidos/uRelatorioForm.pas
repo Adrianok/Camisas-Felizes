@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons,
   Vcl.ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.ComCtrls, frxClass;
+  Vcl.ComCtrls, frxClass, frxDBSet, FireDAC.Stan.Async, FireDAC.DApt, frxChart;
 
 type
   TFrmRelatorio = class(TForm)
@@ -32,10 +32,15 @@ type
     Label7: TLabel;
     Label9: TLabel;
     Panel3: TPanel;
-    btnImprimir: TButton;
-    Button1: TButton;
+    btnRelAnalitico: TButton;
     ReportSintetico: TfrxReport;
-    ReportAnalitico: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    FDMemTable1idpedido: TIntegerField;
+    FDMemTable1data: TDateField;
+    FDMemTable1valortotal: TCurrencyField;
+    FDMemTable1nome: TStringField;
+    FDMemTable1idcliente: TIntegerField;
+    frxChartObject1: TfrxChartObject;
   private
     { Private declarations }
   public

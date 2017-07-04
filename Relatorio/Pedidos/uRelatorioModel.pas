@@ -46,8 +46,14 @@ begin
   try
     Query.SQL.Clear;
      Query.Open('SELECT p.idpedido AS idpedido , p.data AS data, p.valortotal AS valortotal , '
-             + 'UPPER(c.nome) AS nome, p.idcliente AS idcliente '
-             + 'FROM pedido p INNER JOIN cliente c on c.idcliente = p.idcliente '
+             + ' UPPER(c.nome) AS nome, p.idcliente AS idcliente, m.descricao AS municipio, '
+             + ' mi.modelo AS modelo FROM pedido p '
+             + ' INNER JOIN cliente c ON c.idcliente = p.idcliente '
+             + ' INNER JOIN endereco e ON e.idendereco = c.idendereco '
+             + ' INNER JOIN bairro b ON b.idbairro = e.idbairro '
+             + ' INNER JOIN municipio m ON m.idmunicipio = b.municipio_idmunicipio '
+             + ' INNER JOIN itenspedido ip ON ip.idpedido = p.idpedido '
+             + ' INNER JOIN modelo mi ON mi.idmodelo = ip.idmodelo '
              + ' WHERE c.idcliente  BETWEEN ' + IntToStr(filtros.ClienteInicial) + ' AND ' + IntToStr(filtros.ClienteFinal)
              + ' AND data BETWEEN ' + (oDataInicial) + ' AND ' + (oDataFinal)
              + ' AND p.idpedido BETWEEN ' + IntToStr(filtros.PedidoInicial) + ' AND ' + IntToStr(filtros.PedidoFinal));

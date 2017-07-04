@@ -58,6 +58,7 @@ begin
 
   oForm.btnFechar.OnClick := Fechar;
   oForm.btnFiltrar.onClick := PreencherGrid;
+
   oForm.Show;
 
 end;

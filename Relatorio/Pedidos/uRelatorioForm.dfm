@@ -4,7 +4,7 @@
   BorderIcons = []
   Caption = 'Relat'#243'rio'
   ClientHeight = 394
-  ClientWidth = 794
+  ClientWidth = 793
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,15 +17,14 @@
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 794
+    Width = 793
     Height = 68
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = -3
+    ExplicitWidth = 794
     object btnFechar: TBitBtn
       AlignWithMargins = True
-      Left = 724
+      Left = 722
       Top = 1
       Width = 60
       Height = 65
@@ -190,9 +189,9 @@
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphTop
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
     end
-    object btnImprimir: TButton
+    object btnRelAnalitico: TButton
       Left = 1
       Top = 1
       Width = 140
@@ -200,19 +199,11 @@
       Caption = 'Imprimir Relat'#243'rio Anal'#237'tico'
       TabOrder = 0
     end
-    object Button1: TButton
-      Left = 142
-      Top = 1
-      Width = 140
-      Height = 65
-      Caption = 'Imprimir Relat'#243'rio Sint'#233'tico'
-      TabOrder = 1
-    end
   end
   object DBGridRelatório: TDBGrid
     Left = 233
     Top = 68
-    Width = 561
+    Width = 560
     Height = 326
     Align = alClient
     DataSource = DataSource1
@@ -414,10 +405,11 @@
   end
   object DataSource1: TDataSource
     DataSet = FDMemTable1
-    Left = 584
-    Top = 8
+    Left = 570
+    Top = 16
   end
   object FDMemTable1: TFDMemTable
+    Active = True
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -426,7 +418,22 @@
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     Left = 656
-    Top = 8
+    Top = 16
+    object FDMemTable1idpedido: TIntegerField
+      FieldName = 'idpedido'
+    end
+    object FDMemTable1data: TDateField
+      FieldName = 'data'
+    end
+    object FDMemTable1valortotal: TCurrencyField
+      FieldName = 'valortotal'
+    end
+    object FDMemTable1nome: TStringField
+      FieldName = 'nome'
+    end
+    object FDMemTable1idcliente: TIntegerField
+      FieldName = 'idcliente'
+    end
   end
   object ReportSintetico: TfrxReport
     Version = '5.3.14'
@@ -437,37 +444,68 @@
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42918.994482592600000000
-    ReportOptions.LastChange = 42918.994482592600000000
+    ReportOptions.LastChange = 42919.884401574100000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
       ''
       'end.')
-    Left = 400
-    Top = 8
-    Datasets = <>
+    Left = 402
+    Top = 16
+    Datasets = <
+      item
+        DataSet = frxDBDataset1
+        DataSetName = 'frxDBDataset1'
+      end>
     Variables = <>
     Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object RelatorioSintetico: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      DataSet = frxDBDataset1
+      DataSetName = 'frxDBDataset1'
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 37.795300000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Left = 15.118120000000000000
+          Top = 7.559059999999999000
+          Width = 684.094930000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Relat'#243'rio Anal'#237'tico de Pedidos - Camizas Felizes')
+          ParentFont = False
+        end
+      end
+    end
   end
-  object ReportAnalitico: TfrxReport
-    Version = '5.3.14'
-    DotMatrixReport = False
-    IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
-    PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
-    PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42918.994770717590000000
-    ReportOptions.LastChange = 42918.994770717590000000
-    ScriptLanguage = 'PascalScript'
-    ScriptText.Strings = (
-      'begin'
-      ''
-      'end.')
-    Left = 320
-    Top = 8
-    Datasets = <>
-    Variables = <>
-    Style = <>
+  object frxDBDataset1: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = FDMemTable1
+    BCDToCurrency = False
+    Left = 488
+    Top = 16
+  end
+  object frxChartObject1: TfrxChartObject
+    Left = 312
+    Top = 16
   end
 end

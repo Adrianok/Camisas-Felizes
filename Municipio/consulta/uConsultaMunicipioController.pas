@@ -27,7 +27,6 @@ type
 
 var
   oConsultaMunicipioController: IInterfaceConsultaBase;
-  oCadastroMunicipioDto : TCadastroMunicipioDto;
 
 implementation
 
@@ -53,7 +52,6 @@ end;
 
 constructor TConsultaMunicipioController.Create;
 begin
-
   if (not(assigned(oConsultaMunicipioController))) then
     oConsultaMunicipioModel := TConsultaMunicipioModel.Create;
 
@@ -62,7 +60,6 @@ begin
 
   if (not(assigned(oCadastroMunicipioDto))) then
     oCadastroMunicipioDto := TCadastroMunicipioDto.Create;
-
 end;
 
 procedure TConsultaMunicipioController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');

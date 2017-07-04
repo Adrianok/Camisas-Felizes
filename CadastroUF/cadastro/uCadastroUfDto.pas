@@ -23,9 +23,6 @@ type
     constructor Create;
   end;
 
-var
-  oCadastroUfDto: TCadastroUfDto;
-
 implementation
 
 { TUf }

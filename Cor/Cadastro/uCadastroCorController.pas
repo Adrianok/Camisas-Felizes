@@ -131,11 +131,6 @@ begin
       edtCodigo.Text :=   IntToStr(oCadastroCorDto.IdCor);
       edtCor.Text    :=  oCadastroCorDto.Descricao;
     end;
-  end
-  else
-  begin
-    Inicial;
-    raise Exception.Create('Não foi escolhido registro');
   end;
 end;
 

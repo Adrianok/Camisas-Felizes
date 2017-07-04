@@ -4,6 +4,7 @@ inherited ConsultaCorForm: TConsultaCorForm
   ClientHeight = 522
   ClientWidth = 374
   Position = poDesigned
+  ExplicitTop = -95
   ExplicitWidth = 380
   ExplicitHeight = 551
   PixelsPerInch = 96
@@ -67,6 +68,13 @@ inherited ConsultaCorForm: TConsultaCorForm
     Top = 442
     Width = 374
     TabOrder = 3
+    ExplicitLeft = 0
+    ExplicitTop = 442
+    ExplicitWidth = 374
+    inherited Panel3: TPanel
+      Left = 89
+      ExplicitLeft = 89
+    end
   end
   inherited DataSourceGrid: TDataSource
     Left = 8

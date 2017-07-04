@@ -93,9 +93,9 @@ COMMENT = '	';
 CREATE TABLE IF NOT EXISTS `db_cf`.`cliente` (
   `idcliente` INT(11) NOT NULL,
   `nome` VARCHAR(255) NOT NULL,
-  `cpf_cnpj` DOUBLE NULL DEFAULT NULL,
-  `telefone` INT(11) NULL DEFAULT NULL,
-  `celular` INT(11) NOT NULL,
+  `cpf_cnpj` VARCHAR(14) NULL DEFAULT NULL,
+  `telefone` VARCHAR(12) NULL DEFAULT NULL,
+  `celular` VARCHAR(12) NOT NULL,
   `observacao` VARCHAR(255) NULL DEFAULT NULL,
   `idendereco` INT(11) NOT NULL,
   PRIMARY KEY (`idcliente`),
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `db_cf`.`cliente` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8
 
 
 -- -----------------------------------------------------
@@ -126,7 +126,7 @@ COMMENT = '		';
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_cf`.`modelo` (
   `idmodelo` INT(11) NOT NULL,
-  `modelo` VARCHAR(100) NULL DEFAULT NULL,
+  descricaoVARCHAR(100) NULL DEFAULT NULL,
   `preco` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`idmodelo`))
 ENGINE = InnoDB
@@ -192,7 +192,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_cf`.`itenspedido` (
   `iditensPedido` INT(11) NOT NULL,
-  `sequencia` INT(11) NULL DEFAULT NULL,
   `valorItem` DOUBLE NULL DEFAULT NULL,
   `idpedido` INT(11) NOT NULL,
   `quantidade` INT(11) NULL DEFAULT NULL,

@@ -16,8 +16,8 @@ type
     Query: TFDQuery;
   public
     function SelectPorId(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
-    function SelectModelo(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
-    function SelectDescricao(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+    function SelectPorModelo(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+    function SelectPorDescricao(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
     function Deletar(const IdModelo : integer): Boolean;
@@ -122,7 +122,7 @@ begin
   end;
 end;
 
-function TCadastroModeloModel.SelectModelo(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+function TCadastroModeloModel.SelectPorModelo(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
 begin
   try
     Query.SQL.Clear;
@@ -136,7 +136,7 @@ begin
   end;
 end;
 
-function TCadastroModeloModel.SelectDescricao(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+function TCadastroModeloModel.SelectPorDescricao(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
 begin
   try
     Query.SQL.Clear;

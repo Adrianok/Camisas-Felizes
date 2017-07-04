@@ -8,7 +8,7 @@ uses
 type
   IInterfaceCadastroCorModel = interface
     function SelectDescricaoDivergente(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
+    function SelectPorDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function SelectAllLista(var oListaCores: TListaCores): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroCorDto):boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroCorDto):boolean;

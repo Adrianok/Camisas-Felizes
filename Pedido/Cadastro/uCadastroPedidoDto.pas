@@ -2,7 +2,8 @@ unit uCadastroPedidoDto ;
 
 interface
 uses
-  System.SysUtils;
+  System.SysUtils, System.Generics.Collections,
+  uListaItens, uCadastroItensDto;
 type
   TCadastroPedidoDto = class
   private
@@ -16,6 +17,8 @@ type
     Fdata: TDate;
     Fdataentrega: TDate;
     Fidendereco: integer;
+    FItensPedido: TListaItens;
+
     procedure Setidcliente(const Value: Integer);
     procedure SetIdPedido(const Value: Integer);
     procedure Setnomereceptor(const Value: string);
@@ -26,11 +29,12 @@ type
     procedure Setdata(const Value: TDate);
     procedure Setdataentrega(const Value: TDate);
     procedure Setidendereco(const Value: integer);
-
-
-
+    procedure SetItensPedido(const Value: TListaItens);
   public
     constructor Create;
+    destructor Destroy; override;
+
+    procedure LimparListaItens;
 
     property IdPedido : Integer read FIdPedido write SetIdPedido;
     property data : TDate read Fdata write Setdata;
@@ -42,6 +46,7 @@ type
     property observacao : string read Fobservacao write Setobservacao;
     property idcliente : Integer read Fidcliente write Setidcliente;
     property usuario : string read Fusuario write Setusuario;
+    property ItensPedido : TListaItens read FItensPedido write SetItensPedido;
   end;
 
 implementation
@@ -60,9 +65,24 @@ begin
     Fidcliente       := 0;
     Fusuario         := EmptyStr;
     Fdata            := 0;
+    FItensPedido := TListaItens.Create([doOwnsValues]);
 end;
 
 
+
+destructor TCadastroPedidoDto.Destroy;
+var
+ oLoopControlItens : TCadastroItensDto;
+begin
+  inherited;
+  if(Assigned(FItensPedido))then
+    FreeAndNil(FItensPedido);
+end;
+
+procedure TCadastroPedidoDto.LimparListaItens;
+begin
+
+end;
 
 procedure TCadastroPedidoDto.Setdata(const Value: TDate);
 begin
@@ -89,6 +109,11 @@ end;
 procedure TCadastroPedidoDto.SetIdPedido(const Value: Integer);
 begin
   FIdPedido := Value;
+end;
+
+procedure TCadastroPedidoDto.SetItensPedido(const Value: TListaItens);
+begin
+  FItensPedido := Value;
 end;
 
 procedure TCadastroPedidoDto.Setnomereceptor(const Value: string);

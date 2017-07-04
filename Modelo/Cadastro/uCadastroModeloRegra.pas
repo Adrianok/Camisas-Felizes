@@ -50,7 +50,7 @@ begin
     if(oCadastroModeloDto.IdModelo < 0)then
       oCadastroCorModel.NovoId(oCadastroCorDto);
 
-    if(oCadastroModeloModel.SelectModelo(oCadastroModeloDto))then
+    if(oCadastroModeloModel.SelectPorModelo(oCadastroModeloDto))then
     begin
       oCadastroModeloModel.Atualizar(oCadastroModeloDto);
       Result:=True
@@ -85,7 +85,7 @@ end;
 
 function TCadastroModeloRegra.SelectDescricao(const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
 begin
-  if(oCadastroModeloModel.SelectDescricao(oCadastroModeloDto))then
+  if(oCadastroModeloModel.SelectPorDescricao(oCadastroModeloDto))then
     Result := True
   else
     Result := oCadastroModeloModel.NovoId(oCadastroModeloDto);

@@ -43,7 +43,7 @@ begin
     Query.Open('SELECT p.idpedido AS idpedido , p.data AS data, '
               +' (select count(i.iditensPedido) from itenspedido i where i.idpedido = p.idpedido) as total, '
              + ' p.valortotal AS valortotal , UPPER(c.nome) AS nome FROM pedido p '
-             + ' LEFT JOIN cliente c on c.idcliente = p.idcliente ');
+             + ' LEFT OUTER JOIN cliente c on c.idcliente = p.idcliente ');
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;

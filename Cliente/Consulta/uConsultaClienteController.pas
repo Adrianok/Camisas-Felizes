@@ -8,7 +8,7 @@ uses
   uClasseInterfaceConsultaBase, uConsultaClienteModel,
   uInterfaceConsultaBase,uCadastroClienteDto, uConsultaClienteForm,
   FireDac.Comp.Client, uConsultaClienteRegra, uFuncaoRetorno,
-  Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows;
+  Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows, uCadastroClienteRegra;
 
 type
   TConsultaClienteController = class(TClassInterfaceConsultaBase)
@@ -16,9 +16,10 @@ type
   public
     procedure PesquisarGrid;  override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);  override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');    override;
     procedure Confirmar; override;
     procedure Cancelar; override;
+
 
     constructor Create;
     destructor Destroy; override;
@@ -26,6 +27,7 @@ type
 
 var
   oConsultaClienteController: IInterfaceConsultaBase;
+  oConsultaClienteRegra: TConsultaClienteRegra;
 
 implementation
 
@@ -54,7 +56,7 @@ begin
     oConsultaClienteRegra := TConsultaClienteRegra.Create;
 end;
 
-procedure TConsultaClienteController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
+procedure TConsultaClienteController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');
 begin
   if not(assigned(oFormulario)) then
   begin
@@ -93,10 +95,12 @@ begin
 
 function TConsultaClienteController.PreencherGrid: boolean;
 begin
-  if(oConsultaClienteRegra.SelectAll(oConsultaClienteModel, oFormulario.FDMemTableGrid))then
-  oFormulario.FDMemTableGrid.Open
-  else
-    ShowMessage('Não foram encontrados registros');
+//  if(oConsultaClienteRegra.SelectAll(oConsultaClienteModel, oFormulario.FDMemTableGrid))then
+//  oFormulario.FDMemTableGrid.Open
+//  else
+//    ShowMessage('Não foram encontrados registros');
 end;
+
+
 
 end.

@@ -13,8 +13,8 @@ type
   private
     Query: TFDQuery;
   public
-   function SelectAll(MemTable: TFDMemTable) : boolean;
-
+    function SelectAllWhere(var MemTable: TFDMemTable; const oListaModelos: TList) : boolean;
+    function SelectAll(MemTable: TFDMemTable) : boolean;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -36,11 +36,42 @@ begin
   inherited;
 end;
 
-function TConsultaCorModel.SelectAll(MemTable: TFDMemTable): boolean;
+function TConsultaCorModel.SelectAll(MemTable: TFDMemTable) : boolean;
 begin
   try
     Query.SQL.Clear;
     Query.Open('SELECT idCor, UPPER(descricao) as descricao FROM Cor');
+    if (not(Query.IsEmpty)) then
+    begin
+      MemTable.Data := Query.Data;
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
+
+function TConsultaCorModel.SelectAllWhere(var MemTable: TFDMemTable;
+  const oListaModelos: TList): boolean;
+var
+  iIndiceLista : integer;
+  sSql : string;
+begin
+  try
+    sSql := 'in (';
+    for iIndiceLista := 0 to oListaModelos.Count -1 do
+    begin
+      if(iIndiceLista > 0)then
+        sSql := sSql + ', ';
+      sSql := sSql + IntToStr(integer(oListaModelos.Items[iIndiceLista])) ;
+    end;
+    sSql := sSql + ')';
+
+
+    Query.SQL.Clear;
+    Query.Open('SELECT idCor, UPPER(descricao) as descricao FROM Cor WHERE idcor ' + sSql);
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;

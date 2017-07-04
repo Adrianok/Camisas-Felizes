@@ -119,19 +119,13 @@ begin
   if(aIdTamanho <> 0)then
   begin
     oCadastroTamanhoDto.IdTamanho := aIdTamanho;
-    if(oCadastroTamanhoRegra.SelectTamanho(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+    if(oCadastroTamanhoRegra.SelectPorId(oCadastroTamanhoModel, oCadastroTamanhoDto))then
     with (oFormulario as TCadastroTamanhoForm) do
     begin
       edtCodigo.Text :=   IntToStr(oCadastroTamanhoDto.IdTamanho);
       edtTamanho.Text    :=  oCadastroTamanhoDto.Descricao;
     end;
-  end
-  else
-  begin
-    Inicial;
-    raise Exception.Create('Não foi escolhido registro');
   end;
-
 end;
 
 procedure TCadastroTamanhoController.Salvar;

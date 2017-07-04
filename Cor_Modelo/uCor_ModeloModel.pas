@@ -116,7 +116,6 @@ begin
   FreeAndNil(Query);
 end;
 
-
 function TCor_ModeloModel.SelectPorIdCor(const IdCor: integer): boolean;
 var
   Query : TFDQuery;

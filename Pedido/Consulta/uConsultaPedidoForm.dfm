@@ -4,6 +4,7 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
   ClientHeight = 540
   ClientWidth = 794
   Position = poDesigned
+  ExplicitTop = -5
   ExplicitWidth = 800
   ExplicitHeight = 569
   PixelsPerInch = 96
@@ -56,12 +57,21 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
   inherited Panel2: TPanel
     Top = 460
     Width = 794
+    ExplicitTop = 460
+    ExplicitWidth = 794
+    inherited Panel3: TPanel
+      Left = 509
+      ExplicitLeft = 509
+    end
   end
   inherited DataSourceGrid: TDataSource
     Left = 8
     Top = 472
   end
   inherited FDMemTableGrid: TFDMemTable
+    FetchOptions.AssignedValues = [evMode, evRowsetSize, evCache, evRecordCountMode]
+    FetchOptions.RecordCountMode = cmTotal
+    FetchOptions.Cache = []
     Left = 40
     Top = 472
   end

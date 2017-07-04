@@ -8,7 +8,9 @@ uses
 type
   IInterfaceCadastroModeloModel = interface
 
-    function SelectDescricao(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+    function SelectPorDescricao(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+    function SelectPorId(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
+    function SelectPorModelo(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroModeloDto):boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroModeloDto):boolean;
     function Deletar(const IdModelo : integer): Boolean;

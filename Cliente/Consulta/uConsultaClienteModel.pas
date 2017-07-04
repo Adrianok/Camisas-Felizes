@@ -32,7 +32,8 @@ end;
 
 destructor TConsultaClienteModel.Destroy;
 begin
-  FreeAndNil(Query);
+  if(assigned(Query))then
+    FreeAndNil(Query);
   inherited;
 end;
 

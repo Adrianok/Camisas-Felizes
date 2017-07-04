@@ -226,7 +226,7 @@ begin
     bAux := False;
     for iIndice := 0 to oForm.chlItens.Count -1 do
     begin
-      if(integer(oForm.chlItens.Items.Objects[iIndice]) =  oCadastroItensDto.IdItensPedido)then
+      if(integer(oForm.chlItens.Items.Objects[iIndice]) =  oCadastroItensDto.idmodelo)then
         bAux := True;
       if(oForm.chlItens.Checked[iIndice])then
         oForm.chlItens.Checked[iIndice] := False;
@@ -234,12 +234,12 @@ begin
     end;
     if(not(bAux))then
     begin
-      oForm.chlItens.AddItem(oCadastroModeloDto.Descricao, TObject(oCadastroItensDto.IdItensPedido));
+      oForm.chlItens.AddItem(oCadastroModeloDto.Descricao, TObject(oCadastroItensDto.idmodelo));
     end;
      end
   else
   begin
-    oForm.chlDetalheItem.AddItem(oCadastroTamanhoDto.Descricao + ' - ' + oCadastroCorDto.Descricao, TObject(oCadastroDetalheItensDto.IdDetalhe));
+    oForm.chlDetalheItem.AddItem(oCadastroTamanhoDto.Descricao + ' - ' + oCadastroCorDto.Descricao, TObject(oCadastroDetalheItensDto.idtamanho));
   end;
 end;
 

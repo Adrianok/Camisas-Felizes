@@ -34,6 +34,8 @@ type
     constructor Create;
     destructor Destroy; override;
 
+    procedure LimparListaItens;
+
     property IdPedido : Integer read FIdPedido write SetIdPedido;
     property data : TDate read Fdata write Setdata;
     property dataentrega : TDate  read Fdataentrega write Setdataentrega;
@@ -73,12 +75,12 @@ var
  oLoopControlItens : TCadastroItensDto;
 begin
   inherited;
-//  if(Assigned(FItensPedido))then
-//    for oLoopControlItens in FItensPedido.Values do
-//    begin
-//      oLoopControlItens.Free
-//    end;
+  if(Assigned(FItensPedido))then
+    FreeAndNil(FItensPedido);
+end;
 
+procedure TCadastroPedidoDto.LimparListaItens;
+begin
 
 end;
 

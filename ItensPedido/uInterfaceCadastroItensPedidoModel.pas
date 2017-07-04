@@ -7,10 +7,8 @@ uses
   uCadastroItensDto, uCadastroPedidoDto;
 type
   IInterfaceCadastroItensPedidoModel = interface
-    function Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
-    function Atualizar(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
-    function Deletar(const IdItensPedido : integer): Boolean;
-    function NovoId(var oCadastroItensDto: TCadastroItensDto):boolean;
+    function Inserir(const oCadastroItensPedido: TCadastroItensDto; const idItensPedido : integer;const idPedido : integer): Boolean;
+    function NovoId: integer;
     function SelectItensPedido(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
 
   end;

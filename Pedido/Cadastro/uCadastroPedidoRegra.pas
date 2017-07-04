@@ -19,9 +19,9 @@ type
   TCadastroPedidoRegra = class
   private
   public
-    function NovoIdDetalheItens(const oCadastroDetalheItensModel :  TCadastroDetalheItensModel ;oCadastroDetalheItensDto: TCadastroDetalheItemDto): boolean;
-    function NovoIdItensPedido(const oCadastroItensModel : TCadastroItensPedidoModel; oCadastroItensDto: TCadastroItensDto): boolean;
 
+    procedure InserirItens(const oCadastroPedidoModel: TCadastroPedidoModel;
+      const oCadastroItensPedidoModel: TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel; const oCadastroPedidoDto: TCadastroPedidoDto);
     function SelectModeloPorDescricao(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
     function SelectModeloPorId(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
 
@@ -47,10 +47,13 @@ type
        const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto;
        const oCadastroItensPedidoModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
 
-    function Deletar(const oCadastroPedidoModel : TCadastroPedidoModel; const IdPedido : integer) : boolean;
+    function DeletarItens(  const oCadastroPedidoDto: TCadastroPedidoDto; const oCadastroItensModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel) : boolean;
+
+    function Deletar(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto : TCadastroPedidoDto;
+     const oCadastroItensModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel) : boolean;
 
     function Novo(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto : TCadastroPedidoDto) : boolean;
-    function Salvar(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto: TCadastroPedidoDto;
+    function Salvar(const oCadastroPedidoModel : TCadastroPedidoModel; const oCadastroPedidoDto: TCadastroPedidoDto;
     const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto;
     const oCadastroItensPedidoModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
   end;
@@ -59,33 +62,61 @@ implementation
 
 { TCadastroPedidoRegra }
 
-
-
 function TCadastroPedidoRegra.Deletar(const oCadastroPedidoModel: TCadastroPedidoModel;
-  const IdPedido: integer): boolean;
+  var oCadastroPedidoDto : TCadastroPedidoDto;
+  const oCadastroItensModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel) : boolean;
 begin
-  Result := oCadastroPedidoModel.Deletar(IdPedido);
+  DeletarItens(oCadastroPedidoDto, oCadastroItensModel, oCadastroDetalhesItensModel);
+  Result := oCadastroPedidoModel.Deletar(oCadastroPedidoDto.IdPedido);
+end;
+
+function TCadastroPedidoRegra.DeletarItens(
+  const oCadastroPedidoDto: TCadastroPedidoDto;
+  const oCadastroItensModel: TCadastroItensPedidoModel;
+  const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
+var
+  oLoopControlItens : TCadastroItensDto;
+  oLoopControlDetalhe : TCadastroDetalheItemDto;
+begin
+    for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
+    begin
+      for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
+      begin
+        oCadastroDetalhesItensModel.Deletar(oLoopControlDetalhe.IdDetalhe);
+      end;
+      oCadastroItensModel.Deletar(oLoopControlItens.IdItensPedido);
+    end;
+end;
+
+procedure TCadastroPedidoRegra.InserirItens(const oCadastroPedidoModel: TCadastroPedidoModel;
+const oCadastroItensPedidoModel: TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel;
+const oCadastroPedidoDto: TCadastroPedidoDto);
+var
+  oLoopControlItens : TCadastroItensDto;
+  idPedido, idItem: Integer;
+  oLoopControlDetalhe : TCadastroDetalheItemDto;
+begin
+    idPedido := oCadastroPedidoModel.NovoId;
+    oCadastroPedidoModel.Inserir(oCadastroPedidoDto, idPedido);
+    for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
+    begin
+      idItem := oCadastroItensPedidoModel.NovoId;
+      oCadastroItensPedidoModel.Inserir(oLoopControlItens, idItem, idPedido);
+      for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
+      begin
+        oCadastroDetalhesItensModel.Inserir(oLoopControlDetalhe, oCadastroDetalhesItensModel.NovoId, idItem);
+      end;
+    end;
 end;
 
 function TCadastroPedidoRegra.Novo(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto : TCadastroPedidoDto) : boolean;
 begin
-  Result := oCadastroPedidoModel.NovoId(oCadastroPedidoDto);
+  oCadastroPedidoDto.IdPedido := oCadastroPedidoModel.NovoId;
+  Result := True;
 end;
 
-function TCadastroPedidoRegra.NovoIdDetalheItens(
-  const oCadastroDetalheItensModel: TCadastroDetalheItensModel;
-  oCadastroDetalheItensDto: TCadastroDetalheItemDto): boolean;
-begin
-  Result := oCadastroDetalheItensModel.NovoId(oCadastroDetalheItensDto);
-end;
 
-function TCadastroPedidoRegra.NovoIdItensPedido(const oCadastroItensModel: TCadastroItensPedidoModel;
-  oCadastroItensDto: TCadastroItensDto): boolean;
-begin
-  Result := oCadastroItensModel.NovoId(oCadastroItensDto);
-end;
-
-function TCadastroPedidoRegra.Salvar(const oCadastroPedidoModel : TCadastroPedidoModel; var oCadastroPedidoDto: TCadastroPedidoDto;
+function TCadastroPedidoRegra.Salvar(const oCadastroPedidoModel : TCadastroPedidoModel; const oCadastroPedidoDto: TCadastroPedidoDto;
 const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto;
 const oCadastroItensPedidoModel : TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel): boolean;
 begin
@@ -95,16 +126,29 @@ begin
     raise Exception.Create('Esse cliente não possui cadastro' + #13
     +'Por favor vá até o cadastro de clientes e cadastre o mesmo');
 
+//  - pega o pedido buscar o id do pedido
+//  for do itens do pedido
+//    - passa o id do pedido
+//    - gerar o id do item
+//    for detalhes
+//      - passa o id do pedido
+//      - passa o id do item do pedido
+//      - gerar o id do detalhe
+
+
   if(oCadastroPedidoModel.SelectPedido(oCadastroPedidoDto))then
   begin
     oCadastroPedidoModel.Atualizar(oCadastroPedidoDto);
+    if(oCadastroPedidoDto.ItensPedido.Count > 0)then
+    begin
+      DeletarItens(oCadastroPedidoDto, oCadastroItensPedidoModel, oCadastroDetalhesItensModel);
+      InserirItens(oCadastroPedidoModel, oCadastroItensPedidoModel, oCadastroDetalhesItensModel, oCadastroPedidoDto);
+    end;
     Result:=True
   end
   else
   begin
-    oCadastroPedidoModel.Inserir(oCadastroPedidoDto);
-    oCadastroItensPedidoModel.Inserir(oCadastroPedidoDto);
-    oCadastroDetalhesItensModel.Inserir(oCadastroPedidoDto);
+    InserirItens(oCadastroPedidoModel, oCadastroItensPedidoModel, oCadastroDetalhesItensModel, oCadastroPedidoDto);
     Result := False;
   end;
 

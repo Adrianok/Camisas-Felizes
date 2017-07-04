@@ -2,7 +2,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 957
-  ExplicitTop = -205
   ExplicitWidth = 963
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -3800,10 +3799,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           Hint = 'C'#243'digo do cliente'
           ParentCustomHint = False
           CharCase = ecUpperCase
-          EditLabel.Width = 95
+          EditLabel.Width = 118
           EditLabel.Height = 23
           EditLabel.Hint = 'C'#243'digo Modelo'
-          EditLabel.Caption = 'C'#243'digo Item:'
+          EditLabel.Caption = '(F2) C'#243'digo Itm:'
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = clWindowText
           EditLabel.Font.Height = -17

@@ -22,7 +22,9 @@ type
 
   public
     constructor Create;
-    destructor Destroy;
+    destructor Destroy; override;
+
+    function AdicionarDetalhe(): Boolean;
 
     property IdItensPedido : Integer  read FIdItensPedido write SetIdItensPedido;
     property valorItem : Currency  read FvalorItem write SetvalorItem;
@@ -34,6 +36,11 @@ type
 implementation
 
 
+function TCadastroItensDto.AdicionarDetalhe: Boolean;
+begin
+
+end;
+
 constructor TCadastroItensDto.Create;
 begin
   FdetalheItem := TListaDetalheItem.Create([doOwnsValues]);
@@ -42,6 +49,9 @@ end;
 
 destructor TCadastroItensDto.Destroy;
 begin
+  inherited;
+  if assigned(FdetalheItem) then
+    FreeAndNil(FdetalheItem);
 end;
 
 procedure TCadastroItensDto.SetDetalheItem(const Value: TListaDetalheItem);

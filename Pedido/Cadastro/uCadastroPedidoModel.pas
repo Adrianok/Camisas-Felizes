@@ -16,11 +16,11 @@ type
     oCadastroPedidoDto : TCadastroPedidoDto;
   public
     function SelectPorId(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
-    function SelectPedido(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
-    function Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
-    function Atualizar(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+    function SelectPedido(const oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+    function Inserir(const oCadastroPedidoDto: TCadastroPedidoDto; const idPedido: integer): Boolean;
+    function Atualizar(const oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
     function Deletar(const IdPedido: integer): Boolean;
-    function NovoId(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+    function NovoId: integer;
 
     constructor Create;
     destructor Destroy; override;
@@ -30,7 +30,7 @@ implementation
 
 { TCadastroModeloModel }
 
-function TCadastroPedidoModel.Atualizar(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+function TCadastroPedidoModel.Atualizar(const oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
 var
   sSql : string;
 begin
@@ -42,7 +42,7 @@ begin
     + ', dataentrega = ' + QuotedStr(FormatDateTime('yyyy/mm/dd', oCadastroPedidoDto.dataentrega))
     + ', idendereco = ' ;
     if(oCadastroPedidoDto.idendereco = 0)then
-      sSql := sSql + 'NULL,'
+      sSql := sSql + 'NULL'
     else
       sSql := sSql + IntToStr(oCadastroPedidoDto.idendereco);
     sSql := sSql +
@@ -97,7 +97,7 @@ end;
 
 
 
-function TCadastroPedidoModel.Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+function TCadastroPedidoModel.Inserir(const oCadastroPedidoDto: TCadastroPedidoDto; const idPedido: integer): Boolean;
 var
   sSql : string;
 begin
@@ -105,7 +105,7 @@ begin
     Query.SQL.Clear;
     sSql := ' INSERT INTO Pedido (idPedido, data, dataentrega, idendereco,'
     +'nomereceptor, nomevendedor, valortotal, observacao, idcliente, usuario) VALUES ('
-    + IntToStr(oCadastroPedidoDto.IdPedido) + ','
+    + IntToStr(IdPedido) + ','
     + QuotedStr(FormatDateTime('yyyy/mm/dd', oCadastroPedidoDto.data)) + ','
     + QuotedStr(FormatDateTime('yyyy/mm/dd', oCadastroPedidoDto.dataentrega)) + ',';
     if(oCadastroPedidoDto.idendereco = 0)then
@@ -131,24 +131,23 @@ begin
   end;
 end;
 
-function TCadastroPedidoModel.NovoId(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+function TCadastroPedidoModel.NovoId: integer;
 begin
   try
     Query.SQL.Clear;
     Query.Open('SELECT MAX(idPedido) AS id FROM Pedido');
     if (not(Query.IsEmpty)) then
     begin
-      oCadastroPedidoDto.IdPedido := (Query.FieldByName('id').AsInteger) + 1;
-      Result := True;
+        Result  := (Query.FieldByName('id').AsInteger) + 1;
     end
     else
-      Result := False;
+      Result := 0;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;
 end;
 
-function TCadastroPedidoModel.SelectPedido(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+function TCadastroPedidoModel.SelectPedido(const oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
 begin
   try
     Query.SQL.Clear;

@@ -17,10 +17,10 @@ type
   public
     function SelectPorId(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
     function SelectDetalheItens(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
-    function Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+    function Inserir(const oCadastroDetalheDto: TCadastroDetalheItemDto; const idDetalhe : integer; const IdItem : integer): Boolean;
     function Atualizar(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
     function Deletar(const IdDetalheItens : integer): Boolean;
-    function NovoId(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
+    function NovoId: integer;
 
     constructor Create;
     destructor Destroy; override;
@@ -66,7 +66,7 @@ begin
   try
     Query.SQL.Clear;
     sSql :=
-    ' DELETE FROM DetalheItens WHERE idDetalheItens = ' + IntToStr(IdDetalheItens);
+    ' DELETE FROM DetalheItem WHERE idDetalheItem = ' + IntToStr(IdDetalheItens);
     Query.SQL.Add(sSql);
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
@@ -79,37 +79,21 @@ begin
 end;
 
 
-function TCadastroDetalheItensModel.Inserir(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
+function TCadastroDetalheItensModel.Inserir(const oCadastroDetalheDto: TCadastroDetalheItemDto; const idDetalhe : integer; const IdItem : integer): Boolean;
 var
-  oLoopControlDetalhe : TCadastroDetalheItemDto;
-  oLoopControlItens   : TCadastroItensDto;
   sSql                : string;
-  bAux                : boolean;
 begin
   try
     Query.SQL.Clear;
-    sSql := ' INSERT INTO detalheitem (iddetalheitem, iditenspedido, idtamanho, idcor'+
-    ',quantidade) '+
-    ' VALUES ';
-    bAux := False;
-    for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
-    begin
-      if(bAux)then
-        sSql := sSql + ',';
-      bAux := False;
-      for oLoopControlDetalhe in oLoopControlItens.DetalheItem.Values do
-      begin
-        if(bAux)then
-          sSql := sSql + ',';
-        bAux := True;
-         sSql := sSql + '('  + IntToStr(oLoopControlDetalhe.IdDetalhe)
-         + ', ' + IntToStr(oLoopControlItens.IdItensPedido)
-         + ', ' + CurrToStr(oLoopControlDetalhe.idtamanho)
-         + ', ' + IntToStr(oLoopControlDetalhe.idcor)
-         + ', ' + IntToStr(oLoopControlDetalhe.quantidade)
-         + ')';
-      end;
-    end;
+    sSql := ' INSERT INTO detalheitem (iddetalheitem, iditenspedido, idtamanho, idcor'
+    + ',quantidade) '
+    + ' VALUES '
+    + '('  + IntToStr(IdDetalhe)
+    + ', ' + IntToStr(IdItem)
+    + ', ' + CurrToStr(oCadastroDetalheDto.idtamanho)
+    + ', ' + IntToStr(oCadastroDetalheDto.idcor)
+    + ', ' + IntToStr(oCadastroDetalheDto.quantidade)
+    + ')';
     Query.SQL.Add(sSql);
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
@@ -121,18 +105,17 @@ begin
   end;
 end;
 
-function TCadastroDetalheItensModel.NovoId(var oCadastroDetalheItemDto: TCadastroDetalheItemDto): Boolean;
+function TCadastroDetalheItensModel.NovoId: integer;
 begin
   try
     Query.SQL.Clear;
     Query.Open('SELECT MAX(idDetalheItem) AS id FROM DetalheItem');
     if (not(Query.IsEmpty)) then
     begin
-      oCadastroDetalheItemDto.IdDetalhe:= (Query.FieldByName('id').AsInteger) + 1;
-      Result := True;
+      Result := Query.FieldByName('id').AsInteger + 1;
     end
     else
-      Result := False;
+      Result := 0;
   except
     raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;

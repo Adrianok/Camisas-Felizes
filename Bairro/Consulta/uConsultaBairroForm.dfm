@@ -1,6 +1,6 @@
-inherited ConsultaCorForm: TConsultaCorForm
+inherited ConsultaBairroForm: TConsultaBairroForm
   Left = 893
-  Caption = 'Consulta cadastro de cor'
+  Caption = 'Consulta cadastro de Bairro'
   ClientHeight = 522
   ClientWidth = 374
   Position = poDesigned
@@ -30,7 +30,7 @@ inherited ConsultaCorForm: TConsultaCorForm
     Columns = <
       item
         Expanded = False
-        FieldName = 'idcor'
+        FieldName = 'idBairro'
         Title.Caption = 'C'#243'digo'
         Width = 54
         Visible = True
@@ -51,7 +51,7 @@ inherited ConsultaCorForm: TConsultaCorForm
     Columns = <
       item
         Expanded = False
-        FieldName = 'idcor'
+        FieldName = 'idBairro'
         Title.Caption = 'C'#243'digo'
         Width = 59
         Visible = True

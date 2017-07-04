@@ -566,7 +566,7 @@ begin
       begin
         edtNomeClienteEx.Text := oCadastroClienteDto.Nome;
         edtNmClient.Text :=   IntToStr(oCadastroClienteDto.IdCliente);
-        edtCpfCnpj.Text    :=  CurrToStr(oCadastroClienteDto.cpf_cnpj);
+        edtCpfCnpj.Text    :=  oCadastroClienteDto.cpf_cnpj;
         edtCpfCnpj.SetFocus;
       end;
     end;
@@ -604,7 +604,7 @@ begin
         edtReceptor.Text := oCadastroPedidoDto.nomereceptor;
         edtNomeClienteEx.Text :=  oCadastroClienteDto.Nome;
         edtNmClient.Text := IntToStr(oCadastroClienteDto.IdCliente);
-        edtCpfCnpj.Text := CurrToStr(oCadastroClienteDto.cpf_cnpj);
+        edtCpfCnpj.Text := oCadastroClienteDto.cpf_cnpj;
         edtUsuario.Text := oCadastroPedidoDto.usuario;
         bendClient := True;
         if(oCadastroPedidoDto.idendereco <= 0)then
@@ -636,7 +636,7 @@ begin
             chkAltEnd.Caption := 'Alterar Endereço';
             edtNmr.Text :=  oCadastroEnderecoDto.Numero;
             edtRua.Text :=  oCadastroEnderecoDto.Endereco;
-            edtCidade.Text := oCadastroMunicipioDto.Descricao;
+            edtCidade.Text := oCadastroMunicipioDto.Municipio;
             edtBairro.Text := oCadastroBairroDto.Descricao;
           end;
         end;
@@ -748,7 +748,8 @@ begin
       oCadastroEnderecoDto.Numero := edtNmr.Text;
       oCadastroBairroDto.Descricao := edtBairro.Text;
       oCadastroEnderecoDto.status := 2;
-      oCadastroMunicipioDto.Descricao := edtCidade.Text;
+      oCadastroMunicipioDto.Municipio
+       := edtCidade.Text;
       oCadastroEnderecoDto.IdEndereco := oCadastroPedidoDto.idendereco;
       if (not(oCadastroPedidoRegra.SalvarEndereco(oCadastroEnderecoModel,
       oCadastroEnderecoDto, oCadastroBairroModel, oCadastroBairroDto,

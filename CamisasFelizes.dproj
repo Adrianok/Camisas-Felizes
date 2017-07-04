@@ -193,7 +193,6 @@
         <DCCReference Include="Pedido\Consulta\uConsultaPedidoController.pas"/>
         <DCCReference Include="Pedido\Consulta\uConsultaPedidoForm.pas">
             <Form>ConsultaPedidoForm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Pedido\Consulta\uConsultaPedidoModel.pas"/>
         <DCCReference Include="Pedido\Consulta\uConsultaPedidoRegra.pas"/>
@@ -203,7 +202,6 @@
         <DCCReference Include="Pedido\Cadastro\uCadastroPedidoDto.pas"/>
         <DCCReference Include="Pedido\Cadastro\uCadastroPedidoForm.pas">
             <Form>CadastroPedidoForm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Pedido\Cadastro\uCadastroPedidoModel.pas"/>
         <DCCReference Include="Pedido\Cadastro\uCadastroPedidoRegra.pas"/>
@@ -217,17 +215,10 @@
         <DCCReference Include="Cliente\Consulta\uConsultaClienteController.pas"/>
         <DCCReference Include="Cliente\Consulta\uConsultaClienteForm.pas">
             <Form>ConsultaClienteForm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Cliente\Consulta\uConsultaClienteModel.pas"/>
         <DCCReference Include="Cliente\Consulta\uConsultaClienteRegra.pas"/>
         <DCCReference Include="Cliente\Consulta\uInterfaceConsultaClienteModel.pas"/>
-        <DCCReference Include="Municipio\uCadastroMunicipioDto.pas"/>
-        <DCCReference Include="Municipio\uCadastroMunicipioModel.pas"/>
-        <DCCReference Include="Municipio\uInterfaceCadastroMunicipioModel.pas"/>
-        <DCCReference Include="Bairro\uCadastroBairroDto.pas"/>
-        <DCCReference Include="Bairro\uCadastroBairroModel.pas"/>
-        <DCCReference Include="Bairro\uInterfaceCadastroBairroModel.pas"/>
         <DCCReference Include="ItensPedido\uCadastroItensDto.pas"/>
         <DCCReference Include="ItensPedido\uListaItens.pas"/>
         <DCCReference Include="ItensPedido\uCadastroDetalheItemDto.pas"/>
@@ -236,6 +227,47 @@
         <DCCReference Include="ItensPedido\uInterfaceCadastroItensPedidoModel.pas"/>
         <DCCReference Include="ItensPedido\uCadastroDetalhesItensModel.pas"/>
         <DCCReference Include="ItensPedido\uInterfaceCadastroDetalhesItensModel.pas"/>
+        <DCCReference Include="Cliente\Cadastro\uCadastroClienteController.pas"/>
+        <DCCReference Include="Cliente\Cadastro\uCadastroClienteForm.pas">
+            <Form>CadastroClienteForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cliente\Cadastro\uCadastroClienteRegra.pas"/>
+        <DCCReference Include="Municipio\cadastro\uCadastroMunicipioController.pas"/>
+        <DCCReference Include="Municipio\cadastro\uCadastroMunicipioDto.pas"/>
+        <DCCReference Include="Municipio\cadastro\uCadastroMunicipioForm.pas">
+            <Form>CadastroMunicipioForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Municipio\cadastro\uCadastroMunicipioModel.pas"/>
+        <DCCReference Include="Municipio\cadastro\uCadastroMunicipioRegra.pas"/>
+        <DCCReference Include="Municipio\cadastro\uInterfaceCadastroMunicipioModel.pas"/>
+        <DCCReference Include="Municipio\consulta\uConsultaMunicipioController.pas"/>
+        <DCCReference Include="Municipio\consulta\uConsultaMunicipioForm.pas">
+            <Form>ConsultaMunicipioForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Municipio\consulta\uConsultaMunicipioModel.pas"/>
+        <DCCReference Include="Municipio\consulta\uConsultaMunicipioRegra.pas"/>
+        <DCCReference Include="Municipio\consulta\uInterfaceConsultaMunicipioModel.pas"/>
+        <DCCReference Include="Municipio\consulta\uInterfaceMunicipioModel.pas"/>
+        <DCCReference Include="Bairro\Cadastro\uCadastroBairroController.pas"/>
+        <DCCReference Include="Bairro\Cadastro\uCadastroBairroDto.pas"/>
+        <DCCReference Include="Bairro\Cadastro\uCadastroBairroForm.pas">
+            <Form>CadastroBairroForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Bairro\Cadastro\uCadastroBairroModel.pas"/>
+        <DCCReference Include="Bairro\Cadastro\uCadastroBairroRegra.pas"/>
+        <DCCReference Include="Bairro\Cadastro\uInterfaceCadastroBairroModel.pas"/>
+        <DCCReference Include="Bairro\Consulta\uConsultaBairroController.pas"/>
+        <DCCReference Include="Bairro\Consulta\uConsultaBairroForm.pas">
+            <Form>ConsultaBairroForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Bairro\Consulta\uConsultaBairroModel.pas"/>
+        <DCCReference Include="Bairro\Consulta\uConsultaBairroRegra.pas"/>
+        <DCCReference Include="Bairro\Consulta\uInterfaceConsultaBairroModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

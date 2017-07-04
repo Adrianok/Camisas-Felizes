@@ -58,7 +58,8 @@ begin
 
   oForm.btnFechar.OnClick := Fechar;
   oForm.btnFiltrar.onClick := PreencherGrid;
-
+  oForm.DtpInicial.Date := Date - 30;
+  oForm.DtpFinal.Date := Date;
   oForm.Show;
 
 end;

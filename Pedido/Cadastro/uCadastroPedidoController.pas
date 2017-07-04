@@ -29,8 +29,7 @@ type
     oCadastroMunicipioDto   : TCadastroMunicipioDto;
 
     oCadastroPedidoRegra   : TCadastroPedidoRegra;
-    oCadastroPedidoModel   : TCadastroPedidoM
-    odel;
+    oCadastroPedidoModel   : TCadastroPedidoModel;
     oCadastroPedidoDto     : TCadastroPedidoDto;
     procedure RetornoPedido(aIdPedido : Integer);
     procedure RetornoCliente(aIdCliente : Integer);

@@ -3,7 +3,7 @@
   Top = 0
   BorderIcons = []
   Caption = 'Relat'#243'rio'
-  ClientHeight = 394
+  ClientHeight = 480
   ClientWidth = 793
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,6 @@
     Height = 68
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 794
     object btnFechar: TBitBtn
       AlignWithMargins = True
       Left = 722
@@ -204,7 +203,7 @@
     Left = 233
     Top = 68
     Width = 560
-    Height = 326
+    Height = 412
     Align = alClient
     DataSource = DataSource1
     TabOrder = 2
@@ -252,9 +251,11 @@
     Left = 0
     Top = 68
     Width = 233
-    Height = 326
+    Height = 412
     Align = alLeft
     TabOrder = 1
+    ExplicitLeft = -6
+    ExplicitTop = 72
     object Label1: TLabel
       Left = 80
       Top = 3
@@ -269,21 +270,21 @@
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 107
+      Left = 109
       Top = 68
       Width = 16
       Height = 13
       Caption = 'at'#233
     end
     object Label3: TLabel
-      Left = 107
+      Left = 109
       Top = 129
       Width = 16
       Height = 13
       Caption = 'at'#233
     end
     object Label4: TLabel
-      Left = 107
+      Left = 109
       Top = 191
       Width = 16
       Height = 13
@@ -328,8 +329,48 @@
       Font.Style = []
       ParentFont = False
     end
+    object Label5: TLabel
+      Left = 109
+      Top = 319
+      Width = 16
+      Height = 13
+      Caption = 'at'#233
+    end
+    object Label8: TLabel
+      Left = 109
+      Top = 255
+      Width = 16
+      Height = 13
+      Caption = 'at'#233
+    end
+    object Label10: TLabel
+      Left = 87
+      Top = 226
+      Width = 56
+      Height = 19
+      Caption = 'Produto'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label11: TLabel
+      Left = 82
+      Top = 290
+      Width = 67
+      Height = 19
+      Caption = 'Municipio'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object EdtClienteInicial: TEdit
-      Left = 6
+      Left = 7
       Top = 64
       Width = 90
       Height = 21
@@ -338,7 +379,7 @@
       TextHint = 'Cliente Inicial'
     end
     object DtpInicial: TDateTimePicker
-      Left = 6
+      Left = 7
       Top = 125
       Width = 90
       Height = 21
@@ -360,7 +401,7 @@
       TabOrder = 3
     end
     object EdtPedidoinicial: TEdit
-      Left = 6
+      Left = 7
       Top = 187
       Width = 90
       Height = 21
@@ -388,11 +429,12 @@
     end
     object Panel3: TPanel
       Left = 1
-      Top = 284
+      Top = 370
       Width = 231
       Height = 41
       Align = alBottom
       TabOrder = 6
+      ExplicitTop = 284
       object btnFiltrar: TButton
         Left = 74
         Top = 6
@@ -401,6 +443,42 @@
         Caption = 'Filtrar'
         TabOrder = 0
       end
+    end
+    object EdtMunicipioInicial: TEdit
+      Left = 7
+      Top = 315
+      Width = 90
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 7
+      TextHint = 'C'#243'digo Municipio'
+    end
+    object EdtMunicipioFinal: TEdit
+      Left = 137
+      Top = 315
+      Width = 90
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 8
+      TextHint = 'C'#243'digo Municipio'
+    end
+    object EdtProdutoInicial: TEdit
+      Left = 7
+      Top = 251
+      Width = 90
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 9
+      TextHint = 'C'#243'digo Produto'
+    end
+    object EdtProdutoFinal: TEdit
+      Left = 137
+      Top = 251
+      Width = 90
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 10
+      TextHint = 'C'#243'digo Produto'
     end
   end
   object DataSource1: TDataSource

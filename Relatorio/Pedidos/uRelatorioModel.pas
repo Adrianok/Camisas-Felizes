@@ -56,7 +56,9 @@ begin
              + ' INNER JOIN modelo mi ON mi.idmodelo = ip.idmodelo '
              + ' WHERE c.idcliente  BETWEEN ' + IntToStr(filtros.ClienteInicial) + ' AND ' + IntToStr(filtros.ClienteFinal)
              + ' AND data BETWEEN ' + (oDataInicial) + ' AND ' + (oDataFinal)
-             + ' AND p.idpedido BETWEEN ' + IntToStr(filtros.PedidoInicial) + ' AND ' + IntToStr(filtros.PedidoFinal));
+             + ' AND p.idpedido BETWEEN ' + IntToStr(filtros.PedidoInicial) + ' AND ' + IntToStr(filtros.PedidoFinal)
+             + ' AND mi.idmodelo BETWEEN ' + IntToStr(filtros.ProdutoInicial) + ' AND ' + IntToStr(filtros.ProdutoFinal)
+             + ' AND m.idmunicipio BETWEEN ' + IntToStr(filtros.MunicipioInicial) + ' AND ' + IntToStr(filtros.MunicipioFinal));
 
   if (not(Query.IsEmpty)) then
     begin

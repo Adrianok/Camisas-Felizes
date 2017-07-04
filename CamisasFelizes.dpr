@@ -73,7 +73,12 @@ uses
   uCadastroPedidoForm in 'Pedido\Cadastro\uCadastroPedidoForm.pas' {CadastroPedidoForm},
   uCadastroPedidoModel in 'Pedido\Cadastro\uCadastroPedidoModel.pas',
   uCadastroPedidoRegra in 'Pedido\Cadastro\uCadastroPedidoRegra.pas',
-  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas';
+  uInterfaceCadastroPedidoModel in 'Pedido\Cadastro\uInterfaceCadastroPedidoModel.pas',
+  uInterfaceRelatorioModel in 'Relatorio\Pedidos\uInterfaceRelatorioModel.pas',
+  uRelatorioController in 'Relatorio\Pedidos\uRelatorioController.pas',
+  uRelatorioDto in 'Relatorio\Pedidos\uRelatorioDto.pas',
+  uRelatorioForm in 'Relatorio\Pedidos\uRelatorioForm.pas' {FrmRelatorio},
+  uRelatorioModel in 'Relatorio\Pedidos\uRelatorioModel.pas';
 
 {$R *.res}
 
@@ -82,5 +87,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TFrmRelatorio, FrmRelatorio);
   Application.Run;
 end.

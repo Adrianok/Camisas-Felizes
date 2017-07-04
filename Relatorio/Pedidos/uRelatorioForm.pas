@@ -41,6 +41,14 @@ type
     FDMemTable1nome: TStringField;
     FDMemTable1idcliente: TIntegerField;
     frxChartObject1: TfrxChartObject;
+    EdtMunicipioInicial: TEdit;
+    Label5: TLabel;
+    EdtMunicipioFinal: TEdit;
+    EdtProdutoInicial: TEdit;
+    Label8: TLabel;
+    EdtProdutoFinal: TEdit;
+    Label10: TLabel;
+    Label11: TLabel;
   private
     { Private declarations }
   public

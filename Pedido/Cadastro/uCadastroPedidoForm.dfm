@@ -2,6 +2,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 957
+  ExplicitLeft = -131
   ExplicitWidth = 963
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -19,7 +20,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
       end
       inherited btnNovo: TBitBtn
         Left = 3
-        TabOrder = 0
         ExplicitLeft = 3
       end
       inherited btnAlterar: TBitBtn
@@ -170,7 +170,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     Top = 84
     Width = 1113
     Height = 478
-    ActivePage = pgItens
+    ActivePage = pgCabecalho
     Align = alCustom
     TabOrder = 1
     object pgCabecalho: TTabSheet
@@ -3385,9 +3385,9 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           TabOrder = 3
           object edtRua: TLabeledEdit
             Tag = 888
-            Left = 133
-            Top = 20
-            Width = 376
+            Left = 240
+            Top = 91
+            Width = 269
             Height = 26
             Hint = 'Rua'
             CharCase = ecUpperCase
@@ -3413,7 +3413,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           object edtNmr: TLabeledEdit
             Tag = 888
             Left = 133
-            Top = 60
+            Top = 91
             Width = 60
             Height = 26
             Hint = 'Numero'
@@ -3441,7 +3441,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           object edtBairro: TLabeledEdit
             Tag = 888
             Left = 282
-            Top = 60
+            Top = 53
             Width = 227
             Height = 26
             Hint = 'Bairro'
@@ -3468,7 +3468,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           object edtCidade: TLabeledEdit
             Tag = 888
             Left = 133
-            Top = 100
+            Top = 15
             Width = 376
             Height = 26
             Hint = 'Cidade'

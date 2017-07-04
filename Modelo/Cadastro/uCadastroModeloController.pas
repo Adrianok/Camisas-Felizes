@@ -211,6 +211,7 @@ begin
 
       GridCor(StrToIntDef(edtCodigo.Text, 0));
     end;
+  end;
 end;
 
 procedure TCadastroModeloController.Salvar;

@@ -22,7 +22,8 @@ uses
   uCadastroCorModel, uConsultaCorController,
   uConsultaModeloController, uCadastroModeloModel,
   uCadastroModeloDto, uCadastroDetalhesItensModel,
-  uListaItens;
+  uListaItens, uConsultaBairroController,
+  uConsultaMunicipioController;
 
 type
   TCadastroPedidoController = class(TClassInterfaceViewBase)
@@ -35,6 +36,7 @@ type
     oCadastroBairroDto        : TCadastroBairroDto;
     oCadastroMunicipioModel   : TCadastroMunicipioModel;
     oCadastroMunicipioDto     : TCadastroMunicipioDto;
+
 
     oCadastroDetalhesItensModel : TCadastroDetalheItensModel;
     oCadastroTamanhoModel     : TCadastroTamanhoModel;
@@ -57,6 +59,8 @@ type
     idItens                   : integer;
     CampoAtivo                : TWinControl;
 
+    procedure RetornoBairro(aIdBairro : Integer);
+    procedure RetornoMunicipio(aIdMunicipio : Integer);
     procedure RetornoModelo(aIdModelo : Integer);
     procedure RetornoCor(aIdCor : Integer);
     procedure RetornoTamanho(aIdTamanho : Integer);
@@ -509,6 +513,25 @@ var
   sWhere: string;
 begin
   inherited;
+
+
+  if(ActiveControl =  oForm.edtCidade)then
+  begin
+    if (not(assigned(oConsultaMunicipioController))) then
+      oConsultaMunicipioController := TConsultaMunicipioController.Create;
+    oConsultaMunicipioController.CriarForm(Aowner, RetornoMunicipio, oForm.edtCidade.Text);  end
+  else
+  if(ActiveControl =  oForm.edtBairro)then
+  begin
+    if(oForm.edtCidade.Text <> '')then
+    oCadastroMunicipioDto.Municipio := oForm.edtCidade.Text;
+    if(oCadastroPedidoRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
+      sWhere := IntToStr(oCadastroMunicipioDto.id);
+    if (not(assigned(oConsultaBairroController))) then
+      oConsultaBairroController := TConsultaBairroController.Create;
+    oConsultaBairroController.CriarForm(Aowner, RetornoBairro, oForm.edtCor.Text, sWhere);
+  end
+  else
   if(ActiveControl =  oForm.edtCor)then
   begin
     if((oForm.edtCdItensPedido.Text = '') or (oForm.edtModelo.Text = ''))then
@@ -554,6 +577,17 @@ begin
   end;
 end;
 
+
+procedure TCadastroPedidoController.RetornoBairro(aIdBairro: Integer);
+begin
+  if(aIdBairro <> 0)then
+  begin
+    oCadastroBairroDto.IdBairro := aIdBairro;
+    if(oCadastroPedidoRegra.SelectBairroPorId(oCadastroBairroModel, oCadastroBairroDto))then
+      oForm.edtBairro.Text := oCadastroBairroDto.Descricao;
+      oForm.edtRua.SetFocus;
+  end;
+end;
 
 procedure TCadastroPedidoController.RetornoCliente(aIdCliente: Integer);
 begin
@@ -702,6 +736,17 @@ begin
       oForm.edtCdItensPedido.Text := IntToStr(oCadastroModeloDto.IdModelo);
       oForm.edtTamanho.SetFocus;
     end;
+  end;
+end;
+
+procedure TCadastroPedidoController.RetornoMunicipio(aIdMunicipio: Integer);
+begin
+  if(aIdMunicipio <> 0)then
+  begin
+    oCadastroMunicipioDto.id := aIdMunicipio;
+    if(oCadastroPedidoRegra.SelectMunicipioPorId(oCadastroMunicipioModel, oCadastroMunicipioDto))then
+      oForm.edtCidade.Text := oCadastroMunicipioDto.Municipio;
+      oForm.edtBairro.SetFocus;
   end;
 end;
 

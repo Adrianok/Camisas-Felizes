@@ -95,6 +95,15 @@ function TConsultaBairroController.PreencherGrid: boolean;
 var
   oListaModelo : TList;
 begin
+
+  if(sCondicao <> '')then
+  begin
+    if(oConsultaBairroRegra.SelectAllWhere(oConsultaBairroModel ,oFormulario.FDMemTableGrid, StrToInt(sCondicao)))then
+      oFormulario.FDMemTableGrid.Open
+    else
+     ShowMessage('Não foram encontrados registros');
+  end
+  else
   if(oConsultaBairroRegra.SelectAll(oConsultaBairroModel, oFormulario.FDMemTableGrid))then
     oFormulario.FDMemTableGrid.Open
   else

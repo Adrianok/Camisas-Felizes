@@ -113,7 +113,6 @@ begin
     ShowMessage('Não foi possível ConsultaCorCadastro ao banco de dados');
     Application.Terminate;
   end;
-
 end;
 
 end.

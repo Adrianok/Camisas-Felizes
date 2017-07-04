@@ -10,8 +10,9 @@ uses
 type
   TConsultaBairroRegra = class
   public
-     function SelectAll(const oConsultaBairroModel: TConsultaBairroModel;var MemTable: TFDMemTable) : boolean;  end;
-
+     function SelectAll(const oConsultaBairroModel: TConsultaBairroModel;var MemTable: TFDMemTable) : boolean;
+     function SelectAllWhere(const oConsultaBairroModel: TConsultaBairroModel;var MemTable: TFDMemTable; const sCondicao : integer): boolean;
+  end;
 var
   oConsultaBairroRegra: TConsultaBairroRegra;
 implementation
@@ -22,4 +23,10 @@ function TConsultaBairroRegra.SelectAll(const oConsultaBairroModel: TConsultaBai
 begin
   Result:= oConsultaBairroModel.SelectAll(MemTable);
 end;
+
+function TConsultaBairroRegra.SelectAllWhere(const oConsultaBairroModel: TConsultaBairroModel;var MemTable: TFDMemTable; const sCondicao : integer): boolean;
+begin
+  Result := oConsultaBairroModel.SelectAllWhere(MemTable, sCondicao);
+end;
+
 end.

@@ -6,7 +6,7 @@ uses
   uCadastroBairroDto, FireDac.Comp.Client;
 type
   IInterfaceConsultaBairroModel = interface
-    function SelectAllWhere(var MemTable: TFDMemTable; const oListaModelos: TList) : boolean;
+    function SelectAllWhere(var MemTable: TFDMemTable;   const sCondicao: integer) : boolean;
     function SelectAll(MemTable: TFDMemTable) : boolean;
   end;
 

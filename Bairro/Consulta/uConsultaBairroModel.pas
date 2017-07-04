@@ -13,7 +13,7 @@ type
   private
     Query: TFDQuery;
   public
-    function SelectAllWhere(var MemTable: TFDMemTable; const oListaModelos: TList) : boolean;
+    function SelectAllWhere(var MemTable: TFDMemTable;   const sCondicao: integer) : boolean;
     function SelectAll(MemTable: TFDMemTable) : boolean;
     constructor Create;
     destructor Destroy; override;
@@ -53,25 +53,11 @@ begin
   end;
 end;
 
-function TConsultaBairroModel.SelectAllWhere(var MemTable: TFDMemTable;
-  const oListaModelos: TList): boolean;
-var
-  iIndiceLista : integer;
-  sSql : string;
+function TConsultaBairroModel.SelectAllWhere(var MemTable: TFDMemTable;const sCondicao: integer): boolean;
 begin
   try
-    sSql := 'in (';
-    for iIndiceLista := 0 to oListaModelos.Count -1 do
-    begin
-      if(iIndiceLista > 0)then
-        sSql := sSql + ', ';
-      sSql := sSql + IntToStr(integer(oListaModelos.Items[iIndiceLista])) ;
-    end;
-    sSql := sSql + ')';
-
-
     Query.SQL.Clear;
-    Query.Open('SELECT idBairro, UPPER(descricao) as descricao FROM Bairro WHERE idBairro ' + sSql);
+    Query.Open('SELECT idBairro, UPPER(descricao) as descricao FROM Bairro WHERE idBairro =' + IntToStr(sCondicao));
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;

@@ -25,6 +25,12 @@ type
     function SelectModeloPorDescricao(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
     function SelectModeloPorId(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
 
+    function SelectMunicipioPorDescricao(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+    function SelectMunicipioPorId(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+
+    function SelectBairroDescricao(const oCadastroBairroModel: TCadastroBairroModel; var oCadastroBairroDto: TCadastroBairroDto): boolean;
+    function SelectBairroPorId(const oCadastroBairroModel: TCadastroBairroModel; var oCadastroBairroDto: TCadastroBairroDto): boolean;
+
     function SelectCorPorDescricao(const oCadastroCorModel: TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
     function SelectCorPorId(const oCadastroCorModel: TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;
 
@@ -212,6 +218,20 @@ begin
 
 end;
 
+function TCadastroPedidoRegra.SelectBairroDescricao(
+  const oCadastroBairroModel: TCadastroBairroModel;
+  var oCadastroBairroDto: TCadastroBairroDto): boolean;
+begin
+  Result := oCadastroBairroModel.SelectPorDescricao(oCadastroBairroDto);
+end;
+
+function TCadastroPedidoRegra.SelectBairroPorId(
+  const oCadastroBairroModel: TCadastroBairroModel;
+  var oCadastroBairroDto: TCadastroBairroDto): boolean;
+begin
+  Result := oCadastroBairroModel.SelectPorId(oCadastroBairroDto);
+end;
+
 function TCadastroPedidoRegra.SelectCliente(
   const oCadastroClienteModel: TCadastroClienteModel;
   var oCadastroClienteDto: TCadastroClienteDto): boolean;
@@ -278,6 +298,20 @@ function TCadastroPedidoRegra.SelectModeloPorId(
   var oCadastroModeloDto: TCadastroModeloDto): boolean;
 begin
   Result := oCadastroModeloModel.SelectPorId(oCadastroModeloDto);
+end;
+
+function TCadastroPedidoRegra.SelectMunicipioPorDescricao(
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  Result := oCadastroMunicipioModel.SelectMunicipio(oCadastroMunicipioDto);
+end;
+
+function TCadastroPedidoRegra.SelectMunicipioPorId(
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  Result := oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto);
 end;
 
 function TCadastroPedidoRegra.SelectTamanhoPorId(

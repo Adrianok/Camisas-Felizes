@@ -13,7 +13,7 @@ uses
   uCadastroUfController,  uCadastroCorController,
   uCadastroTamanhoController,  uCadastroMunicipioController,
   uCadastroClienteController, uCadastroPedidoController,
-  uCadastroBairroController;
+  uCadastroBairroController, uRelatorioController;
 
 type
   TfrmPrincipal = class(TForm)
@@ -25,6 +25,7 @@ type
     CadastrodeMunicipio1: TMenuItem;
     CadastrodeCliente1: TMenuItem;
     CadastrodeBairro: TMenuItem;
+    Pedidos1: TMenuItem;
 
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -35,6 +36,7 @@ type
     procedure CadastrodeCliente1Click(Sender: TObject);
     procedure CadastrodeBairroClick(Sender: TObject);
     procedure CadastroUfClick(Sender: TObject);
+    procedure Pedidos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -113,6 +115,13 @@ begin
     ShowMessage('Não foi possível ConsultaCorCadastro ao banco de dados');
     Application.Terminate;
   end;
+end;
+
+procedure TfrmPrincipal.Pedidos1Click(Sender: TObject);
+begin
+  if (not(Assigned(oRelatorioController))) then
+   oRelatorioController := TRelatorioController.Create;
+  oRelatorioController.CriarForm(Self);
 end;
 
 end.

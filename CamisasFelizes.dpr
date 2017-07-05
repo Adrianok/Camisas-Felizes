@@ -78,7 +78,24 @@ uses
   uRelatorioController in 'Relatorio\Pedidos\uRelatorioController.pas',
   uRelatorioDto in 'Relatorio\Pedidos\uRelatorioDto.pas',
   uRelatorioForm in 'Relatorio\Pedidos\uRelatorioForm.pas' {FrmRelatorio},
-  uRelatorioModel in 'Relatorio\Pedidos\uRelatorioModel.pas';
+  uRelatorioModel in 'Relatorio\Pedidos\uRelatorioModel.pas',
+  uConsultaClienteController in 'Cliente\consulta\uConsultaClienteController.pas',
+  uConsultaClienteForm in 'Cliente\consulta\uConsultaClienteForm.pas' {ConsultaClienteForm},
+  uConsultaClienteModel in 'Cliente\consulta\uConsultaClienteModel.pas',
+  uConsultaClienteRegra in 'Cliente\consulta\uConsultaClienteRegra.pas',
+  uInterfaceConsultaClienteModel in 'Cliente\consulta\uInterfaceConsultaClienteModel.pas',
+  uCadastroClienteDto in 'Cliente\cadastro\uCadastroClienteDto.pas',
+  uCadastroClienteModel in 'Cliente\cadastro\uCadastroClienteModel.pas',
+  uInterfaceCadastroClienteModel in 'Cliente\cadastro\uInterfaceCadastroClienteModel.pas',
+  uCadastroEnderecoDto in 'Endereço\uCadastroEnderecoDto.pas',
+  uCadastroEnderecoModel in 'Endereço\uCadastroEnderecoModel.pas',
+  uInterfaceCadastroEnderecoModel in 'Endereço\uInterfaceCadastroEnderecoModel.pas',
+  uCadastroBairroDto in 'Bairro\uCadastroBairroDto.pas',
+  uCadastroBairroModel in 'Bairro\uCadastroBairroModel.pas',
+  uInterfaceCadastroBairroModel in 'Bairro\uInterfaceCadastroBairroModel.pas',
+  uCadastroMunicipioDto in 'Municipio\uCadastroMunicipioDto.pas',
+  uCadastroMunicipioModel in 'Municipio\uCadastroMunicipioModel.pas',
+  uInterfaceCadastroMunicipioModel in 'Municipio\uInterfaceCadastroMunicipioModel.pas';
 
 {$R *.res}
 
@@ -87,6 +104,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TFrmRelatorio, FrmRelatorio);
   Application.Run;
 end.

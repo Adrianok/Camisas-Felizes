@@ -30,6 +30,7 @@ type
   public
     { Public declarations }
     oController: IInterfaceViewBase;
+
   end;
 
 implementation

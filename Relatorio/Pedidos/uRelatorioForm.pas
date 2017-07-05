@@ -10,13 +10,13 @@ uses
   Vcl.ComCtrls, frxClass, frxDBSet, FireDAC.Stan.Async, FireDAC.DApt, frxChart;
 
 type
-  TFrmRelatorio = class(TForm)
-    Panel1: TPanel;
-    btnFechar: TBitBtn;
-    DBGridRelatório: TDBGrid;
+  TFrmRelatorio = class
+    Panelrel: TPanel;
+    btnFecharRel: TBitBtn;
+    DBGridRelatorio: TDBGrid;
     DataSource1: TDataSource;
     FDMemTable1: TFDMemTable;
-    Panel2: TPanel;
+    Panel22: TPanel;
     Label1: TLabel;
     btnFiltrar: TButton;
     EdtClienteInicial: TEdit;
@@ -49,6 +49,9 @@ type
     EdtProdutoFinal: TEdit;
     Label10: TLabel;
     Label11: TLabel;
+    FDMemTable1modelo: TIntegerField;
+    FDMemTable1municipio: TIntegerField;
+    FDMemTable1valoritem: TCurrencyField;
   private
     { Private declarations }
   public

@@ -1,4 +1,4 @@
-﻿object FrmRelatorio: TFrmRelatorio
+object FrmRelatorio: TFrmRelatorio
   Left = 0
   Top = 0
   BorderIcons = []
@@ -14,17 +14,17 @@
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object Panelrel: TPanel
     Left = 0
     Top = 0
     Width = 793
-    Height = 68
+    Height = 73
     Align = alTop
     TabOrder = 0
-    object btnFechar: TBitBtn
+    object btnFecharRel: TBitBtn
       AlignWithMargins = True
       Left = 722
-      Top = 1
+      Top = 4
       Width = 60
       Height = 65
       Caption = 'Fechar'
@@ -192,20 +192,23 @@
     end
     object btnRelAnalitico: TButton
       Left = 1
-      Top = 1
+      Top = 4
       Width = 140
       Height = 65
       Caption = 'Imprimir Relat'#243'rio Anal'#237'tico'
       TabOrder = 0
     end
   end
-  object DBGridRelatório: TDBGrid
+  object DBGridRelatorio: TDBGrid
     Left = 233
-    Top = 68
+    Top = 73
     Width = 560
-    Height = 412
+    Height = 407
     Align = alClient
+    BorderStyle = bsNone
+    Ctl3D = True
     DataSource = DataSource1
+    ParentCtl3D = False
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -247,15 +250,13 @@
         Visible = True
       end>
   end
-  object Panel2: TPanel
+  object Panel22: TPanel
     Left = 0
-    Top = 68
+    Top = 73
     Width = 233
-    Height = 412
+    Height = 407
     Align = alLeft
     TabOrder = 1
-    ExplicitLeft = -6
-    ExplicitTop = 72
     object Label1: TLabel
       Left = 80
       Top = 3
@@ -376,6 +377,7 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 0
+      Text = '0'
       TextHint = 'Cliente Inicial'
     end
     object DtpInicial: TDateTimePicker
@@ -407,6 +409,7 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 4
+      Text = '0'
       TextHint = 'Pedido Inicial'
     end
     object EdtPedidoFinal: TEdit
@@ -416,6 +419,7 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 5
+      Text = '9999999'
       TextHint = 'Pedido Final'
     end
     object EdtClienteFinal: TEdit
@@ -425,16 +429,17 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 1
+      Text = '999999'
       TextHint = 'Cliente Final'
     end
     object Panel3: TPanel
       Left = 1
-      Top = 370
+      Top = 365
       Width = 231
       Height = 41
       Align = alBottom
+      BevelEdges = []
       TabOrder = 6
-      ExplicitTop = 284
       object btnFiltrar: TButton
         Left = 74
         Top = 6
@@ -451,6 +456,7 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 7
+      Text = '0'
       TextHint = 'C'#243'digo Municipio'
     end
     object EdtMunicipioFinal: TEdit
@@ -460,6 +466,7 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 8
+      Text = '999999'
       TextHint = 'C'#243'digo Municipio'
     end
     object EdtProdutoInicial: TEdit
@@ -469,6 +476,7 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 9
+      Text = '0'
       TextHint = 'C'#243'digo Produto'
     end
     object EdtProdutoFinal: TEdit
@@ -478,6 +486,7 @@
       Height = 21
       NumbersOnly = True
       TabOrder = 10
+      Text = '999999'
       TextHint = 'C'#243'digo Produto'
     end
   end
@@ -488,6 +497,30 @@
   end
   object FDMemTable1: TFDMemTable
     Active = True
+    FieldDefs = <
+      item
+        Name = 'idpedido'
+        DataType = ftInteger
+      end
+      item
+        Name = 'data'
+        DataType = ftDate
+      end
+      item
+        Name = 'valortotal'
+        DataType = ftCurrency
+        Precision = 19
+      end
+      item
+        Name = 'nome'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'idcliente'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -495,6 +528,7 @@
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
     Left = 656
     Top = 16
     object FDMemTable1idpedido: TIntegerField
@@ -512,6 +546,21 @@
     object FDMemTable1idcliente: TIntegerField
       FieldName = 'idcliente'
     end
+    object FDMemTable1modelo: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'modelo'
+      Calculated = True
+    end
+    object FDMemTable1municipio: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'municipio'
+      Calculated = True
+    end
+    object FDMemTable1valoritem: TCurrencyField
+      FieldKind = fkCalculated
+      FieldName = 'valoritem'
+      Calculated = True
+    end
   end
   object ReportSintetico: TfrxReport
     Version = '5.3.14'
@@ -522,7 +571,7 @@
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42918.994482592600000000
-    ReportOptions.LastChange = 42919.884401574100000000
+    ReportOptions.LastChange = 42920.895441597230000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -553,12 +602,12 @@
       DataSetName = 'frxDBDataset1'
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
-        Height = 37.795300000000000000
+        Height = 41.574830000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 15.118120000000000000
-          Top = 7.559059999999999000
+          Top = 7.559060000000000000
           Width = 684.094930000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -570,6 +619,12 @@
           Memo.UTF8W = (
             'Relat'#243'rio Anal'#237'tico de Pedidos - Camizas Felizes')
           ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Top = 41.574830000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          Frame.Typ = [ftTop]
         end
       end
     end

@@ -3,30 +3,27 @@ unit uRelatorioController;
 interface
 
 uses
-  Dialogs, Vcl.ExtCtrls,
-  Vcl.StdCtrls, System.classes, System.SysUtils,
+  Vcl.Controls, Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, System.classes, System.SysUtils,
   uRelatorioModel, uRelatorioForm, uRelatorioDto, uBase,
-  FireDac.Comp.Client, Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows;
+  FireDac.Comp.Client, Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows;
 
 type
-  TRelatorioController = class (TFrmBase)
+  TRelatorioController = class
+
   private
+  oRelatorioModel : TRelatorioModel;
+  oForm : TFrmRelatorio;
+  oRelatorioDto : TRelatorioDto;
 
   public
+   procedure Fechar;
    procedure CriarForm(Aowner: TComponent);
    procedure PreencherGrid(Sender: TObject);
-   procedure Fechar(Sender: TObject);
    procedure AlimentarDto;
 
    constructor Create;
    destructor Destroy; override;
   end;
-
-var
-  oRelatorioModel : TRelatorioModel;
-  oForm : TFrmRelatorio;
-  oRelatorioDto : TRelatorioDto;
-
 
 implementation
 
@@ -54,9 +51,8 @@ end;
 procedure TRelatorioController.CriarForm(Aowner: TComponent);
 begin
   if (not(Assigned(oForm))) then
-    oForm := TFrmRelatorio.Create(aOwner);
+    oForm := TFrmRelatorio.Create(Aowner);
 
-  oForm.btnFechar.OnClick := Fechar;
   oForm.btnFiltrar.onClick := PreencherGrid;
   oForm.DtpInicial.Date := Date - 30;
   oForm.DtpFinal.Date := Date;
@@ -77,7 +73,8 @@ end;
 
 procedure TRelatorioController.Fechar;
 begin
-  oForm.Close;
+if assigned(oForm) then
+    FreeAndNil(oForm);
 end;
 
 procedure TRelatorioController.PreencherGrid(Sender: TObject);

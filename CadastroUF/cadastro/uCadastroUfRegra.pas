@@ -18,8 +18,6 @@ type
 
   end;
 
-var
-  oCadastroUfRegra: TCadastroUfRegra;
 
 implementation
 

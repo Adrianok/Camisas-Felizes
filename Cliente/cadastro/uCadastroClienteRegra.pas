@@ -4,12 +4,37 @@ interface
 
 uses
   System.SysUtils, uCadastroClienteDto,
-  uCadastroClienteForm, uCadastroClienteModel;
+  uCadastroClienteForm, uCadastroClienteModel,
+  uCadastroEnderecoModel, uCadastroEnderecoDto,
+  uCadastroBairroModel, uCadastroBairroDto,
+  uCadastroMunicipioModel, uCadastroMunicipioDto,
+  uCadastroUfModel, uCadastroUfDto;
 
 type
   TCadastroClienteRegra = class
   private
   public
+    function SelectUfPorDescricao(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
+    function SelectUfPorId(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
+
+
+
+    function SelectMunicipioPorDescricao(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+    function SelectMunicipioPorId(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+
+    function SelectBairroDescricao(const oCadastroBairroModel: TCadastroBairroModel; var oCadastroBairroDto: TCadastroBairroDto): boolean;
+    function SelectBairroPorId(const oCadastroBairroModel: TCadastroBairroModel; var oCadastroBairroDto: TCadastroBairroDto): boolean;
+
+
+    function SelectEndereco(const oCadastroEnderecoModel : TCadastroEnderecoModel; var oCadastroEnderecoDto: TCadastroEnderecoDto;
+       const oCadastroBairroModel : TCadastroBairroModel ; var oCadastroBairroDto: TCadastroBairroDto;
+       const oCadastroMunicipioModel : TCadastroMunicipioModel ; var oCadastroMunicipioDto: TCadastroMunicipioDto):boolean;
+
+    function SalvarEndereco(const oCadastroEnderecoModel : TCadastroEnderecoModel; var oCadastroEnderecoDto: TCadastroEnderecoDto;
+       const oCadastroBairroModel : TCadastroBairroModel ; var oCadastroBairroDto: TCadastroBairroDto;
+       const oCadastroMunicipioModel : TCadastroMunicipioModel ; var oCadastroMunicipioDto: TCadastroMunicipioDto):boolean;
+
+
     function SelectDescricao(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
     function SelectCliente(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
     function Novo(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
@@ -19,9 +44,6 @@ type
     function ValidarCNPJ(Acnpj: string): Boolean;
 
   end;
-
-var
-  oCadastroClienteRegra: TCadastroClienteRegra;
 
 implementation
 
@@ -36,6 +58,52 @@ begin
   end
 end;
 
+function TCadastroClienteRegra.SelectEndereco(
+  const oCadastroEnderecoModel: TCadastroEnderecoModel;
+  var oCadastroEnderecoDto: TCadastroEnderecoDto;
+  const oCadastroBairroModel: TCadastroBairroModel;
+  var oCadastroBairroDto: TCadastroBairroDto;
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  oCadastroEnderecoModel.SelectPorId(oCadastroEnderecoDto);
+
+  oCadastroBairroDto.IdBairro := oCadastroEnderecoDto.idbairro;
+  oCadastroBairroModel.SelectPorId(oCadastroBairroDto);
+
+  oCadastroMunicipioDto.Id := oCadastroBairroDto.idmunicipio;
+  oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto);
+  Result := True
+end;
+
+function TCadastroClienteRegra.SelectMunicipioPorDescricao(
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  Result := oCadastroMunicipioModel.SelectMunicipio(oCadastroMunicipioDto);
+end;
+
+function TCadastroClienteRegra.SelectMunicipioPorId(
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  Result := oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto);
+end;
+
+function TCadastroClienteRegra.SelectUfPorDescricao(
+  const oCadastroUfModel: TCadastroUfModel;
+  var oCadastroUfDto: TCadastroUfDto): boolean;
+begin
+ Result := oCadastroUfModel.SelectUf(oCadastroUfDto);
+end;
+
+function TCadastroClienteRegra.SelectUfPorId(
+  const oCadastroUfModel: TCadastroUfModel;
+  var oCadastroUfDto: TCadastroUfDto): boolean;
+begin
+ Result := oCadastroUfModel.SelectPorId(oCadastroUfDto);
+end;
+
 function TCadastroClienteRegra.Novo(const oCadastroClienteModel: TCadastroClienteModel;
   var oCadastroClienteDto: TCadastroClienteDto): boolean;
 begin
@@ -45,7 +113,6 @@ end;
 function TCadastroClienteRegra.Salvar(const oCadastroClienteModel: TCadastroClienteModel;
   var oCadastroClienteDto: TCadastroClienteDto): boolean;
 begin
-  // funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
   if (oCadastroClienteModel.SelectCliente(oCadastroClienteDto)) then
   begin
     oCadastroClienteModel.Atualizar(oCadastroClienteDto);
@@ -57,6 +124,63 @@ begin
     Result := False;
   end;
 
+end;
+
+function TCadastroClienteRegra.SalvarEndereco(
+  const oCadastroEnderecoModel: TCadastroEnderecoModel;
+  var oCadastroEnderecoDto: TCadastroEnderecoDto;
+  const oCadastroBairroModel: TCadastroBairroModel;
+  var oCadastroBairroDto: TCadastroBairroDto;
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  Result := False;
+  if(oCadastroBairroModel.SelectPorDescricao(oCadastroBairroDto))then
+  begin
+    oCadastroEnderecoDto.idbairro := oCadastroBairroDto.IdBairro
+  end
+  else
+  begin
+    raise Exception.Create('Esse bairro não possui cadastro' + #13
+    +'Por favor vá até o cadastro de bairros e cadastre o mesmo')
+  end;
+
+  if(oCadastroMunicipioModel.SelectDescricao(oCadastroMunicipioDto))then
+  begin
+    if(oCadastroMunicipioDto.id <> oCadastroBairroDto.idmunicipio)then
+      raise Exception.Create('Esse bairro não pertence'
+      +' a essa cidade, por favor, verifique')
+  end
+  else
+  begin
+    raise Exception.Create('Esse municipio não possui cadastro' + #13
+    +'Por favor vá até o cadastro de municipios e cadastre o mesmo');
+  end;
+
+  if(oCadastroEnderecoModel.SelectPorId(oCadastroEnderecoDto))then
+  begin
+    if(oCadastroEnderecoModel.Atualizar(oCadastroEnderecoDto))then
+      Result := True;
+  end
+  else
+  begin
+    if(oCadastroEnderecoModel.Inserir(oCadastroEnderecoDto))then
+      Result := True;
+  end;
+end;
+
+function TCadastroClienteRegra.SelectBairroDescricao(
+  const oCadastroBairroModel: TCadastroBairroModel;
+  var oCadastroBairroDto: TCadastroBairroDto): boolean;
+begin
+  Result := oCadastroBairroModel.SelectPorDescricao(oCadastroBairroDto);
+end;
+
+function TCadastroClienteRegra.SelectBairroPorId(
+  const oCadastroBairroModel: TCadastroBairroModel;
+  var oCadastroBairroDto: TCadastroBairroDto): boolean;
+begin
+  Result := oCadastroBairroModel.SelectPorId(oCadastroBairroDto);
 end;
 
 function TCadastroClienteRegra.SelectCliente(const oCadastroClienteModel: TCadastroClienteModel;
@@ -100,7 +224,10 @@ begin
       iDigito := 11 - iDigito;
     sCPFValidado := sCPFValidado + IntToStr(iDigito);
   end;
-  Result := sCPF = sCPFValidado;
+  if(sCPF = sCPFValidado)then
+    Result := True
+  else
+    Result := False;
 end;
 
 function TCadastroClienteRegra.ValidarCNPJ(Acnpj: string): Boolean;
@@ -139,7 +266,10 @@ begin
     end;
     sCNPJValidado := sCNPJValidado + IntToStr(iDigito);
   end;
-  Result := True;
+  if(sCNPJ = sCNPJValidado)then
+    Result := True
+  else
+    Result := False;
 end;
 
 end.

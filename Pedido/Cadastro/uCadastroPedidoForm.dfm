@@ -2,7 +2,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 957
-  ExplicitLeft = -131
+  ExplicitTop = -92
   ExplicitWidth = 963
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -170,7 +170,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     Top = 84
     Width = 1113
     Height = 478
-    ActivePage = pgCabecalho
+    ActivePage = pgItens
     Align = alCustom
     TabOrder = 1
     object pgCabecalho: TTabSheet
@@ -4009,12 +4009,12 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 4
+        TabOrder = 3
         OnClick = btnNovoClick
       end
       object btnExcluirItem: TBitBtn
-        Left = 542
-        Top = 253
+        Left = 449
+        Top = 252
         Width = 30
         Height = 18
         Caption = '-'
@@ -4030,13 +4030,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         ShowHint = False
         TabOrder = 2
         OnClick = btnNovoClick
-      end
-      object chlDetalheItem: TCheckListBox
-        Left = 609
-        Top = 277
-        Width = 184
-        Height = 167
-        TabOrder = 3
       end
       object btnAddItem: TBitBtn
         Left = 61
@@ -4056,12 +4049,23 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         TabOrder = 1
         OnClick = btnNovoClick
       end
-      object chlItens: TCheckListBox
+      object chlItens: TListView
         Left = 61
         Top = 277
-        Width = 511
-        Height = 167
+        Width = 418
+        Height = 150
+        Columns = <>
+        TabOrder = 4
+        ViewStyle = vsList
+      end
+      object chlDetalheItem: TListView
+        Left = 542
+        Top = 277
+        Width = 251
+        Height = 150
+        Columns = <>
         TabOrder = 5
+        ViewStyle = vsList
       end
     end
   end

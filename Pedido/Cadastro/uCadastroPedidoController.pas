@@ -3,7 +3,7 @@ unit uCadastroPedidoController;
 interface
 
 uses
-  Vcl.Dialogs, Vcl.Controls, Vcl.ExtCtrls,
+  Vcl.Dialogs, Vcl.Controls,Vcl.ComCtrls, Vcl.ExtCtrls,
   Vcl.StdCtrls, System.UITypes,
   System.classes, System.SysUtils,
   uCadastroPedidoDto, uClasseInterfaceViewBase,
@@ -23,41 +23,40 @@ uses
   uConsultaModeloController, uCadastroModeloModel,
   uCadastroModeloDto, uCadastroDetalhesItensModel,
   uListaItens, uConsultaBairroController,
-  uConsultaMunicipioController;
+  uConsultaMunicipioController, uCadastroClienteRegra;
 
 type
   TCadastroPedidoController = class(TClassInterfaceViewBase)
   private
-    oCadastroEnderecoDto      : TCadastroEnderecoDto;
-    oCadastroEnderecoModel    : TCadastroEnderecoModel;
-    oCadastroClienteModel     : TCadastroClienteModel;
-    oCadastroClienteDto       : TCadastroClienteDto;
-    oCadastroBairroModel      : TCadastroBairroModel;
-    oCadastroBairroDto        : TCadastroBairroDto;
-    oCadastroMunicipioModel   : TCadastroMunicipioModel;
-    oCadastroMunicipioDto     : TCadastroMunicipioDto;
-
-
+    oCadastroEnderecoDto        : TCadastroEnderecoDto;
+    oCadastroEnderecoModel      : TCadastroEnderecoModel;
+    oCadastroClienteModel       : TCadastroClienteModel;
+    oCadastroClienteDto         : TCadastroClienteDto;
+    oCadastroBairroModel        : TCadastroBairroModel;
+    oCadastroBairroDto          : TCadastroBairroDto;
+    oCadastroMunicipioModel     : TCadastroMunicipioModel;
+    oCadastroMunicipioDto       : TCadastroMunicipioDto;
+    oCadastroClienteRegra       : TCadastroClienteRegra;
     oCadastroDetalhesItensModel : TCadastroDetalheItensModel;
-    oCadastroTamanhoModel     : TCadastroTamanhoModel;
-    oCadastroTamanhoDto       : TCadastroTamanhoDto;
-    oCadastroDetalheItensDto  : TCadastroDetalheItemDto;
-    oCadastroItensPedidoModel : TCadastroItensPedidoModel;
-    oCadastroItensDto         : TCadastroItensDto;
-    oCadastroPedidoRegra      : TCadastroPedidoRegra;
-    oCadastroPedidoModel      : TCadastroPedidoModel;
-    oCadastroPedidoDto        : TCadastroPedidoDto;
-    oForm                     : TCadastroPedidoForm;
-    bPermite                  : Boolean;
-    oListaDetalheItem         : TListaDetalheItem;
-    oCadastroDetalheItem      : TCadastroDetalheItemDto;
-    oCadastroCorDto           : TCadastroCorDto;
-    oCadastroCorModel         : TCadastroCorModel;
-    oCadastroModeloDto        : TCadastroModeloDto;
-    oCadastroModeloModel      : TCadastroModeloModel;
-    idDetalheItens            : integer;
-    idItens                   : integer;
-    CampoAtivo                : TWinControl;
+    oCadastroTamanhoModel       : TCadastroTamanhoModel;
+    oCadastroTamanhoDto         : TCadastroTamanhoDto;
+    oCadastroDetalheItensDto    : TCadastroDetalheItemDto;
+    oCadastroItensPedidoModel   : TCadastroItensPedidoModel;
+    oCadastroItensDto           : TCadastroItensDto;
+    oCadastroPedidoRegra        : TCadastroPedidoRegra;
+    oCadastroPedidoModel        : TCadastroPedidoModel;
+    oCadastroPedidoDto          : TCadastroPedidoDto;
+    oForm                       : TCadastroPedidoForm;
+    bPermite                    : Boolean;
+    oListaDetalheItem           : TListaDetalheItem;
+    oCadastroDetalheItem        : TCadastroDetalheItemDto;
+    oCadastroCorDto             : TCadastroCorDto;
+    oCadastroCorModel           : TCadastroCorModel;
+    oCadastroModeloDto          : TCadastroModeloDto;
+    oCadastroModeloModel        : TCadastroModeloModel;
+    idDetalheItens              : integer;
+    idItens                     : integer;
+    CampoAtivo                  : TWinControl;
 
     procedure RetornoBairro(aIdBairro : Integer);
     procedure RetornoMunicipio(aIdMunicipio : Integer);
@@ -72,8 +71,8 @@ type
     procedure Aguardando; override;
     procedure Inicial; override;
     procedure ChlAdd(bEscolha : boolean);
-    procedure ExibirChlCampos(Sender: TObject);
-    procedure ExibirChl(Sender: TObject);
+    procedure ExibirChlCampos(Sender: TObject; AColuna : TListColumn);
+    procedure ExibirChl(Sender: TObject; AColuna : TListColumn);
     procedure Verificar (ActiveControl : TWinControl); override;
     procedure AlterarEndereco(Sender : Tobject);
     procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl); override;
@@ -224,14 +223,15 @@ begin
   if(bEscolha)then
   begin
     bAux := False;
-    for iIndice := 0 to oForm.chlItens.Count -1 do
-    begin
-      if(integer(oForm.chlItens.Items.Objects[iIndice]) =  oCadastroItensDto.idmodelo)then
-        bAux := True;
-      if(oForm.chlItens.Checked[iIndice])then
-        oForm.chlItens.Checked[iIndice] := False;
-      oForm.chlDetalheItem.Clear;
-    end;
+
+//    oForm.chlItens.Selected
+//
+//      if(integer(oForm.chlItens.Items.Objects[iIndice]) =  oCadastroItensDto.idmodelo)then
+//        bAux := True;
+//      if(oForm.chlItens.Checked[iIndice])then
+//        oForm.chlItens.Checked[iIndice] := False;
+//      oForm.chlDetalheItem.Clear;
+
     if(not(bAux))then
     begin
       oForm.chlItens.AddItem(oCadastroModeloDto.Descricao, TObject(oCadastroItensDto.idmodelo));
@@ -291,6 +291,9 @@ begin
   if (not(assigned(oCadastroBairroDto))) then
     oCadastroBairroDto := TCadastroBairroDto.Create;
 
+  if (not(assigned(oCadastroClienteRegra))) then
+    oCadastroClienteRegra := TCadastroClienteRegra.Create;
+
   if (not(assigned(oCadastroPedidoModel))) then
     oCadastroPedidoModel := TCadastroPedidoModel.Create;
 
@@ -328,8 +331,8 @@ begin
     oForm.edtCodigo.SetFocus;
     oForm.pgpedido.OnChanging := TAllowChange;
     bPermite := False;
-    chlItens.OnClickCheck := ExibirChl;
-    chlDetalheItem.OnClickCheck := ExibirChlCampos
+    chlItens.OnColumnClick := ExibirChl;
+    chlDetalheItem.OnColumnClick:= ExibirChlCampos;
   end;
   inherited;
 end;
@@ -350,6 +353,9 @@ destructor TCadastroPedidoController.Destroy;
 
   if (assigned(oCadastroTamanhoDto)) then
     FreeAndNil(oCadastroTamanhoDto);
+
+  if (assigned(oCadastroClienteRegra)) then
+    FreeAndNil(oCadastroClienteRegra);
 
   if (assigned(oCadastroMunicipioDto)) then
     FreeAndNil(oCadastroMunicipioDto);
@@ -415,17 +421,14 @@ begin
   end;
 end;
 
-procedure TCadastroPedidoController.ExibirChl(Sender: TObject);
+procedure TCadastroPedidoController.ExibirChl(Sender: TObject; AColuna : TListColumn);
 var
   iIndice, iIdItem : integer;
   oLoopControlDetalhe : TCadastroDetalheItemDto;
   oLoopControlItens   : TCadastroItensDto;
 begin
-  iIdItem := 0;
-  for iIndice := 0 to oForm.chlItens.Items.Count  - 1 do
-    if(oForm.chlItens.Checked[iIndice])then
-      if(oForm.chlItens.Selected[iIndice])then
-        iIdItem := integer(oForm.chlItens.Items.Objects[iIndice]);
+  if oForm.chlItens.Selected <> nil then
+    oCadastroModeloDto.IdModelo :=  integer(oForm.chlItens.Items[oForm.chlItens.Selected.Index].Data);
 
   oForm.chlDetalheItem.Clear;
   if(iIdItem = 0)then
@@ -433,7 +436,7 @@ begin
 
   for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
   begin
-    if(oLoopControlItens.IdItensPedido = iIdItem)then
+    if(oLoopControlItens.IdItensPedido = oCadastroModeloDto.IdModelo)then
     begin
       if(assigned(oLoopControlItens.DetalheItem))then
       begin
@@ -445,7 +448,7 @@ begin
             oCadastroPedidoRegra.SelectTamanhoPorId(oCadastroTamanhoModel, oCadastroTamanhoDto);
             oCadastroCorDto.IdCor := oLoopControlDetalhe.idcor;
             oCadastroPedidoRegra.SelectCorPorId(oCadastroCorModel, oCadastroCorDto);
-            oForm.chlDetalheItem.AddItem(oCadastroTamanhoDto.Descricao + ' - ' + oCadastroCorDto.Descricao, TObject(oLoopControlDetalhe.IdDetalhe));
+            oForm.chlDetalheItem.AddItem(oCadastroTamanhoDto.Descricao + ' - ' + oCadastroCorDto.Descricao, TObject(oLoopControlDetalhe.idtamanho));
           end;
         end;
       end;
@@ -453,15 +456,14 @@ begin
   end;
 end;
 
-procedure TCadastroPedidoController.ExibirChlCampos(Sender: TObject);
+procedure TCadastroPedidoController.ExibirChlCampos(Sender: TObject; AColuna : TListColumn);
 var
   oLoopControlItens   : TCadastroItensDto;
   oLoopControlDetalhe : TCadastroDetalheItemDto;
   iIndice, iIdItem    : integer;
 begin
-  for iIndice := 0 to oForm.chlDetalheItem.Count -1 do
-    if(oForm.chlDetalheItem.Selected[iIndice])then
-      iIdItem := integer(oForm.chlItens.Items.Objects[iIndice]);
+  if oForm.chlItens.Selected <> nil then
+    oCadastroModeloDto.IdModelo :=  integer(oForm.chlItens.Items[oForm.chlItens.Selected.Index].Data);
 
   for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values  do
     if(oLoopControlItens.IdItensPedido = iIdItem)then
@@ -529,7 +531,7 @@ begin
       sWhere := IntToStr(oCadastroMunicipioDto.id);
     if (not(assigned(oConsultaBairroController))) then
       oConsultaBairroController := TConsultaBairroController.Create;
-    oConsultaBairroController.CriarForm(Aowner, RetornoBairro, oForm.edtCor.Text, sWhere);
+    oConsultaBairroController.CriarForm(Aowner, RetornoBairro, oForm.edtBairro.Text, sWhere);
   end
   else
   if(ActiveControl =  oForm.edtCor)then
@@ -602,6 +604,17 @@ begin
         edtNmClient.Text :=   IntToStr(oCadastroClienteDto.IdCliente);
         edtCpfCnpj.Text    :=  oCadastroClienteDto.cpf_cnpj;
         edtCpfCnpj.SetFocus;
+
+        oCadastroEnderecoDto.IdEndereco := oCadastroClienteDto.idendereco;
+        if(oCadastroPedidoRegra.SelectEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
+          oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then
+        begin
+          oForm.edtRua.Text := oCadastroEnderecoDto.Endereco;
+          oForm.edtNmr.Text := oCadastroEnderecoDto.Numero;
+          oForm.edtBairro.Text := oCadastroBairroDto.Descricao;
+          oForm.edtCidade.Text := oCadastroMunicipioDto.Municipio;
+          oForm.chkAltEnd.Checked;
+        end;
       end;
     end;
   end;
@@ -827,7 +840,6 @@ end;
 
 
 
-
 procedure TCadastroPedidoController.TAllowChange(Sender: TObject;var AllowChange : boolean);
 begin
   AllowChange := bPermite;
@@ -835,7 +847,39 @@ end;
 
 procedure TCadastroPedidoController.Verificar(ActiveControl: TWinControl);
 begin
+  if(ActiveControl = oForm.edtCpfCnpj)then
+  begin
+    if(oForm.edtCpfCnpj.Text <> '')then
+    begin
+      oCadastroClienteDto.cpf_cnpj := oForm.edtCpfCnpj.Text;
+      if (Length(oCadastroClienteDto.cpf_cnpj) <= 11) then
+      begin
+        if(not(oCadastroClienteRegra.ValidaCPF(oCadastroClienteDto.cpf_cnpj)))then
+          raise Exception.Create('Insira um CPF válido');
+      end
+      else
+      begin
+        if(not(oCadastroClienteRegra.ValidarCNPJ(oCadastroClienteDto.cpf_cnpj)))then
+          raise Exception.Create('Insira um CNPJ válido');
+      end;
 
+      if (oCadastroPedidoRegra.SelectClientePorCpf(oCadastroClienteModel, oCadastroClienteDto)) then
+      begin
+        oForm.edtNomeClienteEx.Text := oCadastroClienteDto.Nome;
+        oCadastroEnderecoDto.IdEndereco := oCadastroClienteDto.idendereco;
+        if(oCadastroPedidoRegra.SelectEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
+          oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then
+        begin
+          oForm.edtRua.Text := oCadastroEnderecoDto.Endereco;
+          oForm.edtNmr.Text := oCadastroEnderecoDto.Numero;
+          oForm.edtBairro.Text := oCadastroBairroDto.Descricao;
+          oForm.edtCidade.Text := oCadastroMunicipioDto.Municipio;
+          oForm.chkAltEnd.Checked;
+        end;
+      end;
+    end;
+  end
+  else
   if(ActiveControl = oForm.edtCdItensPedido)then
   begin
     if(oForm.edtCor.Text = '') and (oForm.edtTamanho.Text <> '')then

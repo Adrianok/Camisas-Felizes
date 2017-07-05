@@ -1,14 +1,14 @@
 inherited CadastroClienteForm: TCadastroClienteForm
   Caption = 'Cadastro de Cliente'
-  ClientHeight = 517
-  ClientWidth = 591
-  ExplicitWidth = 597
-  ExplicitHeight = 546
+  ClientHeight = 531
+  ClientWidth = 844
+  ExplicitWidth = 850
+  ExplicitHeight = 560
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   object Label3: TLabel [0]
-    Left = 8
-    Top = 401
+    Left = 86
+    Top = 400
     Width = 95
     Height = 21
     Caption = 'Observa'#231#245'es'
@@ -20,16 +20,16 @@ inherited CadastroClienteForm: TCadastroClienteForm
     ParentFont = False
   end
   inherited Panel1: TPanel
-    Width = 591
+    Width = 844
     ExplicitWidth = 591
     inherited Panel3: TPanel
-      Left = 390
-      ExplicitLeft = 390
+      Left = 758
+      ExplicitLeft = 505
     end
   end
   object EdtCpfCnpj: TLabeledEdit
-    Left = 108
-    Top = 235
+    Left = 310
+    Top = 155
     Width = 459
     Height = 26
     CharCase = ecUpperCase
@@ -53,8 +53,8 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'nome Cliente'
   end
   object EdtNome: TLabeledEdit
-    Left = 108
-    Top = 179
+    Left = 310
+    Top = 107
     Width = 459
     Height = 26
     CharCase = ecUpperCase
@@ -73,15 +73,14 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Name = 'Tahoma'
     Font.Style = []
     LabelPosition = lpLeft
-    MaxLength = 2
     ParentFont = False
     TabOrder = 2
     TextHint = 'Nome'
   end
   object EdtCodigo: TLabeledEdit
     Tag = 999
-    Left = 108
-    Top = 131
+    Left = 85
+    Top = 107
     Width = 121
     Height = 26
     EditLabel.Width = 48
@@ -108,8 +107,8 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'C'#211'DIGO'
   end
   object EdtTelefone: TLabeledEdit
-    Left = 108
-    Top = 291
+    Left = 310
+    Top = 197
     Width = 178
     Height = 26
     CharCase = ecUpperCase
@@ -133,8 +132,8 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'Telefone Fixo'
   end
   object EdtCelular: TLabeledEdit
-    Left = 389
-    Top = 291
+    Left = 591
+    Top = 197
     Width = 178
     Height = 26
     CharCase = ecUpperCase
@@ -159,8 +158,8 @@ inherited CadastroClienteForm: TCadastroClienteForm
   end
   object edtObservacoes: TMemo
     Tag = 888
-    Left = 109
-    Top = 400
+    Left = 85
+    Top = 426
     Width = 459
     Height = 97
     Hint = 'Observa'#231#227'o'
@@ -173,10 +172,10 @@ inherited CadastroClienteForm: TCadastroClienteForm
     ParentFont = False
     TabOrder = 6
   end
-  object EdtEndereco: TLabeledEdit
-    Left = 108
-    Top = 347
-    Width = 459
+  object EdtRua: TLabeledEdit
+    Left = 310
+    Top = 352
+    Width = 275
     Height = 26
     CharCase = ecUpperCase
     EditLabel.Width = 65
@@ -196,6 +195,106 @@ inherited CadastroClienteForm: TCadastroClienteForm
     LabelPosition = lpLeft
     ParentFont = False
     TabOrder = 7
+    TextHint = 'Selecione o Endere'#231'o'
+  end
+  object edtNum: TLabeledEdit
+    Left = 85
+    Top = 352
+    Width = 102
+    Height = 26
+    CharCase = ecUpperCase
+    EditLabel.Width = 57
+    EditLabel.Height = 18
+    EditLabel.Caption = 'N'#250'mero:'
+    EditLabel.Font.Charset = DEFAULT_CHARSET
+    EditLabel.Font.Color = clWindowText
+    EditLabel.Font.Height = -15
+    EditLabel.Font.Name = 'Tahoma'
+    EditLabel.Font.Style = []
+    EditLabel.ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    LabelPosition = lpLeft
+    ParentFont = False
+    TabOrder = 8
+    TextHint = 'Selecione o Endere'#231'o'
+  end
+  object edtBairro: TLabeledEdit
+    Left = 310
+    Top = 314
+    Width = 275
+    Height = 26
+    CharCase = ecUpperCase
+    EditLabel.Width = 42
+    EditLabel.Height = 18
+    EditLabel.Caption = 'Bairro:'
+    EditLabel.Font.Charset = DEFAULT_CHARSET
+    EditLabel.Font.Color = clWindowText
+    EditLabel.Font.Height = -15
+    EditLabel.Font.Name = 'Tahoma'
+    EditLabel.Font.Style = []
+    EditLabel.ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    LabelPosition = lpLeft
+    ParentFont = False
+    TabOrder = 9
+    TextHint = 'Selecione o Endere'#231'o'
+  end
+  object edtCidade: TLabeledEdit
+    Left = 310
+    Top = 276
+    Width = 275
+    Height = 26
+    CharCase = ecUpperCase
+    EditLabel.Width = 48
+    EditLabel.Height = 18
+    EditLabel.Caption = 'Cidade:'
+    EditLabel.Font.Charset = DEFAULT_CHARSET
+    EditLabel.Font.Color = clWindowText
+    EditLabel.Font.Height = -15
+    EditLabel.Font.Name = 'Tahoma'
+    EditLabel.Font.Style = []
+    EditLabel.ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    LabelPosition = lpLeft
+    ParentFont = False
+    TabOrder = 10
+    TextHint = 'Selecione o Endere'#231'o'
+  end
+  object edtEstado: TLabeledEdit
+    Left = 310
+    Top = 237
+    Width = 275
+    Height = 26
+    CharCase = ecUpperCase
+    EditLabel.Width = 49
+    EditLabel.Height = 18
+    EditLabel.Caption = 'Estado:'
+    EditLabel.Font.Charset = DEFAULT_CHARSET
+    EditLabel.Font.Color = clWindowText
+    EditLabel.Font.Height = -15
+    EditLabel.Font.Name = 'Tahoma'
+    EditLabel.Font.Style = []
+    EditLabel.ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    LabelPosition = lpLeft
+    ParentFont = False
+    TabOrder = 11
     TextHint = 'Selecione o Endere'#231'o'
   end
 end

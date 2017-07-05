@@ -27,8 +27,6 @@ type
     destructor Destroy; override;
   end;
 
-  var
-    oCadastroMunicipioModel: TCadastroMunicipioModel;
 
 implementation
 

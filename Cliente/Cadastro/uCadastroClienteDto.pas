@@ -32,9 +32,6 @@ type
     property idendereco : integer read Fidendereco write Setidendereco;
   end;
 
-var
-  oCadastroClienteDto : TCadastroClienteDto;
-
 implementation
 
 { TDtoCliente }

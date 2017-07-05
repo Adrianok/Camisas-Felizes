@@ -6,7 +6,6 @@ uses
   System.SysUtils;
 
 type
-
   TCadastroUfDto = class
   private
     Fuf: string;

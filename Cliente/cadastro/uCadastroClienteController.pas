@@ -9,11 +9,34 @@ uses
   uCadastroClienteDto, uClasseInterfaceViewBase,
   uCadastroClienteRegra, uCadastroClienteModel,
   uCadastroClienteForm, uInterfaceViewBase,
-  uConsultaClienteForm, uConsultaClienteController;
+  uConsultaClienteForm, uConsultaClienteController,
+  uCadastroEnderecoModel, uCadastroEnderecoDto,
+  uCadastroBairroModel, uCadastroBairroDto,
+  uCadastroMunicipioModel, uCadastroMunicipioDto,
+  uCadastroUfModel, uCadastroUfDto,
+  uConsultaMunicipioController, uConsultaBairroController,
+  uConsultaUfController;
 
 type
   TCadastroClienteController = class(TClassInterfaceViewBase)
   private
+    oCadastroClienteModel: TCadastroClienteModel;
+    oCadastroClienteDto : TCadastroClienteDto;
+    oCadastroClienteRegra: TCadastroClienteRegra;
+    oCadastroUfDto : TCadastroUfDto;
+    oCadastroUfModel : TCadastroUfModel;
+    oCadastroMunicipioDto : TCadastroMunicipioDto;
+    oCadastroBairroDto : TCadastroBairroDto;
+    oCadastroEnderecoDto : TCadastroEnderecoDto;
+    oCadastroBairroModel : TCadastroBairroModel;
+    oCadastroMunicipioModel : TCadastroMunicipioModel;
+    oCadastroEnderecoModel : TCadastroEnderecoModel;
+    oForm : TCadastroClienteForm;
+
+
+    procedure RetornoUf(aIdUf : Integer);
+    procedure RetornoBairro(aIdBairro : Integer);
+    procedure RetornoMunicipio(aIdMunicipio : Integer);
     procedure RetornoCliente(aIdCliente: integer);
   public
     procedure Inicial; override;
@@ -41,6 +64,24 @@ implementation
 
 constructor TCadastroClienteController.Create;
 begin
+  if (not(assigned(oCadastroBairroModel))) then
+    oCadastroBairroModel := TCadastroBairroModel.Create;
+
+  if (not(assigned(oCadastroMunicipioDto))) then
+    oCadastroMunicipioDto := TCadastroMunicipioDto.Create;
+
+  if (not(assigned(oCadastroMunicipioModel))) then
+    oCadastroMunicipioModel := TCadastroMunicipioModel.Create;
+
+  if (not(assigned(oCadastroEnderecoDto))) then
+    oCadastroEnderecoDto := TCadastroEnderecoDto.Create;
+
+  if (not(assigned(oCadastroEnderecoModel))) then
+    oCadastroEnderecoModel := TCadastroEnderecoModel.Create;
+
+  if (not(assigned(oCadastroBairroDto))) then
+    oCadastroBairroDto := TCadastroBairroDto.Create;
+
   if (not(assigned(oCadastroClienteModel))) then
     oCadastroClienteModel := TCadastroClienteModel.Create;
 
@@ -49,6 +90,12 @@ begin
 
   if (not(assigned(oCadastroClienteRegra))) then
     oCadastroClienteRegra := TCadastroClienteRegra.Create;
+
+  if (not(assigned(oCadastroUfDto))) then
+    oCadastroUfDto := TCadastroUfDto.Create;
+
+  if (not(assigned(oCadastroUfModel))) then
+    oCadastroUfModel := TCadastroUfModel.Create;
 end;
 
 procedure TCadastroClienteController.CriarForm(Aowner: TComponent);
@@ -57,9 +104,8 @@ begin
     oFormulario := TCadastroClienteForm.Create(Aowner);
   oFormulario.oController := oCadastroClienteController;
   oFormulario.Show;
-
-  (oFormulario as TCadastroClienteForm).EdtCpfCnpj.OnExit := VerificaCPF_CNPJ;
-
+  oForm :=(oFormulario as TCadastroClienteForm);
+  oForm.EdtCpfCnpj.OnExit := VerificaCPF_CNPJ;
   inherited;
 end;
 
@@ -72,6 +118,30 @@ end;
 
 destructor TCadastroClienteController.Destroy;
 begin
+  if (assigned(oCadastroMunicipioDto)) then
+    FreeAndNil(oCadastroMunicipioDto);
+
+  if (assigned(oCadastroMunicipioModel)) then
+    FreeAndNil(oCadastroMunicipioModel);
+
+  if (assigned(oCadastroEnderecoDto)) then
+    FreeAndNil(oCadastroEnderecoDto);
+
+  if (assigned(oCadastroEnderecoModel)) then
+    FreeAndNil(oCadastroEnderecoModel);
+
+  if (assigned(oCadastroUfDto)) then
+    FreeAndNil(oCadastroUfDto);
+
+  if (assigned(oCadastroUfModel)) then
+    FreeAndNil(oCadastroUfModel);
+
+  if (assigned(oCadastroBairroModel)) then
+    FreeAndNil(oCadastroBairroModel);
+
+  if (assigned(oCadastroBairroDto)) then
+    FreeAndNil(oCadastroBairroDto);
+
   if (assigned(oCadastroClienteModel)) then
     FreeAndNil(oCadastroClienteModel);
 
@@ -104,13 +174,51 @@ begin
 end;
 
 procedure TCadastroClienteController.Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);
+var
+  sWhere : string;
 begin
   inherited;
 
-  oCadastroClienteDto.Nome   :=(oFormulario as TCadastroClienteForm).EdtNome.Text;
-  if (not(assigned(oConsultaClienteController))) then
-    oConsultaClienteController := TConsultaClienteController.Create;
-  oConsultaClienteController.CriarForm(Aowner, RetornoCliente, oCadastroClienteDto.nome);
+  if(ActiveControl =  oForm.edtEstado)then
+  begin
+    if (not(assigned(oConsultaUfController))) then
+      oConsultaUfController := TConsultaUfController.Create;
+    oConsultaUfController.CriarForm(Aowner, RetornoUf, oForm.edtCidade.Text);  end
+  else
+  if(ActiveControl =  oForm.edtCidade)then
+  begin
+    if (not(assigned(oConsultaMunicipioController))) then
+      oConsultaMunicipioController := TConsultaMunicipioController.Create;
+    oConsultaMunicipioController.CriarForm(Aowner, RetornoMunicipio, oForm.edtCidade.Text);  end
+  else
+  if(ActiveControl =  oForm.edtBairro)then
+  begin
+    if(oForm.edtCidade.Text <> '')then
+    oCadastroMunicipioDto.Municipio := oForm.edtCidade.Text;
+    if(oCadastroClienteRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
+      sWhere := IntToStr(oCadastroMunicipioDto.id);
+    if (not(assigned(oConsultaBairroController))) then
+      oConsultaBairroController := TConsultaBairroController.Create;
+    oConsultaBairroController.CriarForm(Aowner, RetornoBairro, oForm.edtBairro.Text, sWhere);
+  end
+  else
+  begin
+    oCadastroClienteDto.Nome   :=(oFormulario as TCadastroClienteForm).EdtNome.Text;
+    if (not(assigned(oConsultaClienteController))) then
+      oConsultaClienteController := TConsultaClienteController.Create;
+    oConsultaClienteController.CriarForm(Aowner, RetornoCliente, oCadastroClienteDto.nome);
+  end;
+end;
+
+procedure TCadastroClienteController.RetornoBairro(aIdBairro: Integer);
+begin
+  if(aIdBairro <> 0)then
+  begin
+    oCadastroBairroDto.IdBairro := aIdBairro;
+    if(oCadastroClienteRegra.SelectBairroPorId(oCadastroBairroModel, oCadastroBairroDto))then
+      oForm.edtBairro.Text := oCadastroBairroDto.Descricao;
+      oForm.edtRua.SetFocus;
+  end;
 end;
 
 procedure TCadastroClienteController.RetornoCliente(aIdCliente: integer);
@@ -127,10 +235,41 @@ begin
         EdtCpfCnpj.Text := oCadastroClienteDto.cpf_cnpj;
         EdtCelular.Text := oCadastroClienteDto.celular;
         edtObservacoes.Text := oCadastroClienteDto.observacao;
-        EdtEndereco.Text := IntToStr(oCadastroClienteDto.idendereco);
+
+        oCadastroEnderecoDto.IdEndereco := oCadastroClienteDto.idendereco;
+        if(oCadastroClienteRegra.SelectEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
+          oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then
+        begin
+          edtRua.Text := oCadastroEnderecoDto.Endereco;
+          edtNum.Text := oCadastroEnderecoDto.Numero;
+          edtBairro.Text := oCadastroBairroDto.Descricao;
+          edtCidade.Text := oCadastroMunicipioDto.Municipio;
+        end;
       end;
   end
   else;
+end;
+
+procedure TCadastroClienteController.RetornoUf(aIdUf: Integer);
+begin
+  if(aIdUf <> 0)then
+  begin
+  oCadastroUfDto.id := aIdUf;
+    if(oCadastroClienteRegra.SelectUfPorId(oCadastroUfModel, oCadastroUfDto))then
+      oForm.edtEstado.Text := oCadastroUfDto.nome;
+    oForm.edtCidade.SetFocus;
+  end;
+end;
+
+procedure TCadastroClienteController.RetornoMunicipio(aIdMunicipio: Integer);
+begin
+  if(aIdMunicipio<> 0)then
+  begin
+    oCadastroMunicipioDto.id := aIdMunicipio;
+    if(oCadastroClienteRegra.SelectMunicipioPorId(oCadastroMunicipioModel, oCadastroMunicipioDto))then
+      oForm.edtCidade.Text := oCadastroMunicipioDto.Municipio;
+      oForm.edtBairro.SetFocus;
+  end;
 end;
 
 procedure TCadastroClienteController.Salvar;
@@ -138,19 +277,26 @@ begin
   inherited;
   with (oFormulario as TCadastroClienteForm) do
   begin
-    oCadastroClienteDto.IdCliente := StrToInt(EdtCodigo.Text);
+    if(EdtCodigo.Text <> '')then
+      oCadastroClienteDto.IdCliente := StrToInt(EdtCodigo.Text)
+    else
+      oCadastroClienteRegra.Novo(oCadastroClienteModel, oCadastroClienteDto);
+
     oCadastroClienteDto.Nome := EdtNome.Text;
     oCadastroClienteDto.telefone := EdtTelefone.Text;
     oCadastroClienteDto.cpf_cnpj := EdtCpfCnpj.Text;
     oCadastroClienteDto.celular := EdtCelular.Text;
-    oCadastroClienteDto.observacao := edtObservacoes.Text;
-    oCadastroClienteDto.idendereco := StrToInt(EdtEndereco.Text);
+    oCadastroClienteDto.observacao := edtObservacoes.Lines.Text;
   end;
-  if (oCadastroClienteRegra.Salvar(oCadastroClienteModel, oCadastroClienteDto)) then
-    ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Atualizado com sucesso')
-  else
+  if(oCadastroClienteRegra.SalvarEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
+    oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then
   begin
-    ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Inserido com sucesso');
+    if (oCadastroClienteRegra.Salvar(oCadastroClienteModel, oCadastroClienteDto)) then
+      ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Atualizado com sucesso')
+    else
+    begin
+      ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Inserido com sucesso');
+    end;
   end;
 end;
 
@@ -158,7 +304,7 @@ end;
 
 function TCadastroClienteController.ValidaCPF(aCpf: string): boolean;
 begin
-   oCadastroClienteRegra.ValidaCPF(oCadastroClienteDto.cpf_cnpj);
+
 end;
 
 function TCadastroClienteController.ValidarCNPJ(Acnpj: string): Boolean;
@@ -168,17 +314,21 @@ end;
 
 procedure TCadastroClienteController.VerificaCPF_CNPJ(Sender: TObject);
 begin
+
   with (oFormulario as TCadastroClienteForm) do
-   if (Length(EdtCpfCnpj.Text) <= 10) then
-   begin
-     ValidaCPF(EdtCpfCnpj.Text);
-     ShowMessage('verificando CPF')
-   end
-   else
+  begin
+    oCadastroClienteDto.cpf_cnpj :=EdtCpfCnpj.Text ;
+    if (Length(EdtCpfCnpj.Text) <= 11) then
     begin
-     ValidarCNPJ(EdtCpfCnpj.Text);
-     ShowMessage('verificando CNPJ');
+      if(not(oCadastroClienteRegra.ValidaCPF(oCadastroClienteDto.cpf_cnpj)))then
+        raise Exception.Create('Insira um CPF válido');
+    end
+    else
+    begin
+      if(not(oCadastroClienteRegra.ValidarCNPJ(oCadastroClienteDto.cpf_cnpj)))then
+        raise Exception.Create('Insira um CNPJ válido');
     end;
+  end;
 
 end;
 

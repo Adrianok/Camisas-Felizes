@@ -22,7 +22,9 @@ type
 
     procedure InserirItens(const oCadastroPedidoModel: TCadastroPedidoModel;
       const oCadastroItensPedidoModel: TCadastroItensPedidoModel; const oCadastroDetalhesItensModel: TCadastroDetalheItensModel; const oCadastroPedidoDto: TCadastroPedidoDto);
+
     function SelectModeloPorDescricao(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
+
     function SelectModeloPorId(const oCadastroModeloModel: TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
 
     function SelectMunicipioPorDescricao(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
@@ -36,6 +38,7 @@ type
 
     function SelectTamanhoPorDescricao(const oCadastroTamanhoModel: TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
     function SelectTamanhoPorId(const oCadastroTamanhoModel: TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
+    function SelectClientePorCpf(const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto : TCadastroClienteDto): boolean;
 
     function SelectCliente(const oCadastroClienteModel : TCadastroClienteModel; var oCadastroClienteDto : TCadastroClienteDto): boolean;
 
@@ -237,6 +240,13 @@ function TCadastroPedidoRegra.SelectCliente(
   var oCadastroClienteDto: TCadastroClienteDto): boolean;
 begin
   Result := oCadastroClienteModel.SelectPorId(oCadastroClienteDto);
+end;
+
+function TCadastroPedidoRegra.SelectClientePorCpf(
+  const oCadastroClienteModel: TCadastroClienteModel;
+  var oCadastroClienteDto: TCadastroClienteDto): boolean;
+begin
+  Result := oCadastroClienteModel.SelectPorCpf(oCadastroClienteDto);
 end;
 
 function TCadastroPedidoRegra.SelectCorPorDescricao(

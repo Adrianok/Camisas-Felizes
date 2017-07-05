@@ -53,12 +53,12 @@ type
     btnExcluirItem: TBitBtn;
     Label20: TLabel;
     edtPrecoItem: TLabeledEdit;
-    chlDetalheItem: TCheckListBox;
     logo: TImage;
     Label6: TLabel;
     edtQntTot: TLabeledEdit;
     edtQntItm: TLabeledEdit;
-    chlItens: TCheckListBox;
+    chlItens: TListView;
+    chlDetalheItem: TListView;
   private
     { Private declarations }
   public

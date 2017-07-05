@@ -23,6 +23,7 @@ uses
     oCadastroUfDto                : TCadastroUfDto;
     oCadastroUfModel              : TCadastroUfModel;
 
+
     procedure RetornoMunicipio(AID: Integer);
     procedure RetornoEstado(AID: Integer);
   public

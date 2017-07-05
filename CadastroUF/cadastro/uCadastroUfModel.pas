@@ -27,9 +27,6 @@ type
     destructor Destroy; override;
   end;
 
-  var
-    oCadastroUfModel: TCadastroUfModel;
-
 implementation
 
 { TCadastroModeloModel }
@@ -130,6 +127,8 @@ begin
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
+      oCadastroUfDto.uf   := Query.FieldByName('descricao').AsString;
+      oCadastroUfDto.nome := Query.FieldByName('sigla').AsString;
     end
     else
       Result := False;

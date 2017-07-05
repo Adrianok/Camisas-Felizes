@@ -17,7 +17,11 @@ type
     EdtCelular: TLabeledEdit;
     edtObservacoes: TMemo;
     Label3: TLabel;
-    EdtEndereco: TLabeledEdit;
+    EdtRua: TLabeledEdit;
+    edtNum: TLabeledEdit;
+    edtBairro: TLabeledEdit;
+    edtCidade: TLabeledEdit;
+    edtEstado: TLabeledEdit;
 
   private
     { Private declarations }

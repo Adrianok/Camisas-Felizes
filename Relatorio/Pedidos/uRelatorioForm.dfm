@@ -21,7 +21,6 @@ object FrmRelatorio: TFrmRelatorio
     Height = 73
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 793
     object btnFecharRel: TBitBtn
       AlignWithMargins = True
       Left = 722

@@ -8,13 +8,13 @@ inherited CadastroBairroForm: TCadastroBairroForm
   ExplicitWidth = 507
   ExplicitHeight = 276
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   inherited Panel1: TPanel
     Width = 501
     ExplicitWidth = 501
     inherited Panel3: TPanel
-      Left = 300
-      ExplicitLeft = 300
+      Left = 415
+      ExplicitLeft = 415
     end
   end
   object edtCodigo: TLabeledEdit
@@ -49,7 +49,7 @@ inherited CadastroBairroForm: TCadastroBairroForm
     Width = 355
     Height = 26
     Hint = 'Bairro'
-    EditLabel.Width = 32
+    EditLabel.Width = 46
     EditLabel.Height = 23
     EditLabel.Caption = 'Bairro:'
     EditLabel.Font.Charset = DEFAULT_CHARSET

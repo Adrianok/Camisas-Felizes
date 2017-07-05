@@ -2,7 +2,6 @@ inherited CadastroClienteForm: TCadastroClienteForm
   Caption = 'Cadastro de Cliente'
   ClientHeight = 531
   ClientWidth = 844
-  ExplicitTop = -121
   ExplicitWidth = 850
   ExplicitHeight = 560
   PixelsPerInch = 96
@@ -29,13 +28,10 @@ inherited CadastroClienteForm: TCadastroClienteForm
         TabOrder = 3
       end
       inherited btnPesquisar: TBitBtn
-        TabOrder = 5
+        TabOrder = 4
       end
       inherited btnNovo: TBitBtn
         TabOrder = 2
-      end
-      inherited btnAlterar: TBitBtn
-        TabOrder = 4
       end
       inherited btnCancelar: TBitBtn
         TabOrder = 0

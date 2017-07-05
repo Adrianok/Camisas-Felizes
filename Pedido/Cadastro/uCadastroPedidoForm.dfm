@@ -2,7 +2,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 957
-  ExplicitTop = -92
   ExplicitWidth = 963
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -16,14 +15,11 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         TabOrder = 2
       end
       inherited btnPesquisar: TBitBtn
-        TabOrder = 3
+        TabOrder = 1
       end
       inherited btnNovo: TBitBtn
         Left = 3
         ExplicitLeft = 3
-      end
-      inherited btnAlterar: TBitBtn
-        TabOrder = 1
       end
     end
     inherited Panel3: TPanel
@@ -175,6 +171,10 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     TabOrder = 1
     object pgCabecalho: TTabSheet
       Caption = 'Cabe'#231'alho'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object logo: TImage
         Left = 779
         Top = 340

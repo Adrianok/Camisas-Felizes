@@ -30,7 +30,6 @@ type
     procedure SetProdutoInicial(const Value: integer);
 
   public
-    constructor Create;
     property ClienteInicial : Integer read FClienteInicial write SetClienteInicial;
     property ClienteFinal : Integer read FClienteFinal write SetClienteFinal;
     property DataInicial : TDate read FDataInicial write SetDataInicial;
@@ -47,11 +46,6 @@ type
 implementation
 
 { TRelatorioDto }
-
-constructor TRelatorioDto.Create;
-begin
-
-end;
 
 procedure TRelatorioDto.SetClienteFinal(const Value: Integer);
 begin

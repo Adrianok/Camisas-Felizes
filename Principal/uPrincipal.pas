@@ -37,7 +37,6 @@ type
 
 var
   frmPrincipal: TfrmPrincipal;
-  oRelatorioController: TRelatorioController;
 
 implementation
 

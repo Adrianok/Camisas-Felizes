@@ -49,9 +49,9 @@ type
     EdtProdutoFinal: TEdit;
     Label10: TLabel;
     Label11: TLabel;
-    FDMemTable1municipio: TIntegerField;
     FDMemTable1valoritem: TCurrencyField;
-    FDMemTable1modelo: TAggregateField;
+    FDMemTable1municipio: TStringField;
+    FDMemTable1modelo: TStringField;
   private
     { Private declarations }
   public

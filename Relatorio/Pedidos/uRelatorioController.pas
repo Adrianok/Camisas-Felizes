@@ -6,9 +6,7 @@ uses
   Vcl.Controls, Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, System.classes, System.SysUtils,
   uRelatorioModel, uRelatorioForm, uRelatorioDto, uBase,
   FireDac.Comp.Client, Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows,
-
-  System.Variants, Vcl.Graphics,
-    FireDAC.UI.Intf, FireDAC.VCLUI.Wait,
+  System.Variants, Vcl.Graphics, FireDAC.UI.Intf, FireDAC.VCLUI.Wait,
   FireDAC.Phys.MySQLDef, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Stan.Param,
@@ -26,14 +24,17 @@ type
 
   public
    procedure CriarForm(Aowner: TComponent);
-   procedure PreencherGrid(Sender: TObject);
-   procedure Fechar(Sender: TObject);
+   procedure PreencherGrid(Sender: TObject); virtual;
+   procedure Fechar(Sender: TObject); virtual;
    procedure AlimentarDto;
    procedure AbrirRelatorio(Sender: TObject);
 
    constructor Create;
    destructor Destroy; override;
   end;
+
+var
+  oRelatorioController: TRelatorioController;
 
 implementation
 
@@ -43,7 +44,6 @@ procedure TRelatorioController.AbrirRelatorio;
 begin
   oForm.FDMemTable1.Open;
   oForm.ReportSintetico.ShowReport;
-
 end;
 
 procedure TRelatorioController.AlimentarDto;
@@ -97,18 +97,23 @@ end;
 
 procedure TRelatorioController.Fechar;
 begin
-if assigned(oForm) then
+  oForm.FDMemTable1.Close;
+
+  if assigned(oForm) then
     FreeAndNil(oForm);
+  if assigned(oRelatorioController) then
+    FreeAndNil(oRelatorioController);
 end;
 
 procedure TRelatorioController.PreencherGrid(Sender: TObject);
  begin
-  AlimentarDto;
 
-  if(oRelatorioModel.SelectAll(oForm.FDMemTable1, oRelatorioDto))then
-   oForm.FDMemTable1.Open
-  else
-    ShowMessage('Não foram encontrados registros');
+   AlimentarDto;
+
+   if(oRelatorioModel.SelectAll(oForm.FDMemTable1, oRelatorioDto))then
+     oForm.FDMemTable1.Open
+   else
+     ShowMessage('Não foram encontrados registros');
  end;
 
 

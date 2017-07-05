@@ -4,7 +4,7 @@ object FrmRelatorio: TFrmRelatorio
   BorderIcons = []
   Caption = 'Relat'#243'rio'
   ClientHeight = 480
-  ClientWidth = 793
+  ClientWidth = 785
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,10 +17,11 @@ object FrmRelatorio: TFrmRelatorio
   object Panelrel: TPanel
     Left = 0
     Top = 0
-    Width = 793
+    Width = 785
     Height = 73
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 793
     object btnFecharRel: TBitBtn
       AlignWithMargins = True
       Left = 722
@@ -202,7 +203,7 @@ object FrmRelatorio: TFrmRelatorio
   object DBGridRelatorio: TDBGrid
     Left = 233
     Top = 73
-    Width = 560
+    Width = 552
     Height = 407
     Align = alClient
     BorderStyle = bsNone
@@ -226,14 +227,14 @@ object FrmRelatorio: TFrmRelatorio
         Expanded = False
         FieldName = 'nome'
         Title.Caption = 'Nome'
-        Width = 226
+        Width = 160
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'data'
         Title.Caption = 'Data'
-        Width = 80
+        Width = 70
         Visible = True
       end
       item
@@ -241,6 +242,13 @@ object FrmRelatorio: TFrmRelatorio
         FieldName = 'idpedido'
         Title.Caption = 'Pedido'
         Width = 68
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'modelo'
+        Title.Caption = 'Produto'
+        Width = 70
         Visible = True
       end
       item
@@ -515,11 +523,21 @@ object FrmRelatorio: TFrmRelatorio
       item
         Name = 'nome'
         DataType = ftString
-        Size = 20
+        Size = 255
       end
       item
         Name = 'idcliente'
         DataType = ftInteger
+      end
+      item
+        Name = 'municipio'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'modelo'
+        DataType = ftString
+        Size = 100
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -543,23 +561,23 @@ object FrmRelatorio: TFrmRelatorio
     end
     object FDMemTable1nome: TStringField
       FieldName = 'nome'
+      Size = 255
     end
     object FDMemTable1idcliente: TIntegerField
       FieldName = 'idcliente'
-    end
-    object FDMemTable1municipio: TIntegerField
-      FieldKind = fkCalculated
-      FieldName = 'municipio'
-      Calculated = True
     end
     object FDMemTable1valoritem: TCurrencyField
       FieldKind = fkCalculated
       FieldName = 'valoritem'
       Calculated = True
     end
-    object FDMemTable1modelo: TAggregateField
+    object FDMemTable1municipio: TStringField
+      FieldName = 'municipio'
+      Size = 100
+    end
+    object FDMemTable1modelo: TStringField
       FieldName = 'modelo'
-      DisplayName = ''
+      Size = 100
     end
   end
   object ReportSintetico: TfrxReport
@@ -571,7 +589,7 @@ object FrmRelatorio: TFrmRelatorio
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42918.994482592600000000
-    ReportOptions.LastChange = 42921.025792361100000000
+    ReportOptions.LastChange = 42921.781174780100000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -618,7 +636,7 @@ object FrmRelatorio: TFrmRelatorio
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Top = 34.015770000000000000
+          Top = 34.015770000000010000
           Width = 718.110700000000000000
           Color = clBlack
           Frame.Typ = [ftTop]
@@ -3762,31 +3780,31 @@ object FrmRelatorio: TFrmRelatorio
             'Nome')
         end
         object Memo6: TfrxMemoView
-          Left = 230.551330000000000000
+          Left = 226.771800000000000000
           Top = 41.574830000000000000
-          Width = 75.590600000000000000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           Memo.UTF8W = (
             'Data Pedido')
         end
         object Memo7: TfrxMemoView
-          Left = 309.921460000000000000
+          Left = 340.157700000000000000
           Top = 41.574830000000000000
-          Width = 64.252010000000000000
+          Width = 90.708720000000000000
           Height = 18.897650000000000000
           Memo.UTF8W = (
             'Pedido')
         end
         object Memo8: TfrxMemoView
-          Left = 377.953000000000000000
+          Left = 442.205010000000000000
           Top = 41.574830000000000000
-          Width = 113.385900000000000000
+          Width = 151.181200000000000000
           Height = 18.897650000000000000
           Memo.UTF8W = (
             'Produto')
         end
         object Memo9: TfrxMemoView
-          Left = 495.118430000000000000
+          Left = 608.504330000000000000
           Top = 41.574830000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
@@ -3797,7 +3815,7 @@ object FrmRelatorio: TFrmRelatorio
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 26.456710000000000000
-        Top = 351.496290000000000000
+        Top = 340.157700000000000000
         Width = 718.110700000000000000
         object Line2: TfrxLineView
           Width = 718.110700000000000000
@@ -3862,7 +3880,7 @@ object FrmRelatorio: TFrmRelatorio
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 45.354360000000000000
+        Height = 22.677180000000000000
         Top = 200.315090000000000000
         Width = 718.110700000000000000
         DataSet = frxDBDataset1
@@ -3870,7 +3888,8 @@ object FrmRelatorio: TFrmRelatorio
         RowCount = 0
         object frxDBDataset1data: TfrxMemoView
           Left = 226.771800000000000000
-          Width = 79.370130000000000000
+          Top = 3.779529999999994000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           DataField = 'data'
           DataSet = frxDBDataset1
@@ -3879,8 +3898,9 @@ object FrmRelatorio: TFrmRelatorio
             '[frxDBDataset1."data"]')
         end
         object frxDBDataset1idpedido: TfrxMemoView
-          Left = 309.921460000000000000
-          Width = 64.252010000000000000
+          Left = 340.157700000000000000
+          Top = 3.779529999999994000
+          Width = 90.708720000000000000
           Height = 18.897650000000000000
           DataField = 'idpedido'
           DataSet = frxDBDataset1
@@ -3889,8 +3909,9 @@ object FrmRelatorio: TFrmRelatorio
             '[frxDBDataset1."idpedido"]')
         end
         object frxDBDataset1modelo: TfrxMemoView
-          Left = 377.953000000000000000
-          Width = 113.385900000000000000
+          Left = 434.645950000000000000
+          Top = 3.779529999999994000
+          Width = 158.740260000000000000
           Height = 18.897650000000000000
           DataField = 'modelo'
           DataSet = frxDBDataset1
@@ -3899,7 +3920,8 @@ object FrmRelatorio: TFrmRelatorio
             '[frxDBDataset1."modelo"]')
         end
         object frxDBDataset1valortotal: TfrxMemoView
-          Left = 495.118430000000000000
+          Left = 608.504330000000000000
+          Top = 3.779529999999994000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
           DataField = 'valortotal'
@@ -3918,50 +3940,34 @@ object FrmRelatorio: TFrmRelatorio
           Memo.UTF8W = (
             '[frxDBDataset1."nome"]')
         end
-        object Memo12: TfrxMemoView
-          Left = 619.842920000000000000
-          Top = 22.677179999999990000
-          Width = 98.267780000000000000
-          Height = 18.897650000000000000
-          DataField = 'valortotal'
-          DataSet = frxDBDataset1
-          DataSetName = 'frxDBDataset1'
-          Memo.UTF8W = (
-            '[frxDBDataset1."valortotal"]')
-        end
-        object Memo13: TfrxMemoView
-          Left = 532.913730000000000000
-          Top = 22.677179999999990000
-          Width = 83.149660000000000000
-          Height = 18.897650000000000000
-          Memo.UTF8W = (
-            'Total Pedido:')
-        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 245.669450000000000000
+        Width = 718.110700000000000000
         object Line4: TfrxLineView
-          Top = 45.354360000000010000
+          Left = -3.779530000000000000
+          Top = 22.677179999999990000
           Width = 718.110700000000000000
           Color = clBlack
           Frame.Typ = [ftTop]
         end
-      end
-      object GroupFooter1: TfrxGroupFooter
-        FillType = ftBrush
-        Height = 22.677180000000000000
-        Top = 268.346630000000000000
-        Width = 718.110700000000000000
         object Memo10: TfrxMemoView
-          Left = 612.283860000000000000
-          Width = 98.267780000000000000
+          Left = 608.504330000000000000
+          Width = 105.826840000000000000
           Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
           Memo.UTF8W = (
             '[SUM(<frxDBDataset1."valortotal">,MasterData1)]')
         end
         object Memo11: TfrxMemoView
-          Left = 525.354670000000000000
-          Width = 83.149660000000000000
+          Left = 442.205010000000000000
+          Width = 166.299320000000000000
           Height = 18.897650000000000000
           Memo.UTF8W = (
-            'Total Vendas:')
+            'Total Vendas no Municipio:')
         end
       end
     end

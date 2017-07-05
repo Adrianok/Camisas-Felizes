@@ -46,8 +46,8 @@ begin
   try
     Query.SQL.Clear;
      Query.Open('SELECT p.idpedido AS idpedido , p.data AS data, p.valortotal AS valortotal , '
-             + ' UPPER(c.nome) AS nome, p.idcliente AS idcliente, m.descricao AS municipio, '
-             + ' mi.modelo AS modelo FROM pedido p '
+             + ' UPPER(c.nome) AS nome, p.idcliente AS idcliente, UPPER(m.descricao) AS municipio, '
+             + ' UPPER(mi.modelo) AS modelo FROM pedido p '
              + ' INNER JOIN cliente c ON c.idcliente = p.idcliente '
              + ' INNER JOIN endereco e ON e.idendereco = c.idendereco '
              + ' INNER JOIN bairro b ON b.idbairro = e.idbairro '

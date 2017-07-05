@@ -18,7 +18,7 @@ type
     function SelectCor(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function SelectAllLista(var oListaCores: TListaCores): Boolean;
     function SelectDescricaoDivergente(var oCadastroCorDto: TCadastroCorDto): Boolean;
-    function SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
+    function SelectPorDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Inserir(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Atualizar(var oCadastroCorDto: TCadastroCorDto): Boolean;
     function Deletar(const IdCor : integer): Boolean;
@@ -161,17 +161,15 @@ begin
   end;
 end;
 
-function TCadastroCorModel.SelectDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
+function TCadastroCorModel.SelectPorDescricao(var oCadastroCorDto: TCadastroCorDto): Boolean;
 begin
   try
     Query.SQL.Clear;
     Query.Open('SELECT idcor FROM cor WHERE descricao =''' + oCadastroCorDto.Descricao + ''' ');
     if (not(Query.IsEmpty)) then
     begin
-      if(oCadastroCorDto.IdCor = Query.FieldByName('idcor').AsInteger)then
+        oCadastroCorDto.IdCor := Query.FieldByName('idcor').AsInteger;
         Result := True
-      else
-        Result := False;
     end
     else
       Result := True;

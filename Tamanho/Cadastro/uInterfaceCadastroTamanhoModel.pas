@@ -8,7 +8,7 @@ uses
 type
   IInterfaceCadastroTamanhoModel = interface
 
-    function SelectDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
+    function SelectPorDescricao(var oCadastroTamanhoDto: TCadastroTamanhoDto): Boolean;
     function Inserir(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
     function Atualizar(var oCadastroModeloDto: TCadastroTamanhoDto):boolean;
     function Deletar(const IdTamanho: integer): Boolean;

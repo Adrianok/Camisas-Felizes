@@ -1,3 +1,4 @@
+
 unit uPrincipal;
 
 interface
@@ -10,25 +11,30 @@ uses
   Vcl.Buttons, Vcl.ToolWin, Vcl.ComCtrls, Vcl.Menus,
   uCadastroModeloController, uConexaoSingleTon,
   uCadastroUfController,  uCadastroCorController,
-  uCadastroTamanhoController, uCadastroPedidoController,
-  uRelatorioController;
+  uCadastroTamanhoController,  uCadastroMunicipioController,
+  uCadastroClienteController, uCadastroPedidoController,
+  uCadastroBairroController;
 
 type
   TfrmPrincipal = class(TForm)
     MainMenu1: TMainMenu;
-    C1: TMenuItem;
+    CadastroUf: TMenuItem;
     CadastrodeCor: TMenuItem;
     CadastrodeTamanho: TMenuItem;
     CadastrodePedidos: TMenuItem;
-    Relatorios1: TMenuItem;
-    Pedidos1: TMenuItem;
-    procedure C1Click(Sender: TObject);
+    CadastrodeMunicipio1: TMenuItem;
+    CadastrodeCliente1: TMenuItem;
+    CadastrodeBairro: TMenuItem;
+
     procedure CadastrodeModelos1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure CadastrodeCorClick(Sender: TObject);
     procedure CadastrodeTamanhoClick(Sender: TObject);
     procedure CadastrodePedidosClick(Sender: TObject);
-    procedure Pedidos1Click(Sender: TObject);
+    procedure CadastrodeMunicipio1Click(Sender: TObject);
+    procedure CadastrodeCliente1Click(Sender: TObject);
+    procedure CadastrodeBairroClick(Sender: TObject);
+    procedure CadastroUfClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,12 +48,18 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmPrincipal.C1Click(Sender: TObject);
+procedure TfrmPrincipal.CadastrodeBairroClick(Sender: TObject);
 begin
-  if (not(Assigned(oCadastroUfController))) then
-    oCadastroUfController := TCadastroUfController.Create;
-  oCadastroUfController.CriarForm(Self);
+  if (not(Assigned(oCadastroBairroController))) then
+    oCadastroBairroController := TCadastroBairroController.Create;
+  oCadastroBairroController.CriarForm(Self);
+end;
 
+procedure TfrmPrincipal.CadastrodeCliente1Click(Sender: TObject);
+begin
+  if (not(Assigned(oCadastroClienteController))) then
+    oCadastroClienteController := TCadastroClienteController.Create;
+  oCadastroClienteController.CriarForm(Self);
 end;
 
 procedure TfrmPrincipal.CadastrodeCorClick(Sender: TObject);
@@ -64,6 +76,13 @@ begin
   oCadastroModeloController.CriarForm(Self);
 end;
 
+procedure TfrmPrincipal.CadastrodeMunicipio1Click(Sender: TObject);
+begin
+  if (not(Assigned(oCadastroMunicipioController))) then
+    oCadastroMunicipioController := TCadastroMunicipioController.Create;
+  oCadastroMunicipioController.CriarForm(Self);
+end;
+
 procedure TfrmPrincipal.CadastrodePedidosClick(Sender: TObject);
 begin
   if (not(Assigned(oCadastroPedidoController))) then
@@ -78,6 +97,13 @@ begin
   oCadastroTamanhoController.CriarForm(Self);
 end;
 
+procedure TfrmPrincipal.CadastroUfClick(Sender: TObject);
+begin
+  if (not(Assigned(oCadastroUfController))) then
+    oCadastroUfController := TCadastroUfController.Create;
+  oCadastroUfController.CriarForm(Self);
+end;
+
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   ReportMemoryLeaksOnShutdown := True;
@@ -87,14 +113,6 @@ begin
     ShowMessage('Não foi possível ConsultaCorCadastro ao banco de dados');
     Application.Terminate;
   end;
-
-end;
-
-procedure TfrmPrincipal.Pedidos1Click(Sender: TObject);
-begin
-     if (not(Assigned(oRelatorioController))) then
-    oRelatorioController := TRelatorioController.Create;
-  oRelatorioController.CriarForm(Self);
 end;
 
 end.

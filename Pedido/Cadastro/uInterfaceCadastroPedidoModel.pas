@@ -8,10 +8,10 @@ uses
 type
   IInterfaceCadastroPedidoModel = interface
 
-    function Inserir(var oCadastroModeloDto: TCadastroPedidoDto):boolean;
-    function Atualizar(var oCadastroModeloDto: TCadastroPedidoDto):boolean;
+    function Inserir(const oCadastroModeloDto: TCadastroPedidoDto; const idPedido: integer):boolean;
+    function Atualizar(const oCadastroModeloDto: TCadastroPedidoDto):boolean;
     function Deletar(const IdPedido: integer): Boolean;
-    function NovoId(var oCadastroModeloDto: TCadastroPedidoDto):boolean;
+    function NovoId: integer;
 
   end;
 

@@ -1,0 +1,96 @@
+inherited CadastroMunicipioForm: TCadastroMunicipioForm
+  Caption = 'Cadastro de Municipio'
+  ClientHeight = 314
+  ClientWidth = 600
+  ExplicitWidth = 606
+  ExplicitHeight = 343
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 600
+    ExplicitWidth = 600
+    inherited Panel3: TPanel
+      Left = 399
+      ExplicitLeft = 399
+    end
+  end
+  object EdtEstado: TLabeledEdit
+    Left = 70
+    Top = 235
+    Width = 489
+    Height = 26
+    CharCase = ecUpperCase
+    EditLabel.Width = 49
+    EditLabel.Height = 18
+    EditLabel.Caption = 'Estado:'
+    EditLabel.Font.Charset = DEFAULT_CHARSET
+    EditLabel.Font.Color = clWindowText
+    EditLabel.Font.Height = -15
+    EditLabel.Font.Name = 'Tahoma'
+    EditLabel.Font.Style = []
+    EditLabel.ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    LabelPosition = lpLeft
+    ParentFont = False
+    TabOrder = 1
+    TextHint = 'Selecione o estado (f2)'
+  end
+  object EdtMunicipio: TLabeledEdit
+    Left = 70
+    Top = 179
+    Width = 489
+    Height = 26
+    CharCase = ecUpperCase
+    EditLabel.Width = 44
+    EditLabel.Height = 18
+    EditLabel.Caption = 'Nome:'
+    EditLabel.Font.Charset = DEFAULT_CHARSET
+    EditLabel.Font.Color = clWindowText
+    EditLabel.Font.Height = -15
+    EditLabel.Font.Name = 'Tahoma'
+    EditLabel.Font.Style = []
+    EditLabel.ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    LabelPosition = lpLeft
+    MaxLength = 2
+    ParentFont = False
+    TabOrder = 2
+    TextHint = 'Descricao'
+  end
+  object EdtCodigo: TLabeledEdit
+    Tag = 999
+    Left = 70
+    Top = 123
+    Width = 120
+    Height = 26
+    CharCase = ecUpperCase
+    EditLabel.Width = 48
+    EditLabel.Height = 18
+    EditLabel.Caption = 'C'#243'digo:'
+    EditLabel.Font.Charset = DEFAULT_CHARSET
+    EditLabel.Font.Color = clWindowText
+    EditLabel.Font.Height = -15
+    EditLabel.Font.Name = 'Tahoma'
+    EditLabel.Font.Style = []
+    EditLabel.ParentFont = False
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    LabelPosition = lpLeft
+    MaxLength = 2
+    ParentFont = False
+    TabOrder = 3
+    TextHint = 'codigo'
+  end
+end

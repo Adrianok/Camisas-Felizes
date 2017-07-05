@@ -3,7 +3,7 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
   ClientHeight = 239
   ExplicitHeight = 268
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   object edtTamanho: TLabeledEdit
     Left = 94
     Top = 160

@@ -16,12 +16,13 @@ type
     btnSalvar: TBitBtn;
     btnPesquisar: TBitBtn;
     Panel3: TPanel;
-    btnExcluir: TBitBtn;
-    btnFechar: TBitBtn;
     btnNovo: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnFechar: TBitBtn;
+    btnExcluir: TBitBtn;
     procedure btnNovoClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -37,7 +38,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmBase.btnExcluirClick(Sender: TObject);
+procedure TfrmBase.btnCancelarClick(Sender: TObject);
 begin
   oController.Excluir;
 end;

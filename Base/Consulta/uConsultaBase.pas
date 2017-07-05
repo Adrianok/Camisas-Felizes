@@ -15,7 +15,6 @@ type
   TfrmPesquisaBase = class(TForm)
     Panel1: TPanel;
     edtPesquisa: TEdit;
-    btnPesquisa: TBitBtn;
     DataSourceGrid: TDataSource;
     FDMemTableGrid: TFDMemTable;
     DBGrid1: TDBGrid;

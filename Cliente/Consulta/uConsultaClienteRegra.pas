@@ -13,8 +13,6 @@ type
      function SelectAll(const oConsultaClienteModel: TConsultaClienteModel; MemTable: TFDMemTable) : boolean;
   end;
 
-var
-  oConsultaClienteRegra: TConsultaClienteRegra;
 implementation
 
 { TConsultaClienteRegra }

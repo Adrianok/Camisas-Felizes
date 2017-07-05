@@ -14,6 +14,7 @@ type
   private
     Query: TFDQuery;
   public
+    function SelectPorCpf(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
     function SelectPorNome(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
     function SelectPorId(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
     function SelectCliente(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
@@ -26,25 +27,36 @@ type
     destructor Destroy; override;
   end;
 
+
 implementation
 
 { TCadastroModeloModel }
 
 function TCadastroClienteModel.Atualizar(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
+var
+  sSql : string;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' UPDATE Cliente SET descricao ='''
-//    + oCadastroClienteDto.Descricao + ''' WHERE idCliente= '
-//    + IntToStr(oCadastroClienteDto.IdCliente) + ';');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    Query.SQL.Clear;
+    sSql :=
+      ' UPDATE cliente'
+    + ' SET nome =' + QuotedStr(oCadastroClienteDto.Nome)
+    + ', cpf_cnpj = ' + QuotedStr(oCadastroClienteDto.cpf_cnpj)
+    + ', idendereco = ' + IntToStr(oCadastroClienteDto.idendereco)
+     + ', telefone = ' + QuotedStr(oCadastroClienteDto.telefone)
+    + ', celular = ' + QuotedStr(oCadastroClienteDto.celular)
+    + ', observacao = ' + QuotedStr(oCadastroClienteDto.observacao)
+    + ' WHERE idcliente = ' + IntToStr(oCadastroClienteDto.IdCliente)
+    + ';';
+    Query.SQL.Add(sSql);
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 constructor TCadastroClienteModel.Create;
@@ -80,20 +92,30 @@ end;
 
 
 function TCadastroClienteModel.Inserir(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
+var
+  sSql : string;
 begin
-//  try
-//    Query.SQL.Clear;
-//    Query.SQL.Add(' INSERT INTO Cliente (idCliente, descricao) VALUES ('
-//    + IntToStr(oCadastroClienteDto.IdCliente) + ', '''
-//    + oCadastroClienteDto.Descricao + ''');');
-//    Query.ExecSQL;
-//    if (not(Query.IsEmpty)) then
-//      Result := True
-//    else
-//      Result := False;
-//  except
-//    raise Exception.Create('Não Foi possível acessar o banco de dados');
-//  end;
+  try
+    Query.SQL.Clear;
+    sSql := ' INSERT INTO cliente (idcliente, nome, cpf_cnpj, telefone,'
+    +'celular, observacao, idendereco) VALUES ('
+    + IntToStr(oCadastroClienteDto.IdCliente) + ','
+    + QuotedStr(oCadastroClienteDto.Nome) + ','
+    + QuotedStr(oCadastroClienteDto.cpf_cnpj) + ','
+    + QuotedStr(oCadastroClienteDto.telefone) + ','
+    + QuotedStr(oCadastroClienteDto.celular) + ','
+    + QuotedStr(oCadastroClienteDto.observacao) + ','
+    + IntToStr(oCadastroClienteDto.idendereco)
+    + ');';
+    Query.SQL.Add(sSql);
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 function TCadastroClienteModel.NovoId(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
@@ -129,33 +151,48 @@ begin
 end;
 
 
-function TCadastroClienteModel.SelectPorId(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
-var
-  Query: TFDQuery;
+function TCadastroClienteModel.SelectPorCpf(
+  var oCadastroClienteDto: TCadastroClienteDto): Boolean;
 begin
   try
-    Query := TFDQuery.Create(nil);
-    Query.Connection := TConexaoSigleton.GetInstancia;
-    try
-      Query.SQL.Clear;
-      Query.Open('SELECT * FROM Cliente WHERE idCliente =' + IntToStr(oCadastroClienteDto.IdCliente));
-      if (not(Query.IsEmpty)) then
-      begin
-        Result := True;
-        oCadastroClienteDto.Nome       := Query.FieldByName('nome').AsString;
-        oCadastroClienteDto.cpf_cnpj   := Query.FieldByName('cpf_cnpj').AsCurrency;
-        oCadastroClienteDto.telefone   := Query.FieldByName('telefone').AsInteger;
-        oCadastroClienteDto.celular    := Query.FieldByName('celular').AsInteger;
-        oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;
-        oCadastroClienteDto.idendereco := Query.FieldByName('idendereco').AsInteger;
-      end
-      else
-        Result := False;
-    except
-      raise Exception.Create('Não Foi possível acessar o banco de dados');
-    end;
-  finally
-    FreeAndNil(Query);
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM Cliente WHERE cpf_cnpj =' + QuotedStr(oCadastroClienteDto.cpf_cnpj));
+    if (not(Query.IsEmpty)) then
+    begin
+      Result := True;
+      oCadastroClienteDto.IdCliente  := Query.FieldByName('idcliente').AsInteger;
+      oCadastroClienteDto.Nome       := Query.FieldByName('nome').AsString;
+      oCadastroClienteDto.telefone   := Query.FieldByName('telefone').AsString;
+      oCadastroClienteDto.celular    := Query.FieldByName('celular').AsString;
+      oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;
+      oCadastroClienteDto.idendereco := Query.FieldByName('idendereco').AsInteger;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
+
+function TCadastroClienteModel.SelectPorId(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
+begin
+  try
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM Cliente WHERE idCliente =' + IntToStr(oCadastroClienteDto.IdCliente));
+    if (not(Query.IsEmpty)) then
+    begin
+      Result := True;
+      oCadastroClienteDto.Nome       := Query.FieldByName('nome').AsString;
+      oCadastroClienteDto.cpf_cnpj   := Query.FieldByName('cpf_cnpj').AsString;
+      oCadastroClienteDto.telefone   := Query.FieldByName('telefone').AsString;
+      oCadastroClienteDto.celular    := Query.FieldByName('celular').AsString;
+      oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;
+      oCadastroClienteDto.idendereco := Query.FieldByName('idendereco').AsInteger;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
   end;
 end;
 
@@ -168,9 +205,9 @@ begin
     if (not(Query.IsEmpty)) then
     begin
       oCadastroClienteDto.IdCliente := Query.FieldByName('idcliente').AsInteger;
-      oCadastroClienteDto.cpf_cnpj := Query.FieldByName('cpf_cnpj').AsCurrency;
-      oCadastroClienteDto.telefone := Query.FieldByName('telefone').AsInteger;
-      oCadastroClienteDto.celular := Query.FieldByName('celular').AsInteger;
+      oCadastroClienteDto.cpf_cnpj := Query.FieldByName('cpf_cnpj').AsString;
+      oCadastroClienteDto.telefone := Query.FieldByName('telefone').AsString;
+      oCadastroClienteDto.celular := Query.FieldByName('celular').AsString;
       oCadastroClienteDto.observacao := Query.FieldByName('observacao').AsString;
       oCadastroClienteDto.idendereco := Query.FieldByName('idendereco').AsInteger;
       Result := True;

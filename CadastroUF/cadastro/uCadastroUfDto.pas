@@ -6,7 +6,6 @@ uses
   System.SysUtils;
 
 type
-
   TCadastroUfDto = class
   private
     Fuf: string;
@@ -22,9 +21,6 @@ type
     property nome: string read Fnome write Setnome;
     constructor Create;
   end;
-
-var
-  oCadastroUfDto: TCadastroUfDto;
 
 implementation
 

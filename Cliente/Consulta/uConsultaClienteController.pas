@@ -8,17 +8,20 @@ uses
   uClasseInterfaceConsultaBase, uConsultaClienteModel,
   uInterfaceConsultaBase,uCadastroClienteDto, uConsultaClienteForm,
   FireDac.Comp.Client, uConsultaClienteRegra, uFuncaoRetorno,
-  Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows;
+  Vcl.DbGrids, Vcl.Forms, Winapi.Messages,  Winapi.Windows, uCadastroClienteRegra;
 
 type
   TConsultaClienteController = class(TClassInterfaceConsultaBase)
   private
+    oConsultaClienteRegra : TConsultaClienteRegra;
+    oConsultaClienteModel : TConsultaClienteModel;
   public
     procedure PesquisarGrid;  override;
     function PreencherGrid:boolean; virtual;
-    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);  override;
+    procedure CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');    override;
     procedure Confirmar; override;
     procedure Cancelar; override;
+
 
     constructor Create;
     destructor Destroy; override;
@@ -54,7 +57,7 @@ begin
     oConsultaClienteRegra := TConsultaClienteRegra.Create;
 end;
 
-procedure TConsultaClienteController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string);
+procedure TConsultaClienteController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');
 begin
   if not(assigned(oFormulario)) then
   begin
@@ -86,7 +89,7 @@ end;
 procedure TConsultaClienteController.PesquisarGrid;
 begin
   inherited;
-  oFormulario.FDMemTableGrid.Filter := 'descricao like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+  oFormulario.FDMemTableGrid.Filter := 'nome like ''%' + oFormulario.edtPesquisa.Text + '%'' '
                                       +'or idCliente  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';
   oFormulario.FDMemTableGrid.Filtered := True;
  end;
@@ -98,5 +101,7 @@ begin
   else
     ShowMessage('Não foram encontrados registros');
 end;
+
+
 
 end.

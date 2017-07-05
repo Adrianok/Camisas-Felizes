@@ -14,6 +14,9 @@ uses
 type
   TCadastroUfController = class(TClassInterfaceViewBase)
   private
+    oCadastroUfDto : TCadastroUfDto;
+    oCadastroUfModel : TCadastroUfModel;
+    oCadastroUfRegra: TCadastroUfRegra;
     procedure RetornoUf(aIdUf: integer);
   public
     procedure Inicial; override;

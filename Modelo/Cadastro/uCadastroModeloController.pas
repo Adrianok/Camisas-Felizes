@@ -53,7 +53,6 @@ begin
 
     if(Search <> nil)then
     begin
-      ListView1.Selected:= nil;
       ListView1.Items.Item[Search.Index].Selected := True;
     end
     else
@@ -112,8 +111,7 @@ begin
 
   if (assigned(oCadastroModeloRegra)) then
     FreeAndNil(oCadastroModeloRegra);
-
-    inherited;
+  inherited;
 end;
 
 
@@ -212,11 +210,6 @@ begin
       edtPreco.Text    :=  CurrToStr(oCadastroModeloDto.Preco);
 
       GridCor(StrToIntDef(edtCodigo.Text, 0));
-    end
-    else
-    begin
-      Inicial;
-      raise Exception.Create('Não foi escolhido registro');
     end;
   end;
 end;

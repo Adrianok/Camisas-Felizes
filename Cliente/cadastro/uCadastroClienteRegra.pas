@@ -120,8 +120,13 @@ begin
   end
   else
   begin
-    oCadastroClienteModel.Inserir(oCadastroClienteDto);
-    Result := False;
+    if(not(oCadastroClienteModel.SelectPorCpf(oCadastroClienteDto)))then
+    begin
+      oCadastroClienteModel.Inserir(oCadastroClienteDto);
+      Result := False;
+    end
+    else
+      raise Exception.Create('Já existe um cliente com esse CPF/CNPJ Cadastrado');
   end;
 
 end;
@@ -159,12 +164,13 @@ begin
 
   if(oCadastroEnderecoModel.SelectPorId(oCadastroEnderecoDto))then
   begin
-    if(oCadastroEnderecoModel.Atualizar(oCadastroEnderecoDto))then
+    if(not(oCadastroEnderecoModel.Atualizar(oCadastroEnderecoDto)))then
       Result := True;
   end
   else
   begin
-    if(oCadastroEnderecoModel.Inserir(oCadastroEnderecoDto))then
+    oCadastroEnderecoModel.NovoId(oCadastroEnderecoDto);
+    if(not(oCadastroEnderecoModel.Inserir(oCadastroEnderecoDto)))then
       Result := True;
   end;
 end;

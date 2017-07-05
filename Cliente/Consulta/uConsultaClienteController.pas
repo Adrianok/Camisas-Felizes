@@ -13,6 +13,8 @@ uses
 type
   TConsultaClienteController = class(TClassInterfaceConsultaBase)
   private
+    oConsultaClienteRegra : TConsultaClienteRegra;
+    oConsultaClienteModel : TConsultaClienteModel;
   public
     procedure PesquisarGrid;  override;
     function PreencherGrid:boolean; virtual;
@@ -27,7 +29,6 @@ type
 
 var
   oConsultaClienteController: IInterfaceConsultaBase;
-  oConsultaClienteRegra: TConsultaClienteRegra;
 
 implementation
 
@@ -88,17 +89,17 @@ end;
 procedure TConsultaClienteController.PesquisarGrid;
 begin
   inherited;
-  oFormulario.FDMemTableGrid.Filter := 'descricao like ''%' + oFormulario.edtPesquisa.Text + '%'' '
+  oFormulario.FDMemTableGrid.Filter := 'nome like ''%' + oFormulario.edtPesquisa.Text + '%'' '
                                       +'or idCliente  like ''%' + oFormulario.edtPesquisa.Text + '%'' ';
   oFormulario.FDMemTableGrid.Filtered := True;
  end;
 
 function TConsultaClienteController.PreencherGrid: boolean;
 begin
-//  if(oConsultaClienteRegra.SelectAll(oConsultaClienteModel, oFormulario.FDMemTableGrid))then
-//  oFormulario.FDMemTableGrid.Open
-//  else
-//    ShowMessage('Não foram encontrados registros');
+  if(oConsultaClienteRegra.SelectAll(oConsultaClienteModel, oFormulario.FDMemTableGrid))then
+  oFormulario.FDMemTableGrid.Open
+  else
+    ShowMessage('Não foram encontrados registros');
 end;
 
 

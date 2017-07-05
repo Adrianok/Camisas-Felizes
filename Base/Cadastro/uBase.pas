@@ -17,7 +17,6 @@ type
     btnPesquisar: TBitBtn;
     Panel3: TPanel;
     btnNovo: TBitBtn;
-    btnAlterar: TBitBtn;
     btnCancelar: TBitBtn;
     btnFechar: TBitBtn;
     btnExcluir: TBitBtn;

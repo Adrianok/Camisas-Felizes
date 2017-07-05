@@ -39,6 +39,7 @@ type
     procedure RetornoMunicipio(aIdMunicipio : Integer);
     procedure RetornoCliente(aIdCliente: integer);
   public
+    procedure Verificar(ActiveControl : TWinControl); override;
     procedure Inicial; override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
@@ -46,9 +47,7 @@ type
     procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl); override;
     procedure NovoID;
     procedure Excluir; override;
-    function ValidaCPF(aCpf : string):boolean;
-    function ValidarCNPJ(Acnpj: string): Boolean;
-    procedure VerificaCPF_CNPJ(Sender: TObject);
+    procedure VerificaCPF_CNPJ;
 
     constructor Create;
     destructor Destroy; override;
@@ -105,7 +104,6 @@ begin
   oFormulario.oController := oCadastroClienteController;
   oFormulario.Show;
   oForm :=(oFormulario as TCadastroClienteForm);
-  oForm.EdtCpfCnpj.OnExit := VerificaCPF_CNPJ;
   inherited;
 end;
 
@@ -187,16 +185,26 @@ begin
   else
   if(ActiveControl =  oForm.edtCidade)then
   begin
+    if(oForm.edtEstado.Text <> '')then
+    begin
+      oCadastroUfDto.nome := oForm.edtEstado.Text;
+      if(oCadastroClienteRegra.SelectUfPorDescricao(oCadastroUfModel, oCadastroUfDto))then
+        sWhere := IntToStr(oCadastroUfDto.id);
+    end
+    else
+      sWhere := '';
     if (not(assigned(oConsultaMunicipioController))) then
       oConsultaMunicipioController := TConsultaMunicipioController.Create;
-    oConsultaMunicipioController.CriarForm(Aowner, RetornoMunicipio, oForm.edtCidade.Text);  end
+    oConsultaMunicipioController.CriarForm(Aowner, RetornoMunicipio, oForm.edtCidade.Text, sWhere);  end
   else
   if(ActiveControl =  oForm.edtBairro)then
   begin
     if(oForm.edtCidade.Text <> '')then
-    oCadastroMunicipioDto.Municipio := oForm.edtCidade.Text;
+      oCadastroMunicipioDto.Municipio := oForm.edtCidade.Text;
     if(oCadastroClienteRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
-      sWhere := IntToStr(oCadastroMunicipioDto.id);
+      sWhere := IntToStr(oCadastroMunicipioDto.id)
+    else
+      sWhere := '';
     if (not(assigned(oConsultaBairroController))) then
       oConsultaBairroController := TConsultaBairroController.Create;
     oConsultaBairroController.CriarForm(Aowner, RetornoBairro, oForm.edtBairro.Text, sWhere);
@@ -287,32 +295,27 @@ begin
     oCadastroClienteDto.cpf_cnpj := EdtCpfCnpj.Text;
     oCadastroClienteDto.celular := EdtCelular.Text;
     oCadastroClienteDto.observacao := edtObservacoes.Lines.Text;
+    oCadastroBairroDto.Descricao := edtBairro.Text;
+    oCadastroMunicipioDto.Municipio := edtCidade.Text;
+    oCadastroUfDto.nome := edtEstado.Text;
   end;
+
   if(oCadastroClienteRegra.SalvarEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
     oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then
   begin
-    if (oCadastroClienteRegra.Salvar(oCadastroClienteModel, oCadastroClienteDto)) then
+    oCadastroClienteDto.idendereco := oCadastroEnderecoDto.IdEndereco;
+    if(oCadastroClienteRegra.Salvar(oCadastroClienteModel, oCadastroClienteDto))then
       ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Atualizado com sucesso')
     else
     begin
       ShowMessage('Registro: ' + oCadastroClienteDto.Nome + ' Inserido com sucesso');
     end;
+    oForm.EdtCodigo.Text := IntToStr(oCadastroClienteDto.IdCliente);
   end;
 end;
 
 
-
-function TCadastroClienteController.ValidaCPF(aCpf: string): boolean;
-begin
-
-end;
-
-function TCadastroClienteController.ValidarCNPJ(Acnpj: string): Boolean;
-begin
-  oCadastroClienteRegra.ValidarCNPJ(oCadastroClienteDto.cpf_cnpj);
-end;
-
-procedure TCadastroClienteController.VerificaCPF_CNPJ(Sender: TObject);
+procedure TCadastroClienteController.VerificaCPF_CNPJ;
 begin
 
   with (oFormulario as TCadastroClienteForm) do
@@ -330,6 +333,25 @@ begin
     end;
   end;
 
+end;
+
+procedure TCadastroClienteController.Verificar(ActiveControl : TWinControl);
+begin
+  if(ActiveControl = oForm.EdtCodigo)then
+  begin
+    if(oCadastroClienteRegra.SelectCliente(oCadastroClienteModel, oCadastroClienteDto))then
+    begin
+      oForm.EdtCpfCnpj.Text := oCadastroClienteDto.cpf_cnpj;
+      oForm.EdtNome.Text := oCadastroClienteDto.Nome;
+      oForm.EdtTelefone.Text := oCadastroClienteDto.telefone;
+      oForm.EdtCelular.Text := oCadastroClienteDto.celular;
+      oForm.edtObservacoes.lines.Text := oCadastroClienteDto.observacao;
+    end;
+  end
+  else
+  if(ActiveControl = oForm.EdtCpfCnpj)then
+    VerificaCPF_CNPJ;
+  inherited;
 end;
 
 end.

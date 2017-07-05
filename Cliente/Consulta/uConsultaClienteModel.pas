@@ -19,8 +19,6 @@ type
     destructor Destroy; override;
   end;
 
-  var
-    oConsultaClienteModel: TConsultaClienteModel;
 implementation
 
 { TConsultaClienteModel }
@@ -38,11 +36,14 @@ begin
 end;
 
 function TConsultaClienteModel.SelectAll(MemTable: TFDMemTable): boolean;
+var
+  sSql : string;
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT idCliente, UPPER(nome) as nome, cpf_cnpj, telefone'
-    + ' FROM cliente');
+    sSql := 'SELECT idCliente, UPPER(nome) as nome, cpf_cnpj, telefone'
+    + ' FROM cliente';
+    Query.Open(sSql);
     if (not(Query.IsEmpty)) then
     begin
       MemTable.Data := Query.Data;

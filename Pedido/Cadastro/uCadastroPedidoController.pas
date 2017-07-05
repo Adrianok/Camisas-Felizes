@@ -528,7 +528,9 @@ begin
     if(oForm.edtCidade.Text <> '')then
     oCadastroMunicipioDto.Municipio := oForm.edtCidade.Text;
     if(oCadastroPedidoRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
-      sWhere := IntToStr(oCadastroMunicipioDto.id);
+      sWhere := IntToStr(oCadastroMunicipioDto.id)
+    else
+      sWhere := '';
     if (not(assigned(oConsultaBairroController))) then
       oConsultaBairroController := TConsultaBairroController.Create;
     oConsultaBairroController.CriarForm(Aowner, RetornoBairro, oForm.edtBairro.Text, sWhere);
@@ -541,7 +543,9 @@ begin
 
     oCadastroModeloDto.Descricao := oForm.edtModelo.Text;
     if(oCadastroPedidoRegra.SelectModeloPorDescricao(oCadastroModeloModel, oCadastroModeloDto))then
-      sWhere := IntToStr(oCadastroModeloDto.IdModelo);
+      sWhere := IntToStr(oCadastroModeloDto.IdModelo)
+    else
+      sWhere := '';
     if (not(assigned(oConsultaCorController))) then
       oConsultaCorController := TConsultaCorController.Create;
     oConsultaCorController.CriarForm(Aowner, RetornoCor, oForm.edtCor.Text, sWhere);

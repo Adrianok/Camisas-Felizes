@@ -33,8 +33,30 @@ implementation
 { TCadastroModeloModel }
 
 function TCadastroClienteModel.Atualizar(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
+var
+  sSql : string;
 begin
-
+  try
+    Query.SQL.Clear;
+    sSql :=
+      ' UPDATE cliente'
+    + ' SET nome =' + QuotedStr(oCadastroClienteDto.Nome)
+    + ', cpf_cnpj = ' + QuotedStr(oCadastroClienteDto.cpf_cnpj)
+    + ', idendereco = ' + IntToStr(oCadastroClienteDto.idendereco)
+     + ', telefone = ' + QuotedStr(oCadastroClienteDto.telefone)
+    + ', celular = ' + QuotedStr(oCadastroClienteDto.celular)
+    + ', observacao = ' + QuotedStr(oCadastroClienteDto.observacao)
+    + ' WHERE idcliente = ' + IntToStr(oCadastroClienteDto.IdCliente)
+    + ';';
+    Query.SQL.Add(sSql);
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 constructor TCadastroClienteModel.Create;
@@ -70,8 +92,30 @@ end;
 
 
 function TCadastroClienteModel.Inserir(var oCadastroClienteDto: TCadastroClienteDto): Boolean;
+var
+  sSql : string;
 begin
-
+  try
+    Query.SQL.Clear;
+    sSql := ' INSERT INTO cliente (idcliente, nome, cpf_cnpj, telefone,'
+    +'celular, observacao, idendereco) VALUES ('
+    + IntToStr(oCadastroClienteDto.IdCliente) + ','
+    + QuotedStr(oCadastroClienteDto.Nome) + ','
+    + QuotedStr(oCadastroClienteDto.cpf_cnpj) + ','
+    + QuotedStr(oCadastroClienteDto.telefone) + ','
+    + QuotedStr(oCadastroClienteDto.celular) + ','
+    + QuotedStr(oCadastroClienteDto.observacao) + ','
+    + IntToStr(oCadastroClienteDto.idendereco)
+    + ');';
+    Query.SQL.Add(sSql);
+    Query.ExecSQL;
+    if (not(Query.IsEmpty)) then
+      Result := True
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
 end;
 
 function TCadastroClienteModel.NovoId(var oCadastroClienteDto: TCadastroClienteDto): Boolean;

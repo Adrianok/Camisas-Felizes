@@ -116,7 +116,7 @@ begin
       QuotedStr(oCadastroPedidoDto.nomereceptor) + ','
     + QuotedStr(oCadastroPedidoDto.nomevendedor)+ ','
     + StringReplace(CurrToStr(oCadastroPedidoDto.valortotal), ',', '.', [rfReplaceAll, rfIgnoreCase]) + ','
-    + QuotedStr({oCadastroPedidoDto.observacao}'aaaa') + ','
+    + QuotedStr(oCadastroPedidoDto.observacao) + ','
     + IntToStr(oCadastroPedidoDto.idcliente) + ','
     + QuotedStr(oCadastroPedidoDto.usuario)
     + ');';

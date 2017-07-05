@@ -139,7 +139,7 @@ function TCadastroMunicipioModel.SelectDescricao(var oCadastroMunicipioDto: TCad
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT idMunicipio, descricao, uf_iduf FROM Municipio WHERE descricao =''' + QuotedStr(oCadastroMunicipioDto.Municipio) + ''' ');
+    Query.Open('SELECT idMunicipio, descricao, uf_iduf FROM Municipio WHERE descricao =' + QuotedStr(oCadastroMunicipioDto.Municipio));
     if (not(Query.IsEmpty)) then
     begin
       oCadastroMunicipioDto.Id := Query.FieldByName('idMunicipio').AsInteger;

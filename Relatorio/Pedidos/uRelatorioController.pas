@@ -5,10 +5,19 @@ interface
 uses
   Vcl.Controls, Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, System.classes, System.SysUtils,
   uRelatorioModel, uRelatorioForm, uRelatorioDto, uBase,
-  FireDac.Comp.Client, Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows;
+  FireDac.Comp.Client, Vcl.DbGrids, Vcl.Forms, Winapi.Messages, Winapi.Windows,
+
+  System.Variants, Vcl.Graphics,
+    FireDAC.UI.Intf, FireDAC.VCLUI.Wait,
+  FireDAC.Phys.MySQLDef, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
+  FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,  frxClass,
+  frxDBSet, Data.DB, FireDAC.Comp.DataSet,  FireDAC.Comp.UI,
+  Vcl.Grids;
 
 type
-  TRelatorioController = class
+  TRelatorioController = class (TFrmBase)
 
   private
   oRelatorioModel : TRelatorioModel;
@@ -16,10 +25,11 @@ type
   oRelatorioDto : TRelatorioDto;
 
   public
-   procedure Fechar;
    procedure CriarForm(Aowner: TComponent);
    procedure PreencherGrid(Sender: TObject);
+   procedure Fechar(Sender: TObject);
    procedure AlimentarDto;
+   procedure AbrirRelatorio(Sender: TObject);
 
    constructor Create;
    destructor Destroy; override;
@@ -29,6 +39,13 @@ implementation
 
 { TRelatorioConsultaController }
 
+procedure TRelatorioController.AbrirRelatorio;
+begin
+  oForm.FDMemTable1.Open;
+  oForm.ReportSintetico.ShowReport;
+
+end;
+
 procedure TRelatorioController.AlimentarDto;
 begin
   oRelatorioDto.ClienteInicial := StrToInt(oForm.EdtClienteInicial.Text);
@@ -37,6 +54,10 @@ begin
   oRelatorioDto.DataFinal := (oForm.DtpFinal.Date);
   oRelatorioDto.PedidoInicial := StrToInt(oForm.EdtPedidoInicial.Text);
   oRelatorioDto.PedidoFinal := StrToInt(oForm.EdtPedidoFinal.Text);
+  oRelatorioDto.ProdutoInicial := StrToInt(oForm.EdtProdutoInicial.Text);
+  oRelatorioDto.ProdutoFinal := StrToInt(oform.EdtProdutoFinal.Text);
+  oRelatorioDto.MunicipioInicial := StrToInt(oForm.EdtMunicipioInicial.Text);
+  oRelatorioDto.MunicipioFinal := StrToInt(oForm.EdtMunicipioFinal.Text);
 end;
 
 constructor TRelatorioController.Create;
@@ -53,10 +74,13 @@ begin
   if (not(Assigned(oForm))) then
     oForm := TFrmRelatorio.Create(Aowner);
 
+  oForm.btnFecharRel.OnClick := Fechar;
+  oForm.btnRelAnalitico.OnClick := AbrirRelatorio;
   oForm.btnFiltrar.onClick := PreencherGrid;
   oForm.DtpInicial.Date := Date - 30;
   oForm.DtpFinal.Date := Date;
-  oForm.Show;
+
+  oForm.show;
 
 end;
 

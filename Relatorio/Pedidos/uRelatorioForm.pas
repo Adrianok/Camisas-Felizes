@@ -10,7 +10,7 @@ uses
   Vcl.ComCtrls, frxClass, frxDBSet, FireDAC.Stan.Async, FireDAC.DApt, frxChart;
 
 type
-  TFrmRelatorio = class
+  TFrmRelatorio = class (TForm)
     Panelrel: TPanel;
     btnFecharRel: TBitBtn;
     DBGridRelatorio: TDBGrid;
@@ -49,9 +49,9 @@ type
     EdtProdutoFinal: TEdit;
     Label10: TLabel;
     Label11: TLabel;
-    FDMemTable1modelo: TIntegerField;
     FDMemTable1municipio: TIntegerField;
     FDMemTable1valoritem: TCurrencyField;
+    FDMemTable1modelo: TAggregateField;
   private
     { Private declarations }
   public

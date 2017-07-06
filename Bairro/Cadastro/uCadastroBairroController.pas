@@ -167,7 +167,7 @@ begin
     if(oCadastroBairroRegra.SelectMunicipioPorId(oCadastroMunicipioModel, oCadastroMunicipioDto))then
     with (oFormulario as TCadastroBairroForm) do
     begin
-      edtMunicipio.Text :=   CurrToStr(oCadastroMunicipioDto.Municipio);
+      edtMunicipio.Text :=   oCadastroMunicipioDto.Municipio;
     end;
   end;
 end;
@@ -179,7 +179,7 @@ begin
   begin
     oCadastroBairroDto.IdBairro        :=  StrToInt(edtCodigo.Text);
     oCadastroBairroDto.Descricao       :=  edtBairro.Text;
-    oCadastroBairroDto.cep             :=  CurrToStr(edtCep.Text);
+    oCadastroBairroDto.cep             :=  StrToCurr(edtCep.Text);
 
     oCadastroMunicipioDto.Municipio := edtMunicipio.Text;
     oCadastroBairroRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto);
@@ -198,17 +198,17 @@ end;
 
 
 
-procedure TCadastroBairroController.Verificar(ActiveControl: TWinControl); override;
+procedure TCadastroBairroController.Verificar(ActiveControl: TWinControl);
 begin
   if (ActiveControl = oForm.edtCodigo) then
   begin
-    if(oForm.edtCodigo = '')then
+    if(oForm.edtCodigo.Text = '')then
       NovoID
     else
       if(oCadastroBairroRegra.SelectBairro(oCadastroBairroModel, oCadastroBairroDto))then
       begin
         oForm.edtBairro.Text := oCadastroBairroDto.Descricao;
-        oForm.edtCep.Text :=  oCadastroBairroDto.cep;
+        oForm.edtCep.Text :=  CurrToStr(oCadastroBairroDto.cep);
         oCadastroMunicipioDto.id := oCadastroBairroDto.idmunicipio;
         oCadastroBairroRegra.SelectMunicipioPorId(oCadastroMunicipioModel, oCadastroMunicipioDto);
         oForm.edtMunicipio.Text := oCadastroMunicipioDto.Municipio;

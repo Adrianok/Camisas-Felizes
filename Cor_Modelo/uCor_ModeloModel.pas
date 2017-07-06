@@ -19,8 +19,6 @@ uses
       constructor Create;
       destructor Destroy; override;
     end;
-var
-  oCor_ModeloModel : TCor_ModeloModel;
 
 implementation
 

@@ -37,6 +37,7 @@ type
     procedure CadastrodeBairroClick(Sender: TObject);
     procedure CadastroUfClick(Sender: TObject);
     procedure Pedidos1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -114,6 +115,12 @@ begin
   except
     Application.Terminate;
   end;
+end;
+
+procedure TfrmPrincipal.FormDestroy(Sender: TObject);
+begin
+  if(assigned(oRelatorioController))then
+    FreeAndNil(oRelatorioController);
 end;
 
 procedure TfrmPrincipal.Pedidos1Click(Sender: TObject);

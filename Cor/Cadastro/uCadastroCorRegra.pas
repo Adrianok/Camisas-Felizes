@@ -19,9 +19,6 @@ type
 
   end;
 
-var
-  oCadastroCorRegra: TCadastroCorRegra;
-
 implementation
 
 { TCadastroCorRegra }

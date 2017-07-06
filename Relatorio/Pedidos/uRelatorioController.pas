@@ -79,7 +79,6 @@ begin
   oForm.btnFiltrar.onClick := PreencherGrid;
   oForm.DtpInicial.Date := Date - 30;
   oForm.DtpFinal.Date := Date;
-
   oForm.show;
 
 end;
@@ -91,7 +90,6 @@ begin
 
   if (assigned(oRelatorioDto)) then
     FreeAndNil(oRelatorioDto);
-
   inherited;
 end;
 

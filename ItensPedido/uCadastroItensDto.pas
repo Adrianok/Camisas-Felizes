@@ -19,12 +19,10 @@ type
     procedure SetvalorItem(const Value: Currency);
     procedure SetDetalheItem(const Value: TListaDetalheItem);
     procedure Setidmodelo(const Value: Integer);
-
   public
     constructor Create;
     destructor Destroy; override;
-
-    function AdicionarDetalhe(): Boolean;
+    procedure LimparDetalhe;
 
     property IdItensPedido : Integer  read FIdItensPedido write SetIdItensPedido;
     property valorItem : Currency  read FvalorItem write SetvalorItem;
@@ -35,11 +33,6 @@ type
 
 implementation
 
-
-function TCadastroItensDto.AdicionarDetalhe: Boolean;
-begin
-
-end;
 
 constructor TCadastroItensDto.Create;
 begin
@@ -52,6 +45,11 @@ begin
   inherited;
   if assigned(FdetalheItem) then
     FreeAndNil(FdetalheItem);
+end;
+
+procedure TCadastroItensDto.LimparDetalhe;
+begin
+  DetalheItem.Clear;
 end;
 
 procedure TCadastroItensDto.SetDetalheItem(const Value: TListaDetalheItem);

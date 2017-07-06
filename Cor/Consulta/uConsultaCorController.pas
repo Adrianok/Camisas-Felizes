@@ -14,6 +14,9 @@ uses
 type
   TConsultaCorController = class(TClassInterfaceConsultaBase)
   private
+    oCor_ModeloModel : TCor_ModeloModel;
+    oConsultaCorRegra: TConsultaCorRegra;
+    oConsultaCorModel : TConsultaCorModel;
     sCondicao : string;
   public
     procedure PesquisarGrid;  override;
@@ -49,11 +52,14 @@ end;
 
 constructor TConsultaCorController.Create;
 begin
-  if (not(assigned(oConsultaCorController))) then
+  if (not(assigned(oConsultaCorModel))) then
     oConsultaCorModel := TConsultaCorModel.Create;
 
   if (not(assigned(oConsultaCorRegra))) then
     oConsultaCorRegra := TConsultaCorRegra.Create;
+
+  if (not(assigned(oCor_ModeloModel))) then
+    oCor_ModeloModel := TCor_ModeloModel.Create;
 end;
 
 procedure TConsultaCorController.CriarForm(Aowner: TComponent; aRetorno: TRetornoConsulta; aString : string; sWhere: string = '');
@@ -79,8 +85,8 @@ begin
   if (assigned(oConsultaCorRegra)) then
     FreeAndNil(oConsultaCorRegra);
 
-  if (assigned(oConsultaCorModel)) then
-    FreeAndNil(oConsultaCorModel);
+  if (assigned(oCor_ModeloModel)) then
+    FreeAndNil(oCor_ModeloModel);
   inherited;
 end;
 
@@ -101,10 +107,11 @@ begin
     oListaModelo := TList.Create;
     if (not(assigned(oCor_ModeloModel))) then
       oCor_ModeloModel := TCor_ModeloModel.Create;
-    if(oConsultaCorRegra.SelectAllWhere(oCor_ModeloModel, oFormulario.FDMemTableGrid, oListaModelo, StrToInt(sCondicao)))then
+    if(oConsultaCorRegra.SelectAllWhere(oConsultaCorModel, oCor_ModeloModel, oFormulario.FDMemTableGrid, oListaModelo, StrToInt(sCondicao)))then
       oFormulario.FDMemTableGrid.Open
     else
-      ShowMessage('Não foram encontrados registros');
+      if(not(oConsultaCorRegra.SelectAll(oConsultaCorModel, oFormulario.FDMemTableGrid)))then
+        ShowMessage('Não foram encontrados registros');
   finally
     sCondicao := '';
     if (assigned(oCor_ModeloModel)) then

@@ -42,7 +42,7 @@ begin
   try
     Query.SQL.Clear;
     sSql := 'SELECT idCliente, UPPER(nome) as nome, cpf_cnpj, telefone'
-    + ' FROM cliente';
+    + ' FROM cliente WHERE observacao <> '''+'inativo'+'''';
     Query.Open(sSql);
     if (not(Query.IsEmpty)) then
     begin

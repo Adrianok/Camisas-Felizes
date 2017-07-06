@@ -18,12 +18,11 @@ type
     function SelectDescricao(const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
     function SelectModelo(const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto : TCadastroModeloDto) : boolean;
     function Novo(const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto : TCadastroModeloDto) : boolean;
-    function Salvar(var oListaIdCores : Tlist; const oCor_ModeloModel : TCor_ModeloModel; const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
+    function Salvar(var oListaIdCores : Tlist; const oCor_ModeloModel : TCor_ModeloModel; const oCadastroModeloModel : TCadastroModeloModel;
+    var oCadastroModeloDto: TCadastroModeloDto; var oCadastroCorDto : TCadastroCorDto; var oCadastroCorModel : TCadastroCorModel): boolean;
+
     procedure Deletar(const oCadastroModeloModel : TCadastroModeloModel; const oCor_ModeloModel : TCor_ModeloModel; const IdModelo: integer);
   end;
-
-var
-  oCadastroModeloRegra: TCadastroModeloRegra;
 
 implementation
 
@@ -44,7 +43,8 @@ begin
   Result := oCadastroModeloModel.NovoId(oCadastroModeloDto);
 end;
 
-function TCadastroModeloRegra.Salvar(var oListaIdCores : Tlist; const oCor_ModeloModel : TCor_ModeloModel; const oCadastroModeloModel : TCadastroModeloModel; var oCadastroModeloDto: TCadastroModeloDto): boolean;
+function TCadastroModeloRegra.Salvar(var oListaIdCores : Tlist; const oCor_ModeloModel : TCor_ModeloModel; const oCadastroModeloModel : TCadastroModeloModel;
+var oCadastroModeloDto: TCadastroModeloDto; var oCadastroCorDto : TCadastroCorDto; var oCadastroCorModel : TCadastroCorModel): boolean;
 begin
     //funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
     if(oCadastroModeloDto.IdModelo < 0)then

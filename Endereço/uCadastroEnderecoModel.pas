@@ -68,7 +68,7 @@ var
   sSql : string;
 begin
   try
-    Query.SQL.Clear;
+      Query.SQL.Clear;
     sSql :=
     ' DELETE FROM Endereco WHERE idEndereco = ' + IntToStr(IdEndereco);
     Query.SQL.Add(sSql);

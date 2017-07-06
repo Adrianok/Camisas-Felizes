@@ -12,11 +12,9 @@ type
   TConsultaCorRegra = class
   public
      function SelectAll(const oConsultaCorModel: TConsultaCorModel;var MemTable: TFDMemTable) : boolean;
-     function SelectAllWhere(const oCor_ModeloModel: TCor_ModeloModel; var MemTable: TFDMemTable; oListaModelo : Tlist; idModelo : integer) : boolean;
+     function SelectAllWhere(const oConsultaCorModel : TConsultaCorModel;const oCor_ModeloModel: TCor_ModeloModel; var MemTable: TFDMemTable; oListaModelo : Tlist; idModelo : integer) : boolean;
   end;
 
-var
-  oConsultaCorRegra: TConsultaCorRegra;
 implementation
 
 { TConsultaCorRegra }
@@ -27,6 +25,7 @@ begin
 end;
 
 function TConsultaCorRegra.SelectAllWhere(
+  const oConsultaCorModel : TConsultaCorModel;
   const oCor_ModeloModel: TCor_ModeloModel; var MemTable: TFDMemTable;
   oListaModelo: Tlist; idModelo : integer): boolean;
 begin

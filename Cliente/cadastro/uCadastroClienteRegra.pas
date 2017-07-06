@@ -17,8 +17,6 @@ type
     function SelectUfPorDescricao(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
     function SelectUfPorId(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
 
-
-
     function SelectMunicipioPorDescricao(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
     function SelectMunicipioPorId(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
 
@@ -37,6 +35,8 @@ type
 
     function SelectDescricao(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
     function SelectCliente(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
+    function SelectClientePorNome(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
+
     function Novo(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
     function Salvar(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
     function Deletar(const oCadastroClienteModel: TCadastroClienteModel; var oCadastroClienteDto: TCadastroClienteDto): boolean;
@@ -169,7 +169,8 @@ begin
   end
   else
   begin
-    oCadastroEnderecoModel.NovoId(oCadastroEnderecoDto);
+    if(not(oCadastroEnderecoDto.IdEndereco <> 0))then
+      oCadastroEnderecoModel.NovoId(oCadastroEnderecoDto);
     if(not(oCadastroEnderecoModel.Inserir(oCadastroEnderecoDto)))then
       Result := True;
   end;
@@ -193,6 +194,13 @@ function TCadastroClienteRegra.SelectCliente(const oCadastroClienteModel: TCadas
   var oCadastroClienteDto: TCadastroClienteDto): boolean;
 begin
   Result := oCadastroClienteModel.SelectPorId(oCadastroClienteDto);
+end;
+
+function TCadastroClienteRegra.SelectClientePorNome(
+  const oCadastroClienteModel: TCadastroClienteModel;
+  var oCadastroClienteDto: TCadastroClienteDto): boolean;
+begin
+  Result := oCadastroClienteModel.SelectPorNome(oCadastroClienteDto);
 end;
 
 function TCadastroClienteRegra.SelectDescricao(const oCadastroClienteModel

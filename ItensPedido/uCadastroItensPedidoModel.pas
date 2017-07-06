@@ -108,7 +108,9 @@ end;
 
 function TCadastroItensPedidoModel.SelectItensPedido(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
 var
+  oLoopControl : TCadastroItensDto;
   oCadastroItensDto : TCadastroItensDto;
+  bAchou : boolean;
 begin
   try
     Query.SQL.Clear;
@@ -125,7 +127,14 @@ begin
         oCadastroItensDto.quantidade := Query.FieldByName('quantidade').AsInteger;
         oCadastroItensDto.idmodelo := Query.FieldByName('idmodelo').AsInteger;
 
-        oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
+        bAchou := False;
+        for oLoopControl in oCadastroPedidoDto.ItensPedido.Values do
+        begin
+          if(oLoopControl.idmodelo = oCadastroItensDto.idmodelo)then
+            bAchou := True;
+        end;
+        if(not(bAchou))then
+          oCadastroPedidoDto.ItensPedido.Add(oCadastroItensDto.IdItensPedido, oCadastroItensDto);
         Query.Next;
       end;
       Result := True;

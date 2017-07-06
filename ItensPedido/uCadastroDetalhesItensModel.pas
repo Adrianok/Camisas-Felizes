@@ -124,10 +124,11 @@ end;
 
 function TCadastroDetalheItensModel.SelectDetalheItens(var oCadastroPedidoDto: TCadastroPedidoDto): Boolean;
 var
+  oLoopControDetalhe  : TCadastroDetalheItemDto;
   oLoopControlItens   : TCadastroItensDto;
   oCadastroDetalheDto : TCadastroDetalheItemDto;
   sSql                : string;
-  bAux                : boolean;
+  bAux, bAchou        : boolean;
 begin
   try
     bAux := False;
@@ -155,7 +156,17 @@ begin
         oCadastroDetalheDto.idcor := Query.FieldByName('idcor').AsInteger;
         oCadastroDetalheDto.quantidade := Query.FieldByName('quantidade').AsInteger;
 
-        oCadastroPedidoDto.ItensPedido.Items[Query.FieldByName('iditenspedido').AsInteger].DetalheItem.Add(oCadastroDetalheDto.IdDetalhe, oCadastroDetalheDto);
+        bAchou := False;
+        for oLoopControlItens in oCadastroPedidoDto.ItensPedido.Values do
+        begin
+          for oLoopControDetalhe in oLoopControlItens.DetalheItem.Values do
+          begin
+            if(oLoopControDetalhe.idtamanho = oCadastroDetalheDto.idtamanho)then
+              bAchou := True;
+          end;
+        end;
+        if(not(bAchou))then
+          oCadastroPedidoDto.ItensPedido.Items[Query.FieldByName('iditenspedido').AsInteger].DetalheItem.Add(oCadastroDetalheDto.IdDetalhe, oCadastroDetalheDto);
         Query.Next;
       end;
       Result := True;

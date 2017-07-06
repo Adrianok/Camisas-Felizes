@@ -81,7 +81,7 @@ end;
 
 procedure TCadastroPedidoDto.LimparListaItens;
 begin
-
+  ItensPedido.Clear;
 end;
 
 procedure TCadastroPedidoDto.Setdata(const Value: TDate);

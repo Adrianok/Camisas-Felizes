@@ -135,16 +135,6 @@ begin
     raise Exception.Create('Esse cliente não possui cadastro' + #13
     +'Por favor vá até o cadastro de clientes e cadastre o mesmo');
 
-//  - pega o pedido buscar o id do pedido
-//  for do itens do pedido
-//    - passa o id do pedido
-//    - gerar o id do item
-//    for detalhes
-//      - passa o id do pedido
-//      - passa o id do item do pedido
-//      - gerar o id do detalhe
-
-
   if(oCadastroPedidoModel.SelectPedido(oCadastroPedidoDto))then
   begin
     oCadastroPedidoModel.Atualizar(oCadastroPedidoDto);
@@ -198,6 +188,8 @@ begin
   end
   else
   begin
+    if(not(oCadastroEnderecoDto.IdEndereco <> 0))then
+      oCadastroEnderecoModel.NovoId(oCadastroEnderecoDto);
     if(oCadastroEnderecoModel.Inserir(oCadastroEnderecoDto))then
       Result := True;
   end;

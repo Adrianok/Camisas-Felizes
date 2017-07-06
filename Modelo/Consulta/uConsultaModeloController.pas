@@ -13,6 +13,8 @@ uses
 type
   TConsultaModeloController = class(TClassInterfaceConsultaBase)
   private
+    oConsultaModeloModel : TConsultaModeloModel;
+    oConsultaModeloRegra: TConsultaModeloRegra;
   public
     procedure PesquisarGrid;  override;
     function PreencherGrid:boolean; virtual;
@@ -39,7 +41,6 @@ end;
 procedure TConsultaModeloController.Confirmar;
 begin
   inherited;
-
 end;
 
 
@@ -74,10 +75,6 @@ begin
 
   if (assigned(oConsultaModeloRegra)) then
     FreeAndNil(oConsultaModeloRegra);
-
-  if (assigned(oConsultaModeloModel)) then
-    FreeAndNil(oConsultaModeloModel);
-
   inherited;
 end;
 

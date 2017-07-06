@@ -19,6 +19,12 @@ type
   private
     oListaIdCores : TList;
     oListaCores : TListaCores;
+    oCadastroModeloRegra: TCadastroModeloRegra;
+    oCadastroModeloModel: TCadastroModeloModel;
+    oCadastroCorModel : TCadastroCorModel;
+    oCadastroCorDto : TCadastroCorDto;
+    oCor_ModeloModel : TCor_ModeloModel;
+
     procedure RetornoModelo(aIdModelo : integer);
   public
     procedure VerificarChecados(oListaIdCores : TList);
@@ -72,6 +78,9 @@ begin
   if (not(assigned(oCadastroCorModel))) then
     oCadastroCorModel := TCadastroCorModel.Create;
 
+  if (not(assigned(oCadastroCorDto))) then
+    oCadastroCorDto := TCadastroCorDto.Create;
+
   if (not(assigned(oCadastroModeloDto))) then
     oCadastroModeloDto := TCadastroModeloDto.Create;
 
@@ -108,6 +117,9 @@ begin
 
   if (assigned(oCadastroCorModel)) then
     FreeAndNil(oCadastroCorModel);
+
+  if (assigned(oCadastroCorDto)) then
+    FreeAndNil(oCadastroCorDto);
 
   if (assigned(oCadastroModeloRegra)) then
     FreeAndNil(oCadastroModeloRegra);
@@ -228,7 +240,8 @@ begin
       oCadastroModeloDto.Preco           := StrToCurr(edtPreco.Text);
       VerificarChecados(oListaIdCores);
     end;
-    if(oCadastroModeloRegra.Salvar(oListaIdCores, oCor_ModeloModel, oCadastroModeloModel, oCadastroModeloDto))then
+    if(oCadastroModeloRegra.Salvar(oListaIdCores, oCor_ModeloModel, oCadastroModeloModel, oCadastroModeloDto,
+     oCadastroCorDto, oCadastroCorModel))then
       ShowMessage('Registro: '+ oCadastroModeloDto.Descricao +' Atualizado com sucesso')
     else
     begin

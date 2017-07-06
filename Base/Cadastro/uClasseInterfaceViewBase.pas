@@ -33,7 +33,7 @@ type
     procedure AjustarFoco;
     procedure AtivarCampos;
     procedure DesativarCampos;
-    procedure LimparCampos;
+    procedure LimparCampos; virtual;
   end;
 
 implementation

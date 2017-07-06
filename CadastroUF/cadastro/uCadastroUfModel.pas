@@ -15,6 +15,7 @@ type
     // function SelecionarTudo(var oCadastroModeloDto: TObjectDictionary<string, TCadastroModeloDto>): Boolean;
     Query: TFDQuery;
   public
+    function Select(var oCadastroUfDto: TCadastroUfDto): Boolean;
     function SelectPorId(var oCadastroUfDto: TCadastroUfDto): Boolean;
     function SelectUf(var oCadastroUfDto: TCadastroUfDto): Boolean;
     function SelectDescricao(var oCadastroUfDto: TCadastroUfDto): Boolean;
@@ -136,6 +137,22 @@ begin
   end;
 end;
 
+function TCadastroUfModel.Select(var oCadastroUfDto: TCadastroUfDto): Boolean;
+begin
+  try
+    Query.SQL.Clear;
+    Query.Open('SELECT * FROM Uf WHERE idUf =' + IntToStr(oCadastroUfDto.Id));
+    if (not(Query.IsEmpty)) then
+    begin
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
+
 function TCadastroUfModel.SelectDescricao(var oCadastroUfDto: TCadastroUfDto): Boolean;
 begin
   try
@@ -143,6 +160,7 @@ begin
     Query.Open('SELECT iduf, sigla, descricao  FROM Uf WHERE sigla =''' + QuotedStr(oCadastroUfDto.uf) + ''' ');
     if (not(Query.IsEmpty)) then
     begin
+      oCadastroUfDto.nome := Query.FieldByName('descricao').AsString;
       oCadastroUfDto.Id := Query.FieldByName('idUf').AsInteger;
       Result := True;
     end

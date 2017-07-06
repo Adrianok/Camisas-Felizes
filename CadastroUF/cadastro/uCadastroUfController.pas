@@ -17,12 +17,14 @@ type
     oCadastroUfDto : TCadastroUfDto;
     oCadastroUfModel : TCadastroUfModel;
     oCadastroUfRegra: TCadastroUfRegra;
+    oForm : TCadastroUfForm;
     procedure RetornoUf(aIdUf: integer);
   public
     procedure Inicial; override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
+    procedure Verificar(ActiveControl: TWinControl);
     procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl); override;
     procedure NovoID;
     procedure Excluir; override;
@@ -57,6 +59,7 @@ begin
     oFormulario := TCadastroUfForm.Create(Aowner);
   oFormulario.oController := oCadastroUfController;
   oFormulario.Show;
+  oForm := (oFormulario as TCadastroUfForm);
   inherited;
 end;
 
@@ -126,11 +129,6 @@ begin
         ledtUf.Text := oCadastroUfDto.uf;
         ledtNome.Text := oCadastroUfDto.nome;
       end;
-  end
-  else
-  begin
-    Inicial;
-    raise Exception.Create('Não foi escolhido registro');
   end;
 end;
 
@@ -143,11 +141,34 @@ begin
     oCadastroUfDto.uf := ledtUf.Text;
     oCadastroUfDto.nome := ledtNome.Text;
   end;
+  if(oCadastroUfRegra.SelectDescricao(oCadastroUfModel, oCadastroUfDto))then
+    raise Exception.Create('Esta unidade federal já possui cadastro');
   if (oCadastroUfRegra.Salvar(oCadastroUfModel, oCadastroUfDto)) then
     ShowMessage('Registro: ' + oCadastroUfDto.uf + ' Atualizado com sucesso')
   else
   begin
     ShowMessage('Registro: ' + oCadastroUfDto.uf + ' Inserido com sucesso');
+  end;
+end;
+
+procedure TCadastroUfController.Verificar(ActiveControl: TWinControl);
+begin
+  if(ActiveControl = oForm.LedtUf)then
+  begin
+    if(oCadastroUfRegra.SelectDescricao(oCadastroUfModel, oCadastroUfDto))then
+    begin
+      oForm.LedtNome.Text := oCadastroUfDto.nome;
+      oForm.LedtCodigo.Text := IntToStr(oCadastroUfDto.id);
+    end;
+  end
+  else
+  if(ActiveControl = oForm.LedtCodigo)then
+  begin
+    if(oForm.LedtCodigo.Text <> '')then
+      RetornoUf(StrToInt(oForm.LedtCodigo.Text))
+    else
+      NovoID;
+
   end;
 end;
 

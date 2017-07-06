@@ -39,7 +39,6 @@ begin
                            ', sigla = ' + QuotedStr(oCadastroUfDto.uf) +
                            ' WHERE iduf = ' + IntToStr(oCadastroUfDto.id));
     Query.ExecSQL;
-
     if (not(Query.IsEmpty)) then
     begin
       Result := True;

@@ -11,6 +11,8 @@ type
   TCadastroBairroForm = class(TfrmBase)
     edtCodigo: TLabeledEdit;
     edtBairro: TLabeledEdit;
+    edtMunicipio: TLabeledEdit;
+    edtCep: TLabeledEdit;
   private
     { Private declarations }
   public

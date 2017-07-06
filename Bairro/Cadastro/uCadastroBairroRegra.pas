@@ -4,12 +4,16 @@ interface
 
 uses
   System.SysUtils, uCadastroBairroDto,
-  uCadastroBairroForm, uCadastroBairroModel;
+  uCadastroBairroForm, uCadastroBairroModel,
+  uCadastroMunicipioModel, uCadastroMunicipioDto;
 
 type
   TCadastroBairroRegra = class
   private
   public
+
+    function SelectMunicipioPorDescricao(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+    function SelectMunicipioPorId(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
     function SelectDescricao(const oCadastroBairroModel : TCadastroBairroModel; var oCadastroBairroDto : TCadastroBairroDto) : boolean;
     function SelectBairro(const oCadastroBairroModel : TCadastroBairroModel; var oCadastroBairroDto : TCadastroBairroDto) : boolean;
     function Novo(const oCadastroBairroModel : TCadastroBairroModel; var oCadastroBairroDto : TCadastroBairroDto) : boolean;
@@ -52,6 +56,8 @@ begin
       end
       else
       begin
+        if(oCadastroBairroDto.IdBairro = 0)then
+          oCadastroBairroModel.NovoId(oCadastroBairroDto);
         oCadastroBairroModel.Inserir(oCadastroBairroDto);
         Result := False;
       end
@@ -72,6 +78,20 @@ begin
     Result := True
   else
     Result := oCadastroBairroModel.NovoId(oCadastroBairroDto);
+end;
+
+function TCadastroBairroRegra.SelectMunicipioPorDescricao(
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  Result := oCadastroMunicipioModel.SelectDescricao(oCadastroMunicipioDto);
+end;
+
+function TCadastroBairroRegra.SelectMunicipioPorId(
+  const oCadastroMunicipioModel: TCadastroMunicipioModel;
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
+begin
+  Result := oCadastroMunicipioModel.SelectPorId(oCadastroMunicipioDto);
 end;
 
 end.

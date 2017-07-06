@@ -142,7 +142,8 @@ begin
     oCadastroUfDto.nome := ledtNome.Text;
   end;
   if(oCadastroUfRegra.SelectDescricao(oCadastroUfModel, oCadastroUfDto))then
-    raise Exception.Create('Esta unidade federal já possui cadastro');
+    if(oForm.LedtCodigo.Text <> IntToStr(oCadastroUfDto.id))then
+      raise Exception.Create('Esta unidade federal já possui cadastro');
   if (oCadastroUfRegra.Salvar(oCadastroUfModel, oCadastroUfDto)) then
     ShowMessage('Registro: ' + oCadastroUfDto.uf + ' Atualizado com sucesso')
   else

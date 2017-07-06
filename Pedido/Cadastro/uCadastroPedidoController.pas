@@ -880,6 +880,15 @@ var
   oLoopControlItem : TCadastroItensDto;
   oLoopControlDetalhe : TCadastroDetalheItemDto;
 begin
+
+  if(ActiveControl = oForm.edtNmClient)then
+  begin
+    if(oForm.edtNmClient.Text <> '')then
+    begin
+      if(oCadastroPedidoRegra.SelectCliente(oCadastroClienteModel, oCadastroClienteDto))then
+        RetornoCliente(oCadastroClienteDto.IdCliente);
+    end;
+  end;
   if(ActiveControl = oForm.edtCpfCnpj)then
   begin
     if(oForm.edtCpfCnpj.Text <> '')then

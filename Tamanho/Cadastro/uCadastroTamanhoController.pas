@@ -14,10 +14,16 @@ uses
 type
   TCadastroTamanhoController = class(TClassInterfaceViewBase)
   private
+    oForm : TCadastroTamanhoForm;
+    oCadastroTamanhoDto : TCadastroTamanhoDto;
+    oCadastroTamanhoModel: TCadastroTamanhoModel;
+    oCadastroTamanhoRegra: TCadastroTamanhoRegra;
+
     procedure RetornoTamanho(aIdTamanho : integer);
   public
     procedure Excluir; override;
     procedure Inicial; override;
+    procedure Verificar(ActiveControl: TWinControl);
     procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);  override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
@@ -55,6 +61,7 @@ begin
     oFormulario := TCadastroTamanhoForm.Create(Aowner);
   oFormulario.oController := oCadastroTamanhoController;
   oFormulario.Show;
+  oForm := (oFormulario as TCadastroTamanhoForm);
   inherited;
 end;
 
@@ -136,12 +143,34 @@ begin
       oCadastroTamanhoDto.IdTamanho        :=  StrToInt(edtCodigo.Text);
       oCadastroTamanhoDto.Descricao        :=  edtTamanho.Text;
     end;
+    if(oCadastroTamanhoRegra.SelectPorDescricao(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+      raise Exception.Create('Esse tamanho já possui cadastro');
     if(oCadastroTamanhoRegra.Salvar(oCadastroTamanhoModel, oCadastroTamanhoDto))then
       ShowMessage('Registro: '+ oCadastroTamanhoDto.Descricao +' Atualizado com sucesso')
     else
     begin
       ShowMessage('Registro: '+ oCadastroTamanhoDto.Descricao +' Inserido com sucesso');
     end;
+end;
+
+procedure TCadastroTamanhoController.Verificar(ActiveControl: TWinControl);
+begin
+  if(ActiveControl = oForm.edtTamanho)then
+  begin
+    if(oCadastroTamanhoRegra.SelectPorDescricao(oCadastroTamanhoModel, oCadastroTamanhoDto))then
+    begin
+      oForm.edtCodigo.Text := IntToStr(oCadastroTamanhoDto.IdTamanho);
+    end;
+  end
+  else
+  if(ActiveControl = oForm.edtCodigo)then
+  begin
+    if(oForm.edtCodigo.Text = '')then
+      NovoID
+    else
+      RetornoTamanho(StrToInt(oForm.edtCodigo.Text));
+  end;
+
 end;
 
 end.

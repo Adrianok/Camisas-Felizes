@@ -109,7 +109,6 @@ end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
-  ReportMemoryLeaksOnShutdown := True;
   try
     TConexaoSigleton.GetInstancia;
   except

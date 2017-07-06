@@ -17,8 +17,6 @@ type
     property Descricao : string read FDescricao write SetDescricao;
   end;
 
-var
-  oCadastroTamanhoDto : TCadastroTamanhoDto;
 implementation
 
 { TDtoTamanho }

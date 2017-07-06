@@ -300,6 +300,9 @@ begin
     oCadastroMunicipioDto.Municipio := edtCidade.Text;
     oCadastroUfDto.nome := edtEstado.Text;
   end;
+  if(oCadastroClienteRegra.SelectClientePorNome(oCadastroClienteModel, oCadastroClienteDto))then
+    if(oForm.EdtCodigo.Text <> IntToStr(oCadastroClienteDto.IdCliente))then
+      raise Exception.Create('Esse cliente já possui cadastro');
 
   if(oCadastroClienteRegra.SalvarEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
     oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then

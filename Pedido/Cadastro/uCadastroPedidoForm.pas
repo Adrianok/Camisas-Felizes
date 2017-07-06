@@ -26,7 +26,6 @@ type
     edtBairro: TLabeledEdit;
     edtCidade: TLabeledEdit;
     gpCliente: TGroupBox;
-    edtCpfCnpj: TLabeledEdit;
     edtNmClient: TLabeledEdit;
     gpNota: TGroupBox;
     Label1: TLabel;
@@ -59,6 +58,8 @@ type
     edtQntItm: TLabeledEdit;
     chlItens: TListView;
     chlDetalheItem: TListView;
+    Label7: TLabel;
+    edtCpfCnpj: TMaskEdit;
   private
     { Private declarations }
   public

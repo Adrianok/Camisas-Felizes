@@ -19,10 +19,13 @@ type
     oCadastroCorRegra: TCadastroCorRegra;
     oCadastroCorModel: TCadastroCorModel;
     oCor_ModeloModel : TCor_ModeloModel;
+    oForm : TCadastroCorForm;
+
     procedure RetornoCor(aIdCor : integer);
   public
     procedure Excluir; override;
     procedure Inicial; override;
+    procedure Verificar(ActiveControl: TWinControl); override;
     procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl); override;
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
@@ -62,6 +65,7 @@ begin
     oFormulario := TCadastroCorForm.Create(Aowner);
   oFormulario.oController := oCadastroCorController;
   oFormulario.Show;
+  oForm := (oFormulario as TCadastroCorForm);
   inherited;
 end;
 
@@ -146,6 +150,8 @@ begin
       oCadastroCorDto.IdCor        :=  StrToInt(edtCodigo.Text);
       oCadastroCorDto.Descricao          :=  edtCor.Text;
     end;
+    if(oCadastroCorRegra.Select(oCadastroCorModel, oCadastroCorDto))then
+      raise Exception.Create('Essa cor já possui cadastro');
     if(oCadastroCorRegra.Salvar(oCadastroCorModel, oCadastroCorDto))then
       ShowMessage('Registro: '+ oCadastroCorDto.Descricao +' Atualizado com sucesso')
     else
@@ -156,5 +162,23 @@ end;
 
 
 
+
+procedure TCadastroCorController.Verificar(ActiveControl: TWinControl);
+begin
+  inherited;
+  if(ActiveControl = oForm.edtCodigo)then
+  begin
+    if(oCadastroCorRegra.SelectCor(oCadastroCorModel, oCadastroCorDto))then
+      oForm.edtCor.Text := oCadastroCorDto.Descricao
+    else
+      NovoID;
+  end
+  else
+  if(ActiveControl = oForm.edtCor)then
+  begin
+    if(oCadastroCorRegra.SelectDescricao(oCadastroCorModel, oCadastroCorDto))then
+      oForm.edtCodigo.Text := oCadastroCorDto.IdCor;
+  end;
+end;
 
 end.

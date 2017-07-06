@@ -11,6 +11,7 @@ type
   TCadastroCorRegra = class
   private
   public
+    function Select(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
     function SelectDescricao(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
     function SelectCor(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
     function Novo(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto : TCadastroCorDto) : boolean;
@@ -60,6 +61,12 @@ begin
       raise Exception.Create('Essa cor já foi cadastrada!');
 
 
+end;
+
+function TCadastroCorRegra.Select(const oCadastroCorModel: TCadastroCorModel;
+  var oCadastroCorDto: TCadastroCorDto): boolean;
+begin
+Result := oCadastroCorModel.SelectCor(oCadastroCorDto);
 end;
 
 function TCadastroCorRegra.SelectCor(const oCadastroCorModel : TCadastroCorModel; var oCadastroCorDto: TCadastroCorDto): boolean;

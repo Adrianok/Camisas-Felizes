@@ -165,7 +165,6 @@ end;
 procedure TClassInterfaceViewBase.Salvar;
 begin
   oFormulario.btnNovo.Enabled := True;
-  oFormulario.btnSalvar.Enabled := False;
   oFormulario.btnExcluir.Enabled := True;
   oFormulario.btnCancelar.Enabled := True;
   ValidarVazio;

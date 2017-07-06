@@ -185,6 +185,7 @@ begin
   inherited;
   NovoID;
   GridCor(StrToIntDef((oFormulario as TCadastroModeloForm).edtCodigo.Text, 0));
+  (oFormulario as TCadastroModeloForm).edtCodigo.SetFocus;
 end;
 
 procedure TCadastroModeloController.NovoID;

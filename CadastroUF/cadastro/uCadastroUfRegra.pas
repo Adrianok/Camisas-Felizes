@@ -10,6 +10,8 @@ type
   TCadastroUfRegra = class
   private
   public
+
+    function Select(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
     function SelectDescricao(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
     function SelectUf(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
     function Novo(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
@@ -42,7 +44,7 @@ function TCadastroUfRegra.Salvar(const oCadastroUfModel: TCadastroUfModel;
   var oCadastroUfDto: TCadastroUfDto): boolean;
 begin
   // funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
-  if (oCadastroUfModel.SelectUf(oCadastroUfDto)) then
+  if (oCadastroUfModel.Select(oCadastroUfDto)) then
   begin
     oCadastroUfModel.Atualizar(oCadastroUfDto);
     Result := True
@@ -59,6 +61,12 @@ function TCadastroUfRegra.SelectUf(const oCadastroUfModel: TCadastroUfModel;
   var oCadastroUfDto: TCadastroUfDto): boolean;
 begin
   Result := oCadastroUfModel.SelectPorId(oCadastroUfDto);
+end;
+
+function TCadastroUfRegra.Select(const oCadastroUfModel: TCadastroUfModel;
+  var oCadastroUfDto: TCadastroUfDto): boolean;
+begin
+  Result := oCadastroUfModel.Select(oCadastroUfDto);
 end;
 
 function TCadastroUfRegra.SelectDescricao(const oCadastroUfModel

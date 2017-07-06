@@ -5,14 +5,14 @@ inherited CadastroUfForm: TCadastroUfForm
   ExplicitWidth = 504
   ExplicitHeight = 216
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   inherited Panel1: TPanel
     Width = 498
     TabOrder = 3
-    ExplicitWidth = 600
+    ExplicitWidth = 498
     inherited Panel3: TPanel
-      Left = 297
-      ExplicitLeft = 399
+      Left = 412
+      ExplicitLeft = 412
     end
   end
   object LedtNome: TLabeledEdit
@@ -87,7 +87,6 @@ inherited CadastroUfForm: TCadastroUfForm
     EditLabel.ParentBiDiMode = False
     EditLabel.ParentFont = False
     EditLabel.Layout = tlBottom
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15

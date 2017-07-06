@@ -230,10 +230,10 @@ begin
   else
   if(ActiveControl = oForm.EdtCodigo)then
   begin
-    if (oForm.EdtCodigo = '') then
+    if (oForm.EdtCodigo.Text = '') then
       NovoID
     else
-      RetornoMunicipio(oForm.EdtCodigo);
+      RetornoMunicipio(StrToInt(oForm.EdtCodigo.Text));
   end;
 end;
 

@@ -231,7 +231,7 @@ begin
   else
   if(ActiveControl = oForm.edtMunicipio)then
   begin
-    if(oCadastroBairroRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto)then
+    if(oCadastroBairroRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
       RetornoMuniipio(oCadastroMunicipioDto.id)
     else
       raise Exception.Create('Insira um município válido');

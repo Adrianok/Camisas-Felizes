@@ -15,6 +15,7 @@ object frmPrincipal: TfrmPrincipal
   OldCreateOrder = False
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object MainMenu1: TMainMenu

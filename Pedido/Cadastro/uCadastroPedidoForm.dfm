@@ -2,8 +2,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
   ClientWidth = 967
-  ExplicitLeft = -141
-  ExplicitTop = -127
+  ExplicitTop = -85
   ExplicitWidth = 973
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -11,7 +10,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   inherited Panel1: TPanel
     Width = 967
     TabOrder = 2
-    ExplicitWidth = 957
+    ExplicitWidth = 967
     inherited Panel2: TPanel
       inherited btnSalvar: TBitBtn
         TabOrder = 2
@@ -26,7 +25,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     end
     inherited Panel3: TPanel
       Left = 881
-      ExplicitLeft = 871
+      ExplicitLeft = 881
     end
   end
   object GroupBox1: TGroupBox
@@ -37,7 +36,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     Align = alBottom
     Caption = 'Dados gerais'
     TabOrder = 0
-    ExplicitWidth = 957
     object Label4: TLabel
       Left = 13
       Top = 19
@@ -3514,32 +3512,18 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        object edtCpfCnpj: TLabeledEdit
-          Left = 147
-          Top = 60
-          Width = 255
-          Height = 26
-          Hint = 'CPF/CNPJ'
-          CharCase = ecUpperCase
-          EditLabel.Width = 117
-          EditLabel.Height = 23
-          EditLabel.Hint = 'CPF ou CNPJ'
-          EditLabel.Caption = '(F2) CPF - CNPJ:'
-          EditLabel.Font.Charset = DEFAULT_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -17
-          EditLabel.Font.Name = 'Segoe UI Light'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
+        object Label7: TLabel
+          Left = 77
+          Top = 58
+          Width = 64
+          Height = 18
+          Caption = 'CPF/CNPJ'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = []
-          LabelPosition = lpLeft
-          NumbersOnly = True
           ParentFont = False
-          TabOrder = 1
         end
         object edtNmClient: TLabeledEdit
           Tag = 999
@@ -3559,7 +3543,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           EditLabel.Font.Name = 'Segoe UI Light'
           EditLabel.Font.Style = []
           EditLabel.ParentFont = False
-          Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15
@@ -3568,6 +3551,22 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           LabelPosition = lpLeft
           ParentFont = False
           TabOrder = 0
+        end
+        object edtCpfCnpj: TMaskEdit
+          Left = 147
+          Top = 56
+          Width = 256
+          Height = 26
+          EditMask = '000\.000\.000\-00;0; '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          MaxLength = 14
+          ParentFont = False
+          TabOrder = 1
+          Text = ''
         end
       end
       object gpNota: TGroupBox

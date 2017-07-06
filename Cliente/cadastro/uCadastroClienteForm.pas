@@ -6,11 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, FireDAC.Stan.Async,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uBase, Vcl.StdCtrls, Vcl.ComCtrls,
-  Vcl.Buttons, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Buttons, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.Mask;
 
 type
   TCadastroClienteForm = class(TfrmBase)
-    EdtCpfCnpj: TLabeledEdit;
     EdtNome: TLabeledEdit;
     EdtCodigo: TLabeledEdit;
     EdtTelefone: TLabeledEdit;
@@ -22,6 +21,8 @@ type
     edtBairro: TLabeledEdit;
     edtCidade: TLabeledEdit;
     edtEstado: TLabeledEdit;
+    EdtCpfCnpj: TMaskEdit;
+    Label1: TLabel;
 
   private
     { Private declarations }

@@ -22,7 +22,7 @@ uses
     oCadastroMunicipioRegra       : TCadastroMunicipioRegra;
     oCadastroUfDto                : TCadastroUfDto;
     oCadastroUfModel              : TCadastroUfModel;
-
+    oForm                         : TCadastroMunicipioForm;
 
     procedure RetornoMunicipio(AID: Integer);
     procedure RetornoEstado(AID: Integer);
@@ -31,6 +31,7 @@ uses
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
+    procedure Verificar(ActiveControl : TWinControl);
     procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);  override;
     procedure NovoID;
     procedure Excluir; override;
@@ -69,6 +70,7 @@ begin
     oFormulario := TCadastroMunicipioForm.Create(Aowner);
   oFormulario.oController := oCadastroMunicipioController;
   oFormulario.Show;
+  oForm := (oFormulario as TCadastroMunicipioForm);
   inherited;
 end;
 
@@ -190,6 +192,9 @@ begin
     if(oCadastroMunicipioRegra.SelectUfPorDescricao(oCadastroUfModel, oCadastroUfDto))then
       oCadastroMunicipioDto.Estado := oCadastroUfDto.id;
   end;
+  if(oCadastroMunicipioRegra.SelectDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
+    if((oFormulario as TCadastroMunicipioForm).EdtMunicipio.Text <> IntToStr(oCadastroMunicipioDto.id))then
+      raise Exception.Create('Esse município já possui cadastro');
   if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel,
     oCadastroMunicipioDto)) then
   begin
@@ -200,6 +205,35 @@ begin
   begin
     ShowMessage('Registro: ' + oCadastroMunicipioDto.Municipio +
       ' Inserido com sucesso');
+  end;
+end;
+
+procedure TCadastroMunicipioController.Verificar(ActiveControl: TWinControl);
+begin
+  if(ActiveControl = oForm.EdtEstado)then
+  begin
+    if(not(oCadastroMunicipioRegra.SelectUfPorDescricao(oCadastroUfModel, oCadastroUfDto)))then
+    begin
+      raise Exception.Create('Insira um estado válido');
+      abort;
+    end;
+  end
+  else
+  if(ActiveControl = oForm.EdtMunicipio)then
+  begin
+    if(oCadastroMunicipioRegra.SelectDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
+    begin
+      oForm.EdtCodigo.Text := IntToStr(oCadastroMunicipioDto.id);
+      RetornoEstado(oCadastroMunicipioDto.estado);
+    end
+  end
+  else
+  if(ActiveControl = oForm.EdtCodigo)then
+  begin
+    if (oForm.EdtCodigo = '') then
+      NovoID
+    else
+      RetornoMunicipio(oForm.EdtCodigo);
   end;
 end;
 

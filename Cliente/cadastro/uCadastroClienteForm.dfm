@@ -2,6 +2,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
   Caption = 'Cadastro de Cliente'
   ClientHeight = 531
   ClientWidth = 844
+  ExplicitTop = -110
   ExplicitWidth = 850
   ExplicitHeight = 560
   PixelsPerInch = 96
@@ -19,9 +20,22 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     ParentFont = False
   end
+  object Label1: TLabel [1]
+    Left = 418
+    Top = 159
+    Width = 64
+    Height = 18
+    Caption = 'CPF/CNPJ'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   inherited Panel1: TPanel
     Width = 844
-    TabOrder = 11
+    TabOrder = 10
     ExplicitWidth = 844
     inherited Panel2: TPanel
       inherited btnSalvar: TBitBtn
@@ -44,31 +58,6 @@ inherited CadastroClienteForm: TCadastroClienteForm
       Left = 758
       ExplicitLeft = 758
     end
-  end
-  object EdtCpfCnpj: TLabeledEdit
-    Left = 310
-    Top = 155
-    Width = 459
-    Height = 26
-    CharCase = ecUpperCase
-    EditLabel.Width = 79
-    EditLabel.Height = 18
-    EditLabel.Caption = 'CPF / CNPJ:'
-    EditLabel.Font.Charset = DEFAULT_CHARSET
-    EditLabel.Font.Color = clWindowText
-    EditLabel.Font.Height = -15
-    EditLabel.Font.Name = 'Tahoma'
-    EditLabel.Font.Style = []
-    EditLabel.ParentFont = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    LabelPosition = lpLeft
-    ParentFont = False
-    TabOrder = 2
-    TextHint = 'nome Cliente'
   end
   object EdtNome: TLabeledEdit
     Left = 310
@@ -145,7 +134,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
     TextHint = 'Telefone Fixo'
   end
   object EdtCelular: TLabeledEdit
@@ -170,7 +159,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 3
     TextHint = 'Celular'
   end
   object edtObservacoes: TMemo
@@ -187,7 +176,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 10
+    TabOrder = 9
   end
   object EdtRua: TLabeledEdit
     Left = 494
@@ -211,7 +200,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 8
+    TabOrder = 7
   end
   object edtNum: TLabeledEdit
     Left = 341
@@ -235,7 +224,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 8
   end
   object edtBairro: TLabeledEdit
     Left = 494
@@ -259,7 +248,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 6
   end
   object edtCidade: TLabeledEdit
     Left = 494
@@ -283,7 +272,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 6
+    TabOrder = 5
   end
   object edtEstado: TLabeledEdit
     Left = 494
@@ -307,6 +296,22 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 4
+  end
+  object EdtCpfCnpj: TMaskEdit
+    Left = 494
+    Top = 158
+    Width = 275
+    Height = 26
+    EditMask = '000\.000\.000\-00;0; '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    MaxLength = 14
+    ParentFont = False
+    TabOrder = 11
+    Text = ''
   end
 end

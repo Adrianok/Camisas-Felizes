@@ -186,7 +186,8 @@ begin
     oCadastroBairroDto.idmunicipio := oCadastroMunicipioDto.id;
   end;
   if(oCadastroBairroRegra.SelectDescricao(oCadastroBairroModel, oCadastroBairroDto))then
-    raise Exception.Create('Esse bairro ja possui cadastro');
+    if(oForm.edtCodigo.Text <> IntToStr(oCadastroBairroDto.IdBairro))then
+      raise Exception.Create('Esse bairro ja possui cadastro');
   if(oCadastroBairroRegra.Salvar(oCadastroBairroModel, oCadastroBairroDto))then
     ShowMessage('Registro: '+ oCadastroBairroDto.Descricao +' Atualizado com sucesso')
   else
@@ -226,6 +227,14 @@ begin
       oCadastroBairroRegra.SelectMunicipioPorId(oCadastroMunicipioModel, oCadastroMunicipioDto);
       oForm.edtMunicipio.Text := oCadastroMunicipioDto.Municipio;
     end;
+  end
+  else
+  if(ActiveControl = oForm.edtMunicipio)then
+  begin
+    if(oCadastroBairroRegra.SelectMunicipioPorDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto)then
+      RetornoMuniipio(oCadastroMunicipioDto.id)
+    else
+      raise Exception.Create('Insira um município válido');
   end;
   inherited;
 end;

@@ -17,9 +17,6 @@ type
     function Salvar(const oCadastroTamanhoModel : TCadastroTamanhoModel; var oCadastroTamanhoDto: TCadastroTamanhoDto): boolean;
   end;
 
-var
-  oCadastroTamanhoRegra: TCadastroTamanhoRegra;
-
 implementation
 
 { TCadastroTamanhoRegra }

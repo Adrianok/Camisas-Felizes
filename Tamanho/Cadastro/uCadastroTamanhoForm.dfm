@@ -4,6 +4,9 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
   ExplicitHeight = 268
   PixelsPerInch = 96
   TextHeight = 16
+  inherited Panel1: TPanel
+    TabOrder = 2
+  end
   object edtTamanho: TLabeledEdit
     Left = 94
     Top = 160
@@ -48,7 +51,6 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
     EditLabel.Font.Name = 'Segoe UI Light'
     EditLabel.Font.Style = []
     EditLabel.ParentFont = False
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -56,6 +58,6 @@ inherited CadastroTamanhoForm: TCadastroTamanhoForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 0
   end
 end

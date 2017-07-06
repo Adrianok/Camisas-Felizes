@@ -27,8 +27,6 @@ type
     destructor Destroy; override;
   end;
 
-  var
-    oCadastroTamanhoModel: TCadastroTamanhoModel;
 
 implementation
 
@@ -67,7 +65,7 @@ function TCadastroTamanhoModel.Deletar(const IdTamanho: integer): Boolean;
 begin
   try
     Query.SQL.Clear;
-    Query.SQL.Add(' DELETE FROM Tamanho WHERE idtamanho = ' + IntToStr(oCadastroTamanhoDto.IdTamanho));
+    Query.SQL.Add(' DELETE FROM Tamanho WHERE idtamanho = ' + IntToStr(IdTamanho));
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
       Result := True

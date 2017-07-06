@@ -78,7 +78,7 @@ begin
   try
     Query.SQL.Clear;
     sSql :=
-    ' DELETE FROM Cliente WHERE idCliente = ' + IntToStr(IdCliente);
+    ' UPDATE Cliente SET observacao = '''+ 'inativo' +''' WHERE idCliente = ' + IntToStr(IdCliente);
     Query.SQL.Add(sSql);
     Query.ExecSQL;
     if (not(Query.IsEmpty)) then
@@ -140,7 +140,7 @@ function TCadastroClienteModel.SelectCliente(var oCadastroClienteDto: TCadastroC
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM Cliente WHERE idCliente =' + IntToStr(oCadastroClienteDto.IdCliente));
+    Query.Open('SELECT * FROM Cliente WHERE observacao <> '''+'inativo'+''' and idCliente =' + IntToStr(oCadastroClienteDto.IdCliente));
     if (not(Query.IsEmpty)) then
       Result := True
     else
@@ -156,7 +156,7 @@ function TCadastroClienteModel.SelectPorCpf(
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM Cliente WHERE cpf_cnpj =' + QuotedStr(oCadastroClienteDto.cpf_cnpj));
+    Query.Open('SELECT * FROM Cliente WHERE observacao <> '''+'inativo'+''' and cpf_cnpj =' + QuotedStr(oCadastroClienteDto.cpf_cnpj));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
@@ -178,7 +178,7 @@ function TCadastroClienteModel.SelectPorId(var oCadastroClienteDto: TCadastroCli
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM Cliente WHERE idCliente =' + IntToStr(oCadastroClienteDto.IdCliente));
+    Query.Open('SELECT * FROM Cliente WHERE observacao <> '''+'inativo'+''' and  idCliente =' + IntToStr(oCadastroClienteDto.IdCliente));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;
@@ -201,7 +201,7 @@ function TCadastroClienteModel.SelectPorNome(
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT * FROM cliente WHERE nome =''' + oCadastroClienteDto.Nome + ''' ');
+    Query.Open('SELECT * FROM cliente WHERE observacao <> '''+'inativo'+''' and nome =''' + oCadastroClienteDto.Nome + ''' ');
     if (not(Query.IsEmpty)) then
     begin
       oCadastroClienteDto.IdCliente := Query.FieldByName('idcliente').AsInteger;

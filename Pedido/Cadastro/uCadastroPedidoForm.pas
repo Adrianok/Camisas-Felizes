@@ -48,7 +48,7 @@ type
     edtTamanho: TLabeledEdit;
     edtCor: TLabeledEdit;
     btnAddItem: TBitBtn;
-    btnExcluirModelo: TBitBtn;
+    btnExcluirDetalhe: TBitBtn;
     Label19: TLabel;
     btnExcluirItem: TBitBtn;
     Label20: TLabel;

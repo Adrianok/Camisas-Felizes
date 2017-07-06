@@ -295,6 +295,7 @@ begin
     oCadastroClienteDto.cpf_cnpj := EdtCpfCnpj.Text;
     oCadastroClienteDto.celular := EdtCelular.Text;
     oCadastroClienteDto.observacao := edtObservacoes.Lines.Text;
+    oCadastroEnderecoDto.IdEndereco := oCadastroClienteDto.idendereco;
     oCadastroBairroDto.Descricao := edtBairro.Text;
     oCadastroMunicipioDto.Municipio := edtCidade.Text;
     oCadastroUfDto.nome := edtEstado.Text;
@@ -339,6 +340,9 @@ procedure TCadastroClienteController.Verificar(ActiveControl : TWinControl);
 begin
   if(ActiveControl = oForm.EdtCodigo)then
   begin
+    if(oForm.edtCodigo.Text = '')then
+      NovoID
+    else
     if(oCadastroClienteRegra.SelectCliente(oCadastroClienteModel, oCadastroClienteDto))then
     begin
       oForm.EdtCpfCnpj.Text := oCadastroClienteDto.cpf_cnpj;
@@ -350,7 +354,33 @@ begin
   end
   else
   if(ActiveControl = oForm.EdtCpfCnpj)then
-    VerificaCPF_CNPJ;
+  begin
+    if(oCadastroClienteRegra.SelectCliente(oCadastroClienteModel, oCadastroClienteDto))then
+      if(oForm.EdtCodigo.Text = oCadastroClienteDto.cpf_cnpj)then
+        VerificaCPF_CNPJ
+      else
+        if (MessageDlg('Já existe um transicionador com esse cpf/cnpj cadastrado'+ #13
+          + 'Deseja preencher com os dados do cliente ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
+          begin
+            oForm.EdtCodigo.Text := IntToStr(oCadastroClienteDto.IdCliente);
+            oForm.EdtNome.Text := oCadastroClienteDto.Nome;
+            oForm.EdtTelefone.Text := oCadastroClienteDto.telefone;
+            oForm.EdtCelular.Text := oCadastroClienteDto.celular;
+            oForm.edtObservacoes.lines.Text := oCadastroClienteDto.observacao;
+          end;
+  end
+  else
+  if(ActiveControl = oForm.EdtNome)then
+  begin
+    if(oCadastroClienteRegra.SelectClientePorNome(oCadastroClienteModel, oCadastroClienteDto))then
+    begin
+      oForm.EdtCpfCnpj.Text := oCadastroClienteDto.cpf_cnpj;
+      oForm.EdtNome.Text := oCadastroClienteDto.Nome;
+      oForm.EdtTelefone.Text := oCadastroClienteDto.telefone;
+      oForm.EdtCelular.Text := oCadastroClienteDto.celular;
+      oForm.edtObservacoes.lines.Text := oCadastroClienteDto.observacao;
+    end;
+  end;
   inherited;
 end;
 

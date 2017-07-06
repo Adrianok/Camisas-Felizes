@@ -49,7 +49,7 @@ begin
       ', nomereceptor = ' + QuotedStr(oCadastroPedidoDto.nomereceptor)
     + ', nomevendedor = ' + QuotedStr(oCadastroPedidoDto.nomevendedor)
     + ', valortotal = ' + StringReplace(CurrToStr(oCadastroPedidoDto.valortotal), ',', '.', [rfReplaceAll])
-    + ', observacao = ' + QuotedStr({oCadastroPedidoDto.observacao}'aaaa')
+    + ', observacao = ' + QuotedStr(oCadastroPedidoDto.observacao)
     + ', idcliente = ' + IntToStr(oCadastroPedidoDto.idcliente)
     + ', usuario = ' + QuotedStr(oCadastroPedidoDto.usuario)
     + ' WHERE idpedido = ' + IntToStr(oCadastroPedidoDto.IdPedido)

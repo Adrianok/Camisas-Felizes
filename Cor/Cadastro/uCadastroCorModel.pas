@@ -28,9 +28,6 @@ type
     destructor Destroy; override;
   end;
 
-  var
-    oCadastroCorModel: TCadastroCorModel;
-
 implementation
 
 { TCadastroModeloModel }
@@ -121,7 +118,9 @@ end;
 function TCadastroCorModel.SelectAllLista(var oListaCores: TListaCores): Boolean;
 var
   oCadastroCorDto: TCadastroCorDto;
+  oLoopControl: TCadastroCorDto;
   sDescricao : String;
+  bAchou : boolean;
 begin
   try
     Query.Open('select idcor, UPPER(descricao) as descricao from cor');
@@ -134,8 +133,14 @@ begin
         oCadastroCorDto.IdCor := Query.FieldByName('idcor').AsInteger;
         oCadastroCorDto.Descricao := Query.FieldByName('descricao').AsString;
 
-        oListaCores.Add(oCadastroCorDto.Descricao, oCadastroCorDto);
-
+        bAchou := False;
+        for oLoopControl in oListaCores.Values do
+        begin
+          if(oLoopControl.Descricao = oCadastroCorDto.Descricao)then
+            bAchou := True;
+        end;
+        if(not(bAchou))then
+          oListaCores.Add(oCadastroCorDto.Descricao, oCadastroCorDto);
         Query.Next;
       end;
       Result := True;

@@ -19,8 +19,6 @@ type
     destructor Destroy; override;
   end;
 
-  var
-    oConsultaModeloModel: TConsultaModeloModel;
 implementation
 
 { TConsultaModeloModel }

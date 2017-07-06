@@ -15,12 +15,11 @@ type
   public
     function SelectAllWhere(var MemTable: TFDMemTable; const oListaModelos: TList) : boolean;
     function SelectAll(MemTable: TFDMemTable) : boolean;
+
     constructor Create;
     destructor Destroy; override;
   end;
 
-  var
-    oConsultaCorModel: TConsultaCorModel;
 implementation
 
 { TConsultaCorModel }
@@ -68,7 +67,6 @@ begin
       sSql := sSql + IntToStr(integer(oListaModelos.Items[iIndiceLista])) ;
     end;
     sSql := sSql + ')';
-
 
     Query.SQL.Clear;
     Query.Open('SELECT idCor, UPPER(descricao) as descricao FROM Cor WHERE idcor ' + sSql);

@@ -12,7 +12,6 @@ uses
 type
   TCadastroModeloModel = class(TinterfacedObject, IInterfaceCadastroModeloModel)
   private
-    // function SelecionarTudo(var oCadastroModeloDto: TObjectDictionary<string, TCadastroModeloDto>): Boolean;
     Query: TFDQuery;
   public
     function SelectPorId(var oCadastroModeloDto: TCadastroModeloDto): Boolean;
@@ -27,9 +26,6 @@ type
     destructor Destroy; override;
   end;
 
-  var
-    oCadastroModeloModel: TCadastroModeloModel;
-
 implementation
 
 { TCadastroModeloModel }
@@ -42,8 +38,8 @@ begin
     Query.SQL.Clear;
     sSql := ' UPDATE Modelo SET descricao = '''
             + oCadastroModeloDto.Descricao + ''', preco = '
-            + CurrToStr(oCadastroModeloDto.Preco)+
-            ' WHERE idModelo= '
+            + StringReplace(CurrToStr(oCadastroModeloDto.Preco), ',', '.', [rfReplaceAll])+
+            ' WHERE idModelo = '
             + IntToStr(oCadastroModeloDto.IdModelo);
     Query.SQL.Add(sSql);
     Query.ExecSQL;

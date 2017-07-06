@@ -1,13 +1,15 @@
 inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'CadastroPedidoForm'
   ClientHeight = 615
-  ClientWidth = 957
-  ExplicitWidth = 963
+  ClientWidth = 967
+  ExplicitLeft = -141
+  ExplicitTop = -127
+  ExplicitWidth = 973
   ExplicitHeight = 644
   PixelsPerInch = 96
   TextHeight = 16
   inherited Panel1: TPanel
-    Width = 957
+    Width = 967
     TabOrder = 2
     ExplicitWidth = 957
     inherited Panel2: TPanel
@@ -23,18 +25,19 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
       end
     end
     inherited Panel3: TPanel
-      Left = 871
+      Left = 881
       ExplicitLeft = 871
     end
   end
   object GroupBox1: TGroupBox
     Left = 0
     Top = 568
-    Width = 957
+    Width = 967
     Height = 47
     Align = alBottom
     Caption = 'Dados gerais'
     TabOrder = 0
+    ExplicitWidth = 957
     object Label4: TLabel
       Left = 13
       Top = 19
@@ -166,15 +169,11 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
     Top = 84
     Width = 1113
     Height = 478
-    ActivePage = pgItens
+    ActivePage = pgCabecalho
     Align = alCustom
     TabOrder = 1
     object pgCabecalho: TTabSheet
       Caption = 'Cabe'#231'alho'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object logo: TImage
         Left = 779
         Top = 340
@@ -3408,7 +3407,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             Font.Style = []
             LabelPosition = lpLeft
             ParentFont = False
-            TabOrder = 0
+            TabOrder = 3
           end
           object edtNmr: TLabeledEdit
             Tag = 888
@@ -3436,7 +3435,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             LabelPosition = lpLeft
             NumbersOnly = True
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 2
           end
           object edtBairro: TLabeledEdit
             Tag = 888
@@ -3463,7 +3462,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             Font.Style = []
             LabelPosition = lpLeft
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 1
           end
           object edtCidade: TLabeledEdit
             Tag = 888
@@ -3490,7 +3489,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
             Font.Style = []
             LabelPosition = lpLeft
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 0
           end
         end
         object chkAltEnd: TCheckBox
@@ -3993,7 +3992,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           TabOrder = 3
         end
       end
-      object btnExcluirModelo: TBitBtn
+      object btnExcluirDetalhe: TBitBtn
         Left = 763
         Top = 253
         Width = 30

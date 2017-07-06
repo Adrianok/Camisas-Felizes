@@ -15,6 +15,10 @@ uses
 type
   TCadastroCorController = class(TClassInterfaceViewBase)
   private
+    oCadastroCorDto : TCadastroCorDto;
+    oCadastroCorRegra: TCadastroCorRegra;
+    oCadastroCorModel: TCadastroCorModel;
+    oCor_ModeloModel : TCor_ModeloModel;
     procedure RetornoCor(aIdCor : integer);
   public
     procedure Excluir; override;

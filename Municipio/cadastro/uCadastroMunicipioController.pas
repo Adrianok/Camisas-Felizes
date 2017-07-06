@@ -193,7 +193,8 @@ begin
       oCadastroMunicipioDto.Estado := oCadastroUfDto.id;
   end;
   if(oCadastroMunicipioRegra.SelectDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
-    if((oFormulario as TCadastroMunicipioForm).EdtMunicipio.Text <> IntToStr(oCadastroMunicipioDto.id))then
+    if((oFormulario as TCadastroMunicipioForm).EdtMunicipio.Text <> IntToStr(oCadastroMunicipioDto.id)
+    and (oForm.EdtCodigo.Text <> ''))then
       raise Exception.Create('Esse município já possui cadastro');
   if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel,
     oCadastroMunicipioDto)) then

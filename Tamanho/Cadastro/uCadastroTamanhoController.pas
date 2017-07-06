@@ -144,7 +144,8 @@ begin
       oCadastroTamanhoDto.Descricao        :=  edtTamanho.Text;
     end;
     if(oCadastroTamanhoRegra.SelectPorDescricao(oCadastroTamanhoModel, oCadastroTamanhoDto))then
-      raise Exception.Create('Esse tamanho já possui cadastro');
+      if(oForm.edtCodigo.Text <> IntToStr(oCadastroTamanhoDto.IdTamanho) and (oForm.edtCodigo.Text <> ''))then
+        raise Exception.Create('Esse tamanho já possui cadastro');
     if(oCadastroTamanhoRegra.Salvar(oCadastroTamanhoModel, oCadastroTamanhoDto))then
       ShowMessage('Registro: '+ oCadastroTamanhoDto.Descricao +' Atualizado com sucesso')
     else

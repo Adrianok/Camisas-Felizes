@@ -151,7 +151,7 @@ begin
       oCadastroCorDto.Descricao          :=  edtCor.Text;
     end;
     if(oCadastroCorRegra.SelectDescricao(oCadastroCorModel, oCadastroCorDto))then
-      if(oForm.edtCodigo.Text <> IntToStr(oCadastroCorDto.IdCor))then
+      if(oForm.edtCodigo.Text <> IntToStr(oCadastroCorDto.IdCor)and(oForm.edtCodigo.Text <> ''))then
         raise Exception.Create('Essa cor já possui cadastro');
     if(oCadastroCorRegra.Salvar(oCadastroCorModel, oCadastroCorDto))then
       ShowMessage('Registro: '+ oCadastroCorDto.Descricao +' Atualizado com sucesso')

@@ -301,7 +301,7 @@ begin
     oCadastroUfDto.nome := edtEstado.Text;
   end;
   if(oCadastroClienteRegra.SelectClientePorNome(oCadastroClienteModel, oCadastroClienteDto))then
-    if(oForm.EdtCodigo.Text <> IntToStr(oCadastroClienteDto.IdCliente))then
+    if(oForm.EdtCodigo.Text <> IntToStr(oCadastroClienteDto.IdCliente)and (oForm.EdtCodigo.Text <> '')then
       raise Exception.Create('Esse cliente já possui cadastro');
 
   if(oCadastroClienteRegra.SalvarEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,

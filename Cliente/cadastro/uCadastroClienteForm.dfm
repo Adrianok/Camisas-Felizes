@@ -1,16 +1,15 @@
 inherited CadastroClienteForm: TCadastroClienteForm
   Tag = 888
   Caption = 'Cadastro de Cliente'
-  ClientHeight = 531
-  ClientWidth = 844
-  ExplicitTop = -111
-  ExplicitWidth = 850
-  ExplicitHeight = 560
+  ClientHeight = 575
+  ClientWidth = 634
+  ExplicitWidth = 640
+  ExplicitHeight = 604
   PixelsPerInch = 96
   TextHeight = 16
   object Label3: TLabel [0]
-    Left = 9
-    Top = 400
+    Left = 101
+    Top = 439
     Width = 95
     Height = 21
     Caption = 'Observa'#231#245'es'
@@ -22,19 +21,19 @@ inherited CadastroClienteForm: TCadastroClienteForm
     ParentFont = False
   end
   inherited Panel1: TPanel
-    Width = 844
+    Width = 634
     TabOrder = 11
     ExplicitWidth = 844
     inherited Panel3: TPanel
-      Left = 758
+      Left = 548
       ExplicitLeft = 758
     end
   end
   object EdtNome: TLabeledEdit
     Tag = 888
-    Left = 310
-    Top = 107
-    Width = 459
+    Left = 101
+    Top = 155
+    Width = 516
     Height = 26
     Hint = 'Nome'
     CharCase = ecUpperCase
@@ -61,7 +60,7 @@ inherited CadastroClienteForm: TCadastroClienteForm
     Tag = 888
     Left = 101
     Top = 107
-    Width = 121
+    Width = 178
     Height = 26
     Hint = 'C'#243'digo'
     EditLabel.Width = 48
@@ -87,8 +86,8 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'C'#211'DIGO'
   end
   object EdtTelefone: TLabeledEdit
-    Left = 310
-    Top = 197
+    Left = 101
+    Top = 251
     Width = 178
     Height = 26
     Hint = 'Telefone'
@@ -113,9 +112,9 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'Telefone Fixo'
   end
   object EdtCelular: TLabeledEdit
-    Left = 591
-    Top = 197
-    Width = 178
+    Left = 368
+    Top = 251
+    Width = 249
     Height = 26
     Hint = 'Celular'
     CharCase = ecUpperCase
@@ -140,9 +139,9 @@ inherited CadastroClienteForm: TCadastroClienteForm
   end
   object edtObservacoes: TMemo
     Tag = 888
-    Left = 8
-    Top = 426
-    Width = 459
+    Left = 101
+    Top = 466
+    Width = 515
     Height = 97
     Hint = 'Observa'#231#227'o'
     CharCase = ecUpperCase
@@ -155,9 +154,9 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TabOrder = 10
   end
   object EdtRua: TLabeledEdit
-    Left = 494
-    Top = 352
-    Width = 275
+    Left = 101
+    Top = 392
+    Width = 324
     Height = 26
     Hint = 'Rua'
     CharCase = ecUpperCase
@@ -181,8 +180,8 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'Rua'
   end
   object edtNum: TLabeledEdit
-    Left = 341
-    Top = 352
+    Left = 514
+    Top = 392
     Width = 102
     Height = 26
     Hint = 'N'#250'mero'
@@ -207,9 +206,9 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'N'#250'mero'
   end
   object edtBairro: TLabeledEdit
-    Left = 494
-    Top = 314
-    Width = 275
+    Left = 101
+    Top = 346
+    Width = 515
     Height = 26
     Hint = 'Bairro'
     CharCase = ecUpperCase
@@ -233,9 +232,9 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'Bairro'
   end
   object edtCidade: TLabeledEdit
-    Left = 494
-    Top = 276
-    Width = 275
+    Left = 368
+    Top = 300
+    Width = 248
     Height = 26
     Hint = 'Cidade'
     CharCase = ecUpperCase
@@ -259,9 +258,9 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'Cidade'
   end
   object edtEstado: TLabeledEdit
-    Left = 494
-    Top = 237
-    Width = 275
+    Left = 101
+    Top = 300
+    Width = 178
     Height = 26
     Hint = 'Estado'
     CharCase = ecUpperCase
@@ -285,9 +284,9 @@ inherited CadastroClienteForm: TCadastroClienteForm
     TextHint = 'estado'
   end
   object edtCpfCnpj: TLabeledEdit
-    Left = 310
-    Top = 155
-    Width = 459
+    Left = 101
+    Top = 203
+    Width = 516
     Height = 26
     Hint = 'Nome'
     CharCase = ecUpperCase

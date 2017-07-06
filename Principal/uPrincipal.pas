@@ -112,7 +112,6 @@ begin
   try
     TConexaoSigleton.GetInstancia;
   except
-    ShowMessage('Não foi possível ConsultaCorCadastro ao banco de dados');
     Application.Terminate;
   end;
 end;

@@ -118,7 +118,12 @@ uses
   uConsultaBairroForm in 'Bairro\Consulta\uConsultaBairroForm.pas' {ConsultaBairroForm},
   uConsultaBairroModel in 'Bairro\Consulta\uConsultaBairroModel.pas',
   uConsultaBairroRegra in 'Bairro\Consulta\uConsultaBairroRegra.pas',
-  uInterfaceConsultaBairroModel in 'Bairro\Consulta\uInterfaceConsultaBairroModel.pas';
+  uInterfaceConsultaBairroModel in 'Bairro\Consulta\uInterfaceConsultaBairroModel.pas',
+  uInterfaceRelatorioModel in 'Relatorio\Pedidos\uInterfaceRelatorioModel.pas',
+  uRelatorioController in 'Relatorio\Pedidos\uRelatorioController.pas',
+  uRelatorioDto in 'Relatorio\Pedidos\uRelatorioDto.pas',
+  uRelatorioForm in 'Relatorio\Pedidos\uRelatorioForm.pas' {FrmRelatorio},
+  uRelatorioModel in 'Relatorio\Pedidos\uRelatorioModel.pas';
 
 {$R *.res}
 

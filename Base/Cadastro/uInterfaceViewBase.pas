@@ -14,6 +14,7 @@ type
     procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl);
     procedure Excluir;
     procedure Fechar;
+    procedure Cancelar;
 
   end;
 

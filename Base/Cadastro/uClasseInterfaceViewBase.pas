@@ -30,9 +30,8 @@ type
     function ValidarVazio: boolean;
     procedure Excluir; virtual;
     procedure Fechar;
+    procedure Cancelar;
     procedure AjustarFoco;
-    procedure AtivarCampos;
-    procedure DesativarCampos;
     procedure LimparCampos;
   end;
 
@@ -73,61 +72,21 @@ end;
 
 
 
-procedure TClassInterfaceViewBase.AtivarCampos;
-var
-  iIndice: integer;
+procedure TClassInterfaceViewBase.Cancelar;
 begin
-  for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-  begin
-   if((oFormulario.Components[iIndice] is TWinControl))then
-    if((oFormulario.Components[iIndice] as TWinControl).Tag = 666)then
-      (oFormulario.Components[iIndice] as TWinControl).Enabled := True;
-
-
-   if((oFormulario.Components[iIndice] is TCustomEdit) or
-       (oFormulario.Components[iIndice] is TGroupBox))   and
-      ((oFormulario.Components[iIndice] as TWinControl).Tag <> NAOVALIDA) then
-      (oFormulario.Components[iIndice] as TWinControl).Enabled := True
-    else if(oFormulario.Components[iIndice] is TLabel)then
-      (oFormulario.Components[iIndice] as TLabel).Enabled := True
-    else if(oFormulario.Components[iIndice] is TDateTimePicker) then
-      (oFormulario.Components[iIndice] as TDateTimePicker).Enabled := True;
-  end;
+  oFormulario.btnNovo.Enabled := True;
+  oFormulario.btnSalvar.Enabled := False;
+  oFormulario.btnExcluir.Enabled := False;
+  oFormulario.btnCancelar.Enabled := False;
+  LimparCampos;
 end;
-
-
 
 procedure TClassInterfaceViewBase.CriarForm(Aowner: TComponent);
 var
   iIndice : integer;
 begin
+
 end;
-
-
-
-procedure TClassInterfaceViewBase.DesativarCampos;
-var
-  iIndice: integer;
-begin
-  for iIndice := 0 to (oFormulario.ComponentCount - 1) do
-  begin
-   if((oFormulario.Components[iIndice] is TWinControl))then
-    if((oFormulario.Components[iIndice] as TWinControl).Tag = 666)then
-      (oFormulario.Components[iIndice] as TWinControl).Enabled := False;
-
-    if((oFormulario.Components[iIndice] is TCustomEdit) or
-        (oFormulario.Components[iIndice] is TGroupBox))     and
-       ((oFormulario.Components[iIndice] as TWinControl).Tag <> NAOVALIDA) then
-        (oFormulario.Components[iIndice] as TWinControl).Enabled := False
-    else if(oFormulario.Components[iIndice] is TLabel)then
-      (oFormulario.Components[iIndice] as TLabel).Enabled := False
-    else if(oFormulario.Components[iIndice] is TDateTimePicker) then
-      (oFormulario.Components[iIndice] as TDateTimePicker).Enabled := False;
-  end;
-end;
-
-
-
 
 procedure TClassInterfaceViewBase.Excluir;
 begin
@@ -137,8 +96,6 @@ begin
   Inicial;
 end;
 
-
-
 procedure TClassInterfaceViewBase.Fechar;
 begin
   inherited;
@@ -146,17 +103,14 @@ begin
     FreeAndNil(oFormulario);
 end;
 
-
-
 procedure TClassInterfaceViewBase.Inicial;
 begin
   oFormulario.btnNovo.Enabled := True;
   oFormulario.btnSalvar.Enabled := False;
   oFormulario.btnExcluir.Enabled := False;
+  oFormulario.btnCancelar.Enabled := False;
   LimparCampos;
 end;
-
-
 
 procedure TClassInterfaceViewBase.KeyDown(var Key: Word; Aowner: TComponent; ActiveControl : TWinControl);
 begin
@@ -191,6 +145,7 @@ begin
   oFormulario.btnNovo.Enabled := False;
   oFormulario.btnSalvar.Enabled := True;
   oFormulario.btnExcluir.Enabled := True;
+  oFormulario.btnCancelar.Enabled := True;
   LimparCampos;
   AjustarFoco;
 end;
@@ -202,7 +157,6 @@ begin
   oFormulario.btnNovo.Enabled := True;
   oFormulario.btnSalvar.Enabled := True;
   oFormulario.btnExcluir.Enabled := True;
-  AtivarCampos;
   AjustarFoco;
 end;
 
@@ -212,7 +166,8 @@ procedure TClassInterfaceViewBase.Salvar;
 begin
   oFormulario.btnNovo.Enabled := True;
   oFormulario.btnSalvar.Enabled := False;
-  oFormulario.btnExcluir.Enabled := False;
+  oFormulario.btnExcluir.Enabled := True;
+  oFormulario.btnCancelar.Enabled := True;
   ValidarVazio;
 end;
 

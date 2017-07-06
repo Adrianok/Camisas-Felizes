@@ -40,7 +40,7 @@ implementation
 
 procedure TfrmBase.btnCancelarClick(Sender: TObject);
 begin
-  oController.Excluir;
+  oController.Cancelar;
 end;
 
 

@@ -18,7 +18,6 @@ type
     edtPreco: TLabeledEdit;
     edtCodigo: TLabeledEdit;
     edtModelo: TLabeledEdit;
-    Label1: TLabel;
 
   private
     { Private declarations }

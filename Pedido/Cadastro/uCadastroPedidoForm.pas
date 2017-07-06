@@ -58,8 +58,7 @@ type
     edtQntItm: TLabeledEdit;
     chlItens: TListView;
     chlDetalheItem: TListView;
-    Label7: TLabel;
-    edtCpfCnpj: TMaskEdit;
+    edtCpfCnpj: TLabeledEdit;
   private
     { Private declarations }
   public

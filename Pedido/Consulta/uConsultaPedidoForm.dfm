@@ -4,7 +4,6 @@ inherited ConsultaPedidoForm: TConsultaPedidoForm
   ClientHeight = 540
   ClientWidth = 794
   Position = poDesigned
-  ExplicitTop = -5
   ExplicitWidth = 800
   ExplicitHeight = 569
   PixelsPerInch = 96

@@ -1,8 +1,8 @@
 inherited CadastroPedidoForm: TCadastroPedidoForm
-  Caption = 'CadastroPedidoForm'
+  Caption = 'Cadastro de Pedidos'
   ClientHeight = 615
   ClientWidth = 967
-  ExplicitTop = -85
+  ExplicitTop = -111
   ExplicitWidth = 973
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -3512,19 +3512,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        object Label7: TLabel
-          Left = 77
-          Top = 58
-          Width = 64
-          Height = 18
-          Caption = 'CPF/CNPJ'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object edtNmClient: TLabeledEdit
           Tag = 999
           Left = 147
@@ -3552,21 +3539,32 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           ParentFont = False
           TabOrder = 0
         end
-        object edtCpfCnpj: TMaskEdit
-          Left = 147
-          Top = 56
-          Width = 256
+        object edtCpfCnpj: TLabeledEdit
+          Left = 143
+          Top = 57
+          Width = 259
           Height = 26
-          EditMask = '000\.000\.000\-00;0; '
+          Hint = 'Nome'
+          CharCase = ecUpperCase
+          EditLabel.Width = 69
+          EditLabel.Height = 18
+          EditLabel.Caption = 'CPF/CNPJ:'
+          EditLabel.Font.Charset = DEFAULT_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -15
+          EditLabel.Font.Name = 'Tahoma'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = []
-          MaxLength = 14
+          LabelPosition = lpLeft
+          NumbersOnly = True
           ParentFont = False
           TabOrder = 1
-          Text = ''
+          TextHint = 'CPF/CNPJ'
         end
       end
       object gpNota: TGroupBox

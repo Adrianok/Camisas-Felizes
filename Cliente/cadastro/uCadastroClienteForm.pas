@@ -21,8 +21,7 @@ type
     edtBairro: TLabeledEdit;
     edtCidade: TLabeledEdit;
     edtEstado: TLabeledEdit;
-    EdtCpfCnpj: TMaskEdit;
-    Label1: TLabel;
+    edtCpfCnpj: TLabeledEdit;
 
   private
     { Private declarations }

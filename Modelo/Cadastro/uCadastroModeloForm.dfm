@@ -1,7 +1,7 @@
 inherited CadastroModeloForm: TCadastroModeloForm
   Left = 340
   Top = 55
-  Caption = 'CadastroModeloForm'
+  Caption = 'Cadastro de Modelos'
   ClientHeight = 480
   ClientWidth = 707
   Position = poDefault
@@ -12,14 +12,9 @@ inherited CadastroModeloForm: TCadastroModeloForm
   inherited Panel1: TPanel
     Width = 707
     ExplicitWidth = 707
-    inherited Panel2: TPanel
-      ExplicitTop = 1
-      ExplicitHeight = 70
-    end
     inherited Panel3: TPanel
       Left = 621
       ExplicitLeft = 621
-      ExplicitHeight = 70
     end
   end
   object GroupBox1: TGroupBox

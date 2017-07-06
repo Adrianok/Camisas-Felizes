@@ -186,7 +186,7 @@ begin
     oCadastroBairroDto.idmunicipio := oCadastroMunicipioDto.id;
   end;
   if(oCadastroBairroRegra.SelectDescricao(oCadastroBairroModel, oCadastroBairroDto))then
-    if(oForm.edtCodigo.Text <> IntToStr(oCadastroBairroDto.IdBairro) and(oForm.edtCodigo.Text <> ''))then
+    if((oForm.edtCodigo.Text <> IntToStr(oCadastroBairroDto.IdBairro)) and(oForm.edtCodigo.Text <> ''))then
       raise Exception.Create('Esse bairro ja possui cadastro');
   if(oCadastroBairroRegra.Salvar(oCadastroBairroModel, oCadastroBairroDto))then
     ShowMessage('Registro: '+ oCadastroBairroDto.Descricao +' Atualizado com sucesso')

@@ -187,13 +187,14 @@ begin
   inherited;
   with (oFormulario as TCadastroMunicipioForm) do
   begin
-    oCadastroMunicipioDto.Id := StrToInt(EdtCodigo.Text);
+    if(oForm.EdtCodigo.Text <> '')then
+      oCadastroMunicipioDto.Id := StrToInt(EdtCodigo.Text);
     oCadastroMunicipioDto.Municipio := EdtMunicipio.Text;
     if(oCadastroMunicipioRegra.SelectUfPorDescricao(oCadastroUfModel, oCadastroUfDto))then
       oCadastroMunicipioDto.Estado := oCadastroUfDto.id;
   end;
   if(oCadastroMunicipioRegra.SelectDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
-    if((oFormulario as TCadastroMunicipioForm).EdtMunicipio.Text <> IntToStr(oCadastroMunicipioDto.id)
+    if(((oFormulario as TCadastroMunicipioForm).EdtMunicipio.Text <> IntToStr(oCadastroMunicipioDto.id))
     and (oForm.EdtCodigo.Text <> ''))then
       raise Exception.Create('Esse município já possui cadastro');
   if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel,

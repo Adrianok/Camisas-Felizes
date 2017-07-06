@@ -181,7 +181,7 @@ begin
   begin
     if (not(assigned(oConsultaUfController))) then
       oConsultaUfController := TConsultaUfController.Create;
-    oConsultaUfController.CriarForm(Aowner, RetornoUf, oForm.edtCidade.Text);  end
+    oConsultaUfController.CriarForm(Aowner, RetornoUf, oForm.edtEstado.Text);  end
   else
   if(ActiveControl =  oForm.edtCidade)then
   begin
@@ -301,7 +301,7 @@ begin
     oCadastroUfDto.nome := edtEstado.Text;
   end;
   if(oCadastroClienteRegra.SelectClientePorNome(oCadastroClienteModel, oCadastroClienteDto))then
-    if(oForm.EdtCodigo.Text <> IntToStr(oCadastroClienteDto.IdCliente)and (oForm.EdtCodigo.Text <> '')then
+    if((oForm.EdtCodigo.Text <> IntToStr(oCadastroClienteDto.IdCliente))and (oForm.EdtCodigo.Text <> ''))then
       raise Exception.Create('Esse cliente já possui cadastro');
 
   if(oCadastroClienteRegra.SalvarEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
@@ -358,19 +358,7 @@ begin
   else
   if(ActiveControl = oForm.EdtCpfCnpj)then
   begin
-    if(oCadastroClienteRegra.SelectCliente(oCadastroClienteModel, oCadastroClienteDto))then
-      if(oForm.EdtCodigo.Text = oCadastroClienteDto.cpf_cnpj)then
-        VerificaCPF_CNPJ
-      else
-        if (MessageDlg('Já existe um transicionador com esse cpf/cnpj cadastrado'+ #13
-          + 'Deseja preencher com os dados do cliente ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
-          begin
-            oForm.EdtCodigo.Text := IntToStr(oCadastroClienteDto.IdCliente);
-            oForm.EdtNome.Text := oCadastroClienteDto.Nome;
-            oForm.EdtTelefone.Text := oCadastroClienteDto.telefone;
-            oForm.EdtCelular.Text := oCadastroClienteDto.celular;
-            oForm.edtObservacoes.lines.Text := oCadastroClienteDto.observacao;
-          end;
+    VerificaCPF_CNPJ
   end
   else
   if(ActiveControl = oForm.EdtNome)then

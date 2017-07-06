@@ -1,21 +1,21 @@
 inherited CadastroCorForm: TCadastroCorForm
   Left = 360
   Top = 208
-  Caption = 'CadastroCorForm'
+  Caption = 'Cadastro de Cores'
   ClientHeight = 191
   ClientWidth = 501
   Position = poDesigned
   ExplicitWidth = 507
   ExplicitHeight = 220
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   inherited Panel1: TPanel
     Width = 501
     TabOrder = 2
     ExplicitWidth = 501
     inherited Panel3: TPanel
-      Left = 300
-      ExplicitLeft = 300
+      Left = 415
+      ExplicitLeft = 415
     end
   end
   object edtCodigo: TLabeledEdit

@@ -1,5 +1,5 @@
 inherited CadastroTamanhoForm: TCadastroTamanhoForm
-  Caption = 'CadastroTamanhoForm'
+  Caption = 'Cadastro de Tamanhos'
   ClientHeight = 239
   ExplicitHeight = 268
   PixelsPerInch = 96

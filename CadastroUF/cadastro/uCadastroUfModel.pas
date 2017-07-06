@@ -157,7 +157,7 @@ function TCadastroUfModel.SelectDescricao(var oCadastroUfDto: TCadastroUfDto): B
 begin
   try
     Query.SQL.Clear;
-    Query.Open('SELECT iduf, sigla, descricao  FROM Uf WHERE sigla =''' + QuotedStr(oCadastroUfDto.uf) + ''' ');
+    Query.Open('SELECT iduf, sigla, descricao  FROM Uf WHERE sigla =' + QuotedStr(oCadastroUfDto.uf));
     if (not(Query.IsEmpty)) then
     begin
       oCadastroUfDto.nome := Query.FieldByName('descricao').AsString;

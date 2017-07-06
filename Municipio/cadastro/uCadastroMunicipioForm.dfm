@@ -1,17 +1,17 @@
 inherited CadastroMunicipioForm: TCadastroMunicipioForm
-  Caption = 'Cadastro de Municipio'
+  Caption = 'Cadastro de Municipios'
   ClientHeight = 314
   ClientWidth = 600
   ExplicitWidth = 606
   ExplicitHeight = 343
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   inherited Panel1: TPanel
     Width = 600
     ExplicitWidth = 600
     inherited Panel3: TPanel
-      Left = 399
-      ExplicitLeft = 399
+      Left = 514
+      ExplicitLeft = 514
     end
   end
   object EdtEstado: TLabeledEdit
@@ -60,7 +60,6 @@ inherited CadastroMunicipioForm: TCadastroMunicipioForm
     Font.Name = 'Tahoma'
     Font.Style = []
     LabelPosition = lpLeft
-    MaxLength = 2
     ParentFont = False
     TabOrder = 2
     TextHint = 'Descricao'
@@ -81,7 +80,6 @@ inherited CadastroMunicipioForm: TCadastroMunicipioForm
     EditLabel.Font.Name = 'Tahoma'
     EditLabel.Font.Style = []
     EditLabel.ParentFont = False
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15

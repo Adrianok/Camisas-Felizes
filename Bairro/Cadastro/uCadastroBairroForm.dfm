@@ -1,7 +1,7 @@
 inherited CadastroBairroForm: TCadastroBairroForm
   Left = 360
   Top = 208
-  Caption = 'CadastroBairroForm'
+  Caption = 'Cadastro de Bairros'
   ClientHeight = 331
   ClientWidth = 501
   Position = poDesigned

@@ -66,6 +66,7 @@ type
     procedure RetornoPedido(aIdPedido : Integer);
     procedure RetornoCliente(aIdCliente : Integer);
   public
+    procedure ValidarCpf(Sender : TObject);
     procedure LimparCampos; virtual;
     procedure Excluir; override;
     procedure TAllowChange(Sender: TObject;var AllowChange : boolean);
@@ -875,11 +876,50 @@ begin
   AllowChange := bPermite;
 end;
 
+procedure TCadastroPedidoController.ValidarCpf(Sender: TObject);
+begin
+  if(oForm.edtCpfCnpj.Text <> '')then
+  begin
+    oCadastroClienteDto.cpf_cnpj := oForm.edtCpfCnpj.Text;
+    if (Length(oCadastroClienteDto.cpf_cnpj) <= 11) then
+    begin
+      if(not(oCadastroClienteRegra.ValidaCPF(oCadastroClienteDto.cpf_cnpj)))then
+        raise Exception.Create('Insira um CPF válido');
+    end
+    else
+    begin
+      if(not(oCadastroClienteRegra.ValidarCNPJ(oCadastroClienteDto.cpf_cnpj)))then
+        raise Exception.Create('Insira um CNPJ válido');
+    end;
+    if (oCadastroPedidoRegra.SelectClientePorCpf(oCadastroClienteModel, oCadastroClienteDto)) then
+    begin
+      oForm.edtNomeClienteEx.Text := oCadastroClienteDto.Nome;
+      oCadastroEnderecoDto.IdEndereco := oCadastroClienteDto.idendereco;
+      if(oCadastroPedidoRegra.SelectEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
+        oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then
+      begin
+        oForm.edtRua.Text := oCadastroEnderecoDto.Endereco;
+        oForm.edtNmr.Text := oCadastroEnderecoDto.Numero;
+        oForm.edtBairro.Text := oCadastroBairroDto.Descricao;
+        oForm.edtCidade.Text := oCadastroMunicipioDto.Municipio;
+        oForm.chkAltEnd.Checked;
+      end;
+    end;
+    abort;
+  end
+  else
+  begin
+    raise Exception.Create('Informe o CPF/CNPJ do cliente');
+  end;
+end;
+
 procedure TCadastroPedidoController.Verificar(ActiveControl: TWinControl);
 var
   oLoopControlItem : TCadastroItensDto;
   oLoopControlDetalhe : TCadastroDetalheItemDto;
 begin
+  if(ActiveControl = oForm.edtCpfCnpj)then
+    ValidarCpf(oForm.edtCpfCnpj);
 
   if(ActiveControl = oForm.edtNmClient)then
   begin
@@ -887,37 +927,6 @@ begin
     begin
       if(oCadastroPedidoRegra.SelectCliente(oCadastroClienteModel, oCadastroClienteDto))then
         RetornoCliente(oCadastroClienteDto.IdCliente);
-    end;
-  end;
-  if(ActiveControl = oForm.edtCpfCnpj)then
-  begin
-    if(oForm.edtCpfCnpj.Text <> '')then
-    begin
-      oCadastroClienteDto.cpf_cnpj := oForm.edtCpfCnpj.Text;
-      if (Length(oCadastroClienteDto.cpf_cnpj) <= 11) then
-      begin
-        if(not(oCadastroClienteRegra.ValidaCPF(oCadastroClienteDto.cpf_cnpj)))then
-          raise Exception.Create('Insira um CPF válido');
-      end
-      else
-      begin
-        if(not(oCadastroClienteRegra.ValidarCNPJ(oCadastroClienteDto.cpf_cnpj)))then
-          raise Exception.Create('Insira um CNPJ válido');
-      end;
-      if (oCadastroPedidoRegra.SelectClientePorCpf(oCadastroClienteModel, oCadastroClienteDto)) then
-      begin
-        oForm.edtNomeClienteEx.Text := oCadastroClienteDto.Nome;
-        oCadastroEnderecoDto.IdEndereco := oCadastroClienteDto.idendereco;
-        if(oCadastroPedidoRegra.SelectEndereco(oCadastroEnderecoModel, oCadastroEnderecoDto,
-          oCadastroBairroModel, oCadastroBairroDto, oCadastroMunicipioModel, oCadastroMunicipioDto))then
-        begin
-          oForm.edtRua.Text := oCadastroEnderecoDto.Endereco;
-          oForm.edtNmr.Text := oCadastroEnderecoDto.Numero;
-          oForm.edtBairro.Text := oCadastroBairroDto.Descricao;
-          oForm.edtCidade.Text := oCadastroMunicipioDto.Municipio;
-          oForm.chkAltEnd.Checked;
-        end;
-      end;
     end;
   end
   else

@@ -31,7 +31,7 @@ uses
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
-    procedure Verificar(ActiveControl : TWinControl);
+    procedure Verificar(ActiveControl : TWinControl);override;
     procedure Pesquisar(Aowner : TComponent; ActiveControl : TWinControl);  override;
     procedure NovoID;
     procedure Excluir; override;
@@ -193,10 +193,6 @@ begin
     if(oCadastroMunicipioRegra.SelectUfPorDescricao(oCadastroUfModel, oCadastroUfDto))then
       oCadastroMunicipioDto.Estado := oCadastroUfDto.id;
   end;
-  if(oCadastroMunicipioRegra.SelectDescricao(oCadastroMunicipioModel, oCadastroMunicipioDto))then
-    if(((oFormulario as TCadastroMunicipioForm).EdtMunicipio.Text <> IntToStr(oCadastroMunicipioDto.id))
-    and (oForm.EdtCodigo.Text <> ''))then
-      raise Exception.Create('Esse município já possui cadastro');
   if (oCadastroMunicipioRegra.Salvar(oCadastroMunicipioModel,
     oCadastroMunicipioDto)) then
   begin

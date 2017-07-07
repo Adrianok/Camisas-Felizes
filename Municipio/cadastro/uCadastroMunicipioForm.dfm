@@ -8,6 +8,7 @@ inherited CadastroMunicipioForm: TCadastroMunicipioForm
   TextHeight = 16
   inherited Panel1: TPanel
     Width = 600
+    TabOrder = 3
     ExplicitWidth = 600
     inherited Panel3: TPanel
       Left = 514
@@ -36,7 +37,7 @@ inherited CadastroMunicipioForm: TCadastroMunicipioForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 2
     TextHint = 'Selecione o estado (f2)'
   end
   object EdtMunicipio: TLabeledEdit
@@ -61,7 +62,7 @@ inherited CadastroMunicipioForm: TCadastroMunicipioForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
     TextHint = 'Descricao'
   end
   object EdtCodigo: TLabeledEdit
@@ -88,7 +89,7 @@ inherited CadastroMunicipioForm: TCadastroMunicipioForm
     LabelPosition = lpLeft
     MaxLength = 2
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 0
     TextHint = 'codigo'
   end
 end

@@ -15,6 +15,7 @@ type
     // function SelecionarTudo(var oCadastroModeloDto: TObjectDictionary<string, TCadastroModeloDto>): Boolean;
     Query: TFDQuery;
   public
+    function Select(var oCadastroMunicipioDto: TCadastroMunicipioDto): Boolean;
     function SelectPorId(var oCadastroMunicipioDto: TCadastroMunicipioDto): Boolean;
     function SelectMunicipio(var oCadastroMunicipioDto: TCadastroMunicipioDto): Boolean;
     function SelectDescricao(var oCadastroMunicipioDto: TCadastroMunicipioDto): Boolean;
@@ -124,6 +125,23 @@ begin
   try
     Query.SQL.Clear;
     Query.Open('SELECT idMunicipio, descricao, uf_iduf FROM Municipio WHERE descricao =' + QuotedStr(oCadastroMunicipioDto.Municipio));
+    if (not(Query.IsEmpty)) then
+    begin
+      Result := True;
+    end
+    else
+      Result := False;
+  except
+    raise Exception.Create('Não Foi possível acessar o banco de dados');
+  end;
+end;
+
+function TCadastroMunicipioModel.Select(
+  var oCadastroMunicipioDto: TCadastroMunicipioDto): Boolean;
+begin
+  try
+    Query.SQL.Clear;
+    Query.Open('SELECT idMunicipio, descricao, uf_iduf FROM Municipio WHERE idmunicipio =' + IntToStr(oCadastroMunicipioDto.id));
     if (not(Query.IsEmpty)) then
     begin
       Result := True;

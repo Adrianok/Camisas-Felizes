@@ -242,9 +242,7 @@ begin
       VerificarChecados(oListaIdCores);
     end;
     if(oCadastroModeloRegra.SelectDescricao(oCadastroModeloModel, oCadastroModeloDto))then
-      if(((oFormulario as TCadastroModeloForm).edtCodigo.Text <> IntToStr(oCadastroModeloDto.IdModelo))
-      and((oFormulario as TCadastroModeloForm).edtCodigo.Text <> ''))then
-        raise Exception.Create('Esse modelo já possui cadastro');
+
     if(oCadastroModeloRegra.Salvar(oListaIdCores, oCor_ModeloModel, oCadastroModeloModel, oCadastroModeloDto,
      oCadastroCorDto, oCadastroCorModel))then
       ShowMessage('Registro: '+ oCadastroModeloDto.Descricao +' Atualizado com sucesso')

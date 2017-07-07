@@ -7,7 +7,7 @@ uses
   uCadastroMunicipioDto;
 type
   IInterfaceCadastroMunicipioModel = interface
-
+    function Select(var oCadastroMunicipioDto: TCadastroMunicipioDto): Boolean;
     function SelectDescricao(var oCadastroMunicipioDto: TCadastroMunicipioDto): Boolean;
     function Inserir(var oCadastroMunicipioDto: TCadastroMunicipioDto):boolean;
     function Atualizar(var oCadastroMunicipioDto: TCadastroMunicipioDto):boolean;

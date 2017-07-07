@@ -2,7 +2,6 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
   Caption = 'Cadastro de Pedidos'
   ClientHeight = 615
   ClientWidth = 967
-  ExplicitTop = -111
   ExplicitWidth = 973
   ExplicitHeight = 644
   PixelsPerInch = 96
@@ -3530,6 +3529,7 @@ inherited CadastroPedidoForm: TCadastroPedidoForm
           EditLabel.Font.Name = 'Segoe UI Light'
           EditLabel.Font.Style = []
           EditLabel.ParentFont = False
+          Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15

@@ -376,6 +376,9 @@ destructor TCadastroPedidoController.Destroy;
   if (assigned(oCadastroPedidoModel)) then
     FreeAndNil(oCadastroPedidoModel);
 
+   if(assigned(oCadastroPedidoDto)) then
+    FreeAndNil(oCadastroPedidoDto);
+
   if (assigned(oCadastroPedidoRegra)) then
     FreeAndNil(oCadastroPedidoRegra);
 
@@ -390,12 +393,6 @@ destructor TCadastroPedidoController.Destroy;
 
    if (assigned(oCadastroItensDto)) then
     FreeAndNil(oCadastroItensDto);
-
-   if(assigned(oCadastroDetalheItensDto))then
-    FreeAndNil(oCadastroDetalheItensDto);
-
-   if(assigned(oCadastroPedidoDto)) then
-    FreeAndNil(oCadastroPedidoDto);
     inherited;
 end;
 
@@ -905,7 +902,6 @@ begin
         oForm.chkAltEnd.Checked;
       end;
     end;
-    abort;
   end
   else
   begin

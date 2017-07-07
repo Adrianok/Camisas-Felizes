@@ -17,7 +17,6 @@ type
     btnPesquisar: TBitBtn;
     Panel3: TPanel;
     btnNovo: TBitBtn;
-    btnCancelar: TBitBtn;
     btnFechar: TBitBtn;
     btnExcluir: TBitBtn;
     procedure btnNovoClick(Sender: TObject);

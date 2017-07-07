@@ -24,7 +24,7 @@ type
     procedure CriarForm(Aowner: TComponent); override;
     procedure Novo; override;
     procedure Salvar; override;
-    procedure Verificar(ActiveControl: TWinControl);
+    procedure Verificar(ActiveControl: TWinControl);  override;
     procedure Pesquisar(Aowner: TComponent; ActiveControl: TWinControl); override;
     procedure NovoID;
     procedure Excluir; override;

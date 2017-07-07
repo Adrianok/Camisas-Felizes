@@ -11,6 +11,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
   TextHeight = 16
   inherited Panel1: TPanel
     Width = 707
+    TabOrder = 4
     ExplicitWidth = 707
     inherited Panel3: TPanel
       Left = 621
@@ -26,7 +27,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
     Color = clWhite
     ParentBackground = False
     ParentColor = False
-    TabOrder = 1
+    TabOrder = 3
     object edtCor: TLabeledEdit
       Tag = 888
       Left = 48
@@ -114,7 +115,7 @@ inherited CadastroModeloForm: TCadastroModeloForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 0
   end
   object edtModelo: TLabeledEdit
     Left = 278
@@ -137,6 +138,6 @@ inherited CadastroModeloForm: TCadastroModeloForm
     Font.Style = []
     LabelPosition = lpLeft
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 1
   end
 end

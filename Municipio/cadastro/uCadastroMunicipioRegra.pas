@@ -12,8 +12,7 @@ type
   private
   public
 
-
-    function SelectUfPorDescricao(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
+     function SelectUfPorDescricao(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
     function SelectUfPorId(const oCadastroUfModel: TCadastroUfModel; var oCadastroUfDto: TCadastroUfDto): boolean;
     function SelectDescricao(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
     function SelectMunicipio(const oCadastroMunicipioModel: TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
@@ -47,7 +46,7 @@ function TCadastroMunicipioRegra.Salvar(const oCadastroMunicipioModel: TCadastro
   var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;
 begin
   // funçao do model checa se ja existem registros com essas informações, caso tenha então retorna true
-  if (oCadastroMunicipioModel.SelectMunicipio(oCadastroMunicipioDto)) then
+  if (oCadastroMunicipioModel.Select(oCadastroMunicipioDto)) then
   begin
     oCadastroMunicipioModel.Atualizar(oCadastroMunicipioDto);
     Result := True
@@ -77,6 +76,7 @@ function TCadastroMunicipioRegra.SelectUfPorId(const oCadastroUfModel: TCadastro
 begin
   Result := oCadastroUfModel.SelectPorId(oCadastroUfDto);
 end;
+
 
 function TCadastroMunicipioRegra.SelectDescricao(const oCadastroMunicipioModel
   : TCadastroMunicipioModel; var oCadastroMunicipioDto: TCadastroMunicipioDto): boolean;

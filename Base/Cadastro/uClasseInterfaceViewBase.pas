@@ -75,9 +75,7 @@ end;
 procedure TClassInterfaceViewBase.Cancelar;
 begin
   oFormulario.btnNovo.Enabled := True;
-  oFormulario.btnSalvar.Enabled := False;
   oFormulario.btnExcluir.Enabled := False;
-  oFormulario.btnCancelar.Enabled := False;
   LimparCampos;
 end;
 
@@ -106,9 +104,7 @@ end;
 procedure TClassInterfaceViewBase.Inicial;
 begin
   oFormulario.btnNovo.Enabled := True;
-  oFormulario.btnSalvar.Enabled := False;
   oFormulario.btnExcluir.Enabled := False;
-  oFormulario.btnCancelar.Enabled := False;
   LimparCampos;
 end;
 
@@ -145,7 +141,6 @@ begin
   oFormulario.btnNovo.Enabled := False;
   oFormulario.btnSalvar.Enabled := True;
   oFormulario.btnExcluir.Enabled := True;
-  oFormulario.btnCancelar.Enabled := True;
   LimparCampos;
   AjustarFoco;
 end;
@@ -166,7 +161,6 @@ procedure TClassInterfaceViewBase.Salvar;
 begin
   oFormulario.btnNovo.Enabled := True;
   oFormulario.btnExcluir.Enabled := True;
-  oFormulario.btnCancelar.Enabled := True;
   ValidarVazio;
 end;
 
